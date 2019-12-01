@@ -1,0 +1,20 @@
+:host {
+    display: block;
+    background: transparent url('../../../../assets/images/game-sprite.png') 0 -41px no-repeat;
+    display: block;
+    width: 320px;
+    height: 41px;
+    color: #ededed;
+    font-weight: bold;
+    label {
+        float: left;
+        width: 200px;
+        text-align: left;
+        padding: 0.9rem 0.5rem 0 1rem;
+    }
+    span {
+        float: right;
+        text-align: right;
+        padding: 0.9rem 1.1rem 0 0.5rem;
+    }
+}

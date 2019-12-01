@@ -1,0 +1,14 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" class="trigger">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span (click)="displayRanking()">Zwischen Stand</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>dialpad</mat-icon>
+    <span><a [routerLink]="['/home']">Spiel beenden</a></span>
+  </button>
+</mat-menu>
+<router-outlet></router-outlet>
