@@ -1,27 +1,23 @@
-import { DataService } from './../services/data.service';
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { DataService } from '../services/data.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class GameIsRunningGuard implements CanActivate {
-  constructor(private dataService: DataService, private router: Router) {}
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.dataService.getGame().pipe(
-        switchMap(game => {
-          // return to the create component
-          if (typeof game === 'undefined' || game === null || game.players.length === 0) {
-            console.log('nicht mit mir');
-            this.router.navigate(['create']);
-          }
-          return of(typeof game !== 'undefined' && game !== null && game.players.length > 0);
-        }),
+  constructor(private readonly data: DataService, private readonly router: Router) {
+  }
+
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.data.getGame().pipe(
+      map(game => {
+        const gameStarted = game && game.players.length !== 0;
+        if (!gameStarted) {
+          this.router.navigate(['create']);
+        }
+        return gameStarted;
+      }),
     );
   }
 }

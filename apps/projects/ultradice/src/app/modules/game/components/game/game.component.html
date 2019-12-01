@@ -1,6 +1,6 @@
-<ng-container *ngIf="init |async">
+<ng-container *ngIf="init$ |async">
   <div class="holder">
-    <div class="{{ game.shuffleMaxCount < 3 ? '' : 'hidden' }}">
+    <div class="{{ game.shuffleMaxCount < 30 ? '' : 'hidden' }}">
       <app-dice id="1"></app-dice>
       <app-dice id="2"></app-dice>
       <app-dice id="3"></app-dice>
@@ -8,11 +8,13 @@
       <app-dice id="5"></app-dice>
     </div>
   </div>
-  <app-button *ngIf="!game.nextPlayer" (click)="shuffle()">{{ game.currentPlayer.name }} Würfeln ({{ game.shuffleMaxCount }})</app-button>
+  <app-button *ngIf="!game.nextPlayer" (click)="shuffle()">{{ game.currentPlayer.name }} Würfeln
+    ({{ game.shuffleMaxCount }})
+  </app-button>
   <app-button *ngIf="game.nextPlayer" (click)="next()">Nächster Spieler</app-button>
   <div class="rules">
     <div class="inner">
-      <app-rule text="Einser"  [value]="gameCard.ones" (click)="handleRule(1)"></app-rule>
+      <app-rule text="Einser" [value]="gameCard.ones" (click)="handleRule(1)"></app-rule>
       <app-rule text="Zweier" [value]="gameCard.twos" (click)="handleRule(2)"></app-rule>
       <app-rule text="Dreier" [value]="gameCard.threes" (click)="handleRule(3)"></app-rule>
       <app-rule text="Vierer" [value]="gameCard.fours" (click)="handleRule(4)"></app-rule>
@@ -28,7 +30,7 @@
       <app-rule text="Vier Gleiche" [value]="gameCard.fourOfAKind" (click)="handleRule(10)"></app-rule>
       <app-rule text="Kuchen" [value]="gameCard.fullHouse" (click)="handleRule(11)"></app-rule>
       <app-rule text="Kleine Straße" [value]="gameCard.shortStreet" (click)="handleRule(12)"></app-rule>
-      <app-rule text="Große Straße"[value]="gameCard.largeStreet" (click)="handleRule(13)"></app-rule>
+      <app-rule text="Große Straße" [value]="gameCard.largeStreet" (click)="handleRule(13)"></app-rule>
       <app-rule text="Pasch" [value]="gameCard.fiveOfAKind" (click)="handleRule(14)"></app-rule>
       <app-rule text="Chance" [value]="gameCard.chance" (click)="handleRule(15)"></app-rule>
       <hr>

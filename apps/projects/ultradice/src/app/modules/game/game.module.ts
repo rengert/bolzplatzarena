@@ -1,14 +1,14 @@
-import { CreateGameComponent } from './components/create-game/create-game.component';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { SharedModule } from './../shared/shared.module';
+import { MatInputModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { CreateGameComponent } from './components/create-game/create-game.component';
+import { SharedModule } from '../shared/shared.module';
 import { DiceComponent } from './components/dice/dice.component';
 import { GameComponent } from './components/game/game.component';
 import { RuleComponent } from './components/rule/rule.component';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { MatInputModule } from '@angular/material';
 import { ResultComponent } from './components/result/result.component';
 import { EndResultComponent } from './components/end-result/end-result.component';
 
@@ -21,8 +21,8 @@ import { EndResultComponent } from './components/end-result/end-result.component
     RouterModule.forChild(
       [
         {
-            path: 'create',
-            component: CreateGameComponent
+          path: 'create',
+          component: CreateGameComponent,
         },
       ],
     ),
@@ -41,4 +41,5 @@ import { EndResultComponent } from './components/end-result/end-result.component
     EndResultComponent,
   ]
 })
-export class GameModule { }
+export class GameModule {
+}

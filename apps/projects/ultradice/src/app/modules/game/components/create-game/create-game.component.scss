@@ -5,19 +5,23 @@
     left: 0;
     width: 100vw;
   }
-    .holder {
-        width: 310px;
-        margin: 6rem auto 0 auto;
-        overflow: hidden;
-        div {
-            padding: 1rem;
-            input {
-                height: 2rem;
-                font-size: 2rem;
-                width: 100%;
-            }
-        }
+
+  .holder {
+    width: 310px;
+    margin: 6rem auto 0 auto;
+    overflow: hidden;
+
+    div {
+      padding: 1rem;
+
+      input {
+        height: 2rem;
+        font-size: 2rem;
+        width: 100%;
+      }
     }
+  }
+
   .full-width {
     width: 100%;
   }

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { GameCard } from '../models/game-card.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class RuleService {
-  handleRule(gameCard: GameCard, rule: number, dices: number[]): any {
+  handleRule(gameCard: GameCard, rule: number, dices: number[]) {
     switch (rule) {
       case 1:
         gameCard.ones = this.getSimple(rule, dices);
@@ -53,11 +51,11 @@ export class RuleService {
       // four of a kind
       case 14:
         gameCard.fiveOfAKind = this.ofAKind(dices, 5, 50);
-      break;
+        break;
       // four of a kind
       case 15:
         gameCard.chance = this.sum(dices);
-      break;
+        break;
     }
   }
 
@@ -78,7 +76,7 @@ export class RuleService {
     dices = dices.sort().reverse();
     for (let i = 0; i < dices.length; i++) {
       if (dices.lastIndexOf(dices[i]) !== i) {
-      // etwas is doppelt enthalten
+        // etwas is doppelt enthalten
         const value = 2 * dices[i];
         if (value > result) {
           result = value;
@@ -125,7 +123,9 @@ export class RuleService {
     dices = dices.sort();
     check = check.sort();
     let result = true;
-    dices.forEach((item, index) => { result = result && (item === check[index]); });
+    dices.forEach((item, index) => {
+      result = result && (item === check[index]);
+    });
     if (result) {
       return this.sum(dices);
     }
@@ -149,7 +149,6 @@ export class RuleService {
   }
 
 
-
   private sum(dices: number[]): number {
     let result = 0;
     dices.forEach(item => result += item);
@@ -158,12 +157,13 @@ export class RuleService {
 
   /* groups data */
   private groupBy(data: number[]): any {
-    const result = { 1: 0, 2: 0 , 3: 0, 4: 0, 5: 0 , 6: 0 };
+    const result = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
     data.forEach((item) => {
-     result[item]++;
+      result[item]++;
     });
     return result;
   }
 
-  constructor() { }
+  constructor() {
+  }
 }

@@ -1,27 +1,30 @@
 :host {
-    background: transparent url('../../../../assets/images/notpad_background_normal.png') top center no-repeat;
-    margin-top: 10rem;
-    min-height: 250px;
-    display: block;
+  background: transparent url('../../../../assets/images/notpad_background_normal.png') top center no-repeat;
+  margin-top: 10rem;
+  min-height: 250px;
+  display: block;
 
-    ul {
-        list-style: none;
-        width: 200px;
-        display: block;
-        margin: auto;
-        text-align: center;
+  ul {
+    list-style: none;
+    width: 200px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    color: #000;
+    font-size: 1.5em;
+    line-height: 2.15em;
+    padding: 2.5rem 0 0 0;
+
+    li {
+      padding: 0;
+
+      a {
         color: #000;
-        font-size: 1.5em;
-        line-height: 2.15em;
-        padding: 2.5rem 0 0 0;
-        li {
-            padding: 0;
-            a {
-                color: #000;
-                :visited {
-                    color: #000;
-                }
-            }
+
+        :visited {
+          color: #000;
         }
+      }
     }
+  }
 }

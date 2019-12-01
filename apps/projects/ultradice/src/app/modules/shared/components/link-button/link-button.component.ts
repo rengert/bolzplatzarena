@@ -1,15 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-link-button',
   templateUrl: './link-button.component.html',
-  styleUrls: ['./link-button.component.scss']
+  styleUrls: ['./link-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LinkButtonComponent implements OnInit {
+export class LinkButtonComponent {
   @Input() routerLink = ['/home'];
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

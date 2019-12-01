@@ -7,7 +7,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush"
         }
       },
       "root": "projects/ultradice",
@@ -102,8 +103,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ultradice/src/tsconfig.app.json",
-              "projects/ultradice/src/tsconfig.spec.json",
+              "projects/ultradice/tsconfig.app.json",
+              "projects/ultradice/tsconfig.spec.json",
               "projects/ultradice/e2e/tsconfig.json"
             ],
             "exclude": [

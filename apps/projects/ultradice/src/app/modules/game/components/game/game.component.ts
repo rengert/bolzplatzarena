@@ -1,31 +1,29 @@
-import { GameService } from './../../../../services/game.service';
-import { DataService } from './../../../../services/data.service';
-import { Component, OnInit, ViewChildren, QueryList, ChangeDetectionStrategy, AfterViewInit, Input, OnDestroy } from '@angular/core';
-import { GameCard } from './../../../../models/game-card.model';
-import { DiceComponent } from './../dice/dice.component';
-import { RuleService } from '../../../../services/rule.service';
+import { ChangeDetectionStrategy, Component, OnDestroy, QueryList, ViewChildren } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Observable, of, } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { GameService } from '../../../../services/game.service';
+import { DataService } from '../../../../services/data.service';
+import { GameCard } from '../../../../models/game-card.model';
+import { DiceComponent } from '../dice/dice.component';
+import { RuleService } from '../../../../services/rule.service';
 import { Game } from '../../../../models/game.model';
-import { ResultComponent } from '../result/result.component';
-import { MatDialog } from '@angular/material';
 import { EndResultComponent } from '../end-result/end-result.component';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class GameComponent implements OnDestroy {
   @ViewChildren(DiceComponent) dices: QueryList<DiceComponent>;
 
-  init: Observable<any>;
+  init$: Observable<any>;
   game: Game;
 
   get gameCard() {
-    if (typeof this.game.currentPlayer === 'undefined') {
+    if (!this.game.currentPlayer) {
       let index = this.game.players.findIndex(item => item.isCurrent);
       if (index < 0) {
         index = this.game.currentPlayerIndex;
@@ -39,34 +37,30 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
     private ruleService: RuleService,
     private dataService: DataService,
     private readonly gameService: GameService,
-    readonly dialog: MatDialog,
-    ) {
-    this.init = this.initGame();
+    private readonly dialog: MatDialog,
+  ) {
+    this.init$ = this.initGame$();
     this.gameService.state$.next(true);
   }
 
-  private initGame(): Observable<boolean> {
+  private initGame$(): Observable<boolean> {
     return this.dataService.getGame().pipe(
       map(game => this.game = game),
       switchMap(game => of(game.players.length > 0)),
     );
   }
 
-  ngOnInit() {
-  }
-
   ngOnDestroy() {
     this.gameService.state$.next(false);
   }
 
-  ngAfterViewInit(): void {
-  }
-
- async shuffle() {
+  async shuffle() {
     if (this.game.shuffleMaxCount > 0) {
-      this.dices.forEach(async(item) => {
-       await item.shuffel();
-      });
+      const dices = this.dices.toArray();
+      // tslint:disable-next-line:prefer-for-of
+      for (let x = 0; x < dices.length; x++) {
+        await dices[x].shuffel();
+      }
       // this.gameCard.sum++;
       --this.game.shuffleMaxCount;
     }

@@ -1,33 +1,38 @@
 :host {
-    app-link-button {
-        position: absolute;
-        bottom: 2px;
-        left: 50%;
-        margin-left: -160px;
+  app-link-button {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    margin-left: -160px;
+  }
+
+  .holder {
+    width: 310px;
+    height: 74px;
+    margin: 6rem auto 0 auto;
+    overflow: hidden;
+
+    app-dice {
+      float: left;
     }
-    .holder {
-        width: 310px;
-        height: 74px;
-        margin: 6rem auto 0 auto;
-        overflow: hidden;
-        app-dice {
-            float: left;
-        }
-        .hidden {
-            display: none;
-        }
+
+    .hidden {
+      display: none;
     }
-    .rules {
-        position: absolute;
-        flex: 1;
-        top: 13.25rem;
-        bottom: 3.0rem;
-        overflow: scroll;
-        display: block;
-        width: 100%;
-        .inner {
-            width: 320px;
-            margin: auto;
-        }
+  }
+
+  .rules {
+    position: absolute;
+    flex: 1;
+    top: 13.25rem;
+    bottom: 3.0rem;
+    overflow: scroll;
+    display: block;
+    width: 100%;
+
+    .inner {
+      width: 320px;
+      margin: auto;
     }
+  }
 }

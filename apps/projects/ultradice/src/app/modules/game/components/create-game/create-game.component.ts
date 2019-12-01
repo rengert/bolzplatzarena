@@ -1,23 +1,24 @@
-import { DataService } from './../../../../services/data.service';
-import { Component, OnInit } from '@angular/core';
-import { Player } from '../../../../models/player.model';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { timeout, take } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { DataService } from '../../../../services/data.service';
+import { Player } from '../../../../models/player.model';
 import { Game } from '../../../../models/game.model';
 
 @Component({
   selector: 'app-create-game',
   templateUrl: './create-game.component.html',
-  styleUrls: ['./create-game.component.scss']
+  styleUrls: ['./create-game.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateGameComponent implements OnInit {
+export class CreateGameComponent {
   player1 = new Player();
   player2 = new Player();
   player3 = new Player();
   player4 = new Player();
 
-  constructor(private data: DataService, private router: Router) { }
+  constructor(private data: DataService, private router: Router) {
+  }
 
   startGame() {
     const playersList = new Array<Player>();
@@ -33,7 +34,7 @@ export class CreateGameComponent implements OnInit {
     if (this.player4.name !== '') {
       playersList.push(this.player4);
     }
-    if (playersList.length > 0)  {
+    if (playersList.length > 0) {
       const game = new Game();
       game.players = playersList;
       this.data.createGame(game).pipe(
@@ -43,8 +44,4 @@ export class CreateGameComponent implements OnInit {
       });
     }
   }
-
-  ngOnInit() {
-  }
-
 }

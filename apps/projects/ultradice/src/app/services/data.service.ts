@@ -1,117 +1,114 @@
-import { Observable, from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import Dexie from 'dexie';
 import { Statistic } from '../models/statistic.model';
 import { Player } from '../models/player.model';
 import { Game } from '../models/game.model';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class DataService {
+@Injectable({ providedIn: 'root' })
+export class DataService extends Dexie {
+  private readonly statisticTableName = 'statistic';
+  private readonly playerTableName = 'player';
+  private readonly gameTableName = 'game';
 
-  private static db: Dexie;
-  private static STATISTIC_TABLE_NAME = 'statistic';
-  private static PLAYER_TABLE_NAME = 'player';
-  private static GAME_TABLE_NAME = 'game';
+  constructor() {
+    super('ultradice');
 
-  public static init(): void {
-    DataService.db = new Dexie('MyDatabase');
-    DataService.db.version(1).stores({
+    this.version(1).stores({
       statistic: '++id, name, value',
       player: '++id',
     });
-    DataService.db.version(2).stores({
+    this.version(2).stores({
       statistic: '++id, name, value',
       player: '++id',
     });
-    DataService.db.version(3).stores({
+    this.version(3).stores({
       statistic: '++id, name, value',
       player: '++id',
       game: '++id',
     });
   }
 
-  static initValue(stat: string) {
-    DataService.db.table<Statistic>(DataService.STATISTIC_TABLE_NAME).filter((item) => item.name === stat).first()
-    .then(item => {
-      if (typeof(item) === 'undefined') {
-        DataService.db.table(DataService.STATISTIC_TABLE_NAME).add({ name: stat, value: 0});
-      }
-    });
-  }
-
-  updateShuffleStatistic(key: string) {
-    return DataService.db.table<Statistic>(DataService.STATISTIC_TABLE_NAME).filter((item) => item.name === key).first()
-    .then((item) => {
-        if (typeof(item) === 'undefined') {
-          DataService.db.table(DataService.STATISTIC_TABLE_NAME).add({ name: key, value: 1});
-        } else {
-          DataService.db.table<Statistic>(DataService.STATISTIC_TABLE_NAME).update(item.id, { value: item.value + 1 });
+  initValue(stat: string) {
+    this.table<Statistic>(this.statisticTableName).filter((item) => item.name === stat).first()
+      .then(item => {
+        if (!item) {
+          this.table(this.statisticTableName).add({ name: stat, value: 0 });
         }
-    });
+      });
   }
 
-  async updateMax(key: string, value: number) {
-    return await DataService.db.table<Statistic>(DataService.STATISTIC_TABLE_NAME).filter((item) => item.name === key).first()
-    .then((item) => {
-        if (typeof(item) === 'undefined') {
-          DataService.db.table(DataService.STATISTIC_TABLE_NAME).add({ name: key, value});
+  updateShuffleStatistic(key: string): Promise<void> {
+    return this.table<Statistic>(this.statisticTableName).filter((item) => item.name === key).first()
+      .then((item) => {
+          if (!item) {
+            this.table(this.statisticTableName).add({ name: key, value: 1 });
+          } else {
+            this.table<Statistic>(this.statisticTableName).update(item.id, { value: item.value + 1 });
+          }
+        }
+      );
+  }
+
+  updateMax(key: string, value: number): Promise<void> {
+    return this.table<Statistic>(this.statisticTableName).filter((item) => item.name === key).first()
+      .then((item) => {
+        if (!item) {
+          this.table(this.statisticTableName).add({ name: key, value });
         } else if (item.value < value) {
-          DataService.db.table<Statistic>(DataService.STATISTIC_TABLE_NAME).update(item.id, { value });
+          this.table<Statistic>(this.statisticTableName).update(item.id, { value });
         }
-    });
+      });
   }
 
-  async updateMin(key: string, value: number) {
-    return await DataService.db.table<Statistic>(DataService.STATISTIC_TABLE_NAME).filter((item) => item.name === key).first()
-    .then((item) => {
-        if (typeof(item) === 'undefined') {
-          DataService.db.table(DataService.STATISTIC_TABLE_NAME).add({ name: key, value});
+  updateMin(key: string, value: number): Promise<void> {
+    return this.table<Statistic>(this.statisticTableName).filter((item) => item.name === key).first()
+      .then((item) => {
+        if (!item) {
+          this.table(this.statisticTableName).add({ name: key, value });
         } else if (item.value > value) {
-          DataService.db.table<Statistic>(DataService.STATISTIC_TABLE_NAME).update(item.id, { value });
+          this.table<Statistic>(this.statisticTableName).update(item.id, { value });
         }
-    });
+      });
   }
 
   getStatistics(): Promise<Statistic[]> {
-    return DataService.db.table<Statistic>(DataService.STATISTIC_TABLE_NAME).orderBy('name').toArray();
+    return this.table<Statistic>(this.statisticTableName).orderBy('name').toArray();
   }
 
   getGame(): Observable<Game> {
-    return from(DataService.db.table<Game>(DataService.GAME_TABLE_NAME).filter((item) => true).first());
+    return from(this.table<Game>(this.gameTableName).filter((item) => true).first());
   }
 
   updatePlayers(playersList: Player[]) {
-    return DataService.db.table<Player>(DataService.PLAYER_TABLE_NAME).bulkPut(playersList);
+    return this.table<Player>(this.playerTableName).bulkPut(playersList);
   }
 
   createGame(game: Game): Observable<any> {
-    return from<any>(DataService.db.table<Game>(DataService.GAME_TABLE_NAME).clear().then(
-      () => DataService.db.table<Game>(DataService.GAME_TABLE_NAME).put(game)
+    return from<any>(this.table<Game>(this.gameTableName).clear().then(
+      () => this.table<Game>(this.gameTableName).put(game)
     ));
   }
 
   updateGame(game: Game): any {
-    return DataService.db.table<Game>(DataService.GAME_TABLE_NAME).put(game);
+    return this.table<Game>(this.gameTableName).put(game);
   }
 
-  cleanUpGame(): Observable<any> {
-    return from(DataService.db.table<Game>(DataService.GAME_TABLE_NAME).clear());
+  cleanUpGame(): Promise<void> {
+    return this.table<Game>(this.gameTableName).clear();
   }
 
   async cleanUp() {
-    await DataService.db.table<Player>(DataService.PLAYER_TABLE_NAME).clear();
-    await DataService.db.table<Player>(DataService.STATISTIC_TABLE_NAME).clear();
+    await this.table<Player>(this.playerTableName).clear();
+    await this.table<Player>(this.statisticTableName).clear();
     return;
   }
 
   async updateData(playersList: Player[]): Promise<any> {
     try {
-      await DataService.db.table<Player>(DataService.PLAYER_TABLE_NAME).clear();
-    } catch {}
-    return DataService.db.table<Player>(DataService.PLAYER_TABLE_NAME).bulkAdd(playersList);
+      await this.table<Player>(this.playerTableName).clear();
+    } catch {
+    }
+    return this.table<Player>(this.playerTableName).bulkAdd(playersList);
   }
-
-  constructor() { }
 }

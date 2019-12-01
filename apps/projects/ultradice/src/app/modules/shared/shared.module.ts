@@ -1,9 +1,9 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule, MatButtonToggleModule, MatInputModule } from '@angular/material';
 import { ButtonComponent } from './components/button/button.component';
 import { LinkButtonComponent } from './components/link-button/link-button.component';
-import {MatButtonModule, MatButtonToggleModule, MatInputModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -15,11 +15,12 @@ import {MatButtonModule, MatButtonToggleModule, MatInputModule} from '@angular/m
   ],
   declarations: [
     ButtonComponent,
-    LinkButtonComponent
+    LinkButtonComponent,
   ],
   exports: [
     ButtonComponent,
-    LinkButtonComponent
+    LinkButtonComponent,
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

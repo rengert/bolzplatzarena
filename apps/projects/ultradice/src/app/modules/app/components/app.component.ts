@@ -1,22 +1,21 @@
-import { ResultComponent } from './../../game/components/result/result.component';
-import {Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {GameService} from '../../../services/game.service';
-import {Subscription} from 'rxjs';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ImprintComponent } from '../../info/components/imprint/imprint.component';
-
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { ResultComponent } from '../../game/components/result/result.component';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit, OnDestroy {
-  @Input('visible') @HostBinding('class.visible') IsVisible: boolean;
+  @Input() @HostBinding('class.visible') isVisible: boolean;
   subscription: Subscription;
 
-  constructor(private readonly translate: TranslateService, readonly gameService: GameService, readonly dialog: MatDialog) {
+  constructor(private readonly translate: TranslateService, readonly gameService: GameService, private readonly dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -27,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscription = this.gameService.state$.subscribe(
       value => {
-        this.IsVisible = value;
+        this.isVisible = value;
       }
     );
   }

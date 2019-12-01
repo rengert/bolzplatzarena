@@ -2,13 +2,13 @@
   <mat-icon>more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
+  <button mat-menu-item (click)="displayRanking()">
     <mat-icon>dialpad</mat-icon>
-    <span (click)="displayRanking()">Zwischen Stand</span>
+    <span translate>COMPONENTS.APP_COMPONENT.STANDINGS</span>
   </button>
-  <button mat-menu-item disabled>
+  <button mat-menu-item disabled [routerLink]="['/home']">
     <mat-icon>dialpad</mat-icon>
-    <span><a [routerLink]="['/home']">Spiel beenden</a></span>
+    <span>Spiel beenden</span>
   </button>
 </mat-menu>
 <router-outlet></router-outlet>

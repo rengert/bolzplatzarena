@@ -1,5 +1,5 @@
 export interface Statistic {
-    id: number;
-    name: string;
-    value: number;
+  id: number;
+  name: string;
+  value: number;
 }
