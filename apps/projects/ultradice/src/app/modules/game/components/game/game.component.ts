@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable, of, } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -34,10 +34,11 @@ export class GameComponent implements OnDestroy {
   }
 
   constructor(
-    private ruleService: RuleService,
-    private dataService: DataService,
+    private readonly ruleService: RuleService,
+    private readonly dataService: DataService,
     private readonly gameService: GameService,
     private readonly dialog: MatDialog,
+    private readonly changeDetectionRef: ChangeDetectorRef,
   ) {
     this.init$ = this.initGame$();
     this.gameService.state$.next(true);
@@ -59,10 +60,24 @@ export class GameComponent implements OnDestroy {
       const dices = this.dices.toArray();
       // tslint:disable-next-line:prefer-for-of
       for (let x = 0; x < dices.length; x++) {
-        await dices[x].shuffel();
+        await this.shuffelDice(dices[x]);
       }
       // this.gameCard.sum++;
       --this.game.shuffleMaxCount;
+    }
+    this.changeDetectionRef.markForCheck();
+  }
+
+  async shuffelDice(dice: DiceComponent) {
+    if (dice.id === 0) {
+      // error case
+      return;
+    }
+    if (!dice.fixed) {
+      dice.value = Math.ceil((Math.random() * 6));
+      await this.dataService.updateShuffleStatistic(`dice.all`);
+      await this.dataService.updateShuffleStatistic(`dice.value.${dice.value}`);
+      await this.dataService.updateShuffleStatistic(`dice.${dice.id}.${dice.value}`);
     }
   }
 
