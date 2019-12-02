@@ -9,7 +9,6 @@
 .scene {
   width: 50px;
   height: 50px;
-  border: 1px solid #CCC;
   margin: 6px;
   perspective: 150px;
 }
@@ -48,67 +47,72 @@
 }
 
 .cube__face {
+  background: transparent url(../../../../assets/images/dice-sprite.png) top left no-repeat;
+  background-position-x: -86px;
   position: absolute;
   width: 50px;
   height: 50px;
-  border: 2px solid black;
-  line-height: 50px;
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
 }
 
+:host.fixed .cube__face {
+  background-position-x: -12px;
+}
+
+// 1
 .cube__face--front {
-  background: hsla(0, 100%, 50%, 0.7);
+  background-position-y: -12px;
+}
+
+// 2
+.cube__face--right {
+  background-position-y: -86px;
+}
+
+// 6
+.cube__face--back {
+  background-position-y: -382px;
+}
+
+// 5
+.cube__face--left {
+  background-position-y: -308px;
+}
+
+// 3
+.cube__face--top {
+  background-position-y: -160px;
+}
+
+// 4
+.cube__face--bottom {
+  background-position-y: -234px;
+}
+
+
+/* positions */
+
+.cube__face--front {
+  transform: rotateY(0deg) translateZ(23px);
 }
 
 .cube__face--right {
-  background: hsla(60, 100%, 50%, 0.7);
+  transform: rotateY(90deg) translateZ(23px);
 }
 
 .cube__face--back {
-  background: hsla(120, 100%, 50%, 0.7);
+  transform: rotateY(180deg) translateZ(23px);
 }
 
 .cube__face--left {
-  background: hsla(180, 100%, 50%, 0.7);
+  transform: rotateY(-90deg) translateZ(23px);
 }
 
 .cube__face--top {
-  background: hsla(240, 100%, 50%, 0.7);
+  transform: rotateX(90deg) translateZ(23px);
 }
 
 .cube__face--bottom {
-  background: hsla(300, 100%, 50%, 0.7);
-}
-
-.cube__face--front {
-  transform: rotateY(0deg) translateZ(25px);
-}
-
-.cube__face--right {
-  transform: rotateY(90deg) translateZ(25px);
-}
-
-.cube__face--back {
-  transform: rotateY(180deg) translateZ(25px);
-}
-
-.cube__face--left {
-  transform: rotateY(-90deg) translateZ(25px);
-}
-
-.cube__face--top {
-  transform: rotateX(90deg) translateZ(25px);
-}
-
-.cube__face--bottom {
-  transform: rotateX(-90deg) translateZ(25px);
-}
-
-label {
-  margin-right: 10px;
+  transform: rotateX(-90deg) translateZ(23px);
 }
 
 /*:host {
