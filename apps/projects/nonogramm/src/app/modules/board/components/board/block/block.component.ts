@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-block',
@@ -9,6 +9,8 @@ export class BlockComponent implements OnInit {
   @Input() expected: boolean;
   @HostBinding('class.failed') failed: boolean;
   @HostBinding('class.good') good: boolean;
+  @Output() goodEvent = new EventEmitter<void>();
+  @Output() failedEvent = new EventEmitter<void>();
 
   @HostListener('click') onHover() {
     if (this.failed || this.good) {
@@ -16,6 +18,12 @@ export class BlockComponent implements OnInit {
     }
     this.good = this.expected;
     this.failed = !this.good;
+    if (this.failed) {
+      this.failedEvent.emit();
+    }
+    if (this.good) {
+      this.goodEvent.emit();
+    }
   }
 
   constructor() {

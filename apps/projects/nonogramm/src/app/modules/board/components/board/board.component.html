@@ -1,3 +1,13 @@
+<p>
+  failed: {{ failedCount }}
+</p>
+<p>
+  good: {{ goodCount }}
+</p>
 <div *ngFor="let row of boardData; let i = index" class="row">
-  <app-block *ngFor="let block of row; let j = index" [expected]="(i + j) % 2 === 0"></app-block>
+  <app-block *ngFor="let block of row; let j = index"
+             [expected]="(i + j) % 2 === 0"
+             (failedEvent)="onFailed()"
+             (goodEvent)="onGood()"
+  ></app-block>
 </div>
