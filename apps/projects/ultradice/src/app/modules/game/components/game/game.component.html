@@ -1,0 +1,43 @@
+<ng-container *ngIf="init$ |async">
+  <div class="holder">
+    <div class="{{ game.shuffleMaxCount < 30 ? '' : 'hidden' }}">
+      <app-dice id="1"></app-dice>
+      <app-dice id="2"></app-dice>
+      <app-dice id="3"></app-dice>
+      <app-dice id="4"></app-dice>
+      <app-dice id="5"></app-dice>
+    </div>
+  </div>
+  <app-button *ngIf="!game.nextPlayer" (click)="shuffle()">{{ game.currentPlayer.name }} Würfeln
+    ({{ game.shuffleMaxCount }})
+  </app-button>
+  <app-button *ngIf="game.nextPlayer" (click)="next()">Nächster Spieler</app-button>
+  <div class="rules">
+    <div class="inner">
+      <app-rule text="Einser" [value]="gameCard.ones" (click)="handleRule(1)"></app-rule>
+      <app-rule text="Zweier" [value]="gameCard.twos" (click)="handleRule(2)"></app-rule>
+      <app-rule text="Dreier" [value]="gameCard.threes" (click)="handleRule(3)"></app-rule>
+      <app-rule text="Vierer" [value]="gameCard.fours" (click)="handleRule(4)"></app-rule>
+      <app-rule text="Fünfer" [value]="gameCard.fives" (click)="handleRule(5)"></app-rule>
+      <app-rule text="Sechser" [value]="gameCard.six" (click)="handleRule(6)"></app-rule>
+      <hr>
+      <app-rule text="Summe" [value]="gameCard.sumUpper"></app-rule>
+      <app-rule text="Bonus" [value]="gameCard.bonus"></app-rule>
+      <hr>
+      <app-rule text="Ein Paar" [value]="gameCard.onePair" (click)="handleRule(7)"></app-rule>
+      <app-rule text="Zwei Paar" [value]="gameCard.twoPair" (click)="handleRule(8)"></app-rule>
+      <app-rule text="Drei Gleiche" [value]="gameCard.threeOfAKind" (click)="handleRule(9)"></app-rule>
+      <app-rule text="Vier Gleiche" [value]="gameCard.fourOfAKind" (click)="handleRule(10)"></app-rule>
+      <app-rule text="Kuchen" [value]="gameCard.fullHouse" (click)="handleRule(11)"></app-rule>
+      <app-rule text="Kleine Straße" [value]="gameCard.shortStreet" (click)="handleRule(12)"></app-rule>
+      <app-rule text="Große Straße" [value]="gameCard.largeStreet" (click)="handleRule(13)"></app-rule>
+      <app-rule text="Pasch" [value]="gameCard.fiveOfAKind" (click)="handleRule(14)"></app-rule>
+      <app-rule text="Chance" [value]="gameCard.chance" (click)="handleRule(15)"></app-rule>
+      <hr>
+      <app-rule text="Summe Oben" [value]="gameCard.sumUpper"></app-rule>
+      <app-rule text="Summe Unten" [value]="gameCard.sumLower"></app-rule>
+      <app-rule text="Summe" [value]="gameCard.sum"></app-rule>
+    </div>
+  </div>
+</ng-container>
+<app-link-button>Zurück zu Start</app-link-button>

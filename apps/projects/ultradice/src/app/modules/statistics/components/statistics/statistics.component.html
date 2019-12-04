@@ -1,0 +1,19 @@
+<div class="content">
+  <table mat-table [dataSource]="statistics$ | async" class="mat-elevation-z8">
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef> No.</th>
+      <td mat-cell *matCellDef="let element"> {{element.value}}</td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element"> {{ 'COMPONENTS.STATISTICS.' + element.name | translate }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<div class="buttons">
+  <app-button (click)="reset()">{{ 'COMPONENTS.STATISTICS.RESET' | translate }}</app-button>
+  <app-link-button>{{ 'GLOBAL.TO_START' | translate }}</app-link-button>
+</div>
+

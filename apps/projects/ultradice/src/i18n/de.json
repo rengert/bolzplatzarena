@@ -1,0 +1,80 @@
+{
+  "GLOBAL": {
+    "TO_START": "Zurück zur Startseite"
+  },
+  "COMPONENTS": {
+    "APP": {
+      "STANDINGS": "Zwischenstand"
+    },
+    "GAME": {
+      "CREATE": {
+        "TEXT": "Starten Sie ein neues Spiel und geben Sie den Mitspielern Namen. Sie können mit 1 bis 4 Spielern spielen."
+      },
+      "RESULT": {
+        "HEADLINE": "Zwischenergebnis"
+      },
+      "END_RESULT": {
+        "HEADLINE": "Endergebnis"
+      }
+    },
+    "STATISTICS": {
+      "RESET": "Statistiken zurücksetzen",
+      "GAME": {
+        "RESULT": {
+          "MAX": "Höchstes Ergebnis",
+          "MIN": "Niedrigstes Ergebnis"
+        }
+      },
+      "DICE": {
+        "1": {
+          "1": "Würfel 1 würfelt 1",
+          "2": "Würfel 1 würfelt 2",
+          "3": "Würfel 1 würfelt 3",
+          "4": "Würfel 1 würfelt 4",
+          "5": "Würfel 1 würfelt 5",
+          "6": "Würfel 1 würfelt 6"
+        },
+        "2": {
+          "1": "Würfel 2 würfelt 1",
+          "2": "Würfel 2 würfelt 2",
+          "3": "Würfel 2 würfelt 3",
+          "4": "Würfel 2 würfelt 4",
+          "5": "Würfel 2 würfelt 5",
+          "6": "Würfel 2 würfelt 6"
+        },
+        "3": {
+          "1": "Würfel 3 würfelt 1",
+          "2": "Würfel 3 würfelt 2",
+          "3": "Würfel 3 würfelt 3",
+          "4": "Würfel 3 würfelt 4",
+          "5": "Würfel 3 würfelt 5",
+          "6": "Würfel 3 würfelt 6"
+        },
+        "4": {
+          "1": "Würfel 4 würfelt 1",
+          "2": "Würfel 4 würfelt 2",
+          "3": "Würfel 4 würfelt 3",
+          "4": "Würfel 4 würfelt 4",
+          "5": "Würfel 4 würfelt 5",
+          "6": "Würfel 4 würfelt 6"
+        },
+        "5": {
+          "1": "Würfel 5 würfelt 1",
+          "2": "Würfel 5 würfelt 2",
+          "3": "Würfel 5 würfelt 3",
+          "4": "Würfel 5 würfelt 4",
+          "5": "Würfel 5 würfelt 5",
+          "6": "Würfel 5 würfelt 6"
+        },
+        "VALUE": {
+          "1": "1 gewürfelt",
+          "2": "2 gewürfelt",
+          "3": "3 gewürfelt",
+          "4": "4 gewürfelt",
+          "5": "5 gewürfelt",
+          "6": "6 gewürfelt"
+        }
+      }
+    }
+  }
+}
