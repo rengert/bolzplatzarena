@@ -1,9 +1,11 @@
-import { from, Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
 import Dexie from 'dexie';
-import { Statistic } from '../models/statistic.model';
-import { Player } from '../models/player.model';
+import { from, Observable } from 'rxjs';
+
+import { Injectable } from '@angular/core';
+
 import { Game } from '../models/game.model';
+import { Player } from '../models/player.model';
+import { Statistic } from '../models/statistic.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataService extends Dexie {
@@ -41,12 +43,12 @@ export class DataService extends Dexie {
   updateShuffleStatistic(key: string): Promise<void> {
     return this.table<Statistic>(this.statisticTableName).filter((item) => item.name === key).first()
       .then((item) => {
-          if (!item) {
-            this.table(this.statisticTableName).add({ name: key, value: 1 });
-          } else {
-            this.table<Statistic>(this.statisticTableName).update(item.id, { value: item.value + 1 });
-          }
+        if (!item) {
+          this.table(this.statisticTableName).add({ name: key, value: 1 });
+        } else {
+          this.table<Statistic>(this.statisticTableName).update(item.id, { value: item.value + 1 });
         }
+      }
       );
   }
 
@@ -80,7 +82,7 @@ export class DataService extends Dexie {
     return from(this.table<Game>(this.gameTableName).filter((item) => true).first());
   }
 
-  updatePlayers(playersList: Player[]) {
+  updatePlayers(playersList: Player[]): Promise<any> {
     return this.table<Player>(this.playerTableName).bulkPut(playersList);
   }
 
@@ -90,7 +92,7 @@ export class DataService extends Dexie {
     ));
   }
 
-  updateGame(game: Game): any {
+  updateGame(game: Game): Promise<any> {
     return this.table<Game>(this.gameTableName).put(game);
   }
 
@@ -101,7 +103,6 @@ export class DataService extends Dexie {
   async cleanUp() {
     await this.table<Player>(this.playerTableName).clear();
     await this.table<Player>(this.statisticTableName).clear();
-    return;
   }
 
   async updateData(playersList: Player[]): Promise<any> {

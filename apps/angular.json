@@ -18,7 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ultradice",
+            "outputPath": "dist/ultradice/public",
             "index": "projects/ultradice/src/index.html",
             "main": "projects/ultradice/src/main.ts",
             "polyfills": "projects/ultradice/src/polyfills.ts",
@@ -125,6 +125,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "ultradice"
 }
