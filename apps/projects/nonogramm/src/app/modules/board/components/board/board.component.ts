@@ -1,24 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { GameData } from '../../../../models/game-data';
+import { BoardService } from './services/board.service';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent {
-  readonly boardData: any[][];
+export class BoardComponent implements OnChanges {
+  @Input() boardData: GameData;
+  columnHints: number[][];
+  rowHints: number[][];
   failedCount = 0;
   goodCount = 0;
 
-  constructor() {
-    this.boardData = [];
-    for (let i = 0; i < 15; i++) {
-      const row = [];
-      for (let itemIndex = 0; itemIndex < 15; itemIndex++) {
-        row.push({});
-      }
-      this.boardData.push(row);
-    }
+  constructor(private readonly board: BoardService) {
   }
 
   onGood() {
@@ -39,5 +35,16 @@ export class BoardComponent {
       alert('sorry das war dann leider zu viel');
       document.location.reload();
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes.boardData) {
+      return;
+    }
+    // columns
+    this.columnHints = this.board.generateColumnHints(this.boardData);
+
+    // rows
+    this.rowHints = this.board.generateRowHints(this.boardData);
   }
 }

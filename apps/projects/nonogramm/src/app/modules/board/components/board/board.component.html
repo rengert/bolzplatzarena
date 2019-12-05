@@ -4,10 +4,25 @@
 <p>
   good: {{ goodCount }}
 </p>
-<div *ngFor="let row of boardData; let i = index" class="row">
-  <app-block *ngFor="let block of row; let j = index"
-             [expected]="(i + j) % 2 === 0"
-             (failedEvent)="onFailed()"
-             (goodEvent)="onGood()"
-  ></app-block>
+<div class="columns">
+  <app-caption *ngFor="let column of columnHints; let i = index"
+               [numbers]="column"
+               [vertical]="true"
+               [ngClass]="['item-' + (i + 1)]"></app-caption>
+</div>
+<div class="rows">
+  <app-caption *ngFor="let row of rowHints; let i = index"
+               [numbers]="row"
+               [vertical]="false"
+               [ngClass]="['item-' + (i + 1)]"></app-caption>
+</div>
+<div class="inner">
+  <div *ngFor="let row of boardData.data; let i = index" class="row">
+    <app-block *ngFor="let block of row; let j = index"
+               [expected]="block"
+               (failedEvent)="onFailed()"
+               (goodEvent)="onGood()"
+               [ngClass]="['row-' + (i + 1), 'column-' + (j + 1)]"
+    ></app-block>
+  </div>
 </div>

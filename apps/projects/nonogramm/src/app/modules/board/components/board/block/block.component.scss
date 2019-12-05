@@ -3,8 +3,8 @@
   border: 1px solid black;
   border-top: 0;
   border-left: 0;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
   position: relative;
   margin: 0;
 
@@ -26,6 +26,22 @@
       text-align: center;
       color: black;
       font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  :host {
+    width: 1rem;
+    height: 1rem;
+
+    &.good {
+      background: none;
+
+      &:after {
+        line-height: 1.3rem;
+        font-size: 2rem;
+      }
     }
   }
 }
