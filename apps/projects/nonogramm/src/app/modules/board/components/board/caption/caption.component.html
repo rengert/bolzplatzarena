@@ -1,1 +1,2 @@
-<span [class]="numbersClass">{{ numbers | join }}<span>
+<span *ngFor="let item of numbers"
+      [class]="numbersClass">{{ item }}</span>

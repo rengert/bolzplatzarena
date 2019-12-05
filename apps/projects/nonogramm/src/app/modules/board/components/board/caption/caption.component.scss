@@ -5,8 +5,12 @@
   margin-bottom: 1px;
   background-color: lightgray;
   font-size: 0.7rem;
-  line-height: 1rem;
-  text-align: center;
+  line-height: 1.2rem;
+  text-align: right;
+
+  span {
+    padding-right: 1px;
+  }
 
   &.vertical {
     float: left;
@@ -15,15 +19,18 @@
     height: 3.5rem;
     margin-right: 1px;
     position: relative;
+    text-align: center;
+    padding-top: 1px;
+    line-height: .7rem;
 
     span {
-      top: 25px;
-      left: -26px;
-      width: 70px;
-      position: absolute;
+      padding: 0 !important;
       display: block;
-      transform: rotate(270deg);
-      z-index: 2;
+
+      &.text-length-6 {
+        line-height: .6rem;
+        font-size: .65rem;
+      }
     }
   }
 }
