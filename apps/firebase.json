@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "nonogramm",
+      "public": "dist/nonogramm/public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}
