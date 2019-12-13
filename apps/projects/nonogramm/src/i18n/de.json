@@ -9,6 +9,11 @@
         "EASY": "Einfach",
         "MEDIUM": "Mittel",
         "HEAVY": "Schwer"
+      },
+      "SIZE": {
+        "5": "Klein",
+        "10": "Mittel",
+        "15": "Groß"
       }
     }
   },
@@ -25,7 +30,8 @@
     "SETTINGS": {
       "HEADLINE": "Einstellungen",
       "LABELS": {
-        "LEVEL": "Schwierigkeit"
+        "LEVEL": "Schwierigkeit",
+        "SIZE": "Größe"
       },
       "SAVE": "Speichern"
     }

@@ -1,15 +1,24 @@
 <h2 translate>COMPONENTS.SETTINGS.HEADLINE</h2>
-<label id="example-radio-group-label" translate>
+<label id="level-label" translate>
   COMPONENTS.SETTINGS.LABELS.LEVEL
 </label>
 <mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group"
+  aria-labelledby="level-label"
   [(ngModel)]="level">
   <mat-radio-button *ngFor="let item of levels"
-                    [value]="item"
-                    class="example-radio-button">
+                    [value]="item">
     {{ 'GLOBAL.ENUM.LEVEL.' + item.toString().toUpperCase() | translate }}
+  </mat-radio-button>
+</mat-radio-group>
+<label id="size-label" translate>
+  COMPONENTS.SETTINGS.LABELS.SIZE
+</label>
+<mat-radio-group
+  aria-labelledby="size-label"
+  [(ngModel)]="size">
+  <mat-radio-button *ngFor="let item of sizes"
+                    [value]="item">
+    {{ 'GLOBAL.ENUM.SIZE.' + item | translate }}
   </mat-radio-button>
 </mat-radio-group>
 <button mat-flat-button color="primary" (click)="save()">

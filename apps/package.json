@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy:nonogramm": "firebase deploy --only hosting:nonogramm"
+    "deploy:nonogramm": "ng build nonogramm --prod && firebase deploy --only hosting:nonogramm"
   },
   "private": true,
   "dependencies": {

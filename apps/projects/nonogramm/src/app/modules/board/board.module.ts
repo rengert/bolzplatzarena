@@ -7,9 +7,10 @@ import { CoreModule } from '../../../../../core/src/lib/core.module';
 import { SettingsViewComponent } from './components/board/settings-view/settings-view.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material';
+import { HeartsComponent } from './components/board/hearts/hearts.component';
 
 @NgModule({
-  declarations: [BoardComponent, BlockComponent, CaptionComponent, SettingsViewComponent],
+  declarations: [BoardComponent, BlockComponent, CaptionComponent, SettingsViewComponent, HeartsComponent],
   exports: [
     BoardComponent,
   ],

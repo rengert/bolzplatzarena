@@ -1,9 +1,5 @@
 <app-settings-view [config]="boardData.config"></app-settings-view>
-<div>
-  <mat-icon class="icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-  <mat-icon class="icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-  <mat-icon class="icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-</div>
+<app-hearts [hearts]="hearts"></app-hearts>
 <div class="columns">
   <app-caption *ngFor="let column of columnHints; let i = index"
                [numbers]="column"

@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GameData } from '../../../../models/game-data';
 import { BoardService } from '../../services/board.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -13,8 +14,12 @@ export class BoardComponent implements OnChanges {
   rowHints: number[][];
   failedCount = 0;
   goodCount = 0;
+  hearts = 3;
 
-  constructor(private readonly board: BoardService) {
+  constructor(
+    private readonly board: BoardService,
+    private readonly  router: Router,
+  ) {
   }
 
   onGood() {
@@ -24,16 +29,16 @@ export class BoardComponent implements OnChanges {
 
   onFailed() {
     this.failedCount++;
+    this.hearts = 3 - this.failedCount;
     this.checkBoard();
   }
 
   private checkBoard() {
     if (this.goodCount >= 10) {
-      alert('you are god');
     }
     if (this.failedCount >= 3) {
-      alert('sorry das war dann leider zu viel');
-      document.location.reload();
+      alert('Sie haben leider verloren');
+      this.router.navigate(['']);
     }
   }
 
