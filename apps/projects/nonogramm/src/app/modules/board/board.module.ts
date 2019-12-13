@@ -4,16 +4,20 @@ import { BoardComponent } from './components/board/board.component';
 import { BlockComponent } from './components/board/block/block.component';
 import { CaptionComponent } from './components/board/caption/caption.component';
 import { CoreModule } from '../../../../../core/src/lib/core.module';
-
+import { SettingsViewComponent } from './components/board/settings-view/settings-view.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatIconModule } from '@angular/material';
 
 @NgModule({
-  declarations: [BoardComponent, BlockComponent, CaptionComponent],
+  declarations: [BoardComponent, BlockComponent, CaptionComponent, SettingsViewComponent],
   exports: [
     BoardComponent,
   ],
   imports: [
     CommonModule,
     CoreModule,
+    TranslateModule,
+    MatIconModule,
   ]
 })
 export class BoardModule {

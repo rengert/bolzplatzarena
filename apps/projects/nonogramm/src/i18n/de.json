@@ -1,0 +1,33 @@
+{
+  "TEST": "OKAY",
+  "GLOBAL": {
+    "APP": {
+      "NAME": "NONOGRAMM"
+    },
+    "ENUM": {
+      "LEVEL": {
+        "EASY": "Einfach",
+        "MEDIUM": "Mittel",
+        "HEAVY": "Schwer"
+      }
+    }
+  },
+  "COMPONENTS": {
+    "NAVIGATION": {
+      "NEW": "Neues Spiel",
+      "CONTINUE": "Weiter spielen",
+      "SETTINGS": "Einstellungen",
+      "IMPRINT": "Impressum"
+    },
+    "GAME": {
+      "GIVE_UP": "Ich geb's auf!"
+    },
+    "SETTINGS": {
+      "HEADLINE": "Einstellungen",
+      "LABELS": {
+        "LEVEL": "Schwierigkeit"
+      },
+      "SAVE": "Speichern"
+    }
+  }
+}

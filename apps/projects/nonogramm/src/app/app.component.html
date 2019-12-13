@@ -1,2 +1,11 @@
-<app-game></app-game>
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <mat-icon [routerLink]="['']" class="icon" aria-hidden="false" aria-label="Example heart icon">home</mat-icon>
+    <span class="spacer"></span>
+    <mat-icon class="icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+    <mat-icon class="icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

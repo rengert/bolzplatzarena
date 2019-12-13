@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GameData } from '../../../../models/game-data';
-import { BoardService } from './services/board.service';
+import { BoardService } from '../../services/board.service';
 
 @Component({
   selector: 'app-board',

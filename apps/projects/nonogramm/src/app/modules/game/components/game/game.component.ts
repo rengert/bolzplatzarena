@@ -1,25 +1,30 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { GameService } from '../../services/game.service';
 import { GameData } from '../../../../models/game-data';
+import { StorageService } from '../../../../services/storage.service';
+import { Config } from '../../../../models/config';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameComponent implements OnInit {
   gameData: GameData;
 
-  constructor(private readonly game: GameService) {
+  constructor(
+    private readonly game: GameService,
+    private readonly storage: StorageService,
+  ) {
   }
 
   ngOnInit() {
-    this.setupGame();
+    const config = this.storage.loadConfig();
+    this.setupGame(config);
   }
 
-  setupGame() {
-    console.log('start game');
-    this.gameData = this.game.createGameData({ size: 15, level: 1 });
+  setupGame(config: Config) {
+    this.gameData = this.game.createGameData(config);
   }
 }

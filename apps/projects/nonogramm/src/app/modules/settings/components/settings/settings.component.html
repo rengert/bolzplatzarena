@@ -1,0 +1,18 @@
+<h2 translate>COMPONENTS.SETTINGS.HEADLINE</h2>
+<label id="example-radio-group-label" translate>
+  COMPONENTS.SETTINGS.LABELS.LEVEL
+</label>
+<mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group"
+  [(ngModel)]="level">
+  <mat-radio-button *ngFor="let item of levels"
+                    [value]="item"
+                    class="example-radio-button">
+    {{ 'GLOBAL.ENUM.LEVEL.' + item.toString().toUpperCase() | translate }}
+  </mat-radio-button>
+</mat-radio-group>
+<button mat-flat-button color="primary" (click)="save()">
+  {{ 'COMPONENTS.SETTINGS.SAVE' | translate }}
+</button>
+
