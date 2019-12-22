@@ -5,4 +5,5 @@ export interface GameData {
   config: Config;
   data: GameBlock[][];
   current?: GameBlock[][];
+  failed: number;
 }

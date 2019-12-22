@@ -7,6 +7,7 @@ import { GameBlock } from '../../../models/game-block';
 export class GameService {
   createGameData(config: Config): GameData {
     const gameData = {
+      failed: 0,
       data: [],
       config
     } as GameData;

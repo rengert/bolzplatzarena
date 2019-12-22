@@ -13,7 +13,6 @@ export class BoardComponent implements OnChanges {
   @Input() boardData: GameData;
   columnHints: number[][];
   rowHints: number[][];
-  failedCount = 0;
   goodCount = 0;
   hearts = 3;
 
@@ -30,16 +29,17 @@ export class BoardComponent implements OnChanges {
   }
 
   onFailed() {
-    this.failedCount++;
-    // this.hearts = 3 - this.failedCount;
+    this.boardData.failed++;
+    this.hearts = 3 - this.boardData.failed;
     this.checkBoard();
   }
 
   private checkBoard() {
+    this.hearts = 3 - this.boardData.failed;
     this.storage.saveGame(this.boardData);
     if (this.goodCount >= 10) {
     }
-    if (this.failedCount >= 30) {
+    if (this.boardData.failed >= 30) {
       alert('Sie haben leider verloren');
       this.router.navigate(['']);
     }
@@ -54,5 +54,8 @@ export class BoardComponent implements OnChanges {
 
     // rows
     this.rowHints = this.board.generateRowHints(this.boardData);
+
+    // hearts
+    this.hearts = 3 - this.boardData.failed || 0;
   }
 }
