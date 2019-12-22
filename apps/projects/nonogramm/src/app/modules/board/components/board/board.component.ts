@@ -15,6 +15,7 @@ export class BoardComponent implements OnChanges {
   rowHints: number[][];
   goodCount = 0;
   hearts = 3;
+  selectType = true;
 
   constructor(
     private readonly board: BoardService,

@@ -19,6 +19,11 @@
                (failedEvent)="onFailed()"
                (goodEvent)="onGood()"
                [ngClass]="['row-' + (i + 1), 'column-' + (j + 1)]"
+               [selectExpected]="selectType"
     ></app-block>
   </div>
+</div>
+<div class="controls">
+  <mat-label>&#10005;&nbsp;&nbsp;&nbsp;</mat-label>
+  <mat-slide-toggle [(ngModel)]="selectType">&#9634;</mat-slide-toggle>
 </div>
