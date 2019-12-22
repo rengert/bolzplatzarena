@@ -25,6 +25,9 @@ export class GameComponent implements OnInit {
   }
 
   setupGame(config: Config) {
-    this.gameData = this.game.createGameData(config);
+    this.gameData = this.storage.loadGame();
+    if (!this.gameData) {
+      this.gameData = this.game.createGameData(config);
+    }
   }
 }

@@ -13,9 +13,9 @@
                [ngClass]="['item-' + (i + 1)]"></app-caption>
 </div>
 <div class="inner">
-  <div *ngFor="let row of boardData.data; let i = index" class="row">
+  <div *ngFor="let row of boardData.current; let i = index" class="row">
     <app-block *ngFor="let block of row; let j = index"
-               [expected]="block"
+               [block]="block"
                (failedEvent)="onFailed()"
                (goodEvent)="onGood()"
                [ngClass]="['row-' + (i + 1), 'column-' + (j + 1)]"

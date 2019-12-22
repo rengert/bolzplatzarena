@@ -1,6 +1,8 @@
 import { Config } from './config';
+import { GameBlock } from './game-block';
 
 export interface GameData {
   config: Config;
-  data: boolean[][];
+  data: GameBlock[][];
+  current?: GameBlock[][];
 }

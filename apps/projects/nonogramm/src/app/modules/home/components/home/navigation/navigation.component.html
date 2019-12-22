@@ -1,7 +1,10 @@
-<button mat-flat-button color="primary" [routerLink]="['game']">
+<button mat-flat-button color="primary" (click)="newGame()">
   {{ 'COMPONENTS.NAVIGATION.NEW' | translate }}
 </button>
-<button mat-flat-button disabled color="primary" [routerLink]="['game']">
+<button *ngIf="gameStarted" mat-flat-button color="primary" [routerLink]="['game']">
+  {{ 'COMPONENTS.NAVIGATION.CONTINUE' | translate }}
+</button>
+<button *ngIf="!gameStarted" mat-flat-button disabled color="primary">
   {{ 'COMPONENTS.NAVIGATION.CONTINUE' | translate }}
 </button>
 <button mat-flat-button color="primary" [routerLink]="['settings']">
@@ -10,4 +13,3 @@
 <button mat-flat-button color="primary" [routerLink]="['imprint']">
   {{ 'COMPONENTS.NAVIGATION.IMPRINT' | translate }}
 </button>
-

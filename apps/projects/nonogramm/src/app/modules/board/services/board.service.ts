@@ -5,10 +5,6 @@ import { GameData } from '../../../models/game-data';
   providedIn: 'root'
 })
 export class BoardService {
-
-  constructor() {
-  }
-
   generateRowHints(gameData: GameData): number[][] {
     return this.generateHints(gameData, true);
   }
@@ -20,10 +16,10 @@ export class BoardService {
   private generateHints(gameData: GameData, isRow: boolean): number[][] {
     const result = [];
     for (let i = 0; i < gameData.config.size; i++) {
-      let row = [] as number[];
+      const row = [] as number[];
       let count = 0;
       for (let j = 0; j < gameData.config.size; j++) {
-        const expected = isRow ? gameData.data[i][j] : gameData.data[j][i];
+        const expected = isRow ? gameData.data[i][j].expected : gameData.data[j][i].expected;
         if (!expected) {
           if (count > 0) {
             row.push(count);
@@ -37,7 +33,7 @@ export class BoardService {
         row.push(count);
       }
       if (!isRow) {
-        row = row.reverse();
+        // row = row.reverse();
       }
       result.push(row);
     }

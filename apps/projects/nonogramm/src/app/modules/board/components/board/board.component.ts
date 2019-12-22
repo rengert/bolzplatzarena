@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GameData } from '../../../../models/game-data';
 import { BoardService } from '../../services/board.service';
 import { Router } from '@angular/router';
+import { StorageService } from '../../../../services/storage.service';
 
 @Component({
   selector: 'app-board',
@@ -19,6 +20,7 @@ export class BoardComponent implements OnChanges {
   constructor(
     private readonly board: BoardService,
     private readonly  router: Router,
+    private readonly storage: StorageService,
   ) {
   }
 
@@ -29,14 +31,15 @@ export class BoardComponent implements OnChanges {
 
   onFailed() {
     this.failedCount++;
-    this.hearts = 3 - this.failedCount;
+    // this.hearts = 3 - this.failedCount;
     this.checkBoard();
   }
 
   private checkBoard() {
+    this.storage.saveGame(this.boardData);
     if (this.goodCount >= 10) {
     }
-    if (this.failedCount >= 3) {
+    if (this.failedCount >= 30) {
       alert('Sie haben leider verloren');
       this.router.navigate(['']);
     }
