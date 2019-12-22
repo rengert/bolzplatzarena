@@ -18,6 +18,7 @@ export class BlockComponent implements OnChanges {
     if (this.failed || this.good) {
       return;
     }
+    this.block.show = true;
     this.failed = !this.block.expected;
     this.good = this.block.expected;
     this.none = !this.block.expected;
@@ -27,7 +28,6 @@ export class BlockComponent implements OnChanges {
     if (this.good) {
       this.goodEvent.emit();
     }
-    this.block.show = true;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
