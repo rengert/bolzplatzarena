@@ -19,7 +19,7 @@ export class StorageService {
 
   loadConfig(): Config {
     return JSON.parse(localStorage.getItem(this.configStorageKey))
-      || { size: 1, level: Level.easy };
+      || { size: 15, level: Level.easy };
   }
 
   saveGame(game: GameData) {
