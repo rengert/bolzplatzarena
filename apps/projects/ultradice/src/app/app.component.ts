@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnIn
 import { MatDialog } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { ResultComponent } from '../../game/components/result/result.component';
-import { GameService } from '../../../services/game.service';
+import { ResultComponent } from './modules/game/components/result/result.component';
+import { GameService } from './services/game.service';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const lang = 'de';
     this.translate.use(lang);
-    const data = require(`../../../../i18n/${lang}.json`);
+    const data = require(`../i18n/${lang}.json`);
     this.translate.setTranslation(lang, data, true);
 
     this.subscription = this.gameService.state$.subscribe(
