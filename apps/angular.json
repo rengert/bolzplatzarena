@@ -151,7 +151,8 @@
             "aot": false,
             "assets": [
               "projects/nonogramm/src/favicon.ico",
-              "projects/nonogramm/src/assets"
+              "projects/nonogramm/src/assets",
+              "projects/nonogramm/src/manifest.webmanifest"
             ],
             "styles": [
               "projects/nonogramm/src/styles.scss"
@@ -186,7 +187,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/nonogramm/ngsw-config.json"
             }
           }
         },
@@ -216,7 +219,8 @@
             "karmaConfig": "projects/nonogramm/karma.conf.js",
             "assets": [
               "projects/nonogramm/src/favicon.ico",
-              "projects/nonogramm/src/assets"
+              "projects/nonogramm/src/assets",
+              "projects/nonogramm/src/manifest.webmanifest"
             ],
             "styles": [
               "projects/nonogramm/src/styles.scss"

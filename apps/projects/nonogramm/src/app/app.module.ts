@@ -11,6 +11,8 @@ import { BoardModule } from './modules/board/board.module';
 import { GameModule } from './modules/game/game.module';
 import { HomeModule } from './modules/home/home.module';
 import { SettingsModule } from './modules/settings/settings.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { SettingsModule } from './modules/settings/settings.module';
     MatIconModule,
     SettingsModule,
     TranslateModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
