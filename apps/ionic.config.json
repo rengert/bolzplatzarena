@@ -9,7 +9,9 @@
     },
     "nonogramm": {
       "name": "nonogramm",
-      "integrations": {},
+      "integrations": {
+        "capacitor": {}
+      },
       "type": "angular",
       "root": ""
     }
