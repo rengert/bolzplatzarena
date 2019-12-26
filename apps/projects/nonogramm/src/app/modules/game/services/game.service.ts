@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Config } from '../../../models/config';
 import { GameData } from '../../../models/game-data';
 import { GameBlock } from '../../../models/game-block';
+import { Level } from '../../../models/level';
 
 @Injectable({ providedIn: 'root' })
 export class GameService {
@@ -14,9 +15,10 @@ export class GameService {
     for (let i = 0; i < config.size; i++) {
       const row = [] as GameBlock[];
       for (let j = 0; j < config.size; j++) {
+        const expected = Math.random() < 0.5;
         row.push({
-            expected: Math.random() < 0.5,
-            show: false
+            expected,
+            show: this.shouldBeShown(expected, config)
           }
         );
       }
@@ -26,5 +28,19 @@ export class GameService {
       row => row.map(block => ({ ...block }))
     );
     return gameData;
+  }
+
+  private shouldBeShown(expected: boolean, config: Config): boolean {
+    if (expected) {
+      return false;
+    }
+    switch (config.level) {
+      case Level.easy:
+        return Math.random() < 0.1;
+      case Level.medium:
+        return Math.random() < 0.05;
+      default:
+        return false;
+    }
   }
 }
