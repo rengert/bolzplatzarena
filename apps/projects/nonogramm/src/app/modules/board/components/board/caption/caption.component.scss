@@ -4,8 +4,8 @@
   border-radius: 2px;
   margin-bottom: 1px;
   background-color: lightgray;
-  font-size: 0.9rem;
-  line-height: 1.9rem;
+  font-size: 1rem;
+  line-height: 2rem;
   text-align: right;
 
   span {
@@ -13,19 +13,24 @@
   }
 
   &.vertical {
+    display: flex;
+    position: relative;
     float: left;
-    display: block;
+    flex-direction: column;
     width: 1.9rem;
     height: 5.5rem;
-    margin-right: 1px;
-    position: relative;
-    text-align: center;
     padding-top: 1px;
+    margin-right: 1px;
+
+    justify-content: flex-end;
+    text-align: center;
     line-height: .9rem;
 
     span {
-      padding: 0 !important;
       display: block;
+      flex: 1;
+      flex-grow: 0;
+      padding: 0 !important;
 
       &.text-length-6 {
         line-height: .6rem;
