@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GameData } from '../../../../models/game-data';
 import { BoardService } from '../../services/board.service';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { StorageService } from '../../../../services/storage.service';
 })
 export class BoardComponent implements OnChanges {
   @Input() boardData: GameData;
+  @HostBinding('attr.class') cssClass: string;
   columnHints: number[][];
   rowHints: number[][];
   goodCount = 0;
@@ -50,6 +51,7 @@ export class BoardComponent implements OnChanges {
     if (!changes.boardData) {
       return;
     }
+    this.cssClass = `board-size-${this.boardData.config.size}`;
     // columns
     this.columnHints = this.board.generateColumnHints(this.boardData);
 

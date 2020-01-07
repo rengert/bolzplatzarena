@@ -15,7 +15,7 @@ export class BlockComponent implements OnChanges {
   @Output() goodEvent = new EventEmitter<void>();
   @Output() failedEvent = new EventEmitter<void>();
 
-  @HostListener('click') onHover() {
+  @HostListener('click') onClick() {
     if (this.block.show) {
       return;
     }
