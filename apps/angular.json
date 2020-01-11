@@ -29,6 +29,7 @@
               "projects/ultradice/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "projects/ultradice/src/styles.scss"
             ],
             "scripts": []
@@ -94,6 +95,7 @@
               "projects/ultradice/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "projects/ultradice/src/styles.scss"
             ],
             "scripts": []
@@ -122,6 +124,174 @@
             "production": {
               "devServerTarget": "ultradice:serve:production"
             }
+          }
+        }
+      }
+    },
+    "nonogramm": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "changeDetection": "OnPush"
+        }
+      },
+      "root": "projects/nonogramm",
+      "sourceRoot": "projects/nonogramm/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/nonogramm/public",
+            "index": "projects/nonogramm/src/index.html",
+            "main": "projects/nonogramm/src/main.ts",
+            "polyfills": "projects/nonogramm/src/polyfills.ts",
+            "tsConfig": "projects/nonogramm/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/nonogramm/src/favicon.ico",
+              "projects/nonogramm/src/assets",
+              "projects/nonogramm/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "projects/nonogramm/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/nonogramm/src/environments/environment.ts",
+                  "with": "projects/nonogramm/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/nonogramm/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "nonogramm:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "nonogramm:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "nonogramm:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/nonogramm/src/test.ts",
+            "polyfills": "projects/nonogramm/src/polyfills.ts",
+            "tsConfig": "projects/nonogramm/tsconfig.spec.json",
+            "karmaConfig": "projects/nonogramm/karma.conf.js",
+            "assets": [
+              "projects/nonogramm/src/favicon.ico",
+              "projects/nonogramm/src/assets",
+              "projects/nonogramm/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "projects/nonogramm/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/nonogramm/tsconfig.app.json",
+              "projects/nonogramm/tsconfig.spec.json",
+              "projects/nonogramm/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/nonogramm/e2e/protractor.conf.js",
+            "devServerTarget": "nonogramm:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "nonogramm:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "core": {
+      "projectType": "library",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "changeDetection": "OnPush"
+        }
+      },
+      "root": "projects/core",
+      "sourceRoot": "projects/core/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/core/tsconfig.lib.json",
+            "project": "projects/core/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/core/src/test.ts",
+            "tsConfig": "projects/core/tsconfig.spec.json",
+            "karmaConfig": "projects/core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/core/tsconfig.lib.json",
+              "projects/core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

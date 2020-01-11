@@ -1,0 +1,19 @@
+{
+  "defaultProject": "nonogramm",
+  "projects": {
+    "ultradice": {
+      "name": "Ultradice",
+      "integrations": {},
+      "type": "angular",
+      "root": ""
+    },
+    "nonogramm": {
+      "name": "nonogramm",
+      "integrations": {
+        "capacitor": {}
+      },
+      "type": "angular",
+      "root": ""
+    }
+  }
+}

@@ -1,0 +1,47 @@
+:host {
+  display: inline-block;
+  border: 1px solid black;
+  border-top: 0;
+  border-left: 0;
+  width: 1.9rem;
+  height: 1.9rem;
+  position: relative;
+  margin: 0;
+
+  &.failed {
+    background-color: red;
+  }
+
+  &.good {
+    background-color: black;
+  }
+
+  &.none {
+    &:after {
+      position: absolute;
+      content: '\d7';
+      line-height: 1rem;
+      top: 2px;
+      left: 0;
+      text-align: center;
+      color: black;
+      font-size: 3.2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  :host {
+    width: 1rem;
+    height: 1rem;
+
+    &.good {
+      background: none;
+
+      &:after {
+        line-height: 1.3rem;
+        font-size: 2rem;
+      }
+    }
+  }
+}
