@@ -2,3 +2,10 @@ button {
   width: 100%;
   margin: .5rem;
 }
+
+
+@media all and (display-mode: standalone) {
+  .pwa-install {
+    display: none;
+  }
+}
