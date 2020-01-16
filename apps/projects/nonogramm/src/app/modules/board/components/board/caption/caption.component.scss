@@ -1,12 +1,17 @@
 :host {
   display: block;
-  height: 1.9rem;
+  flex: 1;
+
   border-radius: 2px;
   margin-bottom: 1px;
   background-color: lightgray;
   font-size: 1rem;
   line-height: 2rem;
   text-align: right;
+
+  &.board-size-5 {
+    font-size: 1.5rem;
+  }
 
   span {
     padding-right: 1px;
@@ -33,16 +38,17 @@
       padding: 0 !important;
 
       &.text-length-6 {
-        line-height: .9rem;
-        font-size: .9rem;
+        line-height: .9em;
+        font-size: .9em;
       }
     }
   }
+
+
 }
 
 @media screen and (max-width: 320px) {
   :host {
-    height: 1rem;
     font-size: 0.6rem;
     line-height: 1rem;
 
@@ -51,9 +57,8 @@
       height: 3.5rem;
 
       span {
-        top: 25px;
-        left: -26px;
-        width: 70px;
+        display: block;
+        text-align: center;
       }
     }
   }

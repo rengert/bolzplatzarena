@@ -3,6 +3,8 @@
   text-align: center;
 
   .columns {
+    display: flex;
+    width: 258px;
     padding: 0 0 5px 54px;
 
     .item-5, .item-10 {
@@ -11,21 +13,26 @@
   }
 
   .rows {
-    clear: both;
-    display: block;
-    float: left;
+    display: flex;
+    height: 255px;
     width: 50px;
     padding: 2px 2px 0 0;
+    clear: both;
+    float: left;
+
+    flex-direction: column;
   }
 
   .inner {
-    display: block;
-    float: left;
+    display: flex;
     width: 303px;
     height: 301px;
     border: 1px solid black;
+    flex-direction: column;
 
     div.row {
+      display: flex;
+      flex: 1;
       height: 1.9rem;
       margin: 0;
       padding: 0;
@@ -48,7 +55,7 @@
   :host {
     .inner {
       width: 258px;
-      height: 256px;
+      height: 255px;
 
       div.row {
         height: 1rem;

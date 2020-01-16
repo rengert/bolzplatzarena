@@ -4,18 +4,21 @@
   <app-caption *ngFor="let column of columnHints; let i = index"
                [numbers]="column"
                [vertical]="true"
+               [config]="boardData.config"
                [ngClass]="['item-' + (i + 1)]"></app-caption>
 </div>
 <div class="rows">
   <app-caption *ngFor="let row of rowHints; let i = index"
                [numbers]="row"
                [vertical]="false"
+               [config]="boardData.config"
                [ngClass]="['item-' + (i + 1)]"></app-caption>
 </div>
 <div class="inner">
   <div *ngFor="let row of boardData.current; let i = index" class="row">
     <app-block *ngFor="let block of row; let j = index"
                [block]="block"
+               [config]="boardData.config"
                (failedEvent)="onFailed()"
                (goodEvent)="onGood()"
                [ngClass]="['row-' + (i + 1), 'column-' + (j + 1)]"

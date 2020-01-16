@@ -26,7 +26,6 @@ export class BoardComponent implements OnChanges {
   }
 
   onGood() {
-    console.log('an good');
     this.goodCount++;
     this.checkBoard();
   }
