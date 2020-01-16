@@ -26,6 +26,7 @@ export class BoardComponent implements OnChanges {
   }
 
   onGood() {
+    console.log('an good');
     this.goodCount++;
     this.checkBoard();
   }
@@ -42,8 +43,8 @@ export class BoardComponent implements OnChanges {
     if (this.goodCount >= 10) {
     }
     if (this.boardData.failed >= 30) {
-      alert('Sie haben leider verloren');
-      this.router.navigate(['']);
+      // alert('Sie haben leider verloren');
+      // this.router.navigate(['']);
     }
   }
 

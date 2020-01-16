@@ -11,11 +11,12 @@ export class BlockComponent implements OnChanges {
   @Input() block: GameBlock;
   @HostBinding('class.failed') failed: boolean;
   @HostBinding('class.good') good: boolean;
-  @HostBinding('class.none') none: boolean;
+  none: boolean;
   @Output() goodEvent = new EventEmitter<void>();
   @Output() failedEvent = new EventEmitter<void>();
 
   @HostListener('click') onClick() {
+    this.good = !this.good;
     if (this.block.show) {
       return;
     }

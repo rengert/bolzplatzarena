@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-hearts',
@@ -8,9 +8,14 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } f
 })
 export class HeartsComponent implements OnChanges {
   @Input() hearts = 3;
+  @HostBinding('class') heartClass: string;
   items: any[];
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.items = Array(this.hearts);
+    try {
+      this.items = Array(this.hearts);
+      this.heartClass = 'hearts-' + this.hearts;
+    } catch {
+    }
   }
 }

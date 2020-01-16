@@ -1,5 +1,8 @@
-app-version, .content {
+:host {
   display: block;
-  width: 300px;
-  margin: auto;
+  padding: 1rem;
+}
+
+app-version {
+  display: block;
 }
