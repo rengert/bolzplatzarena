@@ -39,8 +39,6 @@ export class BoardComponent implements OnChanges {
   private checkBoard() {
     this.hearts = 3 - this.boardData.failed;
     this.storage.saveGame(this.boardData);
-    if (this.goodCount >= 10) {
-    }
     if (this.boardData.failed >= 30) {
       // alert('Sie haben leider verloren');
       // this.router.navigate(['']);

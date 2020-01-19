@@ -4,8 +4,8 @@
 
   .columns {
     display: flex;
-    width: 258px;
-    padding: 0 0 5px 54px;
+    width: 303px;
+    margin: 0 0 5px 54px;
 
     .item-5, .item-10 {
       margin-right: 2px;
@@ -14,7 +14,7 @@
 
   .rows {
     display: flex;
-    height: 255px;
+    height: 301px;
     width: 50px;
     padding: 2px 2px 0 0;
     clear: both;
@@ -60,6 +60,70 @@
       div.row {
         height: 1rem;
       }
+    }
+  }
+}
+
+@media screen and (min-width: 410px) {
+  :host {
+    .inner {
+      width: 330px;
+      height: 330px;
+
+      div.row {
+        height: 1rem;
+      }
+    }
+
+    .rows {
+      height: 330px;
+    }
+
+    .columns {
+      width: 330px;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :host {
+    .inner {
+      width: 530px;
+      height: 530px;
+
+      div.row {
+        height: 1rem;
+      }
+    }
+
+    .rows {
+      height: 530px;
+      font-size: 1.2rem;
+    }
+
+    .columns {
+      width: 530px;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :host {
+    .inner {
+      width: 430px;
+      height: 430px;
+
+      div.row {
+        height: 1rem;
+      }
+    }
+
+    .rows {
+      height: 430px;
+    }
+
+    .columns {
+      width: 430px;
     }
   }
 }

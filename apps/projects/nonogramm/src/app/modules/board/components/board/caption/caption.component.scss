@@ -1,13 +1,13 @@
 :host {
-  display: block;
+  display: flex;
   flex: 1;
 
   border-radius: 2px;
   margin-bottom: 1px;
   background-color: lightgray;
   font-size: 1rem;
-  line-height: 2rem;
-  text-align: right;
+  align-items: center;
+  justify-content: flex-end;
 
   &.board-size-5 {
     font-size: 1.5rem;
@@ -61,5 +61,11 @@
         text-align: center;
       }
     }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :host {
+    font-size: 1.2rem;
   }
 }

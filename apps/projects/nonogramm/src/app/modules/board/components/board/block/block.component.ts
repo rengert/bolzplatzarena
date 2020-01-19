@@ -20,13 +20,13 @@ export class BlockComponent implements OnChanges {
 
   @HostListener('click') onClick() {
     if (this.block.show) {
-      return;
+      // return;
     }
     this.block.show = true;
     this.failed = !this.block.expected && this.selectExpected;
     this.good = this.block.expected;
     this.none = !this.block.expected;
-    if (this.failed) {
+    if (this.none) {
       this.failedEvent.emit();
     }
     if (this.good) {
