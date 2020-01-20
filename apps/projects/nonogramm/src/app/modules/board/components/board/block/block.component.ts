@@ -17,30 +17,34 @@ export class BlockComponent implements OnChanges {
   none: boolean;
   @Output() goodEvent = new EventEmitter<void>();
   @Output() failedEvent = new EventEmitter<void>();
+  @Output() actionEvent = new EventEmitter<void>();
 
   @HostListener('click') onClick() {
     if (this.block.show) {
-      // return;
+      return;
     }
     this.block.show = true;
     this.failed = !this.block.expected && this.selectExpected;
     this.good = this.block.expected;
     this.none = !this.block.expected;
-    if (this.none) {
+    if (this.failed) {
       this.failedEvent.emit();
     }
     if (this.good) {
       this.goodEvent.emit();
     }
+    this.actionEvent.emit();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.block.show) {
-      if (this.config) {
-        this.cssClass = `board-size-${this.config.size}`;
+    if (changes.block) {
+      if (this.block.show) {
+        if (this.config) {
+          this.cssClass = `board-size-${this.config.size}`;
+        }
+        this.good = this.block.expected;
+        this.none = !this.block.expected;
       }
-      this.good = this.block.expected;
-      this.none = !this.block.expected;
     }
   }
 }

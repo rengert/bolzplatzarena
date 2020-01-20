@@ -21,6 +21,7 @@
                [config]="boardData.config"
                (failedEvent)="onFailed()"
                (goodEvent)="onGood()"
+               (actionEvent)="onAction()"
                [ngClass]="['row-' + (i + 1), 'column-' + (j + 1)]"
                [selectExpected]="selectType"
     ></app-block>

@@ -27,12 +27,15 @@ export class BoardComponent implements OnChanges {
 
   onGood() {
     this.goodCount++;
-    this.checkBoard();
+
   }
 
   onFailed() {
     this.boardData.failed++;
     this.hearts = 3 - this.boardData.failed;
+  }
+
+  onAction() {
     this.checkBoard();
   }
 
