@@ -27,7 +27,9 @@
     display: flex;
     width: 303px;
     height: 301px;
-    border: 1px solid black;
+    border: 2px solid black;
+    border-right: 0;
+    border-bottom: 0;
     flex-direction: column;
 
     div.row {
@@ -36,16 +38,15 @@
       height: 1.9rem;
       margin: 0;
       padding: 0;
-      border: 1px solid black;
-      border-bottom: 0;
-      border-right: 0;
 
-      .column-5, .column-10 {
-        border-right: 2px solid black;
+      &:nth-child(5n) {
+        border-bottom: 1px solid black;
       }
 
-      .row-5, .row-10 {
-        border-bottom: 2px solid black;
+      app-block {
+        &:nth-child(5n) {
+          border-right: 2px solid black;
+        }
       }
     }
   }
@@ -88,7 +89,7 @@
 @media screen and (min-width: 768px) {
   :host {
     .inner {
-      width: 530px;
+      width: 529px;
       height: 530px;
 
       div.row {

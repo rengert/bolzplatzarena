@@ -63,18 +63,16 @@
       padding: 2px;
 
       &.text-length-5 {
-        line-height: .9em;
+        line-height: .7em;
         font-size: .85em;
       }
 
       &.text-length-6 {
-        line-height: .9em;
+        line-height: .7em;
         font-size: .7em;
       }
     }
   }
-
-
 }
 
 @media screen and (max-width: 320px) {
