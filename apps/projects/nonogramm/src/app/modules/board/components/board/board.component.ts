@@ -3,6 +3,7 @@ import { GameData } from '../../../../models/game-data';
 import { BoardService } from '../../services/board.service';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../services/storage.service';
+import { GameBlock } from '../../../../models/game-block';
 
 @Component({
   selector: 'app-board',
@@ -42,10 +43,13 @@ export class BoardComponent implements OnChanges {
   private checkBoard() {
     this.hearts = 3 - this.boardData.failed;
     this.storage.saveGame(this.boardData);
-    if (this.boardData.failed >= 30) {
-      // alert('Sie haben leider verloren');
-      // this.router.navigate(['']);
+    if (this.boardData.failed >= 3) {
+      alert('Sie haben leider verloren');
+      this.router.navigate(['']);
     }
+    const flattenedArray = [].concat(...this.boardData.current) as GameBlock[];
+    const missing = flattenedArray.filter(item => item.expected && !item.show);
+    console.log(missing.length);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
