@@ -13,3 +13,17 @@ body {
 mat-icon {
   cursor: pointer;
 }
+
+mat-card {
+  max-width: 400px;
+  margin: auto;
+
+  mat-card-title {
+    border-bottom: 1px solid #ededed;
+
+    &.mat-card-title {
+      padding-bottom: .5rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+}

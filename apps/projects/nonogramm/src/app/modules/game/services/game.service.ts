@@ -15,7 +15,7 @@ export class GameService {
     for (let i = 0; i < config.size; i++) {
       const row = [] as GameBlock[];
       for (let j = 0; j < config.size; j++) {
-        const expected = Math.random() < 0.5;
+        const expected = Math.random() < 0.6;
         row.push({
             expected,
             show: this.shouldBeShown(expected, config)

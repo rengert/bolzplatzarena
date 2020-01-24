@@ -1,27 +1,30 @@
-<h2 translate>COMPONENTS.SETTINGS.HEADLINE</h2>
-<label id="level-label">
-  <h3 translate>COMPONENTS.SETTINGS.LABELS.LEVEL</h3>
-</label>
-<mat-radio-group
-  aria-labelledby="level-label"
-  [(ngModel)]="level">
-  <mat-radio-button *ngFor="let item of levels"
-                    [value]="item">
-    {{ 'GLOBAL.ENUM.LEVEL.' + item.toString().toUpperCase() | translate }}
-  </mat-radio-button>
-</mat-radio-group>
-<label id="size-label">
-  <h3 translate>COMPONENTS.SETTINGS.LABELS.SIZE</h3>
-</label>
-<mat-radio-group
-  aria-labelledby="size-label"
-  [(ngModel)]="size">
-  <mat-radio-button *ngFor="let item of sizes"
-                    [value]="item">
-    {{ 'GLOBAL.ENUM.SIZE.' + item | translate }}
-  </mat-radio-button>
-</mat-radio-group>
-<button mat-flat-button color="primary" (click)="save()">
-  {{ 'COMPONENTS.SETTINGS.SAVE' | translate }}
-</button>
-
+<mat-card>
+  <mat-card-title translate>COMPONENTS.SETTINGS.HEADLINE</mat-card-title>
+  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.LEVEL</mat-card-subtitle>
+  <mat-card-content>
+    <mat-radio-group
+      aria-labelledby="level-label"
+      [(ngModel)]="level">
+      <mat-radio-button *ngFor="let item of levels"
+                        [value]="item">
+        {{ 'GLOBAL.ENUM.LEVEL.' + item.toString().toUpperCase() | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.SIZE</mat-card-subtitle>
+  <mat-card-content>
+    <mat-radio-group
+      aria-labelledby="size-label"
+      [(ngModel)]="size">
+      <mat-radio-button *ngFor="let item of sizes"
+                        [value]="item">
+        {{ 'GLOBAL.ENUM.SIZE.' + item | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button color="primary" (click)="save()">
+      {{ 'COMPONENTS.SETTINGS.SAVE' | translate }}
+    </button>
+  </mat-card-actions>
+</mat-card>

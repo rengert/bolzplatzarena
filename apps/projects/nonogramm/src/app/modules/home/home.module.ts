@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatCardModule } from '@angular/material';
 import { VersionComponent } from './components/version/version.component';
 import { NavigationComponent } from './components/home/navigation/navigation.component';
 import { RouterModule } from '@angular/router';
@@ -20,6 +20,7 @@ import { ImprintComponent } from './components/imprint/imprint.component';
     MatButtonModule,
     RouterModule,
     TranslateModule,
+    MatCardModule,
   ],
   exports: [HomeComponent]
 })

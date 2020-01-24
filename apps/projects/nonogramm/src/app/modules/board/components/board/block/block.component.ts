@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { GameBlock } from '../../../../../models/game-block';
+import { Config } from '../../../../../models/config';
 
 @Component({
   selector: 'app-block',
@@ -7,13 +8,16 @@ import { GameBlock } from '../../../../../models/game-block';
   styleUrls: ['./block.component.scss']
 })
 export class BlockComponent implements OnChanges {
+  @Input() config: Config;
   @Input() selectExpected: boolean;
   @Input() block: GameBlock;
+  @HostBinding('class') cssClass = '';
   @HostBinding('class.failed') failed: boolean;
   @HostBinding('class.good') good: boolean;
-  @HostBinding('class.none') none: boolean;
+  none: boolean;
   @Output() goodEvent = new EventEmitter<void>();
   @Output() failedEvent = new EventEmitter<void>();
+  @Output() actionEvent = new EventEmitter<void>();
 
   @HostListener('click') onClick() {
     if (this.block.show) {
@@ -29,12 +33,18 @@ export class BlockComponent implements OnChanges {
     if (this.good) {
       this.goodEvent.emit();
     }
+    this.actionEvent.emit();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.block.show) {
-      this.good = this.block.expected;
-      this.none = !this.block.expected;
+    if (changes.block) {
+      if (this.block.show) {
+        if (this.config) {
+          this.cssClass = `board-size-${this.config.size}`;
+        }
+        this.good = this.block.expected;
+        this.none = !this.block.expected;
+      }
     }
   }
 }

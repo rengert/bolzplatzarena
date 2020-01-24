@@ -1,4 +1,12 @@
 :host {
   display: block;
   padding: 0 0 1rem 0;
+
+  &.hearts-1 {
+    color: red;
+  }
+
+  &.hearts-3 {
+    color: #00b500;
+  }
 }

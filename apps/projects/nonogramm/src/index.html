@@ -5,14 +5,40 @@
   <title>Nonogramm</title>
   <meta name="description" content="Spielen Sie hier eine tolle Version von Nonogramm. Knobbeln. Gehirnjogging.">
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=block" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#1976d2">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png"/>
 </head>
 <body>
 <app-root></app-root>
 <noscript>Please enable JavaScript to continue using this application.</noscript>
+<script>
+  let deferredPrompt = null;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+  });
+
+  async function install() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      console.log(deferredPrompt)
+      deferredPrompt.userChoice.then(function (choiceResult) {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Your PWA has been installed');
+        } else {
+          console.log('User chose to not install your PWA');
+        }
+        deferredPrompt = null;
+      });
+    }
+  }
+</script>
 </body>
 </html>

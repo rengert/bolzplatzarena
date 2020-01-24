@@ -3,6 +3,7 @@ import { GameData } from '../../../../models/game-data';
 import { BoardService } from '../../services/board.service';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../services/storage.service';
+import { GameBlock } from '../../../../models/game-block';
 
 @Component({
   selector: 'app-board',
@@ -27,22 +28,28 @@ export class BoardComponent implements OnChanges {
 
   onGood() {
     this.goodCount++;
-    this.checkBoard();
   }
 
   onFailed() {
     this.boardData.failed++;
     this.hearts = 3 - this.boardData.failed;
+  }
+
+  onAction() {
     this.checkBoard();
   }
 
   private checkBoard() {
     this.hearts = 3 - this.boardData.failed;
     this.storage.saveGame(this.boardData);
-    if (this.goodCount >= 10) {
-    }
-    if (this.boardData.failed >= 30) {
+    if (this.boardData.failed >= 3) {
       alert('Sie haben leider verloren');
+      this.router.navigate(['']);
+    }
+    const flattenedArray = [].concat(...this.boardData.current) as GameBlock[];
+    const missing = flattenedArray.filter(item => item.expected && !item.show);
+    if (missing.length === 0) {
+      alert('Sie haben es geschafft. Glückwunsch.');
       this.router.navigate(['']);
     }
   }
