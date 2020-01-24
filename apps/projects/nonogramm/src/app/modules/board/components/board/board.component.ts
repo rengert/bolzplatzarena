@@ -1,11 +1,10 @@
-import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { GameData } from '../../../../models/game-data';
 import { BoardService } from '../../services/board.service';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../services/storage.service';
 import { GameBlock } from '../../../../models/game-block';
 import { MatDialog } from '@angular/material';
-import { WinScreenComponent } from './win-screen/win-screen.component';
 
 @Component({
   selector: 'app-board',
@@ -20,6 +19,7 @@ export class BoardComponent implements OnChanges {
   goodCount = 0;
   hearts = 3;
   selectType = true;
+  @Output() resultEvent = new EventEmitter<boolean>();
 
   constructor(
     private readonly board: BoardService,
@@ -46,36 +46,22 @@ export class BoardComponent implements OnChanges {
     this.hearts = 3 - this.boardData.failed;
     this.storage.saveGame(this.boardData);
     if (this.boardData.failed >= 3) {
-      alert('Sie haben leider verloren');
-      this.router.navigate(['']);
+      this.resultEvent.emit(false);
     }
     const flattenedArray = [].concat(...this.boardData.current) as GameBlock[];
     const missing = flattenedArray.filter(item => item.expected && !item.show);
     if (missing.length === 0) {
-      this.win();
+      this.resultEvent.emit(true);
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges) {
     if (!changes.boardData) {
       return;
     }
     this.cssClass = `board-size-${this.boardData.config.size}`;
-    // columns
     this.columnHints = this.board.generateColumnHints(this.boardData);
-
-    // rows
     this.rowHints = this.board.generateRowHints(this.boardData);
-
-    // hearts
     this.hearts = 3 - this.boardData.failed || 0;
-  }
-
-  private win() {
-    const dialogRef = this.dialog.open(WinScreenComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      this.storage.cleanGame();
-      this.router.navigate(['']);
-    });
   }
 }
