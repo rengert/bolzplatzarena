@@ -6,12 +6,13 @@ import { CaptionComponent } from './components/board/caption/caption.component';
 import { CoreModule } from '../../../../../core/src/lib/core.module';
 import { SettingsViewComponent } from './components/board/settings-view/settings-view.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatFormFieldModule, MatIconModule, MatSlideToggleModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatSlideToggleModule } from '@angular/material';
 import { HeartsComponent } from './components/board/hearts/hearts.component';
 import { FormsModule } from '@angular/forms';
+import { WinScreenComponent } from './components/board/win-screen/win-screen.component';
 
 @NgModule({
-  declarations: [BoardComponent, BlockComponent, CaptionComponent, SettingsViewComponent, HeartsComponent],
+  declarations: [BoardComponent, BlockComponent, CaptionComponent, SettingsViewComponent, HeartsComponent, WinScreenComponent],
   exports: [
     BoardComponent,
   ],
@@ -20,9 +21,14 @@ import { FormsModule } from '@angular/forms';
     CoreModule,
     FormsModule,
     TranslateModule,
+    MatButtonModule,
+    MatDialogModule,
     MatIconModule,
     MatSlideToggleModule,
     MatFormFieldModule,
+  ],
+  entryComponents: [
+    WinScreenComponent,
   ]
 })
 export class BoardModule {
