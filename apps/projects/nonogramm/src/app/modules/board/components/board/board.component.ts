@@ -4,6 +4,8 @@ import { BoardService } from '../../services/board.service';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../services/storage.service';
 import { GameBlock } from '../../../../models/game-block';
+import { MatDialog } from '@angular/material';
+import { WinScreenComponent } from './win-screen/win-screen.component';
 
 @Component({
   selector: 'app-board',
@@ -23,6 +25,7 @@ export class BoardComponent implements OnChanges {
     private readonly board: BoardService,
     private readonly  router: Router,
     private readonly storage: StorageService,
+    private readonly dialog: MatDialog,
   ) {
   }
 
@@ -49,8 +52,7 @@ export class BoardComponent implements OnChanges {
     const flattenedArray = [].concat(...this.boardData.current) as GameBlock[];
     const missing = flattenedArray.filter(item => item.expected && !item.show);
     if (missing.length === 0) {
-      alert('Sie haben es geschafft. Glückwunsch.');
-      this.router.navigate(['']);
+      this.win();
     }
   }
 
@@ -67,5 +69,13 @@ export class BoardComponent implements OnChanges {
 
     // hearts
     this.hearts = 3 - this.boardData.failed || 0;
+  }
+
+  private win() {
+    const dialogRef = this.dialog.open(WinScreenComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.storage.cleanGame();
+      this.router.navigate(['']);
+    });
   }
 }
