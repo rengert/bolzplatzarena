@@ -28,7 +28,6 @@ export class BoardComponent implements OnChanges {
 
   onGood() {
     this.goodCount++;
-
   }
 
   onFailed() {
@@ -49,7 +48,10 @@ export class BoardComponent implements OnChanges {
     }
     const flattenedArray = [].concat(...this.boardData.current) as GameBlock[];
     const missing = flattenedArray.filter(item => item.expected && !item.show);
-    console.log(missing.length);
+    if (missing.length === 0) {
+      alert('Sie haben es geschafft. Glückwunsch.');
+      this.router.navigate(['']);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
