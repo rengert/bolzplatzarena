@@ -9,10 +9,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatSlideToggleModule } from '@angular/material';
 import { HeartsComponent } from './components/board/hearts/hearts.component';
 import { FormsModule } from '@angular/forms';
-import { WinScreenComponent } from './components/board/win-screen/win-screen.component';
 
 @NgModule({
-  declarations: [BoardComponent, BlockComponent, CaptionComponent, SettingsViewComponent, HeartsComponent, WinScreenComponent],
+  declarations: [
+    BoardComponent,
+    BlockComponent,
+    CaptionComponent,
+    SettingsViewComponent,
+    HeartsComponent,
+  ],
   exports: [
     BoardComponent,
   ],
@@ -27,9 +32,7 @@ import { WinScreenComponent } from './components/board/win-screen/win-screen.com
     MatSlideToggleModule,
     MatFormFieldModule,
   ],
-  entryComponents: [
-    WinScreenComponent,
-  ]
+  entryComponents: []
 })
 export class BoardModule {
 }

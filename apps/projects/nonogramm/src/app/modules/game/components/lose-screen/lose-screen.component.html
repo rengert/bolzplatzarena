@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Verloren</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Du hast das aktuelle Spiel verloren.</h3>
+  <p>Es tut mir leid, aber du bist wohl zu schlecht.</p>
+  <h3>Zu schwer?</h3>
+  <p>Sieh in den Einstellungen nach, ob es nicht noch etwas einfacher geht.</p>
+  <p>Neu starten oder Spiel beenden?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">Spiel beenden</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Spiel neustarten</button>
+</mat-dialog-actions>
