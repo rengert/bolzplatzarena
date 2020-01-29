@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Plugins } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { ResultComponent } from './modules/game/components/result/result.component';
 import { GameService } from './services/game.service';
-import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',

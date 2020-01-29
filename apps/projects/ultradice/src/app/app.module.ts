@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { AppComponent } from './app.component';
 import { GameIsRunningGuard } from './guards/game-is-running.guard';
 import { EndResultComponent } from './modules/game/components/end-result/end-result.component';
 import { ResultComponent } from './modules/game/components/result/result.component';
@@ -12,7 +13,6 @@ import { GameModule } from './modules/game/game.module';
 import { InfoModule } from './modules/info/info.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { StatisticsModule } from './modules/statistics/statistics.module';
-import { AppComponent } from './app.component';
 import { ROUTES } from './routes';
 
 @NgModule({

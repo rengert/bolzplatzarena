@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Level } from '../../../../models/level';
 import { StorageService } from '../../../../services/storage.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',

@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, Query
 import { MatDialog } from '@angular/material';
 import { Observable, of, } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { GameService } from '../../../../services/game.service';
-import { DataService } from '../../../../services/data.service';
 import { GameCard } from '../../../../models/game-card.model';
-import { DiceComponent } from '../dice/dice.component';
-import { RuleService } from '../../../../services/rule.service';
 import { Game } from '../../../../models/game.model';
+import { DataService } from '../../../../services/data.service';
+import { GameService } from '../../../../services/game.service';
+import { RuleService } from '../../../../services/rule.service';
+import { DiceComponent } from '../dice/dice.component';
 import { EndResultComponent } from '../end-result/end-result.component';
 
 @Component({

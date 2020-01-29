@@ -1,10 +1,10 @@
 import { Component, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { GameData } from '../../../../models/game-data';
-import { BoardService } from '../../services/board.service';
-import { Router } from '@angular/router';
-import { StorageService } from '../../../../services/storage.service';
-import { GameBlock } from '../../../../models/game-block';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
+import { GameBlock } from '../../../../models/game-block';
+import { GameData } from '../../../../models/game-data';
+import { StorageService } from '../../../../services/storage.service';
+import { BoardService } from '../../services/board.service';
 
 @Component({
   selector: 'app-board',

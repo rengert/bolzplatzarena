@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { GameBlock } from '../../../../../models/game-block';
 import { Config } from '../../../../../models/config';
+import { GameBlock } from '../../../../../models/game-block';
 
 @Component({
   selector: 'app-block',

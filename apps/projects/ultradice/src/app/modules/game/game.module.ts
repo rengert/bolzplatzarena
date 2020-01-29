@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { CreateGameComponent } from './components/create-game/create-game.component';
 import { SharedModule } from '../shared/shared.module';
+import { CreateGameComponent } from './components/create-game/create-game.component';
 import { DiceComponent } from './components/dice/dice.component';
-import { GameComponent } from './components/game/game.component';
-import { RuleComponent } from './components/rule/rule.component';
-import { ResultComponent } from './components/result/result.component';
 import { EndResultComponent } from './components/end-result/end-result.component';
+import { GameComponent } from './components/game/game.component';
+import { ResultComponent } from './components/result/result.component';
+import { RuleComponent } from './components/rule/rule.component';
 
 @NgModule({
   imports: [

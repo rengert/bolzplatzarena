@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Config } from '../../../models/config';
-import { GameData } from '../../../models/game-data';
 import { GameBlock } from '../../../models/game-block';
+import { GameData } from '../../../models/game-data';
 import { Level } from '../../../models/level';
 
 @Injectable({ providedIn: 'root' })

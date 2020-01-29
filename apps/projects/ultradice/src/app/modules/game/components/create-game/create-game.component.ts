@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { DataService } from '../../../../services/data.service';
-import { Player } from '../../../../models/player.model';
 import { Game } from '../../../../models/game.model';
+import { Player } from '../../../../models/player.model';
+import { DataService } from '../../../../services/data.service';
 
 @Component({
   selector: 'app-create-game',

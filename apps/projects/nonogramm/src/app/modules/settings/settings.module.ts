@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SettingsComponent } from './components/settings/settings.component';
-import { MatButtonModule, MatCardModule, MatRadioModule } from '@angular/material';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule, MatCardModule, MatRadioModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [SettingsComponent],
