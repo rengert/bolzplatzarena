@@ -2,7 +2,8 @@ import { Component, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleC
 import { GameBlock } from '../../../../models/game-block';
 import { GameData } from '../../../../models/game-data';
 import { StorageService } from '../../../../services/storage.service';
-import { BoardService } from '../../services/board.service';
+import { Caption } from '../../../../models/caption';
+import { generateColumnHints, generateRowHints } from '../../services/board.util';
 
 @Component({
   selector: 'app-board',
@@ -12,14 +13,13 @@ import { BoardService } from '../../services/board.service';
 export class BoardComponent implements OnChanges {
   @Input() boardData: GameData;
   @HostBinding('attr.class') cssClass: string;
-  columnHints: number[][];
-  rowHints: number[][];
+  columnHints: Caption[][];
+  rowHints: Caption[][];
   hearts = 3;
   selectType = true;
   @Output() resultEvent = new EventEmitter<boolean>();
 
   constructor(
-    private readonly board: BoardService,
     private readonly storage: StorageService,
   ) {
   }
@@ -37,12 +37,13 @@ export class BoardComponent implements OnChanges {
       return;
     }
     this.cssClass = `board-size-${this.boardData.config.size}`;
-    this.columnHints = this.board.generateColumnHints(this.boardData);
-    this.rowHints = this.board.generateRowHints(this.boardData);
-    this.hearts = 3 - this.boardData.failed || 0;
+    this.checkBoard();
   }
 
   private checkBoard() {
+    this.columnHints = generateColumnHints(this.boardData);
+    this.rowHints = generateRowHints(this.boardData);
+
     this.hearts = 3 - this.boardData.failed;
     this.storage.saveGame(this.boardData);
     if (this.boardData.failed >= 3) {

@@ -1,20 +1,20 @@
 <app-settings-view [config]="boardData.config"></app-settings-view>
 <app-hearts [hearts]="hearts"></app-hearts>
 <div class="columns">
-  <app-caption *ngFor="let column of columnHints; let i = index"
+  <app-caption *ngFor="let column of columnHints"
                [numbers]="column"
                [vertical]="true"
                [config]="boardData.config"></app-caption>
 </div>
 <div class="rows">
-  <app-caption *ngFor="let row of rowHints; let i = index"
+  <app-caption *ngFor="let row of rowHints"
                [numbers]="row"
                [vertical]="false"
                [config]="boardData.config"></app-caption>
 </div>
 <div class="inner">
-  <div *ngFor="let row of boardData.current; let i = index" class="row">
-    <app-block *ngFor="let block of row; let j = index"
+  <div *ngFor="let row of boardData.current" class="row">
+    <app-block *ngFor="let block of row"
                [block]="block"
                [config]="boardData.config"
                (actionEvent)="onAction($event)"
