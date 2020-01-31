@@ -46,6 +46,22 @@
       }
     }
   }
+
+  .controls {
+    display: flex;
+    padding: 0 0 0 52px;
+
+    justify-content: center;
+    align-items: center;
+
+    mat-label {
+      font-size: 2.5rem;
+    }
+
+    mat-slide-toggle {
+      zoom: 2;
+    }
+  }
 }
 
 @media screen and (max-width: 320px) {
