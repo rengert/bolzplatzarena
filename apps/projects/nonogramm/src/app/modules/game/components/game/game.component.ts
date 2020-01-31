@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { GameService } from '../../services/game.service';
-import { GameData } from '../../../../models/game-data';
-import { StorageService } from '../../../../services/storage.service';
-import { Config } from '../../../../models/config';
-import { WinScreenComponent } from '../win-screen/win-screen.component';
-import { LoseScreenComponent } from '../lose-screen/lose-screen.component';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { Config } from '../../../../models/config';
+import { GameData } from '../../../../models/game-data';
+import { StorageService } from '../../../../services/storage.service';
+import { GameService } from '../../services/game.service';
+import { LoseScreenComponent } from '../lose-screen/lose-screen.component';
+import { WinScreenComponent } from '../win-screen/win-screen.component';
 
 @Component({
   selector: 'app-game',

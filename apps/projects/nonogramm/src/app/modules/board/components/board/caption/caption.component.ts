@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Config } from '../../../../../models/config';
+import { Caption } from '../../../../../models/caption';
 
 @Component({
   selector: 'app-caption',
@@ -9,7 +10,7 @@ import { Config } from '../../../../../models/config';
 })
 export class CaptionComponent implements OnChanges {
   @Input() config: Config;
-  @Input() numbers: number[];
+  @Input() numbers: Caption[];
   @HostBinding('class') cssClass = '';
   @Input() @HostBinding('class.vertical') vertical: boolean;
   numbersClass = 'default';

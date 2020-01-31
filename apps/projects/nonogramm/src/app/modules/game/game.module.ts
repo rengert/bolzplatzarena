@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameComponent } from './components/game/game.component';
-import { BoardModule } from '../board/board.module';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { BoardModule } from '../board/board.module';
+import { GameComponent } from './components/game/game.component';
 import { LoseScreenComponent } from './components/lose-screen/lose-screen.component';
 import { WinScreenComponent } from './components/win-screen/win-screen.component';
 

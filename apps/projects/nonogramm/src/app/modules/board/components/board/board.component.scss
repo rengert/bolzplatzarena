@@ -6,10 +6,6 @@
     display: flex;
     width: 303px;
     margin: 0 0 5px 54px;
-
-    .item-5, .item-10 {
-      margin-right: 2px;
-    }
   }
 
   .rows {
@@ -48,6 +44,22 @@
           border-right: 2px solid black;
         }
       }
+    }
+  }
+
+  .controls {
+    display: flex;
+    padding: 0 0 0 52px;
+
+    justify-content: center;
+    align-items: center;
+
+    mat-label {
+      font-size: 2.5rem;
+    }
+
+    mat-slide-toggle {
+      zoom: 2;
     }
   }
 }
