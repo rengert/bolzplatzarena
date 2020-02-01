@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy:nonogramm": "ng build nonogramm --prod && firebase deploy --only hosting:nonogramm"
+    "deploy:nonogramm": "ng build nonogramm --prod && firebase deploy --only hosting:nonogramm",
+    "nonogramm": "ng serve nonogramm"
   },
   "private": true,
   "dependencies": {
@@ -22,7 +23,7 @@
     "@angular/material": "latest",
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
-    "@angular/pwa": "^0.803.21",
+    "@angular/pwa": "^0.fo803.21",
     "@angular/router": "~8.2.14",
     "@angular/service-worker": "~8.2.14",
     "@capacitor/android": "^1.4.0",
