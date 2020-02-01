@@ -1,5 +1,17 @@
-app-version, app-navigation {
-  display: block;
-  width: 300px;
-  margin: auto;
+:host {
+  height: calc(100vmax - 56px);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+
+  app-navigation {
+    display: block;
+    width: 300px;
+    margin: auto;
+  }
+
+  app-version {
+    margin: 2rem;
+    text-align: center;
+  }
 }
