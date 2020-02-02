@@ -6,7 +6,7 @@ import { StorageService } from '../../../../../services/storage.service';
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationComponent implements OnInit {
   gameStarted: boolean;
@@ -23,6 +23,6 @@ export class NavigationComponent implements OnInit {
 
   newGame() {
     this.storage.cleanGame();
-    this.router.navigate(['game']);
+    void this.router.navigate(['game']);
   }
 }

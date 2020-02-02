@@ -7,7 +7,7 @@ import { StorageService } from '../../../../services/storage.service';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent implements OnInit {
   level: Level;
@@ -32,6 +32,6 @@ export class SettingsComponent implements OnInit {
       size: this.size,
       level: this.level
     });
-    this.router.navigate(['']);
+    void this.router.navigate(['']);
   }
 }

@@ -32,7 +32,6 @@ import { SettingsViewComponent } from './components/board/settings-view/settings
     MatSlideToggleModule,
     MatFormFieldModule,
   ],
-  entryComponents: []
 })
 export class BoardModule {
 }
