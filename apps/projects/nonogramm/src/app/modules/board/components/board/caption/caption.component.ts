@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Config } from '../../../../../models/config';
 import { Caption } from '../../../../../models/caption';
+import { Config } from '../../../../../models/config';
 
 @Component({
   selector: 'app-caption',

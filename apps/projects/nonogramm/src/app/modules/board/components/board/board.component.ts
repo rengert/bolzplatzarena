@@ -1,14 +1,14 @@
 import { Component, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Caption } from '../../../../models/caption';
 import { GameBlock } from '../../../../models/game-block';
 import { GameData } from '../../../../models/game-data';
 import { StorageService } from '../../../../services/storage.service';
-import { Caption } from '../../../../models/caption';
 import { generateColumnHints, generateRowHints } from '../../services/board.util';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnChanges {
   @Input() boardData: GameData;

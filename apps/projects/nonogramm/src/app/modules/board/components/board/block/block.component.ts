@@ -5,7 +5,7 @@ import { GameBlock } from '../../../../../models/game-block';
 @Component({
   selector: 'app-block',
   templateUrl: './block.component.html',
-  styleUrls: ['./block.component.scss']
+  styleUrls: ['./block.component.scss'],
 })
 export class BlockComponent implements OnChanges {
   @Input() config: Config;
@@ -30,7 +30,7 @@ export class BlockComponent implements OnChanges {
     this.actionEvent.emit(this.failed);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes.block) {
       if (this.block.show) {
         if (this.config) {

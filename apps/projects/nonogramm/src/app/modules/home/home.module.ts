@@ -13,7 +13,7 @@ import { VersionComponent } from './components/version/version.component';
     HomeComponent,
     VersionComponent,
     NavigationComponent,
-    ImprintComponent
+    ImprintComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +22,7 @@ import { VersionComponent } from './components/version/version.component';
     TranslateModule,
     MatCardModule,
   ],
-  exports: [HomeComponent]
+  exports: [HomeComponent],
 })
 export class HomeModule {
 }

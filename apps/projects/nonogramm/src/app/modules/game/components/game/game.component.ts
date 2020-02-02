@@ -31,18 +31,17 @@ export class GameComponent implements OnInit {
     this.setupGame(config);
   }
 
-  setupGame(config: Config) {
+  resultGame(result: boolean) {
+    if (result) {
+      return this.win();
+    }
+    this.lose();
+  }
+
+  private setupGame(config: Config) {
     this.gameData = this.storage.loadGame();
     if (!this.gameData) {
       this.gameData = this.game.createGameData(config);
-    }
-  }
-
-  resultGame(result: boolean) {
-    if (result) {
-      this.win();
-    } else {
-      this.lose();
     }
   }
 
@@ -50,7 +49,7 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(WinScreenComponent);
     dialogRef.afterClosed().subscribe(result => {
       this.storage.cleanGame();
-      this.router.navigate(['']);
+      void this.router.navigate(['']);
     });
   }
 
@@ -66,7 +65,7 @@ export class GameComponent implements OnInit {
         return;
       }
       this.storage.cleanGame();
-      this.router.navigate(['']);
+      void this.router.navigate(['']);
     });
   }
 }

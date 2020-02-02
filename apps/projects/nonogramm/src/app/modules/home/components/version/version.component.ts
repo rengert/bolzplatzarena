@@ -5,7 +5,7 @@ import { environment } from '../../../../../environments/environment';
   selector: 'app-version',
   templateUrl: './version.component.html',
   styleUrls: ['./version.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VersionComponent {
   version = '0.0.0';

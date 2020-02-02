@@ -14,7 +14,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     MatCardModule,
     MatRadioModule,
     TranslateModule,
-  ]
+  ],
 })
 export class SettingsModule {
 }

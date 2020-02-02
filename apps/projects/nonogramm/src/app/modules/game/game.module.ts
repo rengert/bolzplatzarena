@@ -21,7 +21,7 @@ import { WinScreenComponent } from './components/win-screen/win-screen.component
     MatButtonModule,
     MatDialogModule,
     RouterModule,
-    TranslateModule
+    TranslateModule,
   ],
   exports: [
     GameComponent,
