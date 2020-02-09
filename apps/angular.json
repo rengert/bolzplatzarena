@@ -23,7 +23,7 @@
             "main": "projects/ultradice/src/main.ts",
             "polyfills": "projects/ultradice/src/polyfills.ts",
             "tsConfig": "projects/ultradice/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/ultradice/src/favicon.ico",
               "projects/ultradice/src/assets"
@@ -47,7 +47,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -148,7 +147,7 @@
             "main": "projects/nonogramm/src/main.ts",
             "polyfills": "projects/nonogramm/src/polyfills.ts",
             "tsConfig": "projects/nonogramm/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/nonogramm/src/favicon.ico",
               "projects/nonogramm/src/assets",
@@ -172,7 +171,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -273,7 +271,12 @@
             "tsConfig": "projects/core/tsconfig.lib.json",
             "project": "projects/core/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/core/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {

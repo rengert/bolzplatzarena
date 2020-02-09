@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Player } from '../../../../models/player.model';
 import { DataService } from '../../../../services/data.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-result',

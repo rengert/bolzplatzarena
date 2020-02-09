@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { MatDialogModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { AppComponent } from './app.component';
 import { GameIsRunningGuard } from './guards/game-is-running.guard';
 import { EndResultComponent } from './modules/game/components/end-result/end-result.component';

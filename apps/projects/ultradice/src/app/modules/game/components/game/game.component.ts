@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, QueryList, ViewChildren } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable, of, } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { GameCard } from '../../../../models/game-card.model';
