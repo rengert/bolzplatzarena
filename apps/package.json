@@ -9,7 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy:nonogramm": "ng build nonogramm --prod && firebase deploy --only hosting:nonogramm",
-    "nonogramm": "ng serve nonogramm"
+    "deploy:startup": "ng build startup --prod && firebase deploy --only hosting:startup",
+    "nonogramm": "ng serve nonogramm",
+    "startup": "ng serve startup"
   },
   "private": true,
   "dependencies": {
