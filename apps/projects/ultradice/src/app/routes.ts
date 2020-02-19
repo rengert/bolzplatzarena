@@ -9,7 +9,7 @@ export const ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/home'
+    redirectTo: '/home',
   },
   {
     path: 'home',
@@ -22,4 +22,3 @@ export const ROUTES: Routes = [
   { path: 'statistics', component: StatisticsComponent },
   { path: 'game', component: GameComponent, canActivate: [GameIsRunningGuard] },
 ];
-

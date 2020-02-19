@@ -2,13 +2,13 @@
   <div class="holder">
     <h4 translate>COMPONENTS.GAME.END_RESULT.HEADLINE</h4>
     <ol>
-      <li *ngFor="let player of items; let o = odd; let e = even;"
-          [ngClass]="{ 'odd-active': o, 'even-active': e }">{{ player.name }}: {{ player.gameCard.sum }}</li>
+      <li *ngFor="let player of items; odd as odd; even as even; trackBy: 'id' | trackByProperty"
+          [ngClass]="{ 'odd-active': odd, 'even-active': even }">{{ player.name }}: {{ player.gameCard.sum }}</li>
     </ol>
-    <div *ngFor="let player of items; let o = odd; let e = even;"
+    <div *ngFor="let player of items; odd as odd; even as even; trackBy: 'id' | trackByProperty"
          [ngClass]="{
-            'odd-active': o,
-            'even-active': e
+            'odd-active': odd,
+            'even-active': even
             }">
       <h3>{{ player.name }}</h3>
       <div>Einser: <span>{{ player.gameCard.ones }}</span></div>
