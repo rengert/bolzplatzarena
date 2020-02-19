@@ -21,16 +21,16 @@ export class SettingsComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const config = this.storage.loadConfig();
     this.level = config.level;
     this.size = config.size;
   }
 
-  save() {
+  save(): void {
     this.storage.saveConfig({
       size: this.size,
-      level: this.level
+      level: this.level,
     });
     void this.router.navigate(['']);
   }

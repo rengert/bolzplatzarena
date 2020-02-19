@@ -1,11 +1,15 @@
+// tslint:disable-next-line:no-implicit-dependencies
 import { browser, by, element } from 'protractor';
 
 export class AppPage {
-  navigateTo() {
+  async navigateTo(): Promise<any> {
     return browser.get(browser.baseUrl) as Promise<any>;
   }
 
-  getTitleText() {
-    return element(by.css('app-root .content span')).getText() as Promise<string>;
+  async getTitleText(): Promise<string> {
+    const css = by.css('app-root .content span');
+
+    return element(css)
+      .getText() as Promise<string>;
   }
 }

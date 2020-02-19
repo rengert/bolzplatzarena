@@ -17,12 +17,12 @@ export class NavigationComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.gameStarted = !!this.storage.loadGame();
   }
 
-  newGame() {
+  async newGame(): Promise<void> {
     this.storage.cleanGame();
-    void this.router.navigate(['game']);
+    await this.router.navigate(['game']);
   }
 }

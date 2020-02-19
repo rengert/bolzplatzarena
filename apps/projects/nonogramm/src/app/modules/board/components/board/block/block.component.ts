@@ -16,9 +16,9 @@ export class BlockComponent implements OnChanges {
   @HostBinding('class.good') good: boolean;
   none: boolean;
 
-  @Output() actionEvent = new EventEmitter<boolean>();
+  @Output() readonly actionEvent = new EventEmitter<boolean>();
 
-  @HostListener('click') onClick() {
+  @HostListener('click') onClick(): void {
     if (this.block.show) {
       return;
     }
@@ -30,7 +30,7 @@ export class BlockComponent implements OnChanges {
     this.actionEvent.emit(this.failed);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.block) {
       if (this.block.show) {
         if (this.config) {

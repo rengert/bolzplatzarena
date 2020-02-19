@@ -3,14 +3,12 @@ import { Config } from '../models/config';
 import { GameData } from '../models/game-data';
 import { Level } from '../models/level';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class StorageService {
   private readonly configStorageKey = 'config';
   private readonly gameStorageKey = 'game';
 
-  saveConfig(config: Config) {
+  saveConfig(config: Config): void {
     localStorage.setItem(
       this.configStorageKey,
       JSON.stringify(config),
@@ -22,14 +20,14 @@ export class StorageService {
       || { size: 15, level: Level.easy };
   }
 
-  saveGame(game: GameData) {
+  saveGame(game: GameData): void {
     localStorage.setItem(
       this.gameStorageKey,
       JSON.stringify(game),
     );
   }
 
-  cleanGame() {
+  cleanGame(): void {
     localStorage.removeItem(this.gameStorageKey);
   }
 
@@ -38,6 +36,7 @@ export class StorageService {
     if (data) {
       return JSON.parse(data);
     }
+
     return undefined;
   }
 }

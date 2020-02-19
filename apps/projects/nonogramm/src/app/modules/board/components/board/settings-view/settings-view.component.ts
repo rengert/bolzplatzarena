@@ -12,7 +12,9 @@ export class SettingsViewComponent implements OnChanges {
 
   levelTranslationKey: string;
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.levelTranslationKey = 'GLOBAL.ENUM.LEVEL.' + this.config.level.toString().toUpperCase();
+  ngOnChanges(changes: SimpleChanges): void {
+    const key = this.config.level.toString()
+      .toUpperCase();
+    this.levelTranslationKey = `GLOBAL.ENUM.LEVEL${key}`;
   }
 }

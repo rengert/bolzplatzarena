@@ -1,12 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CoreComponent } from './core.component';
-
-
+import { TrackByCoordPipe } from './pipes/track-by-coord.pipe';
+import { TrackByPropertyPipe } from './pipes/track-by-property.pipe';
 
 @NgModule({
-  declarations: [CoreComponent],
+  declarations: [TrackByPropertyPipe, TrackByCoordPipe],
   imports: [
+    CommonModule,
   ],
-  exports: [CoreComponent]
+  exports: [TrackByPropertyPipe, TrackByCoordPipe],
 })
-export class CoreModule { }
+export class CoreModule {
+}

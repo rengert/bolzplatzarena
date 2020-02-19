@@ -1,4 +1,4 @@
-<mat-icon *ngFor="let item of items"
+<mat-icon *ngFor="let item of items; trackBy: ('value' | trackByProperty)"
           class="icon"
           aria-hidden="false"
           aria-label="Heart">favorite

@@ -17,14 +17,14 @@ export class BoardComponent implements OnChanges {
   rowHints: Caption[][];
   hearts = 3;
   selectType = true;
-  @Output() resultEvent = new EventEmitter<boolean>();
+  @Output() readonly resultEvent = new EventEmitter<boolean>();
 
   constructor(
     private readonly storage: StorageService,
   ) {
   }
 
-  onAction(failed: boolean) {
+  onAction(failed: boolean): void {
     if (failed) {
       this.boardData.failed++;
       this.hearts = 3 - this.boardData.failed;
@@ -32,7 +32,7 @@ export class BoardComponent implements OnChanges {
     this.checkBoard();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (!changes.boardData) {
       return;
     }
@@ -40,7 +40,7 @@ export class BoardComponent implements OnChanges {
     this.checkBoard();
   }
 
-  private checkBoard() {
+  private checkBoard(): void {
     this.columnHints = generateColumnHints(this.boardData);
     this.rowHints = generateRowHints(this.boardData);
 
