@@ -41,7 +41,7 @@ import { RuleComponent } from './components/rule/rule.component';
   exports: [
     ResultComponent,
     EndResultComponent,
-  ]
+  ],
 })
 export class GameModule {
 }

@@ -15,16 +15,21 @@ import { DataService } from '../../../../services/data.service';
 export class EndResultComponent implements OnInit {
   players$: Observable<Player[]>;
 
-  constructor(public dialogRef: MatDialogRef<EndResultComponent>, private dataService: DataService, private router: Router) {
+  constructor(
+    readonly dialogRef: MatDialogRef<EndResultComponent>,
+    private readonly dataService: DataService,
+    private readonly router: Router,
+  ) {
   }
 
-  ngOnInit() {
-    this.players$ = this.dataService.getGame().pipe(
-      map(game => game.players.sort((a, b) => (a.gameCard.sum < b.gameCard.sum ? 1 : -1))),
-    );
+  ngOnInit(): void {
+    this.players$ = this.dataService.getGame()
+      .pipe(
+        map(game => game.players.sort((a, b) => (a.gameCard.sum < b.gameCard.sum ? 1 : -1))),
+      );
   }
 
-  async close() {
+  async close(): Promise<void> {
     await this.dataService.cleanUpGame();
     this.dialogRef.close();
     await this.router.navigate(['']);

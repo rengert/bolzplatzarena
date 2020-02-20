@@ -12,15 +12,18 @@ import { DataService } from '../../../../services/data.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateGameComponent {
-  player1 = new Player();
-  player2 = new Player();
-  player3 = new Player();
-  player4 = new Player();
+  readonly player1 = new Player();
+  readonly player2 = new Player();
+  readonly player3 = new Player();
+  readonly player4 = new Player();
 
-  constructor(private data: DataService, private router: Router) {
+  constructor(
+    private readonly data: DataService,
+    private readonly router: Router,
+  ) {
   }
 
-  startGame() {
+  startGame(): void {
     const playersList = new Array<Player>();
     if (this.player1.name !== '') {
       playersList.push(this.player1);
@@ -37,11 +40,13 @@ export class CreateGameComponent {
     if (playersList.length > 0) {
       const game = new Game();
       game.players = playersList;
-      this.data.createGame(game).pipe(
-        take(1),
-      ).subscribe((result) => {
-        this.router.navigate(['game']);
-      });
+      this.data.createGame(game)
+        .pipe(
+          take(1),
+        )
+        .subscribe(result => {
+          void this.router.navigate(['game']);
+        });
     }
   }
 }

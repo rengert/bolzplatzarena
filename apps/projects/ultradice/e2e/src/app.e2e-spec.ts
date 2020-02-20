@@ -1,3 +1,4 @@
+// tslint:disable-next-line:no-implicit-dependencies
 import { browser, logging } from 'protractor';
 import { AppPage } from './app.po';
 
@@ -9,7 +10,7 @@ describe('workspace-project App', () => {
   });
 
   it('should display welcome message', async () => {
-    page.navigateTo();
+    await page.navigateTo();
     const text = await page.getTitleText();
     await expect(text)
       .toEqual('ultradice app is running!');

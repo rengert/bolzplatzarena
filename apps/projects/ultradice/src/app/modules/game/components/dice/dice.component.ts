@@ -12,12 +12,10 @@ export class DiceComponent {
   @Input() @HostBinding('attr.data-value') value = 0;
   @HostBinding('class.fixed') fixed = false;
 
-  @HostListener('click') click() {
+  @HostListener('click') click(): void {
     this.fixed = !this.fixed;
   }
 
-  constructor(private dataService: DataService) {
+  constructor(private readonly dataService: DataService) {
   }
-
-
 }

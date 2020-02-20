@@ -22,7 +22,7 @@ import { LinkButtonComponent } from './components/link-button/link-button.compon
   exports: [
     ButtonComponent,
     LinkButtonComponent,
-  ]
+  ],
 })
 export class SharedModule {
 }

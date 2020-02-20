@@ -16,13 +16,14 @@ export class StatisticsComponent implements OnInit {
   constructor(private readonly dataService: DataService, private readonly router: Router) {
   }
 
-  ngOnInit() {
-    this.statistics$ = this.dataService.getStatistics().then(
-      statistics => statistics.map(item => ({ ...item, name: item.name.toUpperCase() }))
-    );
+  ngOnInit(): void {
+    this.statistics$ = this.dataService.getStatistics()
+      .then(
+        statistics => statistics.map(item => ({ ...item, name: item.name.toUpperCase() })),
+      );
   }
 
-  async reset() {
+  async reset(): Promise<void> {
     await this.dataService.cleanUp();
     await this.router.navigate(['/home']);
   }

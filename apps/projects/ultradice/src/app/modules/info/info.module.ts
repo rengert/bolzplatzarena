@@ -11,7 +11,7 @@ import { ImprintComponent } from './components/imprint/imprint.component';
     SharedModule,
     RouterModule,
   ],
-  declarations: [HomeComponent, ImprintComponent]
+  declarations: [HomeComponent, ImprintComponent],
 })
 export class InfoModule {
 }

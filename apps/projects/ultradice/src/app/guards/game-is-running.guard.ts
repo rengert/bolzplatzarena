@@ -10,14 +10,16 @@ export class GameIsRunningGuard implements CanActivate {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.data.getGame().pipe(
-      map(game => {
-        const gameStarted = game && game.players.length !== 0;
-        if (!gameStarted) {
-          this.router.navigate(['create']);
-        }
-        return gameStarted;
-      }),
-    );
+    return this.data.getGame()
+      .pipe(
+        map(game => {
+          const gameStarted = game && !game.players.length;
+          if (!gameStarted) {
+            void this.router.navigate(['create']);
+          }
+
+          return gameStarted;
+        }),
+      );
   }
 }
