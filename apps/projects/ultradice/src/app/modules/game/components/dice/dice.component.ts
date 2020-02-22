@@ -8,7 +8,7 @@ import { DataService } from '../../../../services/data.service';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiceComponent {
-  @Input() id = 0;
+  @Input() id = '0';
   @Input() @HostBinding('attr.data-value') value = 0;
   @HostBinding('class.fixed') fixed = false;
 

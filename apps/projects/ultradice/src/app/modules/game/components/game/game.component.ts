@@ -63,7 +63,7 @@ export class GameComponent implements OnDestroy {
   }
 
   async shuffelDice(dice: DiceComponent): Promise<void> {
-    if (dice.id === 0) {
+    if (dice.id === '0') {
       // error case
       return;
     }
