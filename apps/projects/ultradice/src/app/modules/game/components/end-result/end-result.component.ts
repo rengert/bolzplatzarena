@@ -25,7 +25,7 @@ export class EndResultComponent implements OnInit {
   ngOnInit(): void {
     this.players$ = this.dataService.getGame()
       .pipe(
-        map(game => game.players.sort((a, b) => (a.gameCard.sum < b.gameCard.sum ? 1 : -1))),
+        map(game => game !.players.sort((a, b) => (a.gameCard.sum < b.gameCard.sum ? 1 : -1))),
       );
   }
 

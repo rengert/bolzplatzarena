@@ -35,6 +35,7 @@ export class GameService {
     const gameData: GameData = {
       failed: 0,
       data: [],
+      current: [],
       config,
     };
     for (let i = 0; i < config.size; i++) {

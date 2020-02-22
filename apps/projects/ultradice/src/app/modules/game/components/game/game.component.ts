@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { filter, switchMap, tap } from 'rxjs/operators';
 import { GameCard } from '../../../../models/game-card.model';
 import { Game } from '../../../../models/game.model';
 import { DataService } from '../../../../services/data.service';
@@ -127,8 +127,9 @@ export class GameComponent implements OnDestroy {
   private initGame$(): Observable<boolean> {
     return this.dataService.getGame()
       .pipe(
-        tap(game => this.game = game),
-        switchMap(game => of(game.players.length > 0)),
+        filter(game => !!game),
+        tap(game => this.game = game !),
+        switchMap(game => of(!!game && game.players.length > 0)),
       );
   }
 }

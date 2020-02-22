@@ -49,7 +49,8 @@ export class BoardComponent implements OnChanges {
     if (this.boardData.failed >= 3) {
       this.resultEvent.emit(false);
     }
-    const flattenedArray = [].concat(...this.boardData.current) as GameBlock[];
+    const flattenedArray = this.boardData.current
+      .reduce((a, b) => [...a, ...b.data], [] as GameBlock[]);
     const missing = flattenedArray.filter(item => item.expected && !item.show);
     if (missing.length === 0) {
       this.resultEvent.emit(true);

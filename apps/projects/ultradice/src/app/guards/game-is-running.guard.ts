@@ -18,7 +18,7 @@ export class GameIsRunningGuard implements CanActivate {
             void this.router.navigate(['create']);
           }
 
-          return gameStarted;
+          return true;
         }),
       );
   }

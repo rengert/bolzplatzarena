@@ -36,10 +36,7 @@ export class GameComponent implements OnInit {
   }
 
   private setupGame(config: Config): void {
-    this.gameData = this.storage.loadGame();
-    if (!this.gameData) {
-      this.gameData = this.game.createGameData(config);
-    }
+    this.gameData = this.storage.loadGame() || this.game.createGameData(config);
   }
 
   private win(): void {

@@ -16,8 +16,9 @@ export class StorageService {
   }
 
   loadConfig(): Config {
-    return JSON.parse(localStorage.getItem(this.configStorageKey))
-      || { size: 15, level: Level.easy };
+    const data = localStorage.getItem(this.configStorageKey);
+
+    return data ? JSON.parse(data) : { size: 15, level: Level.easy };
   }
 
   saveGame(game: GameData): void {

@@ -1,16 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 interface TrackByFunctionCache {
-  [propertyName: string]: <T>(index: number, item: T) => any;
+  [propertyName: string]: (index: number, item: any) => string;
 }
 
 const cache: TrackByFunctionCache = {};
 
 @Pipe({ name: 'trackByProperty' })
 export class TrackByPropertyPipe implements PipeTransform {
-  transform(propertyName: string): (index: number, item: any) => any {
+  transform(propertyName: string): (index: number, item: any) => string {
     if (!cache[propertyName]) {
-      cache[propertyName] = <T>(index: number, item: T): any =>
+      cache[propertyName] = (index: number, item: any): string =>
         (item[propertyName]);
     }
 

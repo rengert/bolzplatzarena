@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import Dexie from 'dexie';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 
 import { Game } from '../models/game.model';
 import { Player } from '../models/player.model';
@@ -91,16 +91,18 @@ export class DataService extends Dexie {
       });
   }
 
-  async getStatistics(): Promise<Statistic[]> {
-    return this.table<Statistic>(this.statisticTableName)
+  getStatistics$(): Observable<Statistic[]> {
+    return from(this.table<Statistic>(this.statisticTableName)
       .orderBy('name')
-      .toArray();
+      .toArray());
   }
 
-  getGame(): Observable<Game> {
-    return from(this.table<Game>(this.gameTableName)
-      .filter(item => true)
-      .first());
+  getGame(): Observable<Game | undefined> {
+    const data = localStorage.getItem('game');
+
+    return data
+      ? of(JSON.parse(data) as Game)
+      : of(undefined);
   }
 
   async updatePlayers(playersList: Player[]): Promise<any> {

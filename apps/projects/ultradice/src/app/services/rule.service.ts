@@ -152,10 +152,8 @@ export class RuleService {
   };
 
   private readonly groupBy = (data: number[]): any => {
-    const result = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
-    data.forEach(item => {
-      result[item]++;
-    });
+    const result = [0, 0, 0, 0, 0, 0, 0];
+    data.forEach(item => result[item]++);
 
     return result;
   };

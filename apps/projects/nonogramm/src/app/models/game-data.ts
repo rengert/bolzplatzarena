@@ -4,6 +4,6 @@ import { GameRow } from './game-row';
 export interface GameData {
   config: Config;
   data: GameRow[];
-  current?: GameRow[];
+  current: GameRow[];
   failed: number;
 }
