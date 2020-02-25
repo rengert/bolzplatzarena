@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
-import { filter, switchMap, tap } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { GameCard } from '../../../../models/game-card.model';
 import { Game } from '../../../../models/game.model';
 import { DataService } from '../../../../services/data.service';
@@ -23,14 +23,6 @@ export class GameComponent implements OnDestroy {
   game: Game;
 
   get gameCard(): GameCard {
-    if (!this.game.currentPlayer) {
-      let index = this.game.players.findIndex(item => item.isCurrent);
-      if (index < 0) {
-        index = this.game.currentPlayerIndex;
-      }
-      this.game.currentPlayer = this.game.players[index];
-    }
-
     return this.game.currentPlayer.gameCard;
   }
 
@@ -90,14 +82,10 @@ export class GameComponent implements OnDestroy {
     this.ruleService.handleRule(this.game.currentPlayer.gameCard, rule, dices);
     this.game.currentPlayer.gameCard.round++;
     GameCard.recalculate(this.game.currentPlayer.gameCard);
-    // disable current rul
 
-    // reset everything
-    // this.shuffleMaxCount = 3;
-    // check if game is over
     this.game.nextPlayer = true;
 
-    await this.dataService.updateGame(this.game);
+    await this.gameService.updateGame(this.game);
   }
 
   async next(): Promise<void> {
@@ -105,31 +93,30 @@ export class GameComponent implements OnDestroy {
     if (this.game.currentPlayerIndex === this.game.players.length) {
       this.game.currentPlayerIndex = 0;
     }
+
     this.game.currentPlayer.isCurrent = false;
     this.game.currentPlayer = this.game.players[this.game.currentPlayerIndex];
     this.game.currentPlayer.isCurrent = true;
 
     if (this.game.currentPlayer.gameCard.round === this.game.maxRounds) {
-      this.game.players.forEach(async player => {
+      for (const player of this.game.players) {
         GameCard.recalculate(player.gameCard);
         await this.dataService.updateMax('GAME.RESULT.MAX', player.gameCard.sum);
         await this.dataService.updateMin('GAME.RESULT.MIN', player.gameCard.sum);
-      });
+      }
 
-      const dialogReference = this.dialog.open(EndResultComponent);
+      this.dialog.open(EndResultComponent);
     } else {
       this.game.shuffleMaxCount = 3;
       this.game.nextPlayer = false;
-      await this.dataService.updateGame(this.game);
+      await this.gameService.updateGame(this.game);
     }
   }
 
-  private initGame$(): Observable<boolean> {
-    return this.dataService.getGame()
+  private initGame$(): Observable<Game> {
+    return from(this.gameService.getGame())
       .pipe(
-        filter(game => !!game),
-        tap(game => this.game = game !),
-        switchMap(game => of(!!game && game.players.length > 0)),
+        tap(game => this.game = game),
       );
   }
 }

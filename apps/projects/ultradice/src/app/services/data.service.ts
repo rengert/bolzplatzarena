@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import Dexie from 'dexie';
-import { from, Observable, of } from 'rxjs';
-
-import { Game } from '../models/game.model';
+import { from, Observable } from 'rxjs';
 import { Player } from '../models/player.model';
 import { Statistic } from '../models/statistic.model';
 
@@ -10,7 +8,6 @@ import { Statistic } from '../models/statistic.model';
 export class DataService extends Dexie {
   private readonly statisticTableName = 'statistic';
   private readonly playerTableName = 'player';
-  private readonly gameTableName = 'game';
 
   constructor() {
     super('ultradice');
@@ -50,12 +47,12 @@ export class DataService extends Dexie {
       .filter(item => item.name === key)
       .first()
       .then(async item => {
-          if (!item) {
-            await this.table(this.statisticTableName)
-              .add({ name: key, value: 1 });
-          } else {
+          if (item) {
             await this.table<Statistic>(this.statisticTableName)
               .update(item.id, { value: item.value + 1 });
+          } else {
+            await this.table(this.statisticTableName)
+              .add({ name: key, value: 1 });
           }
         },
       );
@@ -66,12 +63,14 @@ export class DataService extends Dexie {
       .filter(item => item.name === key)
       .first()
       .then(async item => {
-        if (!item) {
+        if (item) {
+          if (item.value < value) {
+            await this.table<Statistic>(this.statisticTableName)
+              .update(item.id, { value });
+          }
+        } else {
           await this.table(this.statisticTableName)
             .add({ name: key, value });
-        } else if (item.value < value) {
-          await this.table<Statistic>(this.statisticTableName)
-            .update(item.id, { value });
         }
       });
   }
@@ -81,12 +80,14 @@ export class DataService extends Dexie {
       .filter(item => item.name === key)
       .first()
       .then(async item => {
-        if (!item) {
+        if (item) {
+          if (item.value > value) {
+            await this.table<Statistic>(this.statisticTableName)
+              .update(item.id, { value });
+          }
+        } else {
           await this.table(this.statisticTableName)
             .add({ name: key, value });
-        } else if (item.value > value) {
-          await this.table<Statistic>(this.statisticTableName)
-            .update(item.id, { value });
         }
       });
   }
@@ -97,36 +98,9 @@ export class DataService extends Dexie {
       .toArray());
   }
 
-  getGame(): Observable<Game | undefined> {
-    const data = localStorage.getItem('game');
-
-    return data
-      ? of(JSON.parse(data) as Game)
-      : of(undefined);
-  }
-
   async updatePlayers(playersList: Player[]): Promise<any> {
     return this.table<Player>(this.playerTableName)
       .bulkPut(playersList);
-  }
-
-  createGame(game: Game): Observable<any> {
-    return from<any>(this.table<Game>(this.gameTableName)
-      .clear()
-      .then(
-        () => this.table<Game>(this.gameTableName)
-          .put(game),
-      ));
-  }
-
-  async updateGame(game: Game): Promise<any> {
-    return this.table<Game>(this.gameTableName)
-      .put(game);
-  }
-
-  async cleanUpGame(): Promise<void> {
-    return this.table<Game>(this.gameTableName)
-      .clear();
   }
 
   async cleanUp(): Promise<void> {

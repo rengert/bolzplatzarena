@@ -36,13 +36,13 @@ export class GameComponent implements OnInit {
   }
 
   private setupGame(config: Config): void {
-    this.gameData = this.storage.loadGame() || this.game.createGameData(config);
+    this.gameData = this.storage.loadGame() ?? this.game.createGameData(config);
   }
 
   private win(): void {
     const dialogRef = this.dialog.open(WinScreenComponent);
     dialogRef.afterClosed()
-      .subscribe(result => {
+      .subscribe(() => {
         this.storage.cleanGame();
         void this.router.navigate(['']);
       });

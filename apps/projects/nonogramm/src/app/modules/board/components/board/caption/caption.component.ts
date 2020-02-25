@@ -17,8 +17,6 @@ export class CaptionComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.numbersClass = `text-length-${this.numbers.length}`;
-    if (this.config) {
-      this.cssClass = `board-size-${this.config.size}`;
-    }
+    this.cssClass = `board-size-${this.config.size}`;
   }
 }

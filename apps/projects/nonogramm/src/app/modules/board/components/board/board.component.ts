@@ -33,9 +33,6 @@ export class BoardComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.boardData) {
-      return;
-    }
     this.cssClass = `board-size-${this.boardData.config.size}`;
     this.checkBoard();
   }

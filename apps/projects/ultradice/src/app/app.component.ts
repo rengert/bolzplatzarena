@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { ResultComponent } from './modules/game/components/result/result.component';
@@ -13,10 +13,13 @@ import { GameService } from './services/game.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   @Input() @HostBinding('class.visible') isVisible: boolean;
-  subscription: Subscription;
-  matDialogRef: MatDialogRef<ResultComponent>;
+  private subscription = Subscription.EMPTY;
 
-  constructor(private readonly translate: TranslateService, readonly gameService: GameService, private readonly dialog: MatDialog) {
+  constructor(
+    private readonly translate: TranslateService,
+    private readonly dialog: MatDialog,
+    readonly gameService: GameService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -34,9 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-    if (this.matDialogRef) {
-      this.matDialogRef.close();
-    }
   }
 
   displayRanking(): void {

@@ -1,10 +1,10 @@
 import { Player } from './player.model';
 
-export class Game {
-  currentPlayerIndex = 0;
+export interface Game {
+  currentPlayerIndex: number;
   players: Player[];
-  shuffleMaxCount = 3;
+  shuffleMaxCount: number;
   currentPlayer: Player;
   nextPlayer: boolean;
-  maxRounds = 15;
+  maxRounds: number;
 }

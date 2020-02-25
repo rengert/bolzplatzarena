@@ -31,11 +31,9 @@ export class BlockComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.block) {
+    if (changes.block !== null) {
       if (this.block.show) {
-        if (this.config) {
-          this.cssClass = `board-size-${this.config.size}`;
-        }
+        this.cssClass = `board-size-${this.config.size}`;
         this.good = this.block.expected;
         this.none = !this.block.expected;
       }
