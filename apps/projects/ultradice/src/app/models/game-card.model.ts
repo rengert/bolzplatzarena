@@ -37,7 +37,9 @@ export class GameCard {
       + GameCard.getValueOrDefault(card.fours)
       + GameCard.getValueOrDefault(card.fives)
       + GameCard.getValueOrDefault(card.six);
-    card.bonus = (card.sumUpper >= BONUS_LIMIT) ? BONUS : undefined;
+    if (card.sumUpper >= BONUS_LIMIT) {
+      card.bonus = BONUS;
+    }
     card.sumLower = GameCard.getValueOrDefault(card.onePair);
     card.sumLower += GameCard.getValueOrDefault(card.twoPair);
     card.sumLower += GameCard.getValueOrDefault(card.threeOfAKind);
