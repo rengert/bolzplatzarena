@@ -8,16 +8,14 @@ import { DataService } from '../../../../services/data.service';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiceComponent {
-  @Input() id = 0;
+  @Input() id = '0';
   @Input() @HostBinding('attr.data-value') value = 0;
   @HostBinding('class.fixed') fixed = false;
 
-  @HostListener('click') click() {
+  @HostListener('click') click(): void {
     this.fixed = !this.fixed;
   }
 
-  constructor(private dataService: DataService) {
+  constructor(private readonly dataService: DataService) {
   }
-
-
 }

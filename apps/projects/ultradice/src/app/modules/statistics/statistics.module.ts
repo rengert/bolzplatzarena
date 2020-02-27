@@ -14,7 +14,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
     CdkTableModule,
     TranslateModule,
   ],
-  declarations: [StatisticsComponent]
+  declarations: [StatisticsComponent],
 })
 export class StatisticsModule {
 }

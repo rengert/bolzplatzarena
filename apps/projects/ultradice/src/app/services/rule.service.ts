@@ -3,7 +3,7 @@ import { GameCard } from '../models/game-card.model';
 
 @Injectable({ providedIn: 'root' })
 export class RuleService {
-  handleRule(gameCard: GameCard, rule: number, dices: number[]) {
+  handleRule(gameCard: GameCard, rule: number, dices: number[]): void {
     switch (rule) {
       case 1:
         gameCard.ones = this.getSimple(rule, dices);
@@ -56,28 +56,30 @@ export class RuleService {
       case 15:
         gameCard.chance = this.sum(dices);
         break;
+      default:
+        break;
     }
   }
 
-  /* regel für 1 bis 6 */
-  private getSimple(rule: number, dices: number[]): number {
+  private readonly getSimple = (rule: number, dices: number[]): number => {
     let result = 0;
-    dices.forEach((item) => {
+    dices.forEach(item => {
       if (item === rule) {
         result += item;
       }
     });
-    return result;
-  }
 
-  /* regel für 1 und 2 paar */
-  private getPair(dices: number[], count: number): number {
+    return result;
+  };
+
+  private readonly getPair = (dices: number[], count: number): number => {
     let result = 0;
-    dices = dices.sort().reverse();
-    for (let i = 0; i < dices.length; i++) {
-      if (dices.lastIndexOf(dices[i]) !== i) {
+    const localDices = dices.sort()
+      .reverse();
+    for (let i = 0; i < localDices.length; i++) {
+      if (dices.lastIndexOf(localDices[i]) !== i) {
         // etwas is doppelt enthalten
-        const value = 2 * dices[i];
+        const value = dices[i] * 2;
         if (value > result) {
           result = value;
         }
@@ -97,38 +99,31 @@ export class RuleService {
     }
 
     return result;
-  }
+  };
 
-  /*
-  ** 3 gleiche
-  ** 4 gleiche
-  ** pasch
-  */
   private ofAKind(dices: number[], count: number, preResult = 0): number {
     let result = 0;
     const groupedData = this.groupBy(dices);
     for (let i = 1; i <= 6; i++) {
       if (groupedData[i] >= count && count * i > result) {
-        if (preResult > 0) {
-          result = preResult;
-        } else {
-          result = i * count;
-        }
+        result = preResult || i * count;
       }
     }
+
     return result;
   }
 
   private check(dices: number[], check: number[]): number {
-    dices = dices.sort();
-    check = check.sort();
+    const localDices = dices.sort();
+    const localCheck = check.sort();
     let result = true;
-    dices.forEach((item, index) => {
-      result = result && (item === check[index]);
+    localDices.forEach((item, index) => {
+      result = result && (item === localCheck[index]);
     });
     if (result) {
       return this.sum(dices);
     }
+
     return 0;
   }
 
@@ -145,25 +140,21 @@ export class RuleService {
     if (result === 5) {
       return this.sum(dices);
     }
+
     return 0;
   }
 
-
-  private sum(dices: number[]): number {
+  private readonly sum = (dices: number[]): number => {
     let result = 0;
     dices.forEach(item => result += item);
-    return result;
-  }
 
-  /* groups data */
-  private groupBy(data: number[]): any {
-    const result = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
-    data.forEach((item) => {
-      result[item]++;
-    });
     return result;
-  }
+  };
 
-  constructor() {
-  }
+  private readonly groupBy = (data: number[]): any => {
+    const result = [0, 0, 0, 0, 0, 0, 0];
+    data.forEach(item => result[item]++);
+
+    return result;
+  };
 }

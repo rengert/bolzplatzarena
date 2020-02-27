@@ -1,9 +1,9 @@
 import { Config } from './config';
-import { GameBlock } from './game-block';
+import { GameRow } from './game-row';
 
 export interface GameData {
   config: Config;
-  data: GameBlock[][];
-  current?: GameBlock[][];
+  data: GameRow[];
+  current: GameRow[];
   failed: number;
 }

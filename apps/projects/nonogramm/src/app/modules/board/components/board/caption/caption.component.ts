@@ -15,10 +15,8 @@ export class CaptionComponent implements OnChanges {
   @Input() @HostBinding('class.vertical') vertical: boolean;
   numbersClass = 'default';
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.numbersClass = 'text-length-' + this.numbers.length;
-    if (this.config) {
-      this.cssClass = `board-size-${this.config.size}`;
-    }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.numbersClass = `text-length-${this.numbers.length}`;
+    this.cssClass = `board-size-${this.config.size}`;
   }
 }

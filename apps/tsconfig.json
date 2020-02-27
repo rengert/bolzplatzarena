@@ -23,15 +23,22 @@
     ],
     "paths": {
       "core": [
+        "dist/core",
+        "dist/core/core",
         "dist/core"
       ],
       "core/*": [
         "dist/core/*"
       ]
-    }
+    },
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
+    "strictTemplates": true,
     "strictInjectionParameters": true
   }
 }

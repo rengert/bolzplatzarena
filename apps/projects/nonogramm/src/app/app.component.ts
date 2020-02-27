@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private readonly translate: TranslateService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const lang = 'de';
     this.translate.use(lang);
     const data = require(`../i18n/${lang}.json`);

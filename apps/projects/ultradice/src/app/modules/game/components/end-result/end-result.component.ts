@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Player } from '../../../../models/player.model';
-import { DataService } from '../../../../services/data.service';
+import { GameService } from '../../../../services/game.service';
 
 @Component({
   selector: 'app-end-result',
@@ -15,17 +15,22 @@ import { DataService } from '../../../../services/data.service';
 export class EndResultComponent implements OnInit {
   players$: Observable<Player[]>;
 
-  constructor(public dialogRef: MatDialogRef<EndResultComponent>, private dataService: DataService, private router: Router) {
+  constructor(
+    readonly dialogRef: MatDialogRef<EndResultComponent>,
+    private readonly game: GameService,
+    private readonly router: Router,
+  ) {
   }
 
-  ngOnInit() {
-    this.players$ = this.dataService.getGame().pipe(
-      map(game => game.players.sort((a, b) => (a.gameCard.sum < b.gameCard.sum ? 1 : -1))),
-    );
+  ngOnInit(): void {
+    this.players$ = this.game.getGame()
+      .pipe(
+        map(game => game.players.sort((a, b) => (a.gameCard.sum < b.gameCard.sum ? 1 : -1))),
+      );
   }
 
-  async close() {
-    await this.dataService.cleanUpGame();
+  async close(): Promise<void> {
+    await this.game.cleanUpGame();
     this.dialogRef.close();
     await this.router.navigate(['']);
   }

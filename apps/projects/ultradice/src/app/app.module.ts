@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { AppComponent } from './app.component';
 import { GameIsRunningGuard } from './guards/game-is-running.guard';
 import { EndResultComponent } from './modules/game/components/end-result/end-result.component';
@@ -41,7 +41,7 @@ import { ROUTES } from './routes';
     ResultComponent,
     EndResultComponent,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

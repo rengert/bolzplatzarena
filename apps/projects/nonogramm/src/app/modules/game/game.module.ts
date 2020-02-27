@@ -9,7 +9,6 @@ import { GameComponent } from './components/game/game.component';
 import { LoseScreenComponent } from './components/lose-screen/lose-screen.component';
 import { WinScreenComponent } from './components/win-screen/win-screen.component';
 
-
 @NgModule({
   declarations: [
     GameComponent,

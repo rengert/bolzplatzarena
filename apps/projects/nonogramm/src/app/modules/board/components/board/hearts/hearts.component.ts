@@ -9,13 +9,17 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, Simp
 export class HeartsComponent implements OnChanges {
   @Input() hearts = 3;
   @HostBinding('class') heartClass: string;
-  items: any[];
+  items: number[];
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     try {
-      this.items = Array(this.hearts);
-      this.heartClass = 'hearts-' + this.hearts;
+      this.items = [];
+      for (let i = 1; i <= this.hearts; i++) {
+        this.items.push(i);
+      }
+      this.heartClass = `hearts-${this.hearts}`;
     } catch {
+      //
     }
   }
 }

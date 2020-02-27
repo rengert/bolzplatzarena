@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { ResultComponent } from './modules/game/components/result/result.component';
 import { GameService } from './services/game.service';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +13,16 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent implements OnInit, OnDestroy {
   @Input() @HostBinding('class.visible') isVisible: boolean;
-  subscription: Subscription;
+  private subscription = Subscription.EMPTY;
 
-  constructor(private readonly translate: TranslateService, readonly gameService: GameService, private readonly dialog: MatDialog) {
+  constructor(
+    private readonly translate: TranslateService,
+    private readonly dialog: MatDialog,
+    readonly gameService: GameService,
+  ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const lang = 'de';
     this.translate.use(lang);
     const data = require(`../i18n/${lang}.json`);
@@ -27,15 +31,15 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription = this.gameService.state$.subscribe(
       value => {
         this.isVisible = value;
-      }
+      },
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  displayRanking() {
-    const dialogReference = this.dialog.open(ResultComponent);
+  displayRanking(): void {
+    this.dialog.open(ResultComponent);
   }
 }

@@ -17,14 +17,14 @@ export class BoardComponent implements OnChanges {
   rowHints: Caption[][];
   hearts = 3;
   selectType = true;
-  @Output() resultEvent = new EventEmitter<boolean>();
+  @Output() readonly resultEvent = new EventEmitter<boolean>();
 
   constructor(
     private readonly storage: StorageService,
   ) {
   }
 
-  onAction(failed: boolean) {
+  onAction(failed: boolean): void {
     if (failed) {
       this.boardData.failed++;
       this.hearts = 3 - this.boardData.failed;
@@ -32,15 +32,12 @@ export class BoardComponent implements OnChanges {
     this.checkBoard();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (!changes.boardData) {
-      return;
-    }
+  ngOnChanges(changes: SimpleChanges): void {
     this.cssClass = `board-size-${this.boardData.config.size}`;
     this.checkBoard();
   }
 
-  private checkBoard() {
+  private checkBoard(): void {
     this.columnHints = generateColumnHints(this.boardData);
     this.rowHints = generateRowHints(this.boardData);
 
@@ -49,7 +46,8 @@ export class BoardComponent implements OnChanges {
     if (this.boardData.failed >= 3) {
       this.resultEvent.emit(false);
     }
-    const flattenedArray = [].concat(...this.boardData.current) as GameBlock[];
+    const flattenedArray = this.boardData.current
+      .reduce((a, b) => [...a, ...b.data], [] as GameBlock[]);
     const missing = flattenedArray.filter(item => item.expected && !item.show);
     if (missing.length === 0) {
       this.resultEvent.emit(true);

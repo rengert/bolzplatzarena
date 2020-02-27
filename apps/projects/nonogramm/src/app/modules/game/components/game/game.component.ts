@@ -26,46 +26,47 @@ export class GameComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const config = this.storage.loadConfig();
     this.setupGame(config);
   }
 
-  resultGame(result: boolean) {
-    if (result) {
-      return this.win();
-    }
-    this.lose();
+  resultGame(result: boolean): void {
+    result ? this.win() : this.lose();
   }
 
-  private setupGame(config: Config) {
-    this.gameData = this.storage.loadGame();
-    if (!this.gameData) {
-      this.gameData = this.game.createGameData(config);
-    }
+  private setupGame(config: Config): void {
+    this.gameData = this.storage.loadGame() ?? this.game.createGameData(config);
   }
 
-  private win() {
+  private win(): void {
     const dialogRef = this.dialog.open(WinScreenComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      this.storage.cleanGame();
-      void this.router.navigate(['']);
-    });
+    dialogRef.afterClosed()
+      .subscribe(() => {
+        this.storage.cleanGame();
+        void this.router.navigate(['']);
+      });
   }
 
-  private lose() {
+  private lose(): void {
     const dialogRef = this.dialog.open(LoseScreenComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-        this.gameData.current = [...this.gameData.data].map(
-          row => row.map(block => ({ ...block }))
-        );
-        this.gameData = { ...this.gameData };
-        this.change.detectChanges();
-        return;
-      }
-      this.storage.cleanGame();
-      void this.router.navigate(['']);
-    });
+    dialogRef
+      .afterClosed()
+      .subscribe(async result => {
+        if (result === true) {
+          this.gameData.current = [...this.gameData.data].map(
+            row => ({
+              ...row,
+              data: row.data.map(block => ({ ...block })),
+            }),
+          );
+          this.gameData = { ...this.gameData };
+          this.change.detectChanges();
+
+          return;
+        }
+        this.storage.cleanGame();
+        await this.router.navigate(['']);
+      });
   }
 }

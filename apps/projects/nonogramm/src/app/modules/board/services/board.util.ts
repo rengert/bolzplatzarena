@@ -15,22 +15,24 @@ function generateHints(gameData: GameData, isRow: boolean): Caption[][] {
     const row = [] as Caption[];
     let count = 0;
     let done = true;
+    let index = 0;
     for (let j = 0; j < gameData.config.size; j++) {
-      const item = isRow ? gameData.current[i][j] : gameData.current[j][i];
+      const item = isRow ? gameData.current[i].data[j] : gameData.current[j].data[i];
       done = done && item.show;
-      if (!item.expected) {
+      if (item.expected) {
+        count++;
+      } else {
         if (count > 0) {
-          row.push({ items: count, done });
+          row.push({ row: i + 1, index: index += 1, items: count, done });
         }
         count = 0;
-      } else {
-        count++;
       }
     }
     if (count > 0) {
-      row.push({ items: count, done });
+      row.push({ row: i + 1, index: index += 1, items: count, done });
     }
     result.push(row);
   }
+
   return result;
 }

@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
 import { Game } from '../../../../models/game.model';
 import { Player } from '../../../../models/player.model';
-import { DataService } from '../../../../services/data.service';
+import { GameService } from '../../../../services/game.service';
 
 @Component({
   selector: 'app-create-game',
@@ -12,15 +11,18 @@ import { DataService } from '../../../../services/data.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateGameComponent {
-  player1 = new Player();
-  player2 = new Player();
-  player3 = new Player();
-  player4 = new Player();
+  readonly player1 = new Player();
+  readonly player2 = new Player();
+  readonly player3 = new Player();
+  readonly player4 = new Player();
 
-  constructor(private data: DataService, private router: Router) {
+  constructor(
+    private readonly game: GameService,
+    private readonly router: Router,
+  ) {
   }
 
-  startGame() {
+  async startGame(): Promise<void> {
     const playersList = new Array<Player>();
     if (this.player1.name !== '') {
       playersList.push(this.player1);
@@ -34,14 +36,19 @@ export class CreateGameComponent {
     if (this.player4.name !== '') {
       playersList.push(this.player4);
     }
-    if (playersList.length > 0) {
-      const game = new Game();
-      game.players = playersList;
-      this.data.createGame(game).pipe(
-        take(1),
-      ).subscribe((result) => {
-        this.router.navigate(['game']);
-      });
+    if (playersList.length !== 0) {
+      const game: Game = {
+        currentPlayerIndex: 0,
+        currentPlayer: playersList[0],
+        nextPlayer: false,
+        maxRounds: 15,
+        players: playersList,
+        shuffleMaxCount: 3,
+      };
+      await this.game.createGame(game)
+        .then(() => {
+          void this.router.navigate(['game']);
+        });
     }
   }
 }
