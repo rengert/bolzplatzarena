@@ -6,12 +6,16 @@ import { MaterialModule } from '../../../core/src/lib/modules/material/material.
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NotesComponent } from './components/content/notes/notes.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { PrivacyComponent } from './components/content/privacy/privacy.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
+    NotesComponent,
+    PrivacyComponent,
   ],
   imports: [
     BrowserModule,
