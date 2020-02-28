@@ -1,13 +1,7 @@
 {
-  "name": "ultradice",
+  "name": "bolzplatzarena",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
     "deploy:nonogramm": "ng build nonogramm --prod && firebase deploy --only hosting:nonogramm",
     "deploy:startup": "ng build startup --prod && firebase deploy --only hosting:startup",
     "nonogramm": "ng serve nonogramm",
@@ -45,6 +39,7 @@
     "@angular/cli": "^9.0.4",
     "@angular/compiler-cli": "~9.0.4",
     "@angular/language-service": "~9.0.4",
+    "@angular/material": "9.1.0",
     "@capacitor/cli": "1.4.0",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",

@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  height: 100%;
+  width: 250px;
+
+  mat-nav-list {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-content: space-between;
+
+    .top {
+      flex: 1 1 1px;
+    }
+
+    .button {
+    }
+  }
+}
