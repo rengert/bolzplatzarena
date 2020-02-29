@@ -257,7 +257,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush"
         }
       },
       "root": "projects/startup",
@@ -358,8 +359,7 @@
           "options": {
             "tsConfig": [
               "projects/startup/tsconfig.app.json",
-              "projects/startup/tsconfig.spec.json",
-              "projects/startup/e2e/tsconfig.json"
+              "projects/startup/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -370,6 +370,12 @@
     },
     "core": {
       "projectType": "library",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "changeDetection": "OnPush"
+        }
+      },
       "root": "projects/core",
       "sourceRoot": "projects/core/src",
       "prefix": "lib",

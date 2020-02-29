@@ -15,7 +15,7 @@ export class PrivacyGuard implements CanActivate {
     state: RouterStateSnapshot,
   ): boolean {
     if (!this.privacy.existsConsent()) {
-      this.router.navigate(['consent']);
+      void this.router.navigate(['consent']);
 
       return false;
     }

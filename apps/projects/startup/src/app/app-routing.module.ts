@@ -4,6 +4,8 @@ import { ConsentComponent } from '../../../core/src/lib/modules/privacy/componen
 import { PrivacyGuard } from '../../../core/src/lib/modules/privacy/guards/privacy.guard';
 import { NotesComponent } from './components/content/notes/notes.component';
 import { PrivacyComponent } from './components/content/privacy/privacy.component';
+import { LaunchStartupComponent } from './components/launch-startup/launch-startup.component';
+import { StartupLaunchedGuard } from './guards/startup-launched.guard';
 import { DashBoardComponent } from './modules/dash-board/components/dash-board/dash-board.component';
 
 const routes: Routes = [
@@ -12,7 +14,14 @@ const routes: Routes = [
     canActivate: [PrivacyGuard],
     children: [
       {
-        path: '', component: DashBoardComponent,
+        path: '',
+        canActivate: [StartupLaunchedGuard],
+        children: [
+          { path: '', component: DashBoardComponent },
+        ],
+      },
+      {
+        path: 'launch', component: LaunchStartupComponent,
       },
     ],
   },
