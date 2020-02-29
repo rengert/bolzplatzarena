@@ -7,8 +7,9 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotesComponent } from './components/content/notes/notes.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
 import { PrivacyComponent } from './components/content/privacy/privacy.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { DashBoardModule } from './modules/dash-board/dash-board.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { PrivacyComponent } from './components/content/privacy/privacy.component
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DashBoardModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
     MaterialModule,
