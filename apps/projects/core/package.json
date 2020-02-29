@@ -2,8 +2,11 @@
   "name": "core",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^9.0.1",
-    "@angular/core": "^9.0.1",
+    "@angular/common": "^9.0.4",
+    "@angular/core": "^9.0.4",
+    "@angular/material": "^9.1.0",
+    "@angular/router": "~9.0.4",
+    "rxjs": "~6.5.4",
     "tslib": "^1.10.0"
   }
 }
