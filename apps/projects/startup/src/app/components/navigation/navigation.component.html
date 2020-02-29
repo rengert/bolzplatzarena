@@ -1,24 +1,24 @@
 <mat-nav-list>
   <div class="top">
-    <mat-list-item>
+    <mat-list-item [routerLink]="['/']" (click)="navigation.emit()">
       <mat-icon>home</mat-icon>
-      <a matLine [routerLink]="['/']">Dashboard</a>
+      <span matLine>Dashboard</span>
     </mat-list-item>
   </div>
   <div class="button">
     <mat-divider></mat-divider>
-    <mat-list-item>
+    <mat-list-item [routerLink]="['/']" (click)="navigation.emit()">
       <mat-icon>settings</mat-icon>
-      <a matLine [routerLink]="['/']">Einstellungen</a>
+      <span matLine>Einstellungen</span>
     </mat-list-item>
     <mat-divider></mat-divider>
-    <mat-list-item>
+    <mat-list-item [routerLink]="['notes']" (click)="navigation.emit()">
       <mat-icon>description</mat-icon>
-      <a matLine [routerLink]="['notes']">Impressum</a>
+      <span matLine>Impressum</span>
     </mat-list-item>
-    <mat-list-item>
+    <mat-list-item [routerLink]="['privacy']" (click)="navigation.emit()">
       <mat-icon>info</mat-icon>
-      <a matLine [routerLink]="['privacy']">Datenschutz</a>
+      <span matLine>Datenschutz</span>
     </mat-list-item>
   </div>
 </mat-nav-list>
