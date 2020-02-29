@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: ng buid startup --prod
-    - run: ng test startup
+    - run: npm build.startup
+    - run: npm test.startup
       env:
         CI: true
