@@ -2,11 +2,11 @@
   <button mat-icon-button (click)="snav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <h1>Startup</h1>
+  &nbsp;<h1>Startup</h1>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #snav [mode]="'over'">
-    <app-navigation></app-navigation>
+    <app-navigation (navigation)="snav.toggle()"></app-navigation>
   </mat-sidenav>
   <main>
     <router-outlet></router-outlet>
