@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "build:startup": "ng build startup --prod",
-    "test:startup": "ng test startup",
+    "test:startup": "ng test startup --watch=false --browsers=ChromeHeadless",
     "deploy:nonogramm": "ng build nonogramm --prod && firebase deploy --only hosting:nonogramm",
     "deploy:startup": "ng build startup --prod && firebase deploy --only hosting:startup",
     "nonogramm": "ng serve nonogramm",
