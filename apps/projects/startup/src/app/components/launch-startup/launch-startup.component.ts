@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { LaunchStartup } from '../../services/startup.service';
+import { Router } from '@angular/router';
+import { LaunchStartup, StartupService } from '../../services/startup.service';
 
 @Component({
   selector: 'app-launch-startup',
@@ -18,13 +19,22 @@ export class LaunchStartupComponent {
     companyDescription: new FormControl('', Validators.required),
   });
 
-  async launch(): Promise<void> {
-    this.launchStartup({ ...this.form.value });
-
-    return;
+  constructor(private readonly startup: StartupService, private readonly router: Router) {
   }
 
-  launchStartup(config: LaunchStartup): void {
-    //
+  async launch(): Promise<boolean> {
+    return this.launchStartup({ ...this.form.value });
+  }
+
+  launchStartup(config: LaunchStartup): Promise<boolean> {
+    return this.startup.launch(config)
+      .then(
+        result => {
+          if (result) {
+            return this.router.navigate(['/']);
+          }
+
+          return result;
+        });
   }
 }

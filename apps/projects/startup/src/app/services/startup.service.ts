@@ -19,4 +19,8 @@ export class StartupService {
   async launched(): Promise<boolean> {
     return this.startupStorage.launched();
   }
+
+  async launch(config: LaunchStartup): Promise<boolean> {
+    return true;
+  }
 }
