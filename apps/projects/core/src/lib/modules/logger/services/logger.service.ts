@@ -25,16 +25,22 @@ export class LoggerService<T> implements Logger {
 
   debug(message: string): void {
     const logMessage = createMessage(message);
-    this.logger.forEach(logger => logger.debug(logMessage));
+    this.logger.forEach(logger => {
+      logger.debug(logMessage);
+    });
   }
 
   error(message: string, data: any): void {
     const logMessage = createMessage(message);
-    this.logger.forEach(logger => logger.error(logMessage, data));
+    this.logger.forEach(logger => {
+      logger.error(logMessage, data);
+    });
   }
 
   log(message: string): void {
     const logMessage = createMessage(message);
-    this.logger.forEach(logger => logger.log(logMessage));
+    this.logger.forEach(logger => {
+      logger.log(logMessage);
+    });
   }
 }
