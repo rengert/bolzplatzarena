@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoggerService } from '../../../core/src/lib/modules/logger/services/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -6,9 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'startup';
-
-  openNav(): void {
-    //
+  constructor(private readonly logger: LoggerService<AppComponent>) {
+    this.logger.debug('Application started');
   }
 }
