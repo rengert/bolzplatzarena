@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Startup } from '../models/startup.model';
 import { StartupStorageService } from './storage/startup-storage.service';
 
@@ -19,6 +20,10 @@ export class StartupService {
 
   async launched(): Promise<boolean> {
     return this.startupStorage.launched();
+  }
+
+  get$(): Observable<Startup | undefined> {
+    return this.startupStorage.get$();
   }
 
   async launch(config: LaunchStartup): Promise<Startup> {

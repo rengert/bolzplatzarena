@@ -12,6 +12,7 @@ import { NotesComponent } from './components/content/notes/notes.component';
 import { PrivacyComponent } from './components/content/privacy/privacy.component';
 import { LaunchStartupComponent } from './components/launch-startup/launch-startup.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { StartupAvatarComponent } from './components/navigation/startup-avatar/startup-avatar.component';
 import { DashBoardModule } from './modules/dash-board/dash-board.module';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { DashBoardModule } from './modules/dash-board/dash-board.module';
     NotesComponent,
     PrivacyComponent,
     LaunchStartupComponent,
+    StartupAvatarComponent,
   ],
   imports: [
     BrowserModule,
