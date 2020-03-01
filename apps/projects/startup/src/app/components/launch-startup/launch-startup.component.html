@@ -1,1 +1,58 @@
-<p>launch-startup works!</p>
+<mat-card>
+  <form [formGroup]="form" (ngSubmit)="launch()">
+    <h2>GründerIn des Startups</h2>
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>Anrede</mat-label>
+        <mat-select formControlName="sex">
+          <mat-option value="Frau">Frau</mat-option>
+          <mat-option value="Mann">Mann</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>Vorname</mat-label>
+        <input matInput placeholder="Maxima" formControlName="firstName">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nachname</mat-label>
+        <input matInput placeholder="Musterowsky" formControlName="lastName">
+      </mat-form-field>
+    </div>
+    <h2>Informationen Startup</h2>
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>Name des Startup</mat-label>
+        <input matInput placeholder="Maxima Musterowsky & Co Kg" formControlName="startup">
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>Firmen Typ</mat-label>
+        <mat-select formControlName="companyType">
+          <mat-option value="Frau">GmbH</mat-option>
+          <mat-option value="Mann">AG</mat-option>
+          <mat-option value="Mann">UG</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>Thema</mat-label>
+        <mat-select formControlName="companyTopic">
+          <mat-option value="Frau">IT</mat-option>
+          <mat-option value="Mann">Design</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Beschreibung des Startups</mat-label>
+        <textarea matInput formControlName="companyDescription"></textarea>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" [disabled]="!form.valid">Startup gründen</button>
+  </form>
+</mat-card>
