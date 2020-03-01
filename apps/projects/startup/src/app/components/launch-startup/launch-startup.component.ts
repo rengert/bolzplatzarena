@@ -26,15 +26,8 @@ export class LaunchStartupComponent {
     return this.launchStartup({ ...this.form.value });
   }
 
-  launchStartup(config: LaunchStartup): Promise<boolean> {
+  async launchStartup(config: LaunchStartup): Promise<boolean> {
     return this.startup.launch(config)
-      .then(
-        result => {
-          if (result) {
-            return this.router.navigate(['/']);
-          }
-
-          return result;
-        });
+      .then(_ => this.router.navigate(['/']));
   }
 }

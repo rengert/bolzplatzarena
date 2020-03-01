@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Startup } from '../models/startup.model';
 import { StartupStorageService } from './storage/startup-storage.service';
 
 export interface LaunchStartup {
@@ -20,7 +21,23 @@ export class StartupService {
     return this.startupStorage.launched();
   }
 
-  async launch(config: LaunchStartup): Promise<boolean> {
-    return true;
+  async launch(config: LaunchStartup): Promise<Startup> {
+    const startup: Startup = {
+      name: config.startup,
+      description: config.companyDescription,
+      founder: {
+        firstname: config.firstName,
+        lastname: config.lastName,
+      },
+    };
+
+    return this.startupStorage.save(startup)
+      .then(result => {
+        if (result) {
+          return startup;
+        }
+
+        throw new Error('Unexpected error occured');
+      });
   }
 }
