@@ -23,8 +23,6 @@
     ],
     "paths": {
       "core": [
-        "dist/core",
-        "dist/core/core",
         "dist/core"
       ],
       "core/*": [
