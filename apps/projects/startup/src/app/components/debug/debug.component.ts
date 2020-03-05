@@ -16,6 +16,7 @@ export class DebugComponent {
   }
 
   deleteOffices(): void {
-    this.debug.deleteOffices();
+    this.debug.deleteOffices()
+      .subscribe();
   }
 }

@@ -29,13 +29,13 @@ export class StartupStorageService {
     );
   }
 
-  async save(startup: Startup): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
+  async save(startup: Startup): Promise<Startup> {
+    return new Promise<Startup>(resolve => {
       setTimeout(() => {
         const data = JSON.stringify(startup);
         localStorage.setItem('startup', data);
         this.notify$.next(true);
-        resolve(true);
+        resolve(startup);
       });
     });
   }
