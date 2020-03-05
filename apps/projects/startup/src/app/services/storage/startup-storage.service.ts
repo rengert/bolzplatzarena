@@ -39,4 +39,14 @@ export class StartupStorageService {
       });
     });
   }
+
+  async delete(): Promise<void> {
+    return new Promise<void>(resolve => {
+      setTimeout(() => {
+        localStorage.removeItem('startup');
+        this.notify$.next(false);
+        resolve();
+      });
+    });
+  }
 }

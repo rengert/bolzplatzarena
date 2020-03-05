@@ -4,6 +4,7 @@ import { ConsentComponent } from '../../../core/src/lib/modules/privacy/componen
 import { PrivacyGuard } from '../../../core/src/lib/modules/privacy/guards/privacy.guard';
 import { NotesComponent } from './components/content/notes/notes.component';
 import { PrivacyComponent } from './components/content/privacy/privacy.component';
+import { DebugComponent } from './components/debug/debug.component';
 import { LaunchStartupComponent } from './components/launch-startup/launch-startup.component';
 import { StartupLaunchedGuard } from './guards/startup-launched.guard';
 import { DashBoardComponent } from './modules/dash-board/components/dash-board/dash-board.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'debug', component: DebugComponent },
   { path: 'consent', component: ConsentComponent },
   { path: 'notes', component: NotesComponent },
   { path: 'privacy', component: PrivacyComponent },

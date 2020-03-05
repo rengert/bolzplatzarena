@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotesComponent } from './components/content/notes/notes.component';
 import { PrivacyComponent } from './components/content/privacy/privacy.component';
+import { DebugComponent } from './components/debug/debug.component';
 import { LaunchStartupComponent } from './components/launch-startup/launch-startup.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { StartupAvatarComponent } from './components/navigation/startup-avatar/startup-avatar.component';
@@ -23,6 +24,7 @@ import { DashBoardModule } from './modules/dash-board/dash-board.module';
     PrivacyComponent,
     LaunchStartupComponent,
     StartupAvatarComponent,
+    DebugComponent,
   ],
   imports: [
     BrowserModule,

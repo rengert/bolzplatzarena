@@ -13,6 +13,10 @@
       <mat-icon>settings</mat-icon>
       <span matLine>Einstellungen</span>
     </mat-list-item>
+    <mat-list-item [routerLink]="['/debug']" (click)="navigation.emit()">
+      <mat-icon>tag_faces</mat-icon>
+      <span matLine>Debug</span>
+    </mat-list-item>
     <mat-divider></mat-divider>
     <mat-list-item [routerLink]="['notes']" (click)="navigation.emit()">
       <mat-icon>description</mat-icon>
