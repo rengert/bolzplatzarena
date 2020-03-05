@@ -9,7 +9,7 @@ export interface Logger {
   error(message: string, data: any): void;
 }
 
-function createMessage(message: string): string {
+function createMessage<T>(message: string): string {
   // const type = (typeof T).toString();
 
   return message;

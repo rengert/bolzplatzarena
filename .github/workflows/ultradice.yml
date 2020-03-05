@@ -1,4 +1,4 @@
-name: Startup build & lint & test
+name: Ultradice build & lint & test
 
 on: [push]
 
@@ -18,8 +18,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: cd apps && npm install
-    - run: cd apps && npm run lint:startup
-    - run: cd apps && npm run build:startup
-    - run: cd apps && npm run test:startup
+    - run: cd apps && npm run lint:ultradice
+    - run: cd apps && npm run build:ultradice
       env:
         CI: true
