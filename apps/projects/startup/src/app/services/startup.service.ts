@@ -37,14 +37,7 @@ export class StartupService {
       offices: [],
     };
 
-    return this.startupStorage.save(startup)
-      .then(result => {
-        if (result) {
-          return startup;
-        }
-
-        throw new Error('Unexpected error occured');
-      });
+    return this.startupStorage.save(startup);
   }
 
   update(startup: Startup): Observable<Startup> {
