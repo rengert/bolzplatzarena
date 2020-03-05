@@ -1,1 +1,18 @@
-<p>open-office works!</p>
+<mat-card>
+  <form [formGroup]="form" (ngSubmit)="open()">
+    <h2>Neues Büro eröffnen</h2>
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>Adresse</mat-label>
+        <input matInput placeholder="Mustermannweg 20, 61231 Musterstadt" formControlName="address">
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>Name des Büros</mat-label>
+        <input matInput placeholder="Codingcity" formControlName="name">
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" [disabled]="!form.valid">Büro eröffnen</button>
+  </form>
+</mat-card>

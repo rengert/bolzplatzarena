@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { Startup } from '../models/startup.model';
 import { StartupStorageService } from './storage/startup-storage.service';
 
@@ -45,5 +45,9 @@ export class StartupService {
 
         throw new Error('Unexpected error occured');
       });
+  }
+
+  update(startup: Startup): Observable<Startup> {
+    return from(this.startupStorage.save(startup));
   }
 }

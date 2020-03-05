@@ -15,25 +15,27 @@ import { LaunchStartupComponent } from './components/launch-startup/launch-start
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { StartupAvatarComponent } from './components/navigation/startup-avatar/startup-avatar.component';
 import { DashBoardModule } from './modules/dash-board/dash-board.module';
+import { OfficesModule } from './modules/offices/offices.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DebugComponent,
+    LaunchStartupComponent,
     NavigationComponent,
     NotesComponent,
     PrivacyComponent,
-    LaunchStartupComponent,
     StartupAvatarComponent,
-    DebugComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    DashBoardModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    BrowserModule,
     BrowserAnimationsModule,
+    DashBoardModule,
     MaterialModule,
+    OfficesModule,
     ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always', appearance: 'fill' } },
