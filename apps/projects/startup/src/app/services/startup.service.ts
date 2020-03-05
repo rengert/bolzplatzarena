@@ -34,6 +34,7 @@ export class StartupService {
         firstname: config.firstName,
         lastname: config.lastName,
       },
+      offices: [],
     };
 
     return this.startupStorage.save(startup)
