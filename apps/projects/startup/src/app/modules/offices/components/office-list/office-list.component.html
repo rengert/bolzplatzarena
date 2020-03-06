@@ -5,7 +5,7 @@
     <input matInput (keyup)="applyFilter()" [(ngModel)]="filterTerm" placeholder="Ex. ium" autocomplete="off">
   </mat-form-field>
 
-  <table mat-table [dataSource]="data$ | async" class="mat-elevation-z8">
+  <table *ngIf="data$ | async" mat-table [dataSource]="data" class="mat-elevation-z8">
 
     <!-- Position Column -->
     <ng-container matColumnDef="name">
