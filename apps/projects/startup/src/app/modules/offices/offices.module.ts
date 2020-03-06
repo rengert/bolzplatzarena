@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from '../../../../../core/src/lib/core.module';
 import { MaterialModule } from '../../../../../core/src/lib/modules/material/material.module';
+import { OfficeListComponent } from './components/office-list/office-list.component';
 import { OpenOfficeComponent } from './components/open-office/open-office.component';
 
 @NgModule({
@@ -11,8 +12,9 @@ import { OpenOfficeComponent } from './components/open-office/open-office.compon
     CoreModule,
     MaterialModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
-  declarations: [OpenOfficeComponent],
+  declarations: [OpenOfficeComponent, OfficeListComponent],
 })
 export class OfficesModule {
 }

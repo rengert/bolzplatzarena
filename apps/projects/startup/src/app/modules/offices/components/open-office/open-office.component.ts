@@ -25,6 +25,6 @@ export class OpenOfficeComponent {
 
   openOffice(office: Office): void {
     this.office.open(office)
-      .subscribe(_ => this.router.navigate(['/']));
+      .subscribe(_ => this.router.navigate(['/offices']));
   }
 }
