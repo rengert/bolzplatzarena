@@ -61,7 +61,7 @@
     "interface-over-type-literal": true,
     "function-constructor": true,
     "no-parameter-reassignment": true,
-    "no-void-expression": true,
+    "no-void-expression": false,
     "invalid-void": [
       true,
       {

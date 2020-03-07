@@ -1,7 +1,11 @@
 import { animate, keyframes, query, stagger, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { SpeedDialService } from '../../services/speed-dial.service';
 
 export interface Button {
+  key: string;
   icon: string;
   route: string[];
 }
@@ -54,31 +58,37 @@ const speedDialFabAnimations = [
   animations: speedDialFabAnimations,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SpeedDialComponent {
-  fabButtons: Button[] = [
-    {
-      icon: 'timeline',
-      route: ['open-office'],
-    },
-    {
-      icon: 'view_headline',
-      route: ['offices'],
-    },
-  ];
-  buttons: Button[] = [];
+export class SpeedDialComponent implements OnInit {
+  buttons$: Observable<Button[]>;
   fabTogglerState = 'inactive';
+  hasButtons = false;
+  private readonly state = new BehaviorSubject<boolean>(false);
+
+  constructor(private readonly speedDial: SpeedDialService) {
+  }
+
+  ngOnInit(): void {
+    this.buttons$ = this.speedDial.items$()
+      .pipe(
+        tap(_ => this.state.next(false)),
+        tap(buttons => this.hasButtons = !!buttons.length),
+        switchMap(buttons => this.state.pipe(
+          map(active => active ? buttons : []),
+        )),
+      );
+  }
 
   showItems(): void {
     this.fabTogglerState = 'active';
-    this.buttons = this.fabButtons;
+    this.state.next(true);
   }
 
   hideItems(): void {
     this.fabTogglerState = 'inactive';
-    this.buttons = [];
+    this.state.next(false);
   }
 
   onToggleFab(): void {
-    this.buttons.length ? this.hideItems() : this.showItems();
+    this.state.next(!this.state.value);
   }
 }
