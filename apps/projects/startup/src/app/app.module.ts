@@ -11,6 +11,7 @@ import { MaterialModule } from '../../../core/src/lib/modules/material/material.
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BaseComponent } from './components/base/base.component';
 import { NotesComponent } from './components/content/notes/notes.component';
 import { PrivacyComponent } from './components/content/privacy/privacy.component';
 import { DebugComponent } from './components/debug/debug.component';
@@ -29,6 +30,7 @@ import { OfficesModule } from './modules/offices/offices.module';
     NotesComponent,
     PrivacyComponent,
     StartupAvatarComponent,
+    BaseComponent,
   ],
   imports: [
     AppRoutingModule,
