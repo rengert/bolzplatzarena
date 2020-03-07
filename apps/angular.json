@@ -378,7 +378,7 @@
       },
       "root": "projects/core",
       "sourceRoot": "projects/core/src",
-      "prefix": "lib",
+      "prefix": "bpa",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
