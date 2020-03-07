@@ -4,6 +4,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ButtonModule } from '../../../core/src/lib/modules/button/button.module';
 import { MaterialModule } from '../../../core/src/lib/modules/material/material.module';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +32,7 @@ import { OfficesModule } from './modules/offices/offices.module';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    ButtonModule,
     DashBoardModule,
     MaterialModule,
     OfficesModule,
@@ -41,6 +43,9 @@ import { OfficesModule } from './modules/offices/offices.module';
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always', appearance: 'fill' } },
   ],
   bootstrap: [AppComponent],
+  exports: [
+    StartupAvatarComponent,
+  ],
 })
 export class AppModule {
 }

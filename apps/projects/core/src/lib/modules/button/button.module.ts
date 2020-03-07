@@ -1,14 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '../material/material.module';
-import { ConsentComponent } from './components/consent/consent.component';
+import { SpeedDialComponent } from './components/speed-dial/speed-dial.component';
 
 @NgModule({
-  declarations: [ConsentComponent],
+  declarations: [SpeedDialComponent],
   imports: [
     CommonModule,
     MaterialModule,
   ],
+  exports: [
+    SpeedDialComponent,
+  ],
 })
-export class PrivacyModule {
+export class ButtonModule {
 }
