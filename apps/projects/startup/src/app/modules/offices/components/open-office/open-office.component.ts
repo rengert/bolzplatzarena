@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { v4 as uuid } from 'uuid';
 import { SpeedDialService } from '../../../../../../../core/src/lib/modules/button/services/speed-dial.service';
 import { BaseComponent } from '../../../../components/base/base.component';
 import { Office } from '../../../../models/office.model';
@@ -30,7 +31,11 @@ export class OpenOfficeComponent extends BaseComponent {
   }
 
   openOffice(office: Office): void {
-    this.office.open(office)
-      .subscribe(_ => this.router.navigate(['/offices']));
+    const newOffice = {
+      ...office,
+      id: uuid(),
+    };
+    this.office.open(newOffice)
+      .subscribe(_ => this.router.navigate(['/offices', newOffice.id]));
   }
 }
