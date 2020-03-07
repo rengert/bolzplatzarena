@@ -9,6 +9,7 @@ import { LaunchStartupComponent } from './components/launch-startup/launch-start
 import { StartupLaunchedGuard } from './guards/startup-launched.guard';
 import { DashBoardComponent } from './modules/dash-board/components/dash-board/dash-board.component';
 import { OfficeListComponent } from './modules/offices/components/office-list/office-list.component';
+import { OfficeComponent } from './modules/offices/components/office/office.component';
 import { OpenOfficeComponent } from './modules/offices/components/open-office/open-office.component';
 import { AtLeastOneOfficeGuard } from './modules/offices/guards/at-least-one-office.guard';
 
@@ -35,6 +36,10 @@ const routes: Routes = [
           {
             path: 'offices',
             component: OfficeListComponent,
+          },
+          {
+            path: 'offices/:id',
+            component: OfficeComponent,
           },
         ],
       },
