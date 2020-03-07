@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { PrivacyService } from '../../services/privacy.service';
 
 @Component({
-  selector: 'lib-consent',
+  selector: 'bpa-consent',
   templateUrl: './consent.component.html',
   styleUrls: ['./consent.component.scss'],
 })

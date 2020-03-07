@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 export interface Button {
   icon: string;
+  route: string[];
 }
 
 const speedDialFabAnimations = [
@@ -57,18 +58,11 @@ export class SpeedDialComponent {
   fabButtons: Button[] = [
     {
       icon: 'timeline',
+      route: ['open-office'],
     },
     {
       icon: 'view_headline',
-    },
-    {
-      icon: 'room',
-    },
-    {
-      icon: 'lightbulb_outline',
-    },
-    {
-      icon: 'lock',
+      route: ['offices'],
     },
   ];
   buttons: Button[] = [];

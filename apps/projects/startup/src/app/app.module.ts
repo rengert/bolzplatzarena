@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { CoreModule } from '../../../core/src/lib/core.module';
 import { ButtonModule } from '../../../core/src/lib/modules/button/button.module';
 import { MaterialModule } from '../../../core/src/lib/modules/material/material.module';
 import { environment } from '../environments/environment';
@@ -33,6 +35,8 @@ import { OfficesModule } from './modules/offices/offices.module';
     BrowserModule,
     BrowserAnimationsModule,
     ButtonModule,
+    CommonModule,
+    CoreModule,
     DashBoardModule,
     MaterialModule,
     OfficesModule,
