@@ -22,7 +22,7 @@ export class StartupService {
     return this.startupStorage.launched();
   }
 
-  get$(): Observable<Startup | undefined> {
+  get$(): Observable<Startup> {
     return this.startupStorage.get$();
   }
 

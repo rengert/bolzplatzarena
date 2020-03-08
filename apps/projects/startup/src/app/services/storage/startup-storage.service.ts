@@ -16,12 +16,12 @@ export class StartupStorageService {
     });
   }
 
-  get$(): Observable<Startup | undefined> {
+  get$(): Observable<Startup> {
     return this.notify$.pipe(
       map(_ => {
         const data = localStorage.getItem('startup');
         if (data === null) {
-          return undefined;
+          throw new Error('Unknown error occured');
         }
 
         return JSON.parse(data) as Startup;

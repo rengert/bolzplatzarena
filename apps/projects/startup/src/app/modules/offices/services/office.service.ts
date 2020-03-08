@@ -7,15 +7,20 @@ import { StartupService } from '../../../services/startup.service';
 
 @Injectable({ providedIn: 'root' })
 export class OfficeService {
-
   constructor(private readonly startup: StartupService) {
+  }
+
+  get$(): Observable<Office[]> {
+    return this.startup.get$()
+      .pipe(
+        map(startup => startup.offices),
+      );
   }
 
   open(office: Office): Observable<Startup> {
     return this.startup.get$()
       .pipe(
         first(),
-        map(startup => startup !),
         tap(startup => startup.offices.push(office)),
         switchMap(startup => this.startup.update(startup)),
       );
