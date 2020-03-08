@@ -5,7 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { SpeedDialService } from '../../../../../../../core/src/lib/modules/button/services/speed-dial.service';
 import { BaseComponent } from '../../../../components/base/base.component';
 import { Office } from '../../../../models/office.model';
-import { StartupService } from '../../../../services/startup.service';
+import { OfficeService } from '../../services/office.service';
 
 @Component({
   selector: 'app-office-list',
@@ -21,7 +21,7 @@ export class OfficeListComponent extends BaseComponent implements OnInit {
 
   constructor(
     speedDial: SpeedDialService,
-    private readonly startup: StartupService) {
+    private readonly offices: OfficeService) {
     super(speedDial);
     this.buttons = [
       { key: 'OpenOffice', icon: 'home_work', route: ['open-office'] },
@@ -30,10 +30,9 @@ export class OfficeListComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.data$ = this.startup.get$()
+    this.data$ = this.offices.get$()
       .pipe(
-        map(startup => startup ? startup.offices : []),
-        map(office => new MatTableDataSource<Office>(office)),
+        map(offices => new MatTableDataSource<Office>(offices)),
         tap(data => data.filter = this.filterTerm),
         tap(data => this.data = data),
       );

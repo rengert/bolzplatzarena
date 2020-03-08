@@ -15,9 +15,6 @@ export class AtLeastOneOfficeGuard implements CanActivate {
     return this.startup.get$()
       .pipe(
         map(startup => {
-          if (!startup) {
-            throw new Error('Startup not launched');
-          }
           const hasOffices = !!startup.offices.length;
           if (!hasOffices) {
             void this.router.navigate(['open-office']);
