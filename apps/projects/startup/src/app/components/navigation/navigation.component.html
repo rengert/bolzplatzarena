@@ -8,6 +8,11 @@
       <mat-icon>home_work</mat-icon>
       <span matLine>Standorte</span>
     </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item [routerLink]="['employee/market']" (click)="navigation.emit()">
+      <mat-icon>people</mat-icon>
+      <span matLine>Arbeitsmarkt</span>
+    </mat-list-item>
   </div>
   <div class="button">
     <mat-divider></mat-divider>
