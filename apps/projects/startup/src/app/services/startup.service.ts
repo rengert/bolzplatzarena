@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
+import { v4 as uuid } from 'uuid';
 import { Startup } from '../models/startup.model';
 import { StartupStorageService } from './storage/startup-storage.service';
 
@@ -31,6 +32,7 @@ export class StartupService {
       name: config.startup,
       description: config.companyDescription,
       founder: {
+        id: uuid(),
         firstname: config.firstName,
         lastname: config.lastName,
       },

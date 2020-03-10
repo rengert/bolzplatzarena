@@ -19,6 +19,7 @@ import { LaunchStartupComponent } from './components/launch-startup/launch-start
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { StartupAvatarComponent } from './components/navigation/startup-avatar/startup-avatar.component';
 import { DashBoardModule } from './modules/dash-board/dash-board.module';
+import { EmployeeModule } from './modules/employee/employee.module';
 import { OfficesModule } from './modules/offices/offices.module';
 
 @NgModule({
@@ -40,6 +41,7 @@ import { OfficesModule } from './modules/offices/offices.module';
     CommonModule,
     CoreModule,
     DashBoardModule,
+    EmployeeModule,
     MaterialModule,
     OfficesModule,
     ReactiveFormsModule,

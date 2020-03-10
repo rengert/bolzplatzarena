@@ -8,6 +8,7 @@ import { DebugComponent } from './components/debug/debug.component';
 import { LaunchStartupComponent } from './components/launch-startup/launch-startup.component';
 import { StartupLaunchedGuard } from './guards/startup-launched.guard';
 import { DashBoardComponent } from './modules/dash-board/components/dash-board/dash-board.component';
+import { LabourMarketComponent } from './modules/employee/components/labour-market/labour-market.component';
 import { OfficeListComponent } from './modules/offices/components/office-list/office-list.component';
 import { OfficeComponent } from './modules/offices/components/office/office.component';
 import { OpenOfficeComponent } from './modules/offices/components/open-office/open-office.component';
@@ -40,6 +41,15 @@ const routes: Routes = [
           {
             path: 'offices/:id',
             component: OfficeComponent,
+          },
+          {
+            path: 'employee',
+            children: [
+              {
+                path: 'market',
+                component: LabourMarketComponent,
+              },
+            ],
           },
         ],
       },
