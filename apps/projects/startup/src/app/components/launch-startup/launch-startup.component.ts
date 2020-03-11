@@ -22,12 +22,12 @@ export class LaunchStartupComponent {
   constructor(private readonly startup: StartupService, private readonly router: Router) {
   }
 
-  async launch(): Promise<boolean> {
-    return this.launchStartup({ ...this.form.value });
+  launch(): void {
+    this.launchStartup({ ...this.form.value });
   }
 
-  async launchStartup(config: LaunchStartup): Promise<boolean> {
-    return this.startup.launch(config)
-      .then(_ => this.router.navigate(['/']));
+  launchStartup(config: LaunchStartup): void {
+    this.startup.launch$(config)
+      .subscribe(_ => this.router.navigate(['/']));
   }
 }
