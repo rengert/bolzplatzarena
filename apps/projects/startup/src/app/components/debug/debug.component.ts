@@ -19,4 +19,8 @@ export class DebugComponent {
     this.debug.deleteOffices()
       .subscribe();
   }
+
+  async clearLabourMarket(): Promise<void> {
+    await this.debug.clearLabourMarket();
+  }
 }

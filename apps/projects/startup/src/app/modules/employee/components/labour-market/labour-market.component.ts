@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { SpeedDialService } from '../../../../../../../core/src/lib/modules/button/services/speed-dial.service';
 import { BaseComponent } from '../../../../components/base/base.component';
 import { Worker } from '../../../../models/worker.model';
-import { EmployeeService } from '../../services/employee.service';
+import { EmployeeStorageService } from '../../services/storage/employee-storage.service';
 
 @Component({
   selector: 'app-labout-market',
@@ -11,10 +12,13 @@ import { EmployeeService } from '../../services/employee.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabourMarketComponent extends BaseComponent implements OnInit {
-  readonly displayedColumns: string[] = ['name', 'position', 'salary'];
-  data$: Promise<Worker[]>;
+  readonly displayedColumns: string[] = ['name', 'domicil', 'distance', 'position', 'salary', 'level', 'percentage'];
+  data$: Observable<Worker[]>;
 
-  constructor(speedDial: SpeedDialService, private readonly employee: EmployeeService) {
+  constructor(
+    speedDial: SpeedDialService,
+    private readonly employeeStorage: EmployeeStorageService,
+  ) {
     super(speedDial);
     this.buttons = [
       { key: 'HeadHunter', icon: 'portrait', route: ['head-hunter'] },
@@ -22,6 +26,6 @@ export class LabourMarketComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data$ = this.employee.seed();
+    this.data$ = this.employeeStorage.get$();
   }
 }

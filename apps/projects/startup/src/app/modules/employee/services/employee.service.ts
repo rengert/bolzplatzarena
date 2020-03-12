@@ -1,20 +1,53 @@
 import { Injectable } from '@angular/core';
 import { v4 as uuid } from 'uuid';
-import { Worker } from '../../../models/worker.model';
+import { Level, Worker } from '../../../models/worker.model';
+import { AppStorageService } from '../../../services/storage/app-storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
-  async seed(): Promise<Worker[]> {
-    return new Promise<Worker[]>(
-      resolve => {
-        const data: Worker[] = [];
-        data.push({ id: uuid(), firstname: 'Greg', lastname: 'Bob', salary: 1, position: { id: uuid(), name: 'Entwickler' } });
-        data.push({ id: uuid(), firstname: 'Marge', lastname: 'Bob', salary: 10, position: { id: uuid(), name: 'Entwickler' } });
-        data.push({ id: uuid(), firstname: 'Silv', lastname: 'Bob', salary: 100, position: { id: uuid(), name: 'Entwickler' } });
-        data.push({ id: uuid(), firstname: 'Arge', lastname: 'Bob', salary: 1000, position: { id: uuid(), name: 'Entwickler' } });
-        data.push({ id: uuid(), firstname: 'Mats', lastname: 'Bob', salary: 10000, position: { id: uuid(), name: 'Entwickler' } });
-        resolve(data);
+  constructor(private readonly appStorage: AppStorageService) {
+  }
+
+  async seed(): Promise<string> {
+    const data: Worker[] = [
+      {
+        id: uuid(),
+        firstname: 'Greg',
+        lastname: 'Smith',
+        salary: 1,
+        position: { id: uuid(), name: 'Entwickler' },
+        level: Level.junior,
+        domicile: 'Chemnitz',
+        birthday: '1999-01-01',
+        distance: 1000,
+        percentage: 100,
       },
-    );
+      {
+        id: uuid(),
+        firstname: 'Betty',
+        lastname: 'Muller',
+        salary: 10,
+        position: { id: uuid(), name: 'Entwickler' },
+        level: Level.Senior,
+        domicile: 'Dresden',
+        birthday: '1989-01-01',
+        distance: 100,
+        percentage: 100,
+      },
+      {
+        id: uuid(),
+        firstname: 'Greg',
+        lastname: 'Smith',
+        salary: 123,
+        position: { id: uuid(), name: 'Entwickler' },
+        level: Level.Junior,
+        domicile: 'Berlin',
+        birthday: '1991-01-01',
+        distance: 100,
+        percentage: 80,
+      },
+    ];
+
+    return this.appStorage.workers.bulkAdd(data);
   }
 }
