@@ -12,7 +12,7 @@ import { EmployeeStorageService } from '../../services/storage/employee-storage.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabourMarketComponent extends BaseComponent implements OnInit {
-  readonly displayedColumns: string[] = ['name', 'domicil', 'distance', 'position', 'salary', 'level', 'percentage'];
+  readonly displayedColumns: string[] = ['name', 'age', 'domicil', 'distance', 'position', 'salary', 'level', 'percentage'];
   data$: Observable<Worker[]>;
 
   constructor(

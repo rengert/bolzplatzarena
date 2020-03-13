@@ -18,6 +18,10 @@
       <th mat-header-cell *matHeaderCellDef>Beruf / Position</th>
       <td mat-cell *matCellDef="let worker"> {{ worker.profession.name }}</td>
     </ng-container>
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef>Alter</th>
+      <td mat-cell *matCellDef="let worker"> {{ worker.birthday | age }}</td>
+    </ng-container>
     <ng-container matColumnDef="salary">
       <th mat-header-cell *matHeaderCellDef>Gehalt</th>
       <td mat-cell *matCellDef="let worker"> {{ worker.salary }}</td>
