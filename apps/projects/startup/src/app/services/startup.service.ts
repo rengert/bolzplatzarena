@@ -35,6 +35,7 @@ export class StartupService {
         id: uuid(),
         firstname: config.firstName,
         lastname: config.lastName,
+        birthday: '',
       },
       offices: [],
     };
