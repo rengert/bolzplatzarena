@@ -6,8 +6,8 @@ export const cities: City[] = [
     name: 'Karlsruhe',
     costFactor: 1,
     location: {
-      latitude: 1,
-      longitude: 1,
+      latitude: 49.0159405,
+      longitude: 8.3394945,
     },
   },
   {
@@ -15,8 +15,8 @@ export const cities: City[] = [
     name: 'Dresden',
     costFactor: 1,
     location: {
-      latitude: 2,
-      longitude: 2,
+      latitude: 51.0769207,
+      longitude: 13.7025464,
     },
   },
   {
@@ -24,8 +24,8 @@ export const cities: City[] = [
     name: 'Berlin',
     costFactor: 1,
     location: {
-      latitude: 3,
-      longitude: 3,
+      latitude: 52.5069704,
+      longitude: 13.2846505,
     },
   },
   {
@@ -33,8 +33,8 @@ export const cities: City[] = [
     name: 'Stuttgart',
     costFactor: 1,
     location: {
-      latitude: 4,
-      longitude: 4,
+      latitude: 48.779301,
+      longitude: 9.1071758,
     },
   },
   {
@@ -42,8 +42,8 @@ export const cities: City[] = [
     name: 'Frankfurt / Main',
     costFactor: 1,
     location: {
-      latitude: 5,
-      longitude: 5,
+      latitude: 50.121301,
+      longitude: 8.5665245,
     },
   },
   {
@@ -51,8 +51,8 @@ export const cities: City[] = [
     name: 'München',
     costFactor: 1,
     location: {
-      latitude: 6,
-      longitude: 6,
+      latitude: 48.155004,
+      longitude: 11.4717964,
     },
   },
 ];
