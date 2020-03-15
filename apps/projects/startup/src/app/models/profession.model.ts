@@ -8,8 +8,8 @@ export enum ProfessionType {
 }
 
 export interface Profession extends BaseModel {
+  type: ProfessionType;
   name: string;
   description: string;
   salaryFactor: number;
-  type: ProfessionType;
 }

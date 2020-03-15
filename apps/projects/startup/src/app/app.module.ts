@@ -15,6 +15,7 @@ import { BaseComponent } from './components/base/base.component';
 import { NotesComponent } from './components/content/notes/notes.component';
 import { PrivacyComponent } from './components/content/privacy/privacy.component';
 import { DebugComponent } from './components/debug/debug.component';
+import { LevelsComponent } from './components/debug/levels/levels.component';
 import { ProfessionsComponent } from './components/debug/professions/professions.component';
 import { LaunchStartupComponent } from './components/launch-startup/launch-startup.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -26,14 +27,15 @@ import { OfficesModule } from './modules/offices/offices.module';
 @NgModule({
   declarations: [
     AppComponent,
+    BaseComponent,
     DebugComponent,
     LaunchStartupComponent,
+    LevelsComponent,
     NavigationComponent,
     NotesComponent,
     PrivacyComponent,
-    StartupAvatarComponent,
-    BaseComponent,
     ProfessionsComponent,
+    StartupAvatarComponent,
   ],
   imports: [
     AppRoutingModule,
