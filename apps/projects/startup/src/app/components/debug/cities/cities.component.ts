@@ -10,7 +10,11 @@ import { StaticDataService } from '../../../modules/base/services/static-data.se
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CitiesComponent implements OnInit {
-  readonly columns = ['name', 'costFactor'];
+  readonly position = {
+    latitude: 49.0159405,
+    longitude: 8.3394945,
+  };
+  readonly columns = ['name', 'costFactor', 'distance'];
   data$: Observable<City[]>;
 
   constructor(private readonly statidData: StaticDataService) {
