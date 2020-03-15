@@ -3,7 +3,7 @@
     <div *ngFor="let item of innerItems; trackBy: 'name' | trackByProperty" class="outer-box">
       <div class="box"
            [class.active]="item.active"
-           [class.hasChildren]="item.children?.length > 0"
+           [class.hasChildren]="!!item.children?.length"
            (click)="item.active = !item.children?.length && !item.active">
         <div class="content" [ngClass]="'items-' + item.children?.length">
           <ng-container *ngIf="!item.children">

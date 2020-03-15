@@ -60,7 +60,7 @@ export class DashBoardComponent implements OnInit {
     ];
   }
 
-  trackByFn(index: number, item: Clickable): string {
+  trackByFn(index: number, item: Clickable[]): string {
     return index.toString();
   }
 }
