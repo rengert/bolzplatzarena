@@ -17,10 +17,10 @@ export class CitiesComponent implements OnInit {
   readonly columns = ['name', 'costFactor', 'distance'];
   data$: Observable<City[]>;
 
-  constructor(private readonly statidData: StaticDataService) {
+  constructor(private readonly staticData: StaticDataService) {
   }
 
   ngOnInit(): void {
-    this.data$ = this.statidData.getCities$();
+    this.data$ = this.staticData.getCities$();
   }
 }
