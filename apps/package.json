@@ -32,7 +32,7 @@
     "@capacitor/angular": "^1.0.2",
     "@capacitor/core": "1.4.0",
     "@capacitor/ios": "^1.5.1",
-    "@ngx-pwa/local-storage": "^9.0.2",
+    "@ngx-pwa/local-storage": "^9.0.3",
     "@ngx-translate/core": "^12.1.2",
     "@types/lodash": "^4.14.149",
     "angular-tslint-rules": "^1.20.4",
