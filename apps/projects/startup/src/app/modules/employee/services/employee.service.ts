@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
-import { sample } from 'lodash';
 import moment, { Moment } from 'moment';
 import { createUuid, randomMoment } from '../../../../../../core/src/lib/utils/common.util';
+import { Level } from '../../../models/level.model';
 import { Profession } from '../../../models/profession.model';
-import { Level, Worker } from '../../../models/worker.model';
+import { Worker } from '../../../models/worker.model';
 import { AppStorageService } from '../../../services/storage/app-storage.service';
 import { ProfessionService } from '../../profession/services/profession.service';
 
 function getRandom<T>(data: T[]): T {
   return data[Math.floor(Math.random() * data.length)];
-}
-
-function getRandomLevel(): Level {
-  return sample(Object.values(Level)) as Level;
 }
 
 function getRandomBirthday(): Moment {
@@ -51,27 +47,29 @@ export class EmployeeService {
   async seed(): Promise<string> {
     const professions = await this.profession.get$()
       .toPromise();
+    const levels = await this.profession.getLevels$()
+      .toPromise();
 
     const data: Worker[] = [];
-    data.push(this.random(professions));
-    data.push(this.random(professions));
-    data.push(this.random(professions));
-    data.push(this.random(professions));
-    data.push(this.random(professions));
-    data.push(this.random(professions));
-    data.push(this.random(professions));
-    data.push(this.random(professions));
-    data.push(this.random(professions));
-    data.push(this.random(professions));
-    data.push(this.random(professions));
-    data.push(this.random(professions));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
+    data.push(this.random(professions, levels));
 
     return this.appStorage.workers.bulkAdd(data);
   }
 
-  random(professions: Profession[]): Worker {
-    const position: Profession = getRandom(professions);
-    const level: Level = getRandomLevel();
+  random(professions: Profession[], levels: Level[]): Worker {
+    const position = getRandom(professions);
+    const level = getRandom(levels);
     const birthday: Moment = getRandomBirthday();
     const salary: number = getRandomSalary(position, level, birthday);
     const domicile: string = getRandomDomicile();
