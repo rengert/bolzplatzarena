@@ -1,5 +1,5 @@
 import { Person } from './person.model';
-import { Position } from './position.model';
+import { Profession } from './profession.model';
 
 export enum Level {
   junior = 0,
@@ -9,7 +9,7 @@ export enum Level {
 
 export interface Worker extends Person {
   salary: number;
-  position: Position;
+  profession: Profession;
   level: Level;
   domicile: string;
   distance: number;
