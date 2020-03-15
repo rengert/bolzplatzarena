@@ -15,8 +15,8 @@ function getRandomBirthday(): Moment {
   return randomMoment('1970-01-01', '2000-01-01');
 }
 
-function getRandomSalary(position: Profession, level: Level, birthday: moment.Moment): number {
-  return Math.floor(Math.random() * 100000);
+function getRandomSalary(profession: Profession, level: Level, birthday: moment.Moment): number {
+  return Math.floor(Math.random() * 100000 * level.salaryFactor * profession.salaryFactor);
 }
 
 function getRandomDomicile(): string {
