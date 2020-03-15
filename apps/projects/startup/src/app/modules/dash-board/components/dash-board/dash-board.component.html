@@ -1,6 +1,6 @@
 <div class="row">
-  <ng-container *ngFor="let innerItems of items">
-    <div *ngFor="let item of innerItems" class="outer-box">
+  <ng-container *ngFor="let innerItems of items; trackBy: trackByFn">
+    <div *ngFor="let item of innerItems; trackBy: 'name' | trackByProperty" class="outer-box">
       <div class="box"
            [class.active]="item.active"
            [class.hasChildren]="item.children?.length > 0"
@@ -10,7 +10,7 @@
             {{ item.name }}
           </ng-container>
           <ng-container *ngIf="item.children">
-            <div *ngFor="let i of item.children" class="inner-box"
+            <div *ngFor="let i of item.children; trackBy: 'name' | trackByProperty" class="inner-box"
                  [class.active]="i.active"
                  (click)="i.active = !i.active">
               <div class="inner-content">

@@ -59,4 +59,8 @@ export class DashBoardComponent implements OnInit {
       { name: 'MAL 2', active: false },
     ];
   }
+
+  trackByFn(index: number, item: Clickable): string {
+    return index.toString();
+  }
 }
