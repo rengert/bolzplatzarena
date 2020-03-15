@@ -15,6 +15,7 @@ import { BaseComponent } from './components/base/base.component';
 import { NotesComponent } from './components/content/notes/notes.component';
 import { PrivacyComponent } from './components/content/privacy/privacy.component';
 import { DebugComponent } from './components/debug/debug.component';
+import { ProfessionsComponent } from './components/debug/professions/professions.component';
 import { LaunchStartupComponent } from './components/launch-startup/launch-startup.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { StartupAvatarComponent } from './components/navigation/startup-avatar/startup-avatar.component';
@@ -32,6 +33,7 @@ import { OfficesModule } from './modules/offices/offices.module';
     PrivacyComponent,
     StartupAvatarComponent,
     BaseComponent,
+    ProfessionsComponent,
   ],
   imports: [
     AppRoutingModule,

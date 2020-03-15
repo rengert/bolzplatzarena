@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { sample } from 'lodash';
 import moment, { Moment } from 'moment';
 import { createUuid, randomMoment } from '../../../../../../core/src/lib/utils/common.util';
-import { positions } from '../../../libraries/positions';
-import { Position } from '../../../models/position.model';
+import { Profession } from '../../../models/profession.model';
 import { Level, Worker } from '../../../models/worker.model';
 import { AppStorageService } from '../../../services/storage/app-storage.service';
+import { ProfessionService } from '../../profession/services/profession.service';
 
-function getRandomPosition(): Position {
-  return positions[Math.floor(Math.random() * positions.length)];
+function getRandom<T>(data: T[]): T {
+  return data[Math.floor(Math.random() * data.length)];
 }
 
 function getRandomLevel(): Level {
@@ -19,7 +19,7 @@ function getRandomBirthday(): Moment {
   return randomMoment('1970-01-01', '2000-01-01');
 }
 
-function getRandomSalary(position: Position, level: Level, birthday: moment.Moment): number {
+function getRandomSalary(position: Profession, level: Level, birthday: moment.Moment): number {
   return Math.floor(Math.random() * 100000);
 }
 
@@ -42,29 +42,35 @@ function getRandomPercentage(): number {
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
-  constructor(private readonly appStorage: AppStorageService) {
+  constructor(
+    private readonly appStorage: AppStorageService,
+    private readonly profession: ProfessionService,
+  ) {
   }
 
   async seed(): Promise<string> {
+    const professions = await this.profession.get$()
+      .toPromise();
+
     const data: Worker[] = [];
-    data.push(this.random());
-    data.push(this.random());
-    data.push(this.random());
-    data.push(this.random());
-    data.push(this.random());
-    data.push(this.random());
-    data.push(this.random());
-    data.push(this.random());
-    data.push(this.random());
-    data.push(this.random());
-    data.push(this.random());
-    data.push(this.random());
+    data.push(this.random(professions));
+    data.push(this.random(professions));
+    data.push(this.random(professions));
+    data.push(this.random(professions));
+    data.push(this.random(professions));
+    data.push(this.random(professions));
+    data.push(this.random(professions));
+    data.push(this.random(professions));
+    data.push(this.random(professions));
+    data.push(this.random(professions));
+    data.push(this.random(professions));
+    data.push(this.random(professions));
 
     return this.appStorage.workers.bulkAdd(data);
   }
 
-  random(): Worker {
-    const position: Position = getRandomPosition();
+  random(professions: Profession[]): Worker {
+    const position: Profession = getRandom(professions);
     const level: Level = getRandomLevel();
     const birthday: Moment = getRandomBirthday();
     const salary: number = getRandomSalary(position, level, birthday);
@@ -79,7 +85,7 @@ export class EmployeeService {
       lastname,
       salary,
       level,
-      position,
+      profession: position,
       domicile,
       distance,
       percentage,
