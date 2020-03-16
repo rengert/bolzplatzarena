@@ -3,6 +3,15 @@
     <h2>Neues Büro eröffnen</h2>
     <div class="row">
       <mat-form-field appearance="fill">
+        <mat-label>Stadt</mat-label>
+        <mat-select formControlName="city">
+          <mat-option *ngFor="let city of cities$ | async; trackBy: 'id' | trackByProperty"
+                      [value]="city">{{ city.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="fill">
         <mat-label>Adresse</mat-label>
         <input matInput placeholder="Mustermannweg 20, 61231 Musterstadt" formControlName="address">
       </mat-form-field>

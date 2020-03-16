@@ -14,7 +14,7 @@ import { OfficeService } from '../../services/office.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfficeListComponent extends BaseComponent implements OnInit {
-  readonly displayedColumns: string[] = ['name', 'address'];
+  readonly displayedColumns: string[] = ['name', 'city', 'address'];
   filterTerm: string;
   data$: Observable<MatTableDataSource<Office>>;
   data: MatTableDataSource<Office>;

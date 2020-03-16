@@ -1,10 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { SpeedDialService } from '../../../../../../../core/src/lib/modules/button/services/speed-dial.service';
 import { BaseComponent } from '../../../../components/base/base.component';
+import { City } from '../../../../models/city.model';
 import { Office } from '../../../../models/office.model';
+import { StaticDataService } from '../../../base/services/static-data.service';
 import { OfficeService } from '../../services/office.service';
 
 @Component({
@@ -13,17 +16,31 @@ import { OfficeService } from '../../services/office.service';
   styleUrls: ['./open-office.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OpenOfficeComponent extends BaseComponent {
+export class OpenOfficeComponent extends BaseComponent implements OnInit {
+  cities$: Observable<City[]>;
+
   readonly form = new FormGroup({
+    city: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
   });
 
-  constructor(speedDial: SpeedDialService, private readonly office: OfficeService, private readonly router: Router) {
+  constructor(
+    speedDial: SpeedDialService,
+    private readonly office: OfficeService,
+    private readonly router: Router,
+    private readonly staticData: StaticDataService,
+  ) {
     super(speedDial);
     this.buttons = [
       { key: 'OfficeList', icon: 'assignment', route: ['offices'] },
     ];
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+
+    this.cities$ = this.staticData.getCities$();
   }
 
   open(): void {
