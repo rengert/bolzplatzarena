@@ -7,6 +7,5 @@ export interface Worker extends Person {
   profession: Profession;
   level: Level;
   domicile: string;
-  distance: number;
   percentage: number;
 }

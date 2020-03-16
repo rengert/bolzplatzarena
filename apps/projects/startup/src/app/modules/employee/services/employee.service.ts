@@ -75,7 +75,6 @@ export class EmployeeService {
     const domicile: string = getRandomDomicile();
     const { firstname, lastname } = getRandomNames();
     const percentage: number = getRandomPercentage();
-    const distance = Math.floor(Math.random() * 1000);
 
     return {
       id: createUuid(),
@@ -85,7 +84,6 @@ export class EmployeeService {
       level,
       profession: position,
       domicile,
-      distance,
       percentage,
       birthday: birthday.format(),
     };
