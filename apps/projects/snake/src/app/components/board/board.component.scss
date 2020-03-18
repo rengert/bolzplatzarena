@@ -1,0 +1,31 @@
+:host {
+  display: block;
+  width: 24 * (26px);
+  margin: auto;
+  background-color: grey;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.50), 0 5px 6px rgba(0, 0, 0, 0.1);
+
+  .row {
+    height: 2.4rem;
+  }
+
+  .column {
+    border: 1px solid black;
+    width: 2.4rem;
+    height: 2.4rem;
+    display: inline-block;
+
+    &.snake {
+      background-color: #323232;
+
+      &.head {
+        background-color: #00b500;
+      }
+    }
+
+    &.apple {
+      background-color: #f44336;
+    }
+  }
+}
+
