@@ -2,6 +2,8 @@
   "name": "bolzplatzarena",
   "version": "0.0.0",
   "scripts": {
+    "build:snake": "ng build snake --prod",
+    "lint:snake": "ng lint snake",
     "build:ultradice": "ng build ultradice --prod",
     "lint:ultradice": "ng lint ultradice",
     "build:startup": "ng build startup --prod",
@@ -12,6 +14,7 @@
     "test:nonogramm": "ng test nonogramm --watch=false --browsers=ChromeHeadless",
     "deploy:nonogramm": "ng build nonogramm --prod && firebase deploy --only hosting:nonogramm",
     "deploy:startup": "ng build startup --prod && firebase deploy --only hosting:startup",
+    "deploy:snake": "ng build snake --prod && firebase deploy --only hosting:rattlesnake",
     "nonogramm": "ng serve nonogramm",
     "startup": "ng serve startup"
   },

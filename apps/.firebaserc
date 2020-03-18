@@ -1,14 +1,7 @@
 {
-  "projects": {
-    "default": "bolzplatzarena"
-  },
-  "targets": {
-    "bolzplatzarena": {
-      "hosting": {
-        "nonogramm": [
-          "nonogramm"
-        ]
-      }
+  "hosting": [{
+    "target": "rattlesnake",
+    "public": "dist/snake/public"
     }
-  }
+  ]
 }

@@ -1,0 +1,8 @@
+<div class="row" *ngFor="let row of board; let i = index;">
+  <div *ngFor="let cell of row; let j = index; trackBy: 'id' | trackByProperty"
+       class="column"
+       [class.snake]="cell.isSnake"
+       [class.head]="cell.isHead"
+       [class.apple]="cell.isApple">
+  </div>
+</div>
