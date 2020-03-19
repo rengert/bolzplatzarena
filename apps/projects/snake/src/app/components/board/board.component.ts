@@ -27,12 +27,13 @@ export class BoardComponent implements OnInit {
     body: [],
     direction: Directions.Right,
   };
-  private readonly boardSize = 24;
+  readonly Directions = Directions;
+  private readonly boardSize = 12;
 
   private tempDirection: Directions;
 
   ngOnInit(): void {
-    for (let i = 0; i < this.boardSize; i++) {
+    for (let i = 0; i < this.boardSize * 2; i++) {
       this.board[i] = [];
       for (let j = 0; j < this.boardSize; j++) {
         this.board[i][j] = {
@@ -50,17 +51,16 @@ export class BoardComponent implements OnInit {
     this.board[Math.floor(Math.random() * this.boardSize)][Math.floor(Math.random() * this.boardSize)].isApple = true;
     this.board[Math.floor(Math.random() * this.boardSize)][Math.floor(Math.random() * this.boardSize)].isApple = true;
 
-    const cell = this.board[0][0];
-    cell.isHead = true;
+    let body = this.board[0][2];
+    body.isSnake = true;
+    body.isHead = true;
+    this.snake.body.push(body);
+    const cell = this.board[0][1];
     cell.isSnake = true;
     this.snake.body.push(cell);
-    let body = this.board[0][1];
+    body = this.board[0][0];
     body.isSnake = true;
     this.snake.body.push(body);
-    body = this.board[0][2];
-    body.isSnake = true;
-    this.snake.body.push(body);
-
     this.updatePositions();
   }
 
@@ -110,14 +110,51 @@ export class BoardComponent implements OnInit {
   }
 
   @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
-    if (e.keyCode === Directions.Left && this.snake.direction !== Directions.Right) {
-      this.tempDirection = Directions.Left;
-    } else if (e.keyCode === Directions.Up && this.snake.direction !== Directions.Down) {
-      this.tempDirection = Directions.Up;
-    } else if (e.keyCode === Directions.Right && this.snake.direction !== Directions.Left) {
-      this.tempDirection = Directions.Right;
-    } else if (e.keyCode === Directions.Down && this.snake.direction !== Directions.Up) {
-      this.tempDirection = Directions.Down;
+    this.handleDirection(e.keyCode);
+  }
+
+  handleDirection(direction: Directions): void {
+    switch (direction) {
+      case Directions.Left:
+        console.log('left');
+        switch (this.snake.direction) {
+          case Directions.Left:
+            this.tempDirection = Directions.Down;
+            break;
+          case Directions.Up:
+            this.tempDirection = Directions.Left;
+            break;
+          case Directions.Down:
+            this.tempDirection = Directions.Right;
+            break;
+          case Directions.Right:
+            this.tempDirection = Directions.Up;
+            break;
+          default:
+            this.tempDirection = Directions.Up;
+        }
+        break;
+
+      case Directions.Right:
+        console.log('right');
+        switch (this.snake.direction) {
+          case Directions.Left:
+            this.tempDirection = Directions.Up;
+            break;
+          case Directions.Up:
+            this.tempDirection = Directions.Right;
+            break;
+          case Directions.Down:
+            this.tempDirection = Directions.Left;
+            break;
+          case Directions.Right:
+            this.tempDirection = Directions.Down;
+            break;
+          default:
+            this.tempDirection = Directions.Down;
+        }
+        break;
+      default:
     }
   }
 }

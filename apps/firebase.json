@@ -14,6 +14,21 @@
           "destination": "/index.html"
         }
       ]
+    },
+    {
+      "target": "rattlesnake",
+      "public": "dist/snake/public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
     }
   ]
 }
