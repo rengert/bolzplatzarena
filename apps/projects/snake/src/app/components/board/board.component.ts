@@ -25,7 +25,7 @@ export class BoardComponent implements OnInit {
   points = 0;
 
   readonly board: Cell[][] = [];
-  readonly interval = 500;
+  readonly interval = 100;
   readonly snake: Snake = {
     body: [],
     direction: Directions.Right,
@@ -74,7 +74,8 @@ export class BoardComponent implements OnInit {
     const coord: { x: number; y: number } = this.moveHead();
 
     if ((coord.x >= this.boardSize * 2)
-      || (coord.y >= this.boardSize)) {
+      || (coord.y >= this.boardSize)
+      || (coord.x < 0) || (coord.y < 0)) {
       this.snackBar.open('Spiel verloren', 'Tja');
 
       return;
