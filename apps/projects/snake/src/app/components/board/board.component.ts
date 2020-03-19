@@ -116,7 +116,6 @@ export class BoardComponent implements OnInit {
   handleDirection(direction: Directions): void {
     switch (direction) {
       case Directions.Left:
-        console.log('left');
         switch (this.snake.direction) {
           case Directions.Left:
             this.tempDirection = Directions.Down;
@@ -136,7 +135,6 @@ export class BoardComponent implements OnInit {
         break;
 
       case Directions.Right:
-        console.log('right');
         switch (this.snake.direction) {
           case Directions.Left:
             this.tempDirection = Directions.Up;
