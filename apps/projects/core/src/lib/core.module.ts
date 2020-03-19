@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { PrivacyModule } from './modules/privacy/privacy.module';
 import { AgePipe } from './pipes/age.pipe';
@@ -10,6 +11,7 @@ import { TrackByPropertyPipe } from './pipes/track-by-property.pipe';
 @NgModule({
   declarations: [TrackByPropertyPipe, TrackByCoordPipe, DistancePipe, AgePipe],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     MaterialModule,
     PrivacyModule,
