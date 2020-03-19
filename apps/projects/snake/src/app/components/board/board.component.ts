@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Directions } from '../../app.constants';
 
 interface Cell {
@@ -21,6 +22,8 @@ interface Snake {
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
+  points = 0;
+
   readonly board: Cell[][] = [];
   readonly interval = 500;
   readonly snake: Snake = {
@@ -28,9 +31,13 @@ export class BoardComponent implements OnInit {
     direction: Directions.Right,
   };
   readonly Directions = Directions;
+
   private readonly boardSize = 12;
 
   private tempDirection: Directions;
+
+  constructor(private readonly snackBar: MatSnackBar) {
+  }
 
   ngOnInit(): void {
     for (let i = 0; i < this.boardSize * 2; i++) {
@@ -47,9 +54,8 @@ export class BoardComponent implements OnInit {
       }
     }
 
-    this.board[Math.floor(Math.random() * this.boardSize)][Math.floor(Math.random() * this.boardSize)].isApple = true;
-    this.board[Math.floor(Math.random() * this.boardSize)][Math.floor(Math.random() * this.boardSize)].isApple = true;
-    this.board[Math.floor(Math.random() * this.boardSize)][Math.floor(Math.random() * this.boardSize)].isApple = true;
+    this.setNewApple();
+    this.setNewApple();
 
     let body = this.board[0][2];
     body.isSnake = true;
@@ -67,14 +73,30 @@ export class BoardComponent implements OnInit {
   updatePositions(): void {
     const coord: { x: number; y: number } = this.moveHead();
 
-    const head = this.snake.body[0];
-    const tail = this.snake.body.pop() !;
+    if ((coord.x >= this.boardSize * 2)
+      || (coord.y >= this.boardSize)) {
+      this.snackBar.open('Spiel verloren', 'Tja');
 
-    head.isHead = false;
-    tail.isSnake = false;
+      return;
+    }
+
+    this.points++;
+
     const newHead = this.board[coord.x][coord.y];
     newHead.isSnake = true;
     newHead.isHead = true;
+    if (newHead.isApple) {
+      this.points += 50;
+      newHead.isApple = false;
+      this.setNewApple();
+    } else {
+      const tail = this.snake.body.pop() !;
+      tail.isSnake = false;
+    }
+
+    const head = this.snake.body[0];
+    head.isHead = false;
+
     this.snake.body.unshift(newHead);
 
     setTimeout(() => {
@@ -154,5 +176,9 @@ export class BoardComponent implements OnInit {
         break;
       default:
     }
+  }
+
+  private setNewApple(): void {
+    this.board[Math.floor(Math.random() * this.boardSize)][Math.floor(Math.random() * this.boardSize)].isApple = true;
   }
 }
