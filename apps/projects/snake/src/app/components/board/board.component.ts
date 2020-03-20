@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Directions } from '../../app.constants';
+import { Directions, Level } from '../../app.constants';
+import { Settings } from '../settings/settings.component';
 
 interface Cell {
   id: string;
@@ -16,6 +17,10 @@ interface Snake {
   body: Cell[];
 }
 
+interface BoardSettings {
+  interval: number;
+}
+
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -25,21 +30,30 @@ export class BoardComponent implements OnInit {
   points = 0;
 
   readonly board: Cell[][] = [];
-  readonly interval = 100;
   readonly snake: Snake = {
     body: [],
     direction: Directions.Right,
   };
   readonly Directions = Directions;
 
+  private readonly settings: Settings;
   private readonly boardSize = 12;
 
   private tempDirection: Directions;
 
   constructor(private readonly snackBar: MatSnackBar) {
+    const data = localStorage.getItem('settings');
+    this.settings = data === null ? { level: Level.Normal } : JSON.parse(data) as Settings;
+  }
+
+  get boardSettings(): BoardSettings {
+    return {
+      interval: this.getInterval(),
+    };
   }
 
   ngOnInit(): void {
+
     for (let i = 0; i < this.boardSize * 2; i++) {
       this.board[i] = [];
       for (let j = 0; j < this.boardSize; j++) {
@@ -102,7 +116,7 @@ export class BoardComponent implements OnInit {
 
     setTimeout(() => {
       this.updatePositions();
-    }, this.interval);
+    }, this.boardSettings.interval);
   }
 
   moveHead(): { x: number; y: number } {
@@ -181,5 +195,18 @@ export class BoardComponent implements OnInit {
 
   private setNewApple(): void {
     this.board[Math.floor(Math.random() * this.boardSize)][Math.floor(Math.random() * this.boardSize)].isApple = true;
+  }
+
+  private getInterval(): number {
+    switch (this.settings.level) {
+      case Level.Easy:
+        return 700;
+      case Level.Normal:
+        return 250;
+      case Level.Hard:
+        return 100;
+      default:
+        return 100;
+    }
   }
 }

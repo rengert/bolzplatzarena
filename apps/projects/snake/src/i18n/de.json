@@ -1,0 +1,20 @@
+{
+  "GLOBAL": {
+    "ENUM": {
+      "LEVEL": {
+        "EASY": "Einfach",
+        "NORMAL": "Normal",
+        "HARD": "Schwer"
+      }
+    }
+  },
+  "COMPONENTS": {
+    "SETTINGS": {
+      "HEADLINE": "Einstellungen",
+      "LABELS": {
+        "LEVEL": "Schwierigkeit"
+      },
+      "SAVE": "Speichern & Starten"
+    }
+  }
+}
