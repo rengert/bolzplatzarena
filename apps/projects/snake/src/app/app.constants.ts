@@ -1,3 +1,9 @@
+export enum Level {
+  Easy,
+  Normal,
+  Hard,
+}
+
 export enum Directions {
   Left = 37,
   Up = 38,
