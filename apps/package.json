@@ -33,7 +33,7 @@
     "@angular/service-worker": "~9.0.7",
     "@capacitor/android": "^1.5.1",
     "@capacitor/angular": "^1.0.2",
-    "@capacitor/core": "1.4.0",
+    "@capacitor/core": "1.5.1",
     "@capacitor/ios": "^1.5.1",
     "@ngx-pwa/local-storage": "^9.0.3",
     "@ngx-translate/core": "^12.1.2",
@@ -55,10 +55,10 @@
     "@angular/cli": "^9.0.7",
     "@angular/compiler-cli": "~9.0.7",
     "@angular/language-service": "~9.0.7",
-    "@capacitor/cli": "1.4.0",
+    "@capacitor/cli": "1.5.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^12.12.30",
+    "@types/node": "^13.9.2",
     "@types/uuid": "^7.0.2",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.4.0",
@@ -70,8 +70,8 @@
     "karma-jasmine-html-reporter": "^1.5.1",
     "ng-packagr": "^9.0.3",
     "protractor": "^5.4.3",
-    "ts-node": "~7.0.0",
-    "tslint": "~5.20.1",
+    "ts-node": "~8.7.0",
+    "tslint": "~6.1.0",
     "typescript": "~3.8.3"
   }
 }
