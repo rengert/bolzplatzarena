@@ -13,6 +13,14 @@
 </div>
 
 <div class="controls">
-  <div class="left" (click)="handleDirection(Directions.Left)"></div>
-  <div class="left" (click)="handleDirection(Directions.Right)"></div>
+  <div class="left" (click)="handleDirection(Directions.Left)">
+    <span class="material-icons">
+      arrow_back
+    </span>
+  </div>
+  <div class="right" (click)="handleDirection(Directions.Right)">
+    <span class="material-icons">
+      arrow_forward
+    </span>
+  </div>
 </div>
