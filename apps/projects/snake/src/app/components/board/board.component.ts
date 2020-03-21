@@ -88,7 +88,10 @@ export class BoardComponent implements OnInit {
     body = this.board[0][0];
     body.isSnake = true;
     this.snake.body.push(body);
-    this.updatePositions();
+
+    setTimeout(() => {
+      this.updatePositions();
+    }, 4500);
   }
 
   updatePositions(): void {
