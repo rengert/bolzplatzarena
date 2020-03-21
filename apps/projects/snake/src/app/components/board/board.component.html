@@ -6,7 +6,12 @@
        [class.apple]="cell.isApple">
   </div>
 </div>
-<strong>{{ points }}</strong>
+
+<div class="score-board">
+  <div><label>Punkte:</label> {{ scoreBoard.points }}</div>
+  <div><label>Äpfel</label> {{ scoreBoard.apples }}</div>
+</div>
+
 <div class="controls">
   <div class="left" (click)="handleDirection(Directions.Left)"></div>
   <div class="left" (click)="handleDirection(Directions.Right)"></div>

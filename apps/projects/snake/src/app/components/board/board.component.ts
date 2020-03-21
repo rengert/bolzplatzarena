@@ -21,14 +21,21 @@ interface BoardSettings {
   interval: number;
 }
 
+interface ScoreBoard {
+  points: number;
+  apples: number;
+}
+
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  points = 0;
-
+  readonly scoreBoard: ScoreBoard = {
+    points: 0,
+    apples: 0,
+  };
   readonly board: Cell[][] = [];
   readonly snake: Snake = {
     body: [],
@@ -37,7 +44,8 @@ export class BoardComponent implements OnInit {
   readonly Directions = Directions;
 
   private readonly settings: Settings;
-  private readonly boardSize = 12;
+  private readonly boardSizeWidth = 16;
+  private readonly boardSizeHeight = 25;
 
   private tempDirection: Directions;
 
@@ -53,10 +61,9 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    for (let i = 0; i < this.boardSize * 2; i++) {
+    for (let i = 0; i < this.boardSizeHeight; i++) {
       this.board[i] = [];
-      for (let j = 0; j < this.boardSize; j++) {
+      for (let j = 0; j < this.boardSizeWidth; j++) {
         this.board[i][j] = {
           id: `${i}-{j}`,
           x: i,
@@ -87,21 +94,22 @@ export class BoardComponent implements OnInit {
   updatePositions(): void {
     const coord: { x: number; y: number } = this.moveHead();
 
-    if ((coord.x >= this.boardSize * 2)
-      || (coord.y >= this.boardSize)
+    if ((coord.x >= this.boardSizeHeight)
+      || (coord.y >= this.boardSizeWidth)
       || (coord.x < 0) || (coord.y < 0)) {
       this.snackBar.open('Spiel verloren', 'Tja');
 
       return;
     }
 
-    this.points++;
+    this.scoreBoard.points++;
 
     const newHead = this.board[coord.x][coord.y];
     newHead.isSnake = true;
     newHead.isHead = true;
     if (newHead.isApple) {
-      this.points += 50;
+      this.scoreBoard.points += 50;
+      this.scoreBoard.apples += 1;
       newHead.isApple = false;
       this.setNewApple();
     } else {
@@ -194,7 +202,7 @@ export class BoardComponent implements OnInit {
   }
 
   private setNewApple(): void {
-    this.board[Math.floor(Math.random() * this.boardSize)][Math.floor(Math.random() * this.boardSize)].isApple = true;
+    this.board[Math.floor(Math.random() * this.boardSizeHeight)][Math.floor(Math.random() * this.boardSizeWidth)].isApple = true;
   }
 
   private getInterval(): number {
