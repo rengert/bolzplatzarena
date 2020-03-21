@@ -45,7 +45,7 @@ export class BoardComponent implements OnInit {
 
   private readonly settings: Settings;
   private readonly boardSizeWidth = 16;
-  private readonly boardSizeHeight = 25;
+  private readonly boardSizeHeight = 22;
 
   private tempDirection: Directions;
 
