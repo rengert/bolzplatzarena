@@ -203,7 +203,13 @@ export class BoardComponent implements OnInit {
   }
 
   private setNewApple(): void {
-    this.board[Math.floor(Math.random() * this.boardSizeHeight)][Math.floor(Math.random() * this.boardSizeWidth)].isApple = true;
+    const coord = { x: Math.floor(Math.random() * this.boardSizeHeight), y: Math.floor(Math.random() * this.boardSizeWidth) };
+    if (!this.isTail(coord)) {
+      this.board[coord.x][coord.y].isApple = true;
+
+      return;
+    }
+    this.setNewApple();
   }
 
   private getInterval(): number {
