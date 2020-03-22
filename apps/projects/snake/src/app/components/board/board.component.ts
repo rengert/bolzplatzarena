@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoggerService } from '../../../../../core/src/lib/modules/logger/services/logger.service';
 import { Direction, Level, Speed } from '../../app.constants';
 import { BoardSettings } from '../../models/board-settings.model';
 import { Cell } from '../../models/cell.model';
@@ -28,9 +29,12 @@ export class BoardComponent implements OnInit {
   private readonly boardSizeWidth = 16;
   private readonly boardSizeHeight = 20;
 
-  private tempDirection: Direction;
+  private tempDirection: Direction = Direction.Right;
 
-  constructor(private readonly snackBar: MatSnackBar) {
+  constructor(
+    private readonly snackBar: MatSnackBar,
+    private readonly logger: LoggerService<BoardComponent>,
+  ) {
     const data = localStorage.getItem('settings');
     this.settings = data === null ? { level: Level.Normal } : JSON.parse(data) as Settings;
   }
@@ -49,23 +53,22 @@ export class BoardComponent implements OnInit {
     this.setNewApple();
     this.setNewApple();
 
-    let body = this.board[0][2];
-    body.isSnake = true;
-    body.isHead = true;
-    this.snake.body.push(body);
-    const cell = this.board[0][1];
-    cell.isSnake = true;
-    this.snake.body.push(cell);
-    body = this.board[0][0];
-    body.isSnake = true;
-    this.snake.body.push(body);
+    this.setSnake();
 
     setTimeout(() => {
       this.updatePositions();
     }, 4500);
   }
 
-  updatePositions(): void {
+  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
+    this.handleDirection(e.keyCode);
+  }
+
+  handleDirection(direction: Direction): void {
+    this.tempDirection = this.getDirection(this.snake.direction, direction);
+  }
+
+  private updatePositions(): void {
     const coord: { x: number; y: number } = this.moveHead();
 
     if (this.isOutside(coord) || this.isTail(coord)) {
@@ -99,7 +102,7 @@ export class BoardComponent implements OnInit {
     }, this.boardSettings.interval);
   }
 
-  moveHead(): { x: number; y: number } {
+  private moveHead(): { x: number; y: number } {
     const head = this.snake.body[0];
     let x = 0;
     let y = 0;
@@ -126,51 +129,20 @@ export class BoardComponent implements OnInit {
     return { x: head.x + x, y: head.y + y };
   }
 
-  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
-    this.handleDirection(e.keyCode);
-  }
+  private getDirection(current: number, newDirection: number): Direction {
+    this.logger.debug(`set new direction ${current}: ${newDirection}`);
 
-  handleDirection(direction: Direction): void {
-    switch (direction) {
-      case Direction.Left:
-        switch (this.snake.direction) {
-          case Direction.Left:
-            this.tempDirection = Direction.Down;
-            break;
-          case Direction.Up:
-            this.tempDirection = Direction.Left;
-            break;
-          case Direction.Down:
-            this.tempDirection = Direction.Right;
-            break;
-          case Direction.Right:
-            this.tempDirection = Direction.Up;
-            break;
-          default:
-            this.tempDirection = Direction.Up;
-        }
-        break;
-
-      case Direction.Right:
-        switch (this.snake.direction) {
-          case Direction.Left:
-            this.tempDirection = Direction.Up;
-            break;
-          case Direction.Up:
-            this.tempDirection = Direction.Right;
-            break;
-          case Direction.Down:
-            this.tempDirection = Direction.Left;
-            break;
-          case Direction.Right:
-            this.tempDirection = Direction.Down;
-            break;
-          default:
-            this.tempDirection = Direction.Down;
-        }
-        break;
-      default:
+    const directions = [Direction.Left, Direction.Up, Direction.Right, Direction.Down];
+    let index = directions.indexOf(current);
+    index += (newDirection === Direction.Left ? -1 : 1);
+    if (index < 0) {
+      index = directions.length - 1;
     }
+    if (index === directions.length) {
+      index = 0;
+    }
+
+    return directions[index];
   }
 
   private createNewLine(line: number): Cell[] {
@@ -187,6 +159,18 @@ export class BoardComponent implements OnInit {
     }
 
     return data;
+  }
+
+  private setSnake(): void {
+    const snakeHead = this.board[0][2];
+    snakeHead.isSnake = true;
+    snakeHead.isHead = true;
+    this.snake.body.push(snakeHead);
+    this.board[0][1].isSnake = true;
+    this.board[0][0].isSnake = true;
+    this.snake.body.push(this.board[0][1]);
+    this.snake.body.push(this.board[0][0]);
+    this.snake.direction = Direction.Right;
   }
 
   private setNewApple(): void {
