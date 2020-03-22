@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Directions, Level } from '../../app.constants';
+import { Directions, Level, Speed } from '../../app.constants';
 import { Settings } from '../settings/settings.component';
 
 interface Cell {
@@ -215,15 +215,15 @@ export class BoardComponent implements OnInit {
   private getInterval(): number {
     switch (this.settings.level) {
       case Level.Easy:
-        return 700;
+        return Speed.Slow;
       case Level.Normal:
-        return 250;
+        return Speed.Medium;
       case Level.Hard:
-        return 100;
+        return Speed.Fast;
       case Level.Faster:
-        return 100 - this.scoreBoard.apples;
+        return Speed.Fast - this.scoreBoard.apples;
       default:
-        return 100;
+        return Speed.Fast;
     }
   }
 
