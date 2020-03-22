@@ -2,6 +2,7 @@ export enum Level {
   Easy,
   Normal,
   Hard,
+  Faster,
 }
 
 export enum Directions {

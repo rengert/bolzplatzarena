@@ -22,6 +22,7 @@ export class SettingsComponent {
       { key: 'EASY', value: Level.Easy },
       { key: 'NORMAL', value: Level.Normal },
       { key: 'HARD', value: Level.Hard },
+      { key: 'FASTER', value: Level.Faster },
     ];
   }
 

@@ -214,6 +214,8 @@ export class BoardComponent implements OnInit {
         return 250;
       case Level.Hard:
         return 100;
+      case Level.Faster:
+        return 100 - this.scoreBoard.apples;
       default:
         return 100;
     }
