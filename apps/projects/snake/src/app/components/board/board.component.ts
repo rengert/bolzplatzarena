@@ -45,7 +45,7 @@ export class BoardComponent implements OnInit {
 
   private readonly settings: Settings;
   private readonly boardSizeWidth = 16;
-  private readonly boardSizeHeight = 22;
+  private readonly boardSizeHeight = 20;
 
   private tempDirection: Directions;
 
@@ -97,9 +97,7 @@ export class BoardComponent implements OnInit {
   updatePositions(): void {
     const coord: { x: number; y: number } = this.moveHead();
 
-    if ((coord.x >= this.boardSizeHeight)
-      || (coord.y >= this.boardSizeWidth)
-      || (coord.x < 0) || (coord.y < 0)) {
+    if (this.isOutside(coord) || this.isTail(coord)) {
       this.snackBar.open('Spiel verloren', 'Tja');
 
       return;
@@ -219,5 +217,13 @@ export class BoardComponent implements OnInit {
       default:
         return 100;
     }
+  }
+
+  private isOutside(coord: { x: number, y: number }): boolean {
+    return (coord.x >= this.boardSizeHeight) || (coord.y >= this.boardSizeWidth) || (coord.x < 0) || (coord.y < 0);
+  }
+
+  private isTail(coord: { x: number, y: number }): boolean {
+    return this.snake.body.some(cell => (cell.x === coord.x) && (cell.y === coord.y));
   }
 }
