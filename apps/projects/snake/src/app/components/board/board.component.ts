@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoggerService } from '../../../../../core/src/lib/modules/logger/services/logger.service';
-import { Direction, Level, Speed } from '../../app.constants';
+import { Direction, Level, Points, Speed } from '../../app.constants';
 import { BoardSettings } from '../../models/board-settings.model';
 import { Cell } from '../../models/cell.model';
 import { ScoreBoard } from '../../models/score-board.model';
@@ -26,8 +26,6 @@ export class BoardComponent implements OnInit {
   readonly directions = Direction;
 
   private readonly settings: Settings;
-  private readonly boardSizeWidth = 16;
-  private readonly boardSizeHeight = 20;
 
   private tempDirection: Direction = Direction.Right;
 
@@ -42,11 +40,13 @@ export class BoardComponent implements OnInit {
   get boardSettings(): BoardSettings {
     return {
       interval: this.getInterval(),
+      width: 16,
+      height: 20,
     };
   }
 
   ngOnInit(): void {
-    for (let i = 0; i < this.boardSizeHeight; i++) {
+    for (let i = 0; i < this.boardSettings.height; i++) {
       this.board[i] = this.createNewLine(i);
     }
 
@@ -77,14 +77,14 @@ export class BoardComponent implements OnInit {
       return;
     }
 
-    this.scoreBoard.points++;
+    this.scoreBoard.points += Points.perMove;
 
     const newHead = this.board[coord.x][coord.y];
     newHead.isSnake = true;
     newHead.isHead = true;
     if (newHead.isApple) {
-      this.scoreBoard.points += 50;
-      this.scoreBoard.apples += 1;
+      this.scoreBoard.points += Points.perApple;
+      this.scoreBoard.apples++;
       newHead.isApple = false;
       this.setNewApple();
     } else {
@@ -147,7 +147,7 @@ export class BoardComponent implements OnInit {
 
   private createNewLine(line: number): Cell[] {
     const data: Cell[] = [];
-    for (let j = 0; j < this.boardSizeWidth; j++) {
+    for (let j = 0; j < this.boardSettings.width; j++) {
       data[j] = {
         id: `${line}-{j}`,
         x: line,
@@ -174,7 +174,10 @@ export class BoardComponent implements OnInit {
   }
 
   private setNewApple(): void {
-    const coord = { x: Math.floor(Math.random() * this.boardSizeHeight), y: Math.floor(Math.random() * this.boardSizeWidth) };
+    const coord = {
+      x: Math.floor(Math.random() * this.boardSettings.height),
+      y: Math.floor(Math.random() * this.boardSettings.width),
+    };
     if (!this.isTail(coord)) {
       this.board[coord.x][coord.y].isApple = true;
 
@@ -199,7 +202,7 @@ export class BoardComponent implements OnInit {
   }
 
   private isOutside(coord: { x: number, y: number }): boolean {
-    return (coord.x >= this.boardSizeHeight) || (coord.y >= this.boardSizeWidth) || (coord.x < 0) || (coord.y < 0);
+    return (coord.x >= this.boardSettings.height) || (coord.y >= this.boardSettings.width) || (coord.x < 0) || (coord.y < 0);
   }
 
   private isTail(coord: { x: number, y: number }): boolean {
