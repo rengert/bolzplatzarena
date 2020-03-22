@@ -43,17 +43,7 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     for (let i = 0; i < this.boardSizeHeight; i++) {
-      this.board[i] = [];
-      for (let j = 0; j < this.boardSizeWidth; j++) {
-        this.board[i][j] = {
-          id: `${i}-{j}`,
-          x: i,
-          y: j,
-          isSnake: false,
-          isHead: false,
-          isApple: false,
-        };
-      }
+      this.board[i] = this.createNewLine(i);
     }
 
     this.setNewApple();
@@ -181,6 +171,22 @@ export class BoardComponent implements OnInit {
         break;
       default:
     }
+  }
+
+  private createNewLine(line: number): Cell[] {
+    const data: Cell[] = [];
+    for (let j = 0; j < this.boardSizeWidth; j++) {
+      data[j] = {
+        id: `${line}-{j}`,
+        x: line,
+        y: j,
+        isSnake: false,
+        isHead: false,
+        isApple: false,
+      };
+    }
+
+    return data;
   }
 
   private setNewApple(): void {
