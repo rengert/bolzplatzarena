@@ -1,30 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Directions, Level, Speed } from '../../app.constants';
+import { Direction, Level, Speed } from '../../app.constants';
+import { BoardSettings } from '../../models/board-settings.model';
+import { Cell } from '../../models/cell.model';
+import { ScoreBoard } from '../../models/score-board.model';
+import { Snake } from '../../models/snake.model';
 import { Settings } from '../settings/settings.component';
-
-interface Cell {
-  id: string;
-  x: number;
-  y: number;
-  isHead: boolean;
-  isSnake: boolean;
-  isApple: boolean;
-}
-
-interface Snake {
-  direction: Directions;
-  body: Cell[];
-}
-
-interface BoardSettings {
-  interval: number;
-}
-
-interface ScoreBoard {
-  points: number;
-  apples: number;
-}
 
 @Component({
   selector: 'app-board',
@@ -39,15 +20,15 @@ export class BoardComponent implements OnInit {
   readonly board: Cell[][] = [];
   readonly snake: Snake = {
     body: [],
-    direction: Directions.Right,
+    direction: Direction.Right,
   };
-  readonly Directions = Directions;
+  readonly directions = Direction;
 
   private readonly settings: Settings;
   private readonly boardSizeWidth = 16;
   private readonly boardSizeHeight = 20;
 
-  private tempDirection: Directions;
+  private tempDirection: Direction;
 
   constructor(private readonly snackBar: MatSnackBar) {
     const data = localStorage.getItem('settings');
@@ -134,16 +115,16 @@ export class BoardComponent implements OnInit {
     let y = 0;
 
     switch (this.tempDirection) {
-      case Directions.Right:
+      case Direction.Right:
         y = 1;
         break;
-      case Directions.Left:
+      case Direction.Left:
         y = -1;
         break;
-      case Directions.Down:
+      case Direction.Down:
         x = 1;
         break;
-      case Directions.Up:
+      case Direction.Up:
         x = -1;
         break;
       default:
@@ -159,43 +140,43 @@ export class BoardComponent implements OnInit {
     this.handleDirection(e.keyCode);
   }
 
-  handleDirection(direction: Directions): void {
+  handleDirection(direction: Direction): void {
     switch (direction) {
-      case Directions.Left:
+      case Direction.Left:
         switch (this.snake.direction) {
-          case Directions.Left:
-            this.tempDirection = Directions.Down;
+          case Direction.Left:
+            this.tempDirection = Direction.Down;
             break;
-          case Directions.Up:
-            this.tempDirection = Directions.Left;
+          case Direction.Up:
+            this.tempDirection = Direction.Left;
             break;
-          case Directions.Down:
-            this.tempDirection = Directions.Right;
+          case Direction.Down:
+            this.tempDirection = Direction.Right;
             break;
-          case Directions.Right:
-            this.tempDirection = Directions.Up;
+          case Direction.Right:
+            this.tempDirection = Direction.Up;
             break;
           default:
-            this.tempDirection = Directions.Up;
+            this.tempDirection = Direction.Up;
         }
         break;
 
-      case Directions.Right:
+      case Direction.Right:
         switch (this.snake.direction) {
-          case Directions.Left:
-            this.tempDirection = Directions.Up;
+          case Direction.Left:
+            this.tempDirection = Direction.Up;
             break;
-          case Directions.Up:
-            this.tempDirection = Directions.Right;
+          case Direction.Up:
+            this.tempDirection = Direction.Right;
             break;
-          case Directions.Down:
-            this.tempDirection = Directions.Left;
+          case Direction.Down:
+            this.tempDirection = Direction.Left;
             break;
-          case Directions.Right:
-            this.tempDirection = Directions.Down;
+          case Direction.Right:
+            this.tempDirection = Direction.Down;
             break;
           default:
-            this.tempDirection = Directions.Down;
+            this.tempDirection = Direction.Down;
         }
         break;
       default:
@@ -212,7 +193,7 @@ export class BoardComponent implements OnInit {
     this.setNewApple();
   }
 
-  private getInterval(): number {
+  private getInterval(): Speed {
     switch (this.settings.level) {
       case Level.Easy:
         return Speed.Slow;

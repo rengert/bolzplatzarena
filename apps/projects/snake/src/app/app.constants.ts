@@ -5,7 +5,7 @@ export enum Level {
   Faster,
 }
 
-export enum Directions {
+export enum Direction {
   Left = 37,
   Up = 38,
   Right = 39,
