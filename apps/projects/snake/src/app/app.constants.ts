@@ -5,9 +5,20 @@ export enum Level {
   Faster,
 }
 
-export enum Directions {
+export enum Direction {
   Left = 37,
   Up = 38,
   Right = 39,
   Down = 40,
+}
+
+export enum Speed {
+  Slow = 700,
+  Medium = 250,
+  Fast = 100,
+}
+
+export class Points {
+  static perMove = 1;
+  static perApple = 50;
 }
