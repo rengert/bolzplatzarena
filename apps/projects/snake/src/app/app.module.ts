@@ -8,6 +8,7 @@ import { MaterialModule } from '../../../core/src/lib/modules/material/material.
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoardComponent } from './components/board/board.component';
+import { NavigationComponent } from './components/board/navigation/navigation.component';
 import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     AppComponent,
     BoardComponent,
     SettingsComponent,
+    NavigationComponent,
   ],
   imports: [
     AppRoutingModule,

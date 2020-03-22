@@ -12,7 +12,7 @@
   <div><label>Äpfel</label> {{ scoreBoard.apples }}</div>
 </div>
 
-<div class="controls">
+<div *ngIf="!gameOver" class="controls">
   <div class="left" (click)="handleDirection(directions.Left)">
     <button class="material-icons">
       arrow_back
@@ -25,4 +25,6 @@
   </div>
 </div>
 
-<bpa-count-down></bpa-count-down>
+<app-navigation *ngIf="gameOver" (restart)="restart()"></app-navigation>
+
+<bpa-count-down *ngIf="!started"></bpa-count-down>
