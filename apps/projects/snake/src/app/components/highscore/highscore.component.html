@@ -14,12 +14,16 @@
       <th mat-header-cell *matHeaderCellDef>Äpfel</th>
       <td mat-cell *matCellDef="let highscore"> {{ highscore.apples }}</td>
     </ng-container>
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef>Level</th>
+      <td mat-cell *matCellDef="let highscore"> {{ highscore.level }}</td>
+    </ng-container>
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef>Datum</th>
       <td mat-cell *matCellDef="let highscore"> {{ highscore.date }}</td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="['name', 'score','apples','date']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['name', 'score','apples','date'];"></tr>
+    <tr mat-header-row *matHeaderRowDef="['name', 'score','apples','level','date']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['name', 'score','apples','level','date'];"></tr>
   </table>
 </mat-card>
