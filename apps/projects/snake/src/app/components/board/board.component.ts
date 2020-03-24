@@ -141,7 +141,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   private lose(): void {
     this.snackBarReferences.push(this.snackBar.open('Spiel verloren', 'Tja'));
-    this.highscore.add({
+    void this.highscore.add({
       id: createUuid(),
       name: 'Ich bins',
       score: this.scoreBoard.points,

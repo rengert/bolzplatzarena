@@ -8,14 +8,15 @@ export class HighscoreService {
   constructor(private readonly highscoreStorage: HighscoreStorageService) {
   }
 
-  add(highscore: Highscore): void {
-    this.highscoreStorage.highscore.put(highscore);
+  async add(highscore: Highscore): Promise<string> {
+    return this.highscoreStorage.highscore.put(highscore);
   }
 
   get$(): Observable<Highscore[]> {
     return from(
       this.highscoreStorage.highscore
         .orderBy('score')
+        .reverse()
         .toArray(),
     );
   }
