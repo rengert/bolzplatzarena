@@ -2,12 +2,15 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SimpleSnackBar } from '@angular/material/snack-bar/simple-snack-bar';
 import { MatSnackBarRef } from '@angular/material/snack-bar/snack-bar-ref';
+import moment from 'moment';
 import { LoggerService } from '../../../../../core/src/lib/modules/logger/services/logger.service';
+import { createUuid } from '../../../../../core/src/lib/utils/common.util';
 import { Direction, Level, Points, Speed } from '../../app.constants';
 import { BoardSettings } from '../../models/board-settings.model';
 import { Cell } from '../../models/cell.model';
 import { ScoreBoard } from '../../models/score-board.model';
 import { Snake } from '../../models/snake.model';
+import { HighscoreService } from '../../services/highscore.service';
 import { Settings } from '../settings/settings.component';
 
 @Component({
@@ -33,8 +36,9 @@ export class BoardComponent implements OnInit, OnDestroy {
   private tempDirection: Direction = Direction.Right;
 
   constructor(
-    private readonly snackBar: MatSnackBar,
+    private readonly highscore: HighscoreService,
     private readonly logger: LoggerService<BoardComponent>,
+    private readonly snackBar: MatSnackBar,
   ) {
     const data = localStorage.getItem('settings');
     this.settings = data === null ? { level: Level.Normal } : JSON.parse(data) as Settings;
@@ -137,7 +141,15 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   private lose(): void {
     this.snackBarReferences.push(this.snackBar.open('Spiel verloren', 'Tja'));
-
+    void this.highscore.add({
+      id: createUuid(),
+      name: 'Ich bins',
+      score: this.scoreBoard.points,
+      apples: this.scoreBoard.apples,
+      level: this.settings.level,
+      date: moment()
+        .format(),
+    });
     this.gameOver = true;
   }
 

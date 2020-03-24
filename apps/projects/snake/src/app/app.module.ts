@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoardComponent } from './components/board/board.component';
 import { NavigationComponent } from './components/board/navigation/navigation.component';
+import { HighscoreComponent } from './components/highscore/highscore.component';
 import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     BoardComponent,
     SettingsComponent,
     NavigationComponent,
+    HighscoreComponent,
   ],
   imports: [
     AppRoutingModule,

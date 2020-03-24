@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './components/board/board.component';
+import { HighscoreComponent } from './components/highscore/highscore.component';
 import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'snake',
     component: BoardComponent,
+  },
+  {
+    path: 'highscore',
+    component: HighscoreComponent,
   },
 ];
 
