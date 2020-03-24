@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { BoardComponent } from './components/board/board.component';
 import { NavigationComponent } from './components/board/navigation/navigation.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { HighscoreComponent } from './components/highscore/highscore.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     BoardComponent,
     SettingsComponent,
     NavigationComponent,
+    HighscoreComponent,
   ],
   imports: [
     AppRoutingModule,
