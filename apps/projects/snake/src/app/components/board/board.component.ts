@@ -1,5 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SimpleSnackBar } from '@angular/material/snack-bar/simple-snack-bar';
+import { MatSnackBarRef } from '@angular/material/snack-bar/snack-bar-ref';
 import { LoggerService } from '../../../../../core/src/lib/modules/logger/services/logger.service';
 import { Direction, Level, Points, Speed } from '../../app.constants';
 import { BoardSettings } from '../../models/board-settings.model';
@@ -13,20 +15,21 @@ import { Settings } from '../settings/settings.component';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent implements OnInit {
-  readonly scoreBoard: ScoreBoard = {
+export class BoardComponent implements OnInit, OnDestroy {
+  gameOver: boolean;
+  started: boolean;
+
+  scoreBoard: ScoreBoard = {
     points: 0,
     apples: 0,
   };
   readonly board: Cell[][] = [];
-  readonly snake: Snake = {
-    body: [],
-    direction: Direction.Right,
-  };
   readonly directions = Direction;
 
   private readonly settings: Settings;
+  private readonly snackBarReferences: MatSnackBarRef<SimpleSnackBar>[] = [];
 
+  private snake: Snake;
   private tempDirection: Direction = Direction.Right;
 
   constructor(
@@ -46,18 +49,15 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    for (let i = 0; i < this.boardSettings.height; i++) {
-      this.board[i] = this.createNewLine(i);
-    }
-
-    this.setNewApple();
-    this.setNewApple();
-
-    this.setSnake();
+    this.setup();
 
     setTimeout(() => {
       this.updatePositions();
     }, 4500);
+  }
+
+  ngOnDestroy(): void {
+    this.snackBarReferences.forEach(item => item.dismiss());
   }
 
   @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
@@ -68,11 +68,44 @@ export class BoardComponent implements OnInit {
     this.tempDirection = this.getDirection(this.snake.direction, direction);
   }
 
+  restart(): void {
+    this.snackBarReferences.forEach(item => item.dismiss());
+
+    this.setup();
+
+    this.scoreBoard = {
+      points: 0,
+      apples: 0,
+    };
+
+    this.gameOver = false;
+    this.started = false;
+
+    setTimeout(() => {
+      this.updatePositions();
+    }, 4500);
+  }
+
+  private setup(): void {
+    for (let i = 0; i < this.boardSettings.height; i++) {
+      this.board[i] = this.createNewLine(i);
+    }
+
+    this.setSnake();
+
+    this.setNewApple();
+    this.setNewApple();
+
+    this.tempDirection = Direction.Right;
+  }
+
   private updatePositions(): void {
+    this.started = true;
+
     const coord: { x: number; y: number } = this.moveHead();
 
     if (this.isOutside(coord) || this.isTail(coord)) {
-      this.snackBar.open('Spiel verloren', 'Tja');
+      this.lose();
 
       return;
     }
@@ -100,6 +133,12 @@ export class BoardComponent implements OnInit {
     setTimeout(() => {
       this.updatePositions();
     }, this.boardSettings.interval);
+  }
+
+  private lose(): void {
+    this.snackBarReferences.push(this.snackBar.open('Spiel verloren', 'Tja'));
+
+    this.gameOver = true;
   }
 
   private moveHead(): { x: number; y: number } {
@@ -162,6 +201,11 @@ export class BoardComponent implements OnInit {
   }
 
   private setSnake(): void {
+    this.snake = {
+      body: [],
+      direction: Direction.Right,
+    };
+
     const snakeHead = this.board[0][2];
     snakeHead.isSnake = true;
     snakeHead.isHead = true;
@@ -170,7 +214,6 @@ export class BoardComponent implements OnInit {
     this.board[0][0].isSnake = true;
     this.snake.body.push(this.board[0][1]);
     this.snake.body.push(this.board[0][0]);
-    this.snake.direction = Direction.Right;
   }
 
   private setNewApple(): void {
@@ -208,4 +251,5 @@ export class BoardComponent implements OnInit {
   private isTail(coord: { x: number, y: number }): boolean {
     return this.snake.body.some(cell => (cell.x === coord.x) && (cell.y === coord.y));
   }
+
 }

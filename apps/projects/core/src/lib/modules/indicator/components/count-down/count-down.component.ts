@@ -11,6 +11,6 @@ export class CountDownComponent implements OnInit {
   readonly visible$ = new BehaviorSubject<boolean>(true);
 
   ngOnInit(): void {
-    setTimeout(() => this.visible$.next(false), 3500);
+    // setTimeout(() => this.visible$.next(false), 3500);
   }
 }
