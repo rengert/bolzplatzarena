@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Level } from '../../app.constants';
+import { GameMode, Level } from '../../app.constants';
 
 export interface Settings {
   level: Level;
+  gameMode: GameMode;
 }
 
 @Component({
@@ -14,8 +15,11 @@ export interface Settings {
 })
 export class SettingsComponent {
   readonly Level = Level;
+  readonly GameMode = GameMode;
   level: Level;
+  gameMode: GameMode;
   readonly levels: { key: string, value: Level }[];
+  readonly modes: { key: string, value: GameMode }[];
 
   constructor(private readonly router: Router) {
     this.levels = [
@@ -24,10 +28,15 @@ export class SettingsComponent {
       { key: 'HARD', value: Level.Hard },
       { key: 'FASTER', value: Level.Faster },
     ];
+
+    this.modes = [
+      { key: 'NORMAL', value: GameMode.Normal },
+      { key: 'NO_WALLS', value: GameMode.NoWalls },
+    ];
   }
 
   save(): void {
-    localStorage.setItem('settings', JSON.stringify({ level: this.level }));
+    localStorage.setItem('settings', JSON.stringify({ level: this.level, gameMode: this.gameMode }));
     void this.router.navigate(['snake']);
   }
 }

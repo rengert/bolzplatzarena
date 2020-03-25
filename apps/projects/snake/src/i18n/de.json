@@ -6,6 +6,10 @@
         "NORMAL": "Normal",
         "HARD": "Schwer",
         "FASTER": "Wird schneller"
+      },
+      "GAME_MODE": {
+        "NORMAL": "Normal",
+        "NO_WALLS": "Keine Wände"
       }
     }
   },
