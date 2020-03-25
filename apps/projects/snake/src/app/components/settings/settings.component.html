@@ -11,6 +11,17 @@
       </mat-radio-button>
     </mat-radio-group>
   </mat-card-content>
+  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.LEVEL</mat-card-subtitle>
+  <mat-card-content>
+    <mat-radio-group
+      aria-labelledby="level-label"
+      [(ngModel)]="gameMode">
+      <mat-radio-button *ngFor="let item of modes; trackBy: ('key' | trackByProperty)"
+                        [value]="item.value">
+        {{ 'GLOBAL.ENUM.GAME_MODE.' + item.key | uppercase | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
   <mat-card-actions>
     <button mat-flat-button color="primary" (click)="save()">
       {{ 'COMPONENTS.SETTINGS.SAVE' | translate }}

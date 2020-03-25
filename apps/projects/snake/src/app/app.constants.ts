@@ -12,6 +12,11 @@ export enum Direction {
   Down = 40,
 }
 
+export enum GameMode {
+  Normal,
+  NoWalls,
+}
+
 export enum Speed {
   Slow = 700,
   Medium = 250,

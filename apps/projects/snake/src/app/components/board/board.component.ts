@@ -5,7 +5,7 @@ import { MatSnackBarRef } from '@angular/material/snack-bar/snack-bar-ref';
 import moment from 'moment';
 import { LoggerService } from '../../../../../core/src/lib/modules/logger/services/logger.service';
 import { createUuid } from '../../../../../core/src/lib/utils/common.util';
-import { Direction, Level, Points, Speed } from '../../app.constants';
+import { Direction, GameMode, Level, Points, Speed } from '../../app.constants';
 import { BoardSettings } from '../../models/board-settings.model';
 import { Cell } from '../../models/cell.model';
 import { ScoreBoard } from '../../models/score-board.model';
@@ -41,7 +41,8 @@ export class BoardComponent implements OnInit, OnDestroy {
     private readonly snackBar: MatSnackBar,
   ) {
     const data = localStorage.getItem('settings');
-    this.settings = data === null ? { level: Level.Normal } : JSON.parse(data) as Settings;
+    const defaultValue = { level: Level.Normal, gameMode: GameMode.Normal };
+    this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
   }
 
   get boardSettings(): BoardSettings {
@@ -114,7 +115,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.scoreBoard.points += Points.perMove;
+    this.scoreBoard.points += (this.settings.gameMode === GameMode.Normal ? Points.perMove : 0);
 
     const newHead = this.board[coord.x][coord.y];
     newHead.isSnake = true;
@@ -147,6 +148,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       score: this.scoreBoard.points,
       apples: this.scoreBoard.apples,
       level: this.settings.level,
+      gameMode: this.settings.gameMode,
       date: moment()
         .format(),
     });
@@ -172,12 +174,18 @@ export class BoardComponent implements OnInit, OnDestroy {
         x = -1;
         break;
       default:
-        y = 1;
         break;
     }
     this.snake.direction = this.tempDirection;
 
-    return { x: head.x + x, y: head.y + y };
+    const coord = { x: head.x + x, y: head.y + y };
+
+    if (this.settings.gameMode === GameMode.NoWalls) {
+      coord.x = coord.x < 0 ? this.boardSettings.height - 1 : (coord.x === this.boardSettings.height) ? 0 : coord.x;
+      coord.y = coord.y < 0 ? this.boardSettings.width - 1 : (coord.y === this.boardSettings.width) ? 0 : coord.y;
+    }
+
+    return coord;
   }
 
   private getDirection(current: number, newDirection: number): Direction {
@@ -185,7 +193,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     const directions = [Direction.Left, Direction.Up, Direction.Right, Direction.Down];
     let index = directions.indexOf(current);
-    index += (newDirection === Direction.Left ? -1 : 1);
+    index += ((newDirection === Direction.Left) ? -1 : (newDirection === Direction.Right) ? 1 : 0);
     if (index < 0) {
       index = directions.length - 1;
     }
