@@ -133,7 +133,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.setNewApple();
     } else {
       const tail = this.snake.body.pop() !;
-      tail.isSnake = false;
+      tail.isSnake = this.snake.body.some(item => (item.x === tail.x) && (item.y === tail.y));
     }
     newHead.isGoldenApple = this.snake.goldenHead;
 
