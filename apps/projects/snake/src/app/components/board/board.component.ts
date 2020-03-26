@@ -124,6 +124,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.scoreBoard.points += Points.perApple;
       this.scoreBoard.apples++;
       newHead.isApple = false;
+      newHead.isGoldenApple = false;
       this.setNewApple();
     } else {
       const tail = this.snake.body.pop() !;
@@ -214,6 +215,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         isSnake: false,
         isHead: false,
         isApple: false,
+        isGoldenApple: false,
       };
     }
 
@@ -243,6 +245,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     };
     if (!this.isTail(coord)) {
       this.board[coord.x][coord.y].isApple = true;
+      this.board[coord.x][coord.y].isGoldenApple = (this.settings.gameMode === GameMode.GoldenApple) ? Math.random() > 0.9 : false;
 
       return;
     }
