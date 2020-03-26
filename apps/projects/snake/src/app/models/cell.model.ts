@@ -5,4 +5,5 @@ export interface Cell {
   isHead: boolean;
   isSnake: boolean;
   isApple: boolean;
+  isGoldenApple: boolean;
 }

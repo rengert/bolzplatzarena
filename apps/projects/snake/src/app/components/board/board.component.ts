@@ -110,9 +110,13 @@ export class BoardComponent implements OnInit, OnDestroy {
     const coord: { x: number; y: number } = this.moveHead();
 
     if (this.isOutside(coord) || this.isTail(coord)) {
-      this.lose();
+      if (!this.snake.goldenHead) {
+        this.lose();
 
-      return;
+        return;
+      }
+
+      this.snake.goldenHead = false;
     }
 
     this.scoreBoard.points += (this.settings.gameMode === GameMode.Normal ? Points.perMove : 0);
@@ -121,17 +125,21 @@ export class BoardComponent implements OnInit, OnDestroy {
     newHead.isSnake = true;
     newHead.isHead = true;
     if (newHead.isApple) {
-      this.scoreBoard.points += Points.perApple;
+      this.scoreBoard.points += this.snake.goldenHead && newHead.isGoldenApple ? Points.perGoldenApple : Points.perApple;
       this.scoreBoard.apples++;
+      this.snake.goldenHead = this.snake.goldenHead || newHead.isGoldenApple;
       newHead.isApple = false;
+      newHead.isGoldenApple = false;
       this.setNewApple();
     } else {
       const tail = this.snake.body.pop() !;
       tail.isSnake = false;
     }
+    newHead.isGoldenApple = this.snake.goldenHead;
 
     const head = this.snake.body[0];
     head.isHead = false;
+    head.isGoldenApple = false;
 
     this.snake.body.unshift(newHead);
 
@@ -180,9 +188,22 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     const coord = { x: head.x + x, y: head.y + y };
 
-    if (this.settings.gameMode === GameMode.NoWalls) {
-      coord.x = coord.x < 0 ? this.boardSettings.height - 1 : (coord.x === this.boardSettings.height) ? 0 : coord.x;
-      coord.y = coord.y < 0 ? this.boardSettings.width - 1 : (coord.y === this.boardSettings.width) ? 0 : coord.y;
+    if (this.settings.gameMode === GameMode.NoWalls || this.snake.goldenHead) {
+      if (coord.x < 0) {
+        coord.x = this.boardSettings.height - 1;
+        this.snake.goldenHead = false;
+      } else if (coord.x === this.boardSettings.height) {
+        coord.x = 0;
+        this.snake.goldenHead = false;
+      }
+
+      if (coord.y < 0) {
+        coord.y = this.boardSettings.width - 1;
+        this.snake.goldenHead = false;
+      } else if (coord.y === this.boardSettings.width) {
+        coord.y = 0;
+        this.snake.goldenHead = false;
+      }
     }
 
     return coord;
@@ -214,6 +235,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         isSnake: false,
         isHead: false,
         isApple: false,
+        isGoldenApple: false,
       };
     }
 
@@ -224,6 +246,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.snake = {
       body: [],
       direction: Direction.Right,
+      goldenHead: false,
     };
 
     const snakeHead = this.board[0][2];
@@ -243,6 +266,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     };
     if (!this.isTail(coord)) {
       this.board[coord.x][coord.y].isApple = true;
+      this.board[coord.x][coord.y].isGoldenApple = (this.settings.gameMode === GameMode.GoldenApple) ? Math.random() > 0.9 : false;
 
       return;
     }

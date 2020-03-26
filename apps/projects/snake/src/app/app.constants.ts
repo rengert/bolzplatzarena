@@ -15,6 +15,7 @@ export enum Direction {
 export enum GameMode {
   Normal,
   NoWalls,
+  GoldenApple,
 }
 
 export enum Speed {
@@ -26,4 +27,5 @@ export enum Speed {
 export class Points {
   static perMove = 1;
   static perApple = 50;
+  static perGoldenApple = 75;
 }

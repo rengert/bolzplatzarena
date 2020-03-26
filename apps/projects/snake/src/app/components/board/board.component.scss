@@ -19,11 +19,19 @@
 
       &.head {
         background-color: #00b500;
+
+        &.golden {
+          background-color: gold;
+        }
       }
     }
 
     &.apple {
       background-color: #f44336;
+
+      &.golden {
+        background-color: gold;
+      }
     }
   }
 
