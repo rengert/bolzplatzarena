@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+// tslint:disable-next-line:no-import-side-effect
+import 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { Highscore } from '../../models/highscore.model';
 import { HighscoreService } from '../../services/highscore.service';
@@ -11,11 +13,15 @@ import { HighscoreService } from '../../services/highscore.service';
 })
 export class HighscoreComponent implements OnInit {
   data$: Observable<Highscore[]>;
+  highscore$: Observable<Highscore[]>;
 
-  constructor(private readonly highscore: HighscoreService) {
+  constructor(
+    private readonly highscore: HighscoreService,
+  ) {
   }
 
   ngOnInit(): void {
     this.data$ = this.highscore.get$();
+    this.highscore$ = this.highscore.getRemote$();
   }
 }
