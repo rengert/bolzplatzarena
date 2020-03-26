@@ -23,12 +23,17 @@ export class HighscoreService {
       this.highscoreStorage.highscore
         .orderBy('score')
         .reverse()
+        .limit(10)
         .toArray(),
     );
   }
 
   getRemote$(): Observable<Highscore[]> {
-    return this.firestore.collection<Highscore>('SnakeHighscore', ref => ref.orderBy('score', 'desc'))
+    return this.firestore.collection<Highscore>(
+      'SnakeHighscore',
+      ref => ref.orderBy('score', 'desc')
+        .limit(10),
+    )
       .valueChanges();
   }
 }
