@@ -123,6 +123,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (newHead.isApple) {
       this.scoreBoard.points += Points.perApple;
       this.scoreBoard.apples++;
+      this.snake.goldenHead = this.snake.goldenHead || newHead.isGoldenApple;
       newHead.isApple = false;
       newHead.isGoldenApple = false;
       this.setNewApple();
@@ -130,9 +131,11 @@ export class BoardComponent implements OnInit, OnDestroy {
       const tail = this.snake.body.pop() !;
       tail.isSnake = false;
     }
+    newHead.isGoldenApple = this.snake.goldenHead;
 
     const head = this.snake.body[0];
     head.isHead = false;
+    head.isGoldenApple = false;
 
     this.snake.body.unshift(newHead);
 
@@ -226,6 +229,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.snake = {
       body: [],
       direction: Direction.Right,
+      goldenHead: false,
     };
 
     const snakeHead = this.board[0][2];
