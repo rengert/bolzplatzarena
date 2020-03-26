@@ -9,7 +9,8 @@
       },
       "GAME_MODE": {
         "NORMAL": "Normal",
-        "NO_WALLS": "Keine Wände"
+        "NO_WALLS": "Keine Wände",
+        "GOLDEN_APPLE": "Golden Apple"
       }
     }
   },

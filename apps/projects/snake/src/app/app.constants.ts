@@ -15,6 +15,7 @@ export enum Direction {
 export enum GameMode {
   Normal,
   NoWalls,
+  GoldenApple,
 }
 
 export enum Speed {

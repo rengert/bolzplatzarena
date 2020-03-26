@@ -32,6 +32,7 @@ export class SettingsComponent {
     this.modes = [
       { key: 'NORMAL', value: GameMode.Normal },
       { key: 'NO_WALLS', value: GameMode.NoWalls },
+      { key: 'GOLDEN_APPLE', value: GameMode.GoldenApple },
     ];
   }
 
