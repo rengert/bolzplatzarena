@@ -110,9 +110,13 @@ export class BoardComponent implements OnInit, OnDestroy {
     const coord: { x: number; y: number } = this.moveHead();
 
     if (this.isOutside(coord) || this.isTail(coord)) {
-      this.lose();
+      if (!this.snake.goldenHead) {
+        this.lose();
 
-      return;
+        return;
+      }
+
+      this.snake.goldenHead = false;
     }
 
     this.scoreBoard.points += (this.settings.gameMode === GameMode.Normal ? Points.perMove : 0);
