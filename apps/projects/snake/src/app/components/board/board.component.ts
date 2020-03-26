@@ -184,9 +184,22 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     const coord = { x: head.x + x, y: head.y + y };
 
-    if (this.settings.gameMode === GameMode.NoWalls) {
-      coord.x = coord.x < 0 ? this.boardSettings.height - 1 : (coord.x === this.boardSettings.height) ? 0 : coord.x;
-      coord.y = coord.y < 0 ? this.boardSettings.width - 1 : (coord.y === this.boardSettings.width) ? 0 : coord.y;
+    if (this.settings.gameMode === GameMode.NoWalls || this.snake.goldenHead) {
+      if (coord.x < 0) {
+        coord.x = this.boardSettings.height - 1;
+        this.snake.goldenHead = false;
+      } else if (coord.x === this.boardSettings.height) {
+        coord.x = 0;
+        this.snake.goldenHead = false;
+      }
+
+      if (coord.y < 0) {
+        coord.y = this.boardSettings.width - 1;
+        this.snake.goldenHead = false;
+      } else if (coord.y === this.boardSettings.width) {
+        coord.y = 0;
+        this.snake.goldenHead = false;
+      }
     }
 
     return coord;
