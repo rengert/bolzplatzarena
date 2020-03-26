@@ -50,15 +50,17 @@ export class BoardComponent implements OnInit, OnDestroy {
       interval: this.getInterval(),
       width: 16,
       height: 20,
+      startDelay: 4500,
+      chanceGoldenApple: 0.1,
     };
   }
 
   ngOnInit(): void {
     this.setup();
 
-    setTimeout(() => {
-      this.updatePositions();
-    }, 4500);
+    setTimeout(async () => {
+      await this.updatePositions();
+    }, this.boardSettings.startDelay);
   }
 
   ngOnDestroy(): void {
@@ -66,7 +68,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
-    this.handleDirection(e.keyCode);
+    this.handleDirection(e.key as Direction);
   }
 
   handleDirection(direction: Direction): void {
@@ -86,9 +88,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.gameOver = false;
     this.started = false;
 
-    setTimeout(() => {
-      this.updatePositions();
-    }, 4500);
+    setTimeout(async () => {
+      await this.updatePositions();
+    }, this.boardSettings.startDelay);
   }
 
   private setup(): void {
@@ -104,14 +106,14 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.tempDirection = Direction.Right;
   }
 
-  private updatePositions(): void {
+  private async updatePositions(): Promise<void> {
     this.started = true;
 
     const coord: { x: number; y: number } = this.moveHead();
 
     if (this.isOutside(coord) || this.isTail(coord)) {
       if (!this.snake.goldenHead) {
-        this.lose();
+        await this.lose();
 
         return;
       }
@@ -143,14 +145,14 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     this.snake.body.unshift(newHead);
 
-    setTimeout(() => {
-      this.updatePositions();
+    setTimeout(async () => {
+      await this.updatePositions();
     }, this.boardSettings.interval);
   }
 
-  private lose(): void {
+  private async lose(): Promise<void> {
     this.snackBarReferences.push(this.snackBar.open('Spiel verloren', 'Tja'));
-    void this.highscore.add({
+    await this.highscore.add({
       id: createUuid(),
       name: 'Ich bins',
       score: this.scoreBoard.points,
@@ -189,32 +191,33 @@ export class BoardComponent implements OnInit, OnDestroy {
     const coord = { x: head.x + x, y: head.y + y };
 
     if (this.settings.gameMode === GameMode.NoWalls || this.snake.goldenHead) {
-      if (coord.x < 0) {
-        coord.x = this.boardSettings.height - 1;
-        this.snake.goldenHead = false;
-      } else if (coord.x === this.boardSettings.height) {
-        coord.x = 0;
-        this.snake.goldenHead = false;
-      }
-
-      if (coord.y < 0) {
-        coord.y = this.boardSettings.width - 1;
-        this.snake.goldenHead = false;
-      } else if (coord.y === this.boardSettings.width) {
-        coord.y = 0;
-        this.snake.goldenHead = false;
-      }
+      coord.x = this.getCoordSafe(coord.x, this.boardSettings.height);
+      coord.y = this.getCoordSafe(coord.y, this.boardSettings.width);
     }
 
     return coord;
   }
 
-  private getDirection(current: number, newDirection: number): Direction {
+  private getCoordSafe(value: number, limit: number): number {
+    let result = value;
+    if (value < 0) {
+      result = limit - 1;
+      this.snake.goldenHead = false;
+    } else if (value === limit) {
+      result = 0;
+      this.snake.goldenHead = false;
+    }
+
+    return result;
+  }
+
+  private getDirection(current: Direction, newDirection: Direction): Direction {
     this.logger.debug(`set new direction ${current}: ${newDirection}`);
 
     const directions = [Direction.Left, Direction.Up, Direction.Right, Direction.Down];
     let index = directions.indexOf(current);
-    index += ((newDirection === Direction.Left) ? -1 : (newDirection === Direction.Right) ? 1 : 0);
+    index -= (newDirection === Direction.Left) ? 1 : 0;
+    index += (newDirection === Direction.Right) ? 1 : 0;
     if (index < 0) {
       index = directions.length - 1;
     }
@@ -266,7 +269,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     };
     if (!this.isTail(coord)) {
       this.board[coord.x][coord.y].isApple = true;
-      this.board[coord.x][coord.y].isGoldenApple = (this.settings.gameMode === GameMode.GoldenApple) ? Math.random() > 0.9 : false;
+      this.board[coord.x][coord.y].isGoldenApple = (this.settings.gameMode === GameMode.GoldenApple)
+        ? Math.random() < this.boardSettings.chanceGoldenApple
+        : false;
 
       return;
     }
