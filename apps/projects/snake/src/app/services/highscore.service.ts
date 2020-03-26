@@ -28,7 +28,7 @@ export class HighscoreService {
   }
 
   getRemote$(): Observable<Highscore[]> {
-    return this.firestore.collection<Highscore>('SnakeHighscore')
+    return this.firestore.collection<Highscore>('SnakeHighscore', ref => ref.orderBy('score', 'desc'))
       .valueChanges();
   }
 }
