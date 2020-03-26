@@ -6,10 +6,10 @@ export enum Level {
 }
 
 export enum Direction {
-  Left = 37,
-  Up = 38,
-  Right = 39,
-  Down = 40,
+  Left = 'ArrowLeft',
+  Up = 'ArrowUp',
+  Right = 'ArrowRight',
+  Down = 'ArrowDown',
 }
 
 export enum GameMode {
