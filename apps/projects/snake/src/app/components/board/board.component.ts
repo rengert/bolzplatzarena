@@ -121,7 +121,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     newHead.isSnake = true;
     newHead.isHead = true;
     if (newHead.isApple) {
-      this.scoreBoard.points += Points.perApple;
+      this.scoreBoard.points += this.snake.goldenHead && newHead.isGoldenApple ? Points.perGoldenApple : Points.perApple;
       this.scoreBoard.apples++;
       this.snake.goldenHead = this.snake.goldenHead || newHead.isGoldenApple;
       newHead.isApple = false;

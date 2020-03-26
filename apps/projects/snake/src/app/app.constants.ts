@@ -27,4 +27,5 @@ export enum Speed {
 export class Points {
   static perMove = 1;
   static perApple = 50;
+  static perGoldenApple = 75;
 }
