@@ -1,8 +1,8 @@
 export enum Level {
-  Easy,
-  Normal,
-  Hard,
-  Faster,
+  Easy = 'Easy',
+  Normal = 'Normal',
+  Hard = 'Hard',
+  Faster = 'Faster',
 }
 
 export enum Direction {
@@ -13,9 +13,9 @@ export enum Direction {
 }
 
 export enum GameMode {
-  Normal,
-  NoWalls,
-  GoldenApple,
+  Normal = 'Normal',
+  NoWalls = 'NoWalls',
+  GoldenApple = 'GoldenApple',
 }
 
 export enum Speed {
