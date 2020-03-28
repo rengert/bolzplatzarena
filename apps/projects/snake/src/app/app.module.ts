@@ -6,14 +6,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CoreModule } from '../../../core/src/lib/core.module';
 import { MaterialModule } from '../../../core/src/lib/modules/material/material.module';
 import { environment } from '../environments/environment';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoardComponent } from './components/board/board.component';
 import { NavigationComponent } from './components/board/navigation/navigation.component';
+import { HighScoreTableComponent } from './components/highscore/high-score-table/high-score-table.component';
 import { HighscoreComponent } from './components/highscore/highscore.component';
 import { SettingsComponent } from './components/settings/settings.component';
-import { HighScoreTableComponent } from './components/highscore/high-score-table/high-score-table.component';
 
 @NgModule({
   declarations: [
