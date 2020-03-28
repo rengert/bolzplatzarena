@@ -1,9 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 // tslint:disable-next-line:no-import-side-effect
 import 'firebase/firestore';
-import { Observable } from 'rxjs';
-import { Highscore } from '../../models/highscore.model';
-import { HighscoreService } from '../../services/highscore.service';
+import { GameMode } from '../../app.constants';
 
 @Component({
   selector: 'app-highscore',
@@ -11,17 +9,14 @@ import { HighscoreService } from '../../services/highscore.service';
   styleUrls: ['./highscore.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HighscoreComponent implements OnInit {
-  data$: Observable<Highscore[]>;
-  highscore$: Observable<Highscore[]>;
+export class HighscoreComponent {
+  gameMode: GameMode = GameMode.Normal;
+  readonly GameMode = GameMode;
 
-  constructor(
-    private readonly highscore: HighscoreService,
-  ) {
-  }
+  modes = [
+    { key: 'NORMAL', value: GameMode.Normal },
+    { key: 'NO_WALLS', value: GameMode.NoWalls },
+    { key: 'GOLDEN_APPLE', value: GameMode.GoldenApple },
+  ];
 
-  ngOnInit(): void {
-    this.data$ = this.highscore.get$();
-    this.highscore$ = this.highscore.getRemote$();
-  }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
+import { GameMode } from '../app.constants';
 import { Highscore } from '../models/highscore.model';
 import { HighscoreStorageService } from './storage/highscore-storage.service';
 
@@ -28,10 +29,23 @@ export class HighscoreService {
     );
   }
 
-  getRemote$(): Observable<Highscore[]> {
+  getByMode$(gameMode: GameMode): Observable<Highscore[]> {
+    return from(
+      this.highscoreStorage.highscore
+        .orderBy('score')
+        .filter(item => item.gameMode === gameMode)
+        .reverse()
+        .limit(10)
+        .toArray(),
+    );
+  }
+
+  getRemote$(gameMode: GameMode): Observable<Highscore[]> {
     return this.firestore.collection<Highscore>(
       'SnakeHighscore',
-      ref => ref.orderBy('score', 'desc')
+      ref => ref
+        .where('gameMode', '==', gameMode)
+        .orderBy('score', 'desc')
         .limit(10),
     )
       .valueChanges();
