@@ -21,6 +21,9 @@
         "LEVEL": "Schwierigkeit"
       },
       "SAVE": "Speichern & Starten"
+    },
+    "HIGHSCORE": {
+      "HOME_LINK": "Zur Startseite"
     }
   }
 }

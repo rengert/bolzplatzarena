@@ -8,4 +8,7 @@
   <app-high-score-table [gameMode]="gameMode" [remote]="false"></app-high-score-table>
   <h2>Highscore / Remote</h2>
   <app-high-score-table [gameMode]="gameMode" [remote]="true"></app-high-score-table>
+  <button mat-flat-button color="primary" [routerLink]="['/']">
+    {{ 'COMPONENTS.HIGHSCORE.HOME_LINK' | translate }}
+  </button>
 </mat-card>
