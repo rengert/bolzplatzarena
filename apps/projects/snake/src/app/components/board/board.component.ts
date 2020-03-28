@@ -127,7 +127,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     newHead.isSnake = true;
     newHead.isHead = true;
     if (newHead.isApple) {
-      this.scoreBoard.points += this.snake.goldenHead && newHead.isGoldenApple ? Points.perGoldenApple : Points.perApple;
+      this.scoreBoard.points += (
+        (this.snake.goldenHead && newHead.isGoldenApple)
+          ? Points.perGoldenApple
+          : Points.perApple
+      );
       this.scoreBoard.apples++;
       this.snake.goldenHead = this.snake.goldenHead || newHead.isGoldenApple;
       newHead.isApple = false;
@@ -300,5 +304,4 @@ export class BoardComponent implements OnInit, OnDestroy {
   private isTail(coord: { x: number, y: number }): boolean {
     return this.snake.body.some(cell => (cell.x === coord.x) && (cell.y === coord.y));
   }
-
 }

@@ -20,7 +20,11 @@
       "LABELS": {
         "LEVEL": "Schwierigkeit"
       },
+      "HIGHSCORE": "Highscore",
       "SAVE": "Speichern & Starten"
+    },
+    "HIGHSCORE": {
+      "HOME_LINK": "Zur Startseite"
     }
   }
 }
