@@ -18,7 +18,10 @@
     "SETTINGS": {
       "HEADLINE": "Einstellungen",
       "LABELS": {
-        "LEVEL": "Schwierigkeit"
+        "GAME_MODE": "Spielmodus",
+        "LEVEL": "Schwierigkeit",
+        "NAME": "Name",
+        "USER": "Benutzer"
       },
       "HIGHSCORE": "Highscore",
       "SAVE": "Speichern & Starten"

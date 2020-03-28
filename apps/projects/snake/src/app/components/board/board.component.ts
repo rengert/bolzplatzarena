@@ -41,7 +41,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     private readonly snackBar: MatSnackBar,
   ) {
     const data = localStorage.getItem('settings');
-    const defaultValue = { level: Level.Normal, gameMode: GameMode.Normal };
+    const defaultValue = {
+      level: Level.Normal,
+      gameMode: GameMode.Normal,
+      user: 'Anonym',
+    };
     this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
   }
 
@@ -158,7 +162,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.snackBarReferences.push(this.snackBar.open('Spiel verloren', 'Tja'));
     await this.highscore.add({
       id: createUuid(),
-      name: 'Ich bins',
+      name: this.settings.user,
       score: this.scoreBoard.points,
       apples: this.scoreBoard.apples,
       level: this.settings.level,

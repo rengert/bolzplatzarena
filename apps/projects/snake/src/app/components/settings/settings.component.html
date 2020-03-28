@@ -1,5 +1,12 @@
 <mat-card>
   <mat-card-title translate>COMPONENTS.SETTINGS.HEADLINE</mat-card-title>
+  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.USER</mat-card-subtitle>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label translate>COMPONENTS.SETTINGS.LABELS.NAME</mat-label>
+      <input matInput placeholder="Corban Dallas" [(ngModel)]="user">
+    </mat-form-field>
+  </mat-card-content>
   <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.LEVEL</mat-card-subtitle>
   <mat-card-content>
     <mat-radio-group
