@@ -26,5 +26,8 @@
     <button mat-flat-button color="primary" (click)="save()">
       {{ 'COMPONENTS.SETTINGS.SAVE' | translate }}
     </button>
+    <button mat-flat-button color="primary" [routerLink]="['highscore']">
+      {{ 'COMPONENTS.SETTINGS.HIGHSCORE' | translate }}
+    </button>
   </mat-card-actions>
 </mat-card>
