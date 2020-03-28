@@ -1,6 +1,7 @@
 <mat-card>
   <mat-button-toggle-group [(ngModel)]="gameMode">
-    <mat-button-toggle *ngFor="let item of modes" [value]="item.value" aria-label="Text align left">
+    <mat-button-toggle *ngFor="let item of modes; trackBy: ('key' | trackByProperty)"
+                       [value]="item.value">
       {{ 'GLOBAL.ENUM.GAME_MODE.' + item.key | uppercase | translate }}
     </mat-button-toggle>
   </mat-button-toggle-group>
