@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GameMode, Level, Speed } from '../../../app.constants';
 import { Settings } from '../../../components/settings/settings.component';
 import { BoardSettings } from '../../../models/board-settings.model';
+import { Cell } from '../../../models/cell.model';
 
 // tslint:disable-next-line:no-null-keyword
 @Injectable({ providedIn: null })
@@ -16,6 +17,23 @@ export class BoardService {
       user: 'Anonym',
     };
     this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
+  }
+
+  createNewLine(line: number, settings: BoardSettings): Cell[] {
+    const data: Cell[] = [];
+    for (let j = 0; j < settings.width; j++) {
+      data[j] = {
+        id: `${line}-{j}`,
+        x: line,
+        y: j,
+        isSnake: false,
+        isHead: false,
+        isApple: false,
+        isGoldenApple: false,
+      };
+    }
+
+    return data;
   }
 
   getSettings(): BoardSettings {

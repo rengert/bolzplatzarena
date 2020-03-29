@@ -13,6 +13,7 @@ import { ScoreBoard } from '../../../../models/score-board.model';
 import { Snake } from '../../../../models/snake.model';
 import { HighscoreService } from '../../../../services/highscore.service';
 import { BoardService } from '../../services/board.service';
+import { getDirection } from '../../services/directions.util';
 
 @Component({
   selector: 'app-board',
@@ -41,7 +42,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     private readonly logger: LoggerService<BoardComponent>,
     private readonly snackBar: MatSnackBar,
   ) {
-
   }
 
   get boardSettings(): BoardSettings {
@@ -55,9 +55,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setup();
 
-    setTimeout(async () => {
-      await this.updatePositions();
-    }, this.boardSettings.startDelay);
+    this.nextFrame();
   }
 
   ngOnDestroy(): void {
@@ -69,7 +67,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   handleDirection(direction: Direction): void {
-    this.tempDirection = this.getDirection(this.snake.direction, direction);
+    this.tempDirection = getDirection(this.snake.direction, direction);
   }
 
   restart(): void {
@@ -85,14 +83,13 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.gameOver = false;
     this.started = false;
 
-    setTimeout(async () => {
-      await this.updatePositions();
-    }, this.boardSettings.startDelay);
+    this.nextFrame();
   }
 
   private setup(): void {
-    for (let i = 0; i < this.boardSettings.height; i++) {
-      this.board[i] = this.createNewLine(i);
+    const settings = this.boardSettings;
+    for (let i = 0; i < settings.height; i++) {
+      this.board[i] = this.boardService.createNewLine(i, settings);
     }
 
     this.setSnake();
@@ -147,9 +144,8 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.snake.body.unshift(newHead);
 
     this.updateScoreBoard();
-    setTimeout(async () => {
-      await this.updatePositions();
-    }, this.boardSettings.interval);
+
+    this.nextFrame();
   }
 
   private updateScoreBoard(): void {
@@ -217,40 +213,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  private getDirection(current: Direction, newDirection: Direction): Direction {
-    this.logger.debug(`set new direction ${current}: ${newDirection}`);
-
-    const directions = [Direction.Left, Direction.Up, Direction.Right, Direction.Down];
-    let index = directions.indexOf(current);
-    index -= (newDirection === Direction.Left) ? 1 : 0;
-    index += (newDirection === Direction.Right) ? 1 : 0;
-    if (index < 0) {
-      index = directions.length - 1;
-    }
-    if (index === directions.length) {
-      index = 0;
-    }
-
-    return directions[index];
-  }
-
-  private createNewLine(line: number): Cell[] {
-    const data: Cell[] = [];
-    for (let j = 0; j < this.boardSettings.width; j++) {
-      data[j] = {
-        id: `${line}-{j}`,
-        x: line,
-        y: j,
-        isSnake: false,
-        isHead: false,
-        isApple: false,
-        isGoldenApple: false,
-      };
-    }
-
-    return data;
-  }
-
   private setSnake(): void {
     this.snake = {
       body: [],
@@ -293,5 +255,11 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   private isTail(coord: { x: number, y: number }): boolean {
     return this.snake.body.some(cell => (cell.x === coord.x) && (cell.y === coord.y));
+  }
+
+  private nextFrame(): void {
+    setTimeout(async () => {
+      await this.updatePositions();
+    }, this.boardSettings.interval);
   }
 }
