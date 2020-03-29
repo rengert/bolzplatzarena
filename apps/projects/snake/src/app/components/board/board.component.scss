@@ -48,6 +48,11 @@
     height: auto;
     padding: 0 0 .5rem 0;
 
+    button {
+      border: none;
+      background: none;
+    }
+
     .left, .right {
       flex: 1;
       text-align: center;

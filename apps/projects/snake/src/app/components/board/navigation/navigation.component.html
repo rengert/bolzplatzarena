@@ -1,9 +1,9 @@
-<div class="column">
-  <button [routerLink]="['/']">Menü</button>
-</div>
-<div class="column">
-  <button [routerLink]="['/highscore']">Highscore</button>
-</div>
-<div class="column">
-  <button (click)="restart.emit()">Restart</button>
-</div>
+<button mat-flat-button color="primary" (click)="restart.emit()">
+  {{ 'GLOBAL.LINKS.RESTART' | translate }}
+</button>
+<button mat-flat-button color="primary" [routerLink]="['/highscore']">
+  {{ 'GLOBAL.LINKS.HIGHSCORE' | translate }}
+</button>
+<button mat-flat-button color="primary" [routerLink]="['/']">
+  {{ 'GLOBAL.LINKS.HOME' | translate }}
+</button>
