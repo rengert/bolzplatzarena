@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { Direction } from '../../../app.constants';
+import { Direction } from '../../../../../app.constants';
 
 @Component({
   selector: 'app-controls',

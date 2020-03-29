@@ -3,60 +3,53 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SimpleSnackBar } from '@angular/material/snack-bar/simple-snack-bar';
 import { MatSnackBarRef } from '@angular/material/snack-bar/snack-bar-ref';
 import moment from 'moment';
-import { LoggerService } from '../../../../../core/src/lib/modules/logger/services/logger.service';
-import { createUuid } from '../../../../../core/src/lib/utils/common.util';
-import { Direction, GameMode, Level, Points, Speed } from '../../app.constants';
-import { BoardSettings } from '../../models/board-settings.model';
-import { Cell } from '../../models/cell.model';
-import { ScoreBoard } from '../../models/score-board.model';
-import { Snake } from '../../models/snake.model';
-import { HighscoreService } from '../../services/highscore.service';
-import { Settings } from '../settings/settings.component';
+import { LoggerService } from '../../../../../../../core/src/lib/modules/logger/services/logger.service';
+import { createUuid } from '../../../../../../../core/src/lib/utils/common.util';
+import { Direction, GameMode, Points } from '../../../../app.constants';
+import { Settings } from '../../../../components/settings/settings.component';
+import { BoardSettings } from '../../../../models/board-settings.model';
+import { Cell } from '../../../../models/cell.model';
+import { ScoreBoard } from '../../../../models/score-board.model';
+import { Snake } from '../../../../models/snake.model';
+import { HighscoreService } from '../../../../services/highscore.service';
+import { BoardService } from '../../services/board.service';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
+  providers: [BoardService],
 })
 export class BoardComponent implements OnInit, OnDestroy {
   gameOver: boolean;
   started: boolean;
-
   scoreBoard: ScoreBoard = {
     points: 0,
     apples: 0,
   };
-  readonly board: Cell[][] = [];
-  readonly directions = Direction;
 
-  private readonly settings: Settings;
+  readonly board: Cell[][] = [];
+
   private readonly snackBarReferences: MatSnackBarRef<SimpleSnackBar>[] = [];
 
   private snake: Snake;
   private tempDirection: Direction = Direction.Right;
 
   constructor(
+    private readonly boardService: BoardService,
     private readonly highscore: HighscoreService,
     private readonly logger: LoggerService<BoardComponent>,
     private readonly snackBar: MatSnackBar,
   ) {
-    const data = localStorage.getItem('settings');
-    const defaultValue = {
-      level: Level.Normal,
-      gameMode: GameMode.Normal,
-      user: 'Anonym',
-    };
-    this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
+
   }
 
   get boardSettings(): BoardSettings {
-    return {
-      interval: this.getInterval(),
-      width: 16,
-      height: 20,
-      startDelay: 4500,
-      chanceGoldenApple: 0.1,
-    };
+    return this.boardService.getSettings();
+  }
+
+  get settings(): Settings {
+    return this.boardSettings.settings;
   }
 
   ngOnInit(): void {
@@ -125,7 +118,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.snake.goldenHead = false;
     }
 
-    this.scoreBoard.points += (this.settings.gameMode === GameMode.Normal ? Points.perMove : 0);
+    this.scoreBoard.points += (this.boardSettings.settings.gameMode === GameMode.Normal ? Points.perMove : 0);
 
     const newHead = this.board[coord.x][coord.y];
     newHead.isSnake = true;
@@ -291,23 +284,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.setNewApple();
   }
 
-  private getInterval(): Speed {
-    switch (this.settings.level) {
-      case Level.Easy:
-        return Speed.Slow;
-      case Level.Normal:
-        return Speed.Medium;
-      case Level.Hard:
-        return Speed.Fast;
-      case Level.Faster:
-        return Speed.Fast - this.scoreBoard.apples;
-      default:
-        return Speed.Fast;
-    }
-  }
-
   private isOutside(coord: { x: number, y: number }): boolean {
-    return (coord.x >= this.boardSettings.height) || (coord.y >= this.boardSettings.width) || (coord.x < 0) || (coord.y < 0);
+    return (coord.x >= this.boardSettings.height)
+      || (coord.y >= this.boardSettings.width)
+      || (coord.x < 0)
+      || (coord.y < 0);
   }
 
   private isTail(coord: { x: number, y: number }): boolean {
