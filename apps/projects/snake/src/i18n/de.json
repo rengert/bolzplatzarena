@@ -12,6 +12,11 @@
         "NO_WALLS": "Keine Wände",
         "GOLDEN_APPLE": "Golden Apple"
       }
+    },
+    "LINKS": {
+      "HOME": "Startseite",
+      "HIGHSCORE": "Highscore",
+      "RESTART": "Neustarten"
     }
   },
   "COMPONENTS": {
