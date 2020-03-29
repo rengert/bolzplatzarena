@@ -10,18 +10,7 @@
 
 <app-score [scoreBoard]="scoreBoard"></app-score>
 
-<div *ngIf="!gameOver" class="controls">
-  <div class="left" (click)="handleDirection(directions.Left)">
-    <button class="material-icons">
-      arrow_back
-    </button>
-  </div>
-  <div class="right" (click)="handleDirection(directions.Right)">
-    <button class="material-icons">
-      arrow_forward
-    </button>
-  </div>
-</div>
+<app-controls *ngIf="!gameOver" (control)="handleDirection($event)"></app-controls>
 
 <app-navigation *ngIf="gameOver" (restart)="restart()"></app-navigation>
 

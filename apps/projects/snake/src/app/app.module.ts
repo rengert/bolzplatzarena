@@ -14,6 +14,7 @@ import { HighScoreTableComponent } from './components/highscore/high-score-table
 import { HighscoreComponent } from './components/highscore/highscore.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ScoreComponent } from './components/board/score/score.component';
+import { ControlsComponent } from './components/board/controls/controls.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ScoreComponent } from './components/board/score/score.component';
     NavigationComponent,
     SettingsComponent,
     ScoreComponent,
+    ControlsComponent,
   ],
   imports: [
     AppRoutingModule,
