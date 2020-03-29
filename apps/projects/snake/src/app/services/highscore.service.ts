@@ -14,6 +14,9 @@ export class HighscoreService {
   }
 
   async add(highscore: Highscore): Promise<void> {
+    if (!highscore.name) {
+      return;
+    }
     await this.highscoreStorage.highscore.put(highscore);
     await this.firestore.collection('SnakeHighscore')
       .add(highscore);

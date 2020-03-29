@@ -5,6 +5,7 @@ import { GameMode, Level } from '../../app.constants';
 export interface Settings {
   level: Level;
   gameMode: GameMode;
+  user: string;
 }
 
 @Component({
@@ -15,7 +16,8 @@ export interface Settings {
 })
 export class SettingsComponent {
   readonly Level = Level;
-  readonly GameMode = GameMode;
+
+  user = '';
   level: Level;
   gameMode: GameMode;
   readonly levels: { key: string, value: Level }[];
@@ -37,7 +39,12 @@ export class SettingsComponent {
   }
 
   save(): void {
-    localStorage.setItem('settings', JSON.stringify({ level: this.level, gameMode: this.gameMode }));
+    const settings: Settings = {
+      level: this.level,
+      gameMode: this.gameMode,
+      user: this.user,
+    };
+    localStorage.setItem('settings', JSON.stringify(settings));
     void this.router.navigate(['snake']);
   }
 }
