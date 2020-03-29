@@ -3,68 +3,60 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SimpleSnackBar } from '@angular/material/snack-bar/simple-snack-bar';
 import { MatSnackBarRef } from '@angular/material/snack-bar/snack-bar-ref';
 import moment from 'moment';
-import { LoggerService } from '../../../../../core/src/lib/modules/logger/services/logger.service';
-import { createUuid } from '../../../../../core/src/lib/utils/common.util';
-import { Direction, GameMode, Level, Points, Speed } from '../../app.constants';
-import { BoardSettings } from '../../models/board-settings.model';
-import { Cell } from '../../models/cell.model';
-import { ScoreBoard } from '../../models/score-board.model';
-import { Snake } from '../../models/snake.model';
-import { HighscoreService } from '../../services/highscore.service';
-import { Settings } from '../settings/settings.component';
+import { LoggerService } from '../../../../../../../core/src/lib/modules/logger/services/logger.service';
+import { createUuid } from '../../../../../../../core/src/lib/utils/common.util';
+import { Direction, GameMode, Points } from '../../../../app.constants';
+import { Settings } from '../../../../components/settings/settings.component';
+import { BoardSettings } from '../../../../models/board-settings.model';
+import { Cell } from '../../../../models/cell.model';
+import { ScoreBoard } from '../../../../models/score-board.model';
+import { Snake } from '../../../../models/snake.model';
+import { HighscoreService } from '../../../../services/highscore.service';
+import { BoardService } from '../../services/board.service';
+import { getDirection, getRelativeCoord } from '../../services/directions.util';
+import { isTail } from '../../services/snake.util';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
+  providers: [BoardService],
 })
 export class BoardComponent implements OnInit, OnDestroy {
   gameOver: boolean;
   started: boolean;
-
   scoreBoard: ScoreBoard = {
     points: 0,
     apples: 0,
   };
-  readonly board: Cell[][] = [];
-  readonly directions = Direction;
 
-  private readonly settings: Settings;
+  readonly board: Cell[][] = [];
+
   private readonly snackBarReferences: MatSnackBarRef<SimpleSnackBar>[] = [];
 
   private snake: Snake;
   private tempDirection: Direction = Direction.Right;
 
   constructor(
+    private readonly boardService: BoardService,
     private readonly highscore: HighscoreService,
     private readonly logger: LoggerService<BoardComponent>,
     private readonly snackBar: MatSnackBar,
   ) {
-    const data = localStorage.getItem('settings');
-    const defaultValue = {
-      level: Level.Normal,
-      gameMode: GameMode.Normal,
-      user: 'Anonym',
-    };
-    this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
   }
 
   get boardSettings(): BoardSettings {
-    return {
-      interval: this.getInterval(),
-      width: 16,
-      height: 20,
-      startDelay: 4500,
-      chanceGoldenApple: 0.1,
-    };
+    return this.boardService.getSettings();
+  }
+
+  get settings(): Settings {
+    return this.boardSettings.settings;
   }
 
   ngOnInit(): void {
     this.setup();
 
-    setTimeout(async () => {
-      await this.updatePositions();
-    }, this.boardSettings.startDelay);
+    this.nextFrame();
   }
 
   ngOnDestroy(): void {
@@ -76,7 +68,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   handleDirection(direction: Direction): void {
-    this.tempDirection = this.getDirection(this.snake.direction, direction);
+    this.tempDirection = getDirection(this.snake.direction, direction);
   }
 
   restart(): void {
@@ -92,14 +84,13 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.gameOver = false;
     this.started = false;
 
-    setTimeout(async () => {
-      await this.updatePositions();
-    }, this.boardSettings.startDelay);
+    this.nextFrame();
   }
 
   private setup(): void {
-    for (let i = 0; i < this.boardSettings.height; i++) {
-      this.board[i] = this.createNewLine(i);
+    const settings = this.boardSettings;
+    for (let i = 0; i < settings.height; i++) {
+      this.board[i] = this.boardService.createNewLine(i, settings);
     }
 
     this.setSnake();
@@ -115,7 +106,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     const coord: { x: number; y: number } = this.moveHead();
 
-    if (this.isOutside(coord) || this.isTail(coord)) {
+    if (this.isOutside(coord) || isTail(this.snake, coord)) {
       if (!this.snake.goldenHead) {
         await this.lose();
 
@@ -125,7 +116,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.snake.goldenHead = false;
     }
 
-    this.scoreBoard.points += (this.settings.gameMode === GameMode.Normal ? Points.perMove : 0);
+    this.scoreBoard.points += (this.boardSettings.settings.gameMode === GameMode.Normal ? Points.perMove : 0);
 
     const newHead = this.board[coord.x][coord.y];
     newHead.isSnake = true;
@@ -153,9 +144,13 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     this.snake.body.unshift(newHead);
 
-    setTimeout(async () => {
-      await this.updatePositions();
-    }, this.boardSettings.interval);
+    this.updateScoreBoard();
+
+    this.nextFrame();
+  }
+
+  private updateScoreBoard(): void {
+    this.scoreBoard = { ...this.scoreBoard };
   }
 
   private async lose(): Promise<void> {
@@ -175,28 +170,10 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   private moveHead(): { x: number; y: number } {
     const head = this.snake.body[0];
-    let x = 0;
-    let y = 0;
-
-    switch (this.tempDirection) {
-      case Direction.Right:
-        y = 1;
-        break;
-      case Direction.Left:
-        y = -1;
-        break;
-      case Direction.Down:
-        x = 1;
-        break;
-      case Direction.Up:
-        x = -1;
-        break;
-      default:
-        break;
-    }
-    this.snake.direction = this.tempDirection;
-
+    const { x, y } = getRelativeCoord(this.tempDirection);
     const coord = { x: head.x + x, y: head.y + y };
+
+    this.snake.direction = this.tempDirection;
 
     if (this.settings.gameMode === GameMode.NoWalls || this.snake.goldenHead) {
       coord.x = this.getCoordSafe(coord.x, this.boardSettings.height);
@@ -217,40 +194,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
 
     return result;
-  }
-
-  private getDirection(current: Direction, newDirection: Direction): Direction {
-    this.logger.debug(`set new direction ${current}: ${newDirection}`);
-
-    const directions = [Direction.Left, Direction.Up, Direction.Right, Direction.Down];
-    let index = directions.indexOf(current);
-    index -= (newDirection === Direction.Left) ? 1 : 0;
-    index += (newDirection === Direction.Right) ? 1 : 0;
-    if (index < 0) {
-      index = directions.length - 1;
-    }
-    if (index === directions.length) {
-      index = 0;
-    }
-
-    return directions[index];
-  }
-
-  private createNewLine(line: number): Cell[] {
-    const data: Cell[] = [];
-    for (let j = 0; j < this.boardSettings.width; j++) {
-      data[j] = {
-        id: `${line}-{j}`,
-        x: line,
-        y: j,
-        isSnake: false,
-        isHead: false,
-        isApple: false,
-        isGoldenApple: false,
-      };
-    }
-
-    return data;
   }
 
   private setSnake(): void {
@@ -275,7 +218,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       x: Math.floor(Math.random() * this.boardSettings.height),
       y: Math.floor(Math.random() * this.boardSettings.width),
     };
-    if (!this.isTail(coord)) {
+    if (!isTail(this.snake, coord)) {
       this.board[coord.x][coord.y].isApple = true;
       this.board[coord.x][coord.y].isGoldenApple = (this.settings.gameMode === GameMode.GoldenApple)
         ? Math.random() < this.boardSettings.chanceGoldenApple
@@ -286,26 +229,16 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.setNewApple();
   }
 
-  private getInterval(): Speed {
-    switch (this.settings.level) {
-      case Level.Easy:
-        return Speed.Slow;
-      case Level.Normal:
-        return Speed.Medium;
-      case Level.Hard:
-        return Speed.Fast;
-      case Level.Faster:
-        return Speed.Fast - this.scoreBoard.apples;
-      default:
-        return Speed.Fast;
-    }
-  }
-
   private isOutside(coord: { x: number, y: number }): boolean {
-    return (coord.x >= this.boardSettings.height) || (coord.y >= this.boardSettings.width) || (coord.x < 0) || (coord.y < 0);
+    return (coord.x >= this.boardSettings.height)
+      || (coord.y >= this.boardSettings.width)
+      || (coord.x < 0)
+      || (coord.y < 0);
   }
 
-  private isTail(coord: { x: number, y: number }): boolean {
-    return this.snake.body.some(cell => (cell.x === coord.x) && (cell.y === coord.y));
+  private nextFrame(): void {
+    setTimeout(async () => {
+      await this.updatePositions();
+    }, this.boardSettings.interval);
   }
 }

@@ -33,6 +33,12 @@
     },
     "HIGHSCORE": {
       "HOME_LINK": "Zur Startseite"
+    },
+    "BOARD": {
+      "SCORE": {
+        "POINTS": "Punkte",
+        "APPLES": "Äpfel"
+      }
     }
   }
 }

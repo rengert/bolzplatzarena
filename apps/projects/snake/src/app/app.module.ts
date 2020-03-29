@@ -8,23 +8,21 @@ import { MaterialModule } from '../../../core/src/lib/modules/material/material.
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BoardComponent } from './components/board/board.component';
-import { NavigationComponent } from './components/board/navigation/navigation.component';
 import { HighScoreTableComponent } from './components/highscore/high-score-table/high-score-table.component';
 import { HighscoreComponent } from './components/highscore/highscore.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { BoardModule } from './modules/board/board.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BoardComponent,
     HighscoreComponent,
-    NavigationComponent,
-    SettingsComponent,
     HighScoreTableComponent,
+    SettingsComponent,
   ],
   imports: [
     AppRoutingModule,
+    BoardModule,
     BrowserModule,
     CoreModule,
     MaterialModule,
