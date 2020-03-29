@@ -13,7 +13,8 @@ import { ScoreBoard } from '../../../../models/score-board.model';
 import { Snake } from '../../../../models/snake.model';
 import { HighscoreService } from '../../../../services/highscore.service';
 import { BoardService } from '../../services/board.service';
-import { getDirection } from '../../services/directions.util';
+import { getDirection, getRelativeCoord } from '../../services/directions.util';
+import { isTail } from '../../services/snake.util';
 
 @Component({
   selector: 'app-board',
@@ -105,7 +106,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     const coord: { x: number; y: number } = this.moveHead();
 
-    if (this.isOutside(coord) || this.isTail(coord)) {
+    if (this.isOutside(coord) || isTail(this.snake, coord)) {
       if (!this.snake.goldenHead) {
         await this.lose();
 
@@ -169,28 +170,10 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   private moveHead(): { x: number; y: number } {
     const head = this.snake.body[0];
-    let x = 0;
-    let y = 0;
-
-    switch (this.tempDirection) {
-      case Direction.Right:
-        y = 1;
-        break;
-      case Direction.Left:
-        y = -1;
-        break;
-      case Direction.Down:
-        x = 1;
-        break;
-      case Direction.Up:
-        x = -1;
-        break;
-      default:
-        break;
-    }
-    this.snake.direction = this.tempDirection;
-
+    const { x, y } = getRelativeCoord(this.tempDirection);
     const coord = { x: head.x + x, y: head.y + y };
+
+    this.snake.direction = this.tempDirection;
 
     if (this.settings.gameMode === GameMode.NoWalls || this.snake.goldenHead) {
       coord.x = this.getCoordSafe(coord.x, this.boardSettings.height);
@@ -235,7 +218,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       x: Math.floor(Math.random() * this.boardSettings.height),
       y: Math.floor(Math.random() * this.boardSettings.width),
     };
-    if (!this.isTail(coord)) {
+    if (!isTail(this.snake, coord)) {
       this.board[coord.x][coord.y].isApple = true;
       this.board[coord.x][coord.y].isGoldenApple = (this.settings.gameMode === GameMode.GoldenApple)
         ? Math.random() < this.boardSettings.chanceGoldenApple
@@ -251,10 +234,6 @@ export class BoardComponent implements OnInit, OnDestroy {
       || (coord.y >= this.boardSettings.width)
       || (coord.x < 0)
       || (coord.y < 0);
-  }
-
-  private isTail(coord: { x: number, y: number }): boolean {
-    return this.snake.body.some(cell => (cell.x === coord.x) && (cell.y === coord.y));
   }
 
   private nextFrame(): void {

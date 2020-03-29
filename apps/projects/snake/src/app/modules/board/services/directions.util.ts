@@ -1,5 +1,29 @@
 import { Direction } from '../../../app.constants';
 
+export function getRelativeCoord(direction: Direction): { x: number, y: number } {
+  let x = 0;
+  let y = 0;
+
+  switch (direction) {
+    case Direction.Right:
+      y = 1;
+      break;
+    case Direction.Left:
+      y = -1;
+      break;
+    case Direction.Down:
+      x = 1;
+      break;
+    case Direction.Up:
+      x = -1;
+      break;
+    default:
+      break;
+  }
+
+  return { x, y };
+}
+
 export function getDirection(current: Direction, newDirection: Direction): Direction {
   const directions = [Direction.Left, Direction.Up, Direction.Right, Direction.Down];
   let index = directions.indexOf(current);
