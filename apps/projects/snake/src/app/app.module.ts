@@ -13,15 +13,17 @@ import { NavigationComponent } from './components/board/navigation/navigation.co
 import { HighScoreTableComponent } from './components/highscore/high-score-table/high-score-table.component';
 import { HighscoreComponent } from './components/highscore/highscore.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { ScoreComponent } from './components/board/score/score.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
     HighscoreComponent,
+    HighScoreTableComponent,
     NavigationComponent,
     SettingsComponent,
-    HighScoreTableComponent,
+    ScoreComponent,
   ],
   imports: [
     AppRoutingModule,

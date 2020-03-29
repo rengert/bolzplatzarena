@@ -8,10 +8,7 @@
   </div>
 </div>
 
-<div class="score-board">
-  <div><label>Punkte:</label> {{ scoreBoard.points }}</div>
-  <div><label>Äpfel</label> {{ scoreBoard.apples }}</div>
-</div>
+<app-score [scoreBoard]="scoreBoard"></app-score>
 
 <div *ngIf="!gameOver" class="controls">
   <div class="left" (click)="handleDirection(directions.Left)">

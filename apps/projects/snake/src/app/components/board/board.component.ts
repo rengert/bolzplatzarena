@@ -153,9 +153,14 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     this.snake.body.unshift(newHead);
 
+    this.updateScoreBoard();
     setTimeout(async () => {
       await this.updatePositions();
     }, this.boardSettings.interval);
+  }
+
+  private updateScoreBoard(): void {
+    this.scoreBoard = { ...this.scoreBoard };
   }
 
   private async lose(): Promise<void> {
