@@ -1,6 +1,7 @@
 import { Level } from './level';
+import { Size } from './size';
 
 export interface Config {
-  size: number;
+  size: Size;
   level: Level;
 }
