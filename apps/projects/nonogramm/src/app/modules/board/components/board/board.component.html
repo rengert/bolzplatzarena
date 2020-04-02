@@ -17,7 +17,7 @@
     <app-block *ngFor="let block of row.data; trackBy: ({ prop1: 'row', prop2: 'column'} | trackByCoord)"
                [block]="block"
                [config]="boardData.config"
-               (actionEvent)="onAction($event)"
+               (action)="onAction($event)"
                [selectExpected]="selectType">
     </app-block>
   </div>

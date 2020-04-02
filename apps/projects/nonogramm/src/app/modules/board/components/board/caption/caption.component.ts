@@ -11,9 +11,9 @@ import { Config } from '../../../../../models/config';
 export class CaptionComponent implements OnChanges {
   @Input() config: Config;
   @Input() numbers: Caption[];
-  @HostBinding('class') cssClass = '';
   @Input() @HostBinding('class.vertical') vertical: boolean;
-  numbersClass = 'default';
+  @HostBinding('class') cssClass: string;
+  @HostBinding('class') numbersClass: string;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.numbersClass = `text-length-${this.numbers.length}`;

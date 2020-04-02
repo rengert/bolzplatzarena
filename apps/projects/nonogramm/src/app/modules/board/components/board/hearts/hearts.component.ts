@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, Simp
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeartsComponent implements OnChanges {
-  @Input() hearts = 3;
+  @Input() hearts: number;
   @HostBinding('class') heartClass: string;
   items: number[];
 
