@@ -1,4 +1,4 @@
 <h3>
-  <span>{{ levelTranslationKey | translate }}</span>
-  &nbsp;<span>{{ 'GLOBAL.ENUM.SIZE.' + config.size | translate }}</span>
+  {{ 'GLOBAL.ENUM.LEVEL.' + config.level | uppercase | translate }}
+  - {{ 'GLOBAL.ENUM.SIZE.' + config.size | translate }}
 </h3>
