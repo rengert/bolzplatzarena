@@ -35,7 +35,7 @@ export class BoardComponent implements OnChanges {
   onAction(failed: boolean): void {
     if (failed) {
       this.boardData.failed++;
-      this.hearts = 3 - this.boardData.failed;
+      this.hearts = HEART_LIMIT - this.boardData.failed;
     }
     this.checkBoard();
   }
@@ -44,9 +44,9 @@ export class BoardComponent implements OnChanges {
     this.columnHints = generateColumnHints(this.boardData);
     this.rowHints = generateRowHints(this.boardData);
 
-    this.hearts = 3 - this.boardData.failed;
+    this.hearts = HEART_LIMIT - this.boardData.failed;
     this.storage.saveGame(this.boardData);
-    if (this.boardData.failed >= 3) {
+    if (this.boardData.failed >= HEART_LIMIT) {
       this.resultEvent.emit(false);
     }
     const flattenedArray = this.boardData.current
