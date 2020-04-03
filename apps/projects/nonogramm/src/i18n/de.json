@@ -18,15 +18,25 @@
     }
   },
   "COMPONENTS": {
+    "GAME": {
+      "GIVE_UP": "Ich geb's auf!"
+    },
+    "IMPRINT": {
+      "TITLE": "Impressum"
+    },
+    "LOSE_SCREEN": {
+      "END_GAME": "Spiel beenden",
+      "RESTART": "Spiel neustarten",
+      "SUBTITLE": "Du hast das aktuelle Spiel verloren.",
+      "TEXT": "Es tut mir leid, aber du bist wohl zu schlecht.",
+      "TITLE": "Verloren"
+    },
     "NAVIGATION": {
       "NEW": "Neues Spiel",
       "CONTINUE": "Weiter spielen",
       "SETTINGS": "Einstellungen",
       "IMPRINT": "Impressum",
       "INSTALL": "Nonogramm installieren"
-    },
-    "GAME": {
-      "GIVE_UP": "Ich geb's auf!"
     },
     "SETTINGS": {
       "HEADLINE": "Einstellungen",
@@ -35,9 +45,6 @@
         "SIZE": "Größe"
       },
       "SAVE": "Speichern"
-    },
-    "IMPRINT": {
-      "TITLE": "Impressum"
     }
   }
 }
