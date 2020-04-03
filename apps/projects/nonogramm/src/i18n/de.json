@@ -45,6 +45,10 @@
         "SIZE": "Größe"
       },
       "SAVE": "Speichern"
+    },
+    "WIN_SCREEN": {
+      "CLOSE": "Spiel abschließen",
+      "TITLE": "Gewonnen"
     }
   }
 }

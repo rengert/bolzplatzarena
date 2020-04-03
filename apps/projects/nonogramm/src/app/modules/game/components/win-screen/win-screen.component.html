@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Gewonnen</h2>
+<h2 mat-dialog-title translate>COMPONENTS.WIN_SCREEN.TITLE</h2>
 <mat-dialog-content class="mat-typography">
   <h3>Du hast das aktuelle Spiel gewonnen.</h3>
   <p>Du hast alle nötigen Felder aufgedeckt und dadurch das Spiel gewonnen. Herzlichen Glückwunsch.</p>
@@ -8,5 +8,7 @@
   <p>Nimm die Herausforderungen an und spiele erneut.</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Spiel abschließen</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+    {{ 'COMPONENTS.WIN_SCREEN.CLOSE' | translate }}
+  </button>
 </mat-dialog-actions>
