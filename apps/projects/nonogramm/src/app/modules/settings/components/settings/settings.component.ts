@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Level } from '../../../../models/level';
+import { Size } from '../../../../models/size';
 import { StorageService } from '../../../../services/storage.service';
 
 @Component({
@@ -12,8 +13,10 @@ import { StorageService } from '../../../../services/storage.service';
 export class SettingsComponent implements OnInit {
   level: Level;
   levels: Level[] = [Level.easy, Level.medium, Level.heavy];
-  size: number;
-  sizes: number[] = [5, 10, 15];
+  size: Size;
+  sizes: Size[] = [
+    Size.Small, Size.Medium, Size.Large,
+  ];
 
   constructor(
     private readonly storage: StorageService,

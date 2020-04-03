@@ -1,4 +1,14 @@
-import { Component, EventEmitter, HostBinding, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Config } from '../../../../../models/config';
 import { GameBlock } from '../../../../../models/game-block';
 
@@ -6,6 +16,7 @@ import { GameBlock } from '../../../../../models/game-block';
   selector: 'app-block',
   templateUrl: './block.component.html',
   styleUrls: ['./block.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlockComponent implements OnChanges {
   @Input() config: Config;
@@ -16,18 +27,19 @@ export class BlockComponent implements OnChanges {
   @HostBinding('class.good') good: boolean;
   none: boolean;
 
-  @Output() readonly actionEvent = new EventEmitter<boolean>();
+  @Output() readonly action = new EventEmitter<boolean>();
 
   @HostListener('click') onClick(): void {
     if (this.block.show) {
       return;
     }
+
     this.block.show = true;
     this.failed = !this.block.expected && this.selectExpected;
     this.good = this.block.expected;
     this.none = !this.block.expected;
 
-    this.actionEvent.emit(this.failed);
+    this.action.emit(this.failed);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

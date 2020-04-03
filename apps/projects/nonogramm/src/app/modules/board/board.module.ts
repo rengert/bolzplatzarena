@@ -19,8 +19,8 @@ import { SettingsViewComponent } from './components/board/settings-view/settings
     BoardComponent,
     BlockComponent,
     CaptionComponent,
-    SettingsViewComponent,
     HeartsComponent,
+    SettingsViewComponent,
   ],
   exports: [
     BoardComponent,
