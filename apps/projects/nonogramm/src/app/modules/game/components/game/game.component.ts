@@ -42,9 +42,9 @@ export class GameComponent implements OnInit {
   private win(): void {
     const dialogRef = this.dialog.open(WinScreenComponent);
     dialogRef.afterClosed()
-      .subscribe(() => {
+      .subscribe(async () => {
         this.storage.cleanGame();
-        void this.router.navigate(['']);
+        await this.router.navigate(['']);
       });
   }
 

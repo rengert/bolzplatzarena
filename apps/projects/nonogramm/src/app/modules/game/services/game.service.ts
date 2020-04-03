@@ -5,10 +5,10 @@ import { GameData } from '../../../models/game-data';
 import { GameRow } from '../../../models/game-row';
 import { Level } from '../../../models/level';
 
-const probilityEasy = 0.1;
-const probilityMedium = 0.05;
+const probabilityEasy = 0.1;
+const probabilityMedium = 0.05;
 
-const probility = 0.6;
+const probability = 0.6;
 
 function shouldBeShown(expected: boolean, config: Config): boolean {
   if (expected) {
@@ -17,16 +17,31 @@ function shouldBeShown(expected: boolean, config: Config): boolean {
   let result: boolean;
   switch (config.level) {
     case Level.easy:
-      result = Math.random() < probilityEasy;
+      result = Math.random() < probabilityEasy;
       break;
     case Level.medium:
-      result = Math.random() < probilityMedium;
+      result = Math.random() < probabilityMedium;
       break;
     default:
       result = false;
   }
 
   return result;
+}
+
+function createRow(config: Config, rowIndex: number): GameRow {
+  const row: GameRow = { row: rowIndex + 1, data: [] as GameBlock[] };
+  for (let j = 0; j < config.size; j++) {
+    const expected = Math.random() < probability;
+    row.data.push({
+      column: j + 1,
+      row: rowIndex + 1,
+      expected,
+      show: shouldBeShown(expected, config),
+    });
+  }
+
+  return row;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -39,17 +54,7 @@ export class GameService {
       config,
     };
     for (let i = 0; i < config.size; i++) {
-      const row: GameRow = { row: i + 1, data: [] as GameBlock[] };
-      for (let j = 0; j < config.size; j++) {
-        const expected = Math.random() < probility;
-        row.data.push({
-          column: j + 1,
-          row: i + 1,
-          expected,
-          show: shouldBeShown(expected, config),
-        });
-      }
-      gameData.data.push(row);
+      gameData.data.push(createRow(config, i));
     }
     gameData.current = [...gameData.data].map(
       row => ({
