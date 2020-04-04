@@ -2,11 +2,20 @@ import { Injectable } from '@angular/core';
 import { Config } from '../models/config';
 import { GameData } from '../models/game-data';
 import { Level } from '../models/level';
+import { Size } from '../models/size';
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
   private readonly configStorageKey = 'config';
   private readonly gameStorageKey = 'game';
+
+  loadConfig(): Config {
+    const data = localStorage.getItem(this.configStorageKey);
+
+    return (data === null)
+      ? { size: Size.large, level: Level.easy }
+      : JSON.parse(data);
+  }
 
   saveConfig(config: Config): void {
     localStorage.setItem(
@@ -15,11 +24,11 @@ export class StorageService {
     );
   }
 
-  loadConfig(): Config {
-    const data = localStorage.getItem(this.configStorageKey);
+  loadGame(): GameData | undefined {
+    const data = localStorage.getItem(this.gameStorageKey);
 
-    return data === null
-      ? { size: 15, level: Level.easy }
+    return (data === null)
+      ? undefined
       : JSON.parse(data);
   }
 
@@ -32,14 +41,5 @@ export class StorageService {
 
   cleanGame(): void {
     localStorage.removeItem(this.gameStorageKey);
-  }
-
-  loadGame(): GameData | undefined {
-    const data = localStorage.getItem(this.gameStorageKey);
-    if (data !== null) {
-      return JSON.parse(data);
-    }
-
-    return undefined;
   }
 }

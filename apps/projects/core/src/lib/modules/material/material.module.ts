@@ -19,7 +19,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   declarations: [],
   imports: [
     CommonModule,
-    MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
@@ -33,6 +32,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatTableModule,
     MatButtonToggleModule,
     MatToolbarModule,
+    MatButtonModule,
   ],
   exports: [
     MatButtonModule,
