@@ -8,6 +8,11 @@ export class Player {
 
   constructor() {
     this.name = '';
-    this.gameCard = new GameCard();
+    this.gameCard = {
+      round: 0,
+      sumUpper: 0,
+      sumLower: 0,
+      sum: 0,
+    };
   }
 }

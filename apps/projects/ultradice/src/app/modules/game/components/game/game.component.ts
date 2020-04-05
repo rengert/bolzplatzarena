@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { from, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { GameCard } from '../../../../models/game-card.model';
+import { GameCard, recalculate } from '../../../../models/game-card.model';
 import { Game } from '../../../../models/game.model';
 import { DataService } from '../../../../services/data.service';
 import { GameService } from '../../../../services/game.service';
@@ -81,7 +81,8 @@ export class GameComponent implements OnDestroy {
     // handle rule
     this.ruleService.handleRule(this.game.currentPlayer.gameCard, rule, dices);
     this.game.currentPlayer.gameCard.round++;
-    GameCard.recalculate(this.game.currentPlayer.gameCard);
+
+    this.game.currentPlayer.gameCard = recalculate(this.game.currentPlayer.gameCard);
 
     this.game.nextPlayer = true;
 
@@ -100,7 +101,7 @@ export class GameComponent implements OnDestroy {
 
     if (this.game.currentPlayer.gameCard.round === this.game.maxRounds) {
       for (const player of this.game.players) {
-        GameCard.recalculate(player.gameCard);
+        player.gameCard = recalculate(player.gameCard);
         await this.dataService.updateMax('GAME.RESULT.MAX', player.gameCard.sum);
         await this.dataService.updateMin('GAME.RESULT.MIN', player.gameCard.sum);
       }
@@ -114,7 +115,7 @@ export class GameComponent implements OnDestroy {
   }
 
   private initGame$(): Observable<Game> {
-    return from(this.gameService.getGame())
+    return this.gameService.getGame()
       .pipe(
         tap(game => this.game = game),
       );

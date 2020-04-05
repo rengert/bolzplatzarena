@@ -13,9 +13,7 @@ export class GameService {
   }
 
   exists(): boolean {
-    const data = localStorage.getItem('game');
-
-    return data !== null;
+    return localStorage.getItem('game') !== null;
   }
 
   getGame(): Observable<Game> {
