@@ -1,8 +1,35 @@
+import { getValueOrDefault } from '../services/utils';
+
 const BONUS = 50;
 const BONUS_LIMIT = 63;
 
-export class GameCard {
-  round = 0;
+export function recalculate(input: GameCard): GameCard {
+  const card = { ...input };
+  card.sumUpper = getValueOrDefault(card.ones)
+    + getValueOrDefault(card.twos)
+    + getValueOrDefault(card.threes)
+    + getValueOrDefault(card.fours)
+    + getValueOrDefault(card.fives)
+    + getValueOrDefault(card.six);
+  if (card.sumUpper >= BONUS_LIMIT) {
+    card.bonus = BONUS;
+  }
+  card.sumLower = getValueOrDefault(card.onePair);
+  card.sumLower += getValueOrDefault(card.twoPair);
+  card.sumLower += getValueOrDefault(card.threeOfAKind);
+  card.sumLower += getValueOrDefault(card.fourOfAKind);
+  card.sumLower += getValueOrDefault(card.fullHouse);
+  card.sumLower += getValueOrDefault(card.shortStreet);
+  card.sumLower += getValueOrDefault(card.largeStreet);
+  card.sumLower += getValueOrDefault(card.fiveOfAKind);
+  card.sumLower += getValueOrDefault(card.chance);
+  card.sum = card.sumLower + card.sumUpper + getValueOrDefault(card.bonus);
+
+  return card;
+}
+
+export interface GameCard {
+  round: number;
 
   ones?: number;
   twos?: number;
@@ -11,7 +38,7 @@ export class GameCard {
   fives?: number;
   six?: number;
 
-  sumUpper = 0;
+  sumUpper: number;
   bonus?: number;
 
   onePair?: number;
@@ -24,35 +51,9 @@ export class GameCard {
   shortStreet?: number;
   largeStreet?: number;
 
-  fullHouse: number;
+  fullHouse?: number;
   chance?: number;
 
-  sumLower = 0;
-  sum = 0;
-
-  static recalculate(card: GameCard): void {
-    card.sumUpper = GameCard.getValueOrDefault(card.ones)
-      + GameCard.getValueOrDefault(card.twos)
-      + GameCard.getValueOrDefault(card.threes)
-      + GameCard.getValueOrDefault(card.fours)
-      + GameCard.getValueOrDefault(card.fives)
-      + GameCard.getValueOrDefault(card.six);
-    if (card.sumUpper >= BONUS_LIMIT) {
-      card.bonus = BONUS;
-    }
-    card.sumLower = GameCard.getValueOrDefault(card.onePair);
-    card.sumLower += GameCard.getValueOrDefault(card.twoPair);
-    card.sumLower += GameCard.getValueOrDefault(card.threeOfAKind);
-    card.sumLower += GameCard.getValueOrDefault(card.fourOfAKind);
-    card.sumLower += GameCard.getValueOrDefault(card.fullHouse);
-    card.sumLower += GameCard.getValueOrDefault(card.shortStreet);
-    card.sumLower += GameCard.getValueOrDefault(card.largeStreet);
-    card.sumLower += GameCard.getValueOrDefault(card.fiveOfAKind);
-    card.sumLower += GameCard.getValueOrDefault(card.chance);
-    card.sum = card.sumLower + card.sumUpper + GameCard.getValueOrDefault(card.bonus);
-  }
-
-  static getValueOrDefault(value?: number): number {
-    return value ? value : 0;
-  }
+  sumLower: number;
+  sum: number;
 }

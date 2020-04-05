@@ -15,7 +15,7 @@ export class SettingsComponent implements OnInit {
   levels: Level[] = [Level.easy, Level.medium, Level.heavy];
   size: Size;
   sizes: Size[] = [
-    Size.Small, Size.Medium, Size.Large,
+    Size.small, Size.medium, Size.large,
   ];
 
   constructor(
