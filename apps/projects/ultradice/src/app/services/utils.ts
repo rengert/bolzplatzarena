@@ -1,3 +1,3 @@
 export function getValueOrDefault(value?: number): number {
-  return value || 0;
+  return value === undefined ? 0 : value;
 }
