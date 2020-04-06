@@ -12,6 +12,7 @@ import { HighScoreTableComponent } from './components/highscore/high-score-table
 import { HighscoreComponent } from './components/highscore/highscore.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { BoardModule } from './modules/board/board.module';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BoardModule } from './modules/board/board.module';
     HighscoreComponent,
     HighScoreTableComponent,
     SettingsComponent,
+    PrivacyComponent,
   ],
   imports: [
     AppRoutingModule,
