@@ -1,25 +1,35 @@
 {
   "GLOBAL": {
     "ENUM": {
+      "GAME_MODE": {
+        "NORMAL": "Normal",
+        "NO_WALLS": "Keine Wände",
+        "GOLDEN_APPLE": "Golden Apple"
+      },
       "LEVEL": {
         "EASY": "Einfach",
         "NORMAL": "Normal",
         "HARD": "Schwer",
         "FASTER": "Wird schneller"
-      },
-      "GAME_MODE": {
-        "NORMAL": "Normal",
-        "NO_WALLS": "Keine Wände",
-        "GOLDEN_APPLE": "Golden Apple"
       }
     },
     "LINKS": {
-      "HOME": "Startseite",
       "HIGHSCORE": "Highscore",
+      "HOME": "Startseite",
+      "PRIVACY": "Impressum & Datenschutz",
       "RESTART": "Neustarten"
     }
   },
   "COMPONENTS": {
+    "BOARD": {
+      "SCORE": {
+        "POINTS": "Punkte",
+        "APPLES": "Äpfel"
+      }
+    },
+    "HIGHSCORE": {
+      "HOME_LINK": "Zur Startseite"
+    },
     "SETTINGS": {
       "HEADLINE": "Einstellungen",
       "LABELS": {
@@ -30,15 +40,6 @@
       },
       "HIGHSCORE": "Highscore",
       "SAVE": "Speichern & Starten"
-    },
-    "HIGHSCORE": {
-      "HOME_LINK": "Zur Startseite"
-    },
-    "BOARD": {
-      "SCORE": {
-        "POINTS": "Punkte",
-        "APPLES": "Äpfel"
-      }
     }
   }
 }
