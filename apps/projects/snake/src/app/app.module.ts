@@ -10,9 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HighScoreTableComponent } from './components/highscore/high-score-table/high-score-table.component';
 import { HighscoreComponent } from './components/highscore/highscore.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { BoardModule } from './modules/board/board.module';
-import { PrivacyComponent } from './components/privacy/privacy.component';
 
 @NgModule({
   declarations: [

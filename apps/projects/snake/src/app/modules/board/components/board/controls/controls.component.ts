@@ -8,6 +8,6 @@ import { Direction } from '../../../../../app.constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ControlsComponent {
-  Direction = Direction;
   @Output() readonly control = new EventEmitter<Direction>();
+  Direction = Direction;
 }
