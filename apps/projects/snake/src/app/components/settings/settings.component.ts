@@ -38,13 +38,14 @@ export class SettingsComponent {
     ];
   }
 
-  save(): void {
+  async save(): Promise<void> {
     const settings: Settings = {
       level: this.level,
       gameMode: this.gameMode,
       user: this.user,
     };
     localStorage.setItem('settings', JSON.stringify(settings));
-    void this.router.navigate(['snake']);
+
+    await this.router.navigate(['snake']);
   }
 }

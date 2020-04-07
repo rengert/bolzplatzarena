@@ -15,13 +15,11 @@ export class HighScoreTableComponent implements OnChanges, OnInit {
   @Input() gameMode: GameMode;
   @Input() remote: boolean;
 
-  readonly mode = new BehaviorSubject<GameMode>(GameMode.Normal);
-
   data$: Observable<Highscore[]>;
 
-  constructor(
-    private readonly highscore: HighscoreService,
-  ) {
+  private readonly mode = new BehaviorSubject<GameMode>(GameMode.Normal);
+
+  constructor(private readonly highscore: HighscoreService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
