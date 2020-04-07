@@ -41,7 +41,7 @@
       "LABELS": {
         "GAME_MODE": "Spielmodus",
         "LEVEL": "Schwierigkeit",
-        "NAME": "Name",
+        "NAME": "Name für die Highscore",
         "USER": "Benutzer"
       },
       "HIGHSCORE": "Highscore",
