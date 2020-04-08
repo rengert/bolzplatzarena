@@ -38,6 +38,7 @@
     "@capacitor/ios": "^2.0.0",
     "@ngx-pwa/local-storage": "^9.0.3",
     "@ngx-translate/core": "^12.1.2",
+    "@swimlane/ngx-charts": "^13.0.2",
     "@types/lodash": "^4.14.149",
     "angular-tslint-rules": "^1.20.4",
     "dexie": "latest",
