@@ -11,6 +11,7 @@ export class StatisticsComponent {
     {
       name: 'Germany',
       value: 8940000,
+      color: '#ededed',
     },
     {
       name: 'USA',
@@ -33,7 +34,16 @@ export class StatisticsComponent {
       value: 7200000,
     },
   ];
-  multi: any[];
+
+  colors: any[] = [
+    {
+      name: 'Germany',
+      value: '#ededed',
+    },
+    {
+      name: 'France3',
+      value: '#FF0000',
+    }];
 
   view: [number, number] = [700, 400];
 
@@ -50,8 +60,4 @@ export class StatisticsComponent {
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
   };
-
-  onSelect(event: any): void {
-    console.log(event);
-  }
 }
