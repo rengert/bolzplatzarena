@@ -625,24 +625,11 @@
           "options": {
             "tsConfig": [
               "projects/core-example/tsconfig.app.json",
-              "projects/core-example/tsconfig.spec.json",
-              "projects/core-example/e2e/tsconfig.json"
+              "projects/core-example/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/core-example/e2e/protractor.conf.js",
-            "devServerTarget": "core-example:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "core-example:serve:production"
-            }
           }
         }
       }
