@@ -22,12 +22,6 @@
       "dom"
     ],
     "paths": {
-      "core": [
-        "dist/core"
-      ],
-      "core/*": [
-        "dist/core/*"
-      ]
     },
     "strict": true,
     "strictPropertyInitialization": false,
