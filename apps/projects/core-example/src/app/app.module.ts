@@ -7,12 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { SelectionDemoComponent } from './components/selection-demo/selection-demo.component';
+import { BroadcastDemoComponent } from './components/broadcast-demo/broadcast-demo.component';
+import { CellComponent } from './components/broadcast-demo/cell/cell.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     SelectionDemoComponent,
+    BroadcastDemoComponent,
+    CellComponent,
   ],
   imports: [
     CoreModule,
