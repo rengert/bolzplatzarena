@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatBadgeModule } from '@angular/material/badge';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from '../../../core/src/lib/core.module';
 import { MaterialModule } from '../../../core/src/lib/modules/material/material.module';
@@ -25,6 +26,7 @@ import { SelectionDemoComponent } from './components/selection-demo/selection-de
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
