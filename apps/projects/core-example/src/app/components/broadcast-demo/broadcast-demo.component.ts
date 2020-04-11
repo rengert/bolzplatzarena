@@ -19,6 +19,5 @@ export class BroadcastDemoComponent implements OnInit {
     for (let id = 1; id <= 3000; id++) {
       this.cells.push({ id });
     }
-    console.log(`${this.cells.length} items created`);
   }
 }

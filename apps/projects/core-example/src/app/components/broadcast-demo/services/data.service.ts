@@ -9,8 +9,8 @@ export interface Badge {
 
 @Injectable()
 export class DataService {
-  private interval: Observable<Badge[]>;
-  private limit = 3000;
+  private readonly interval: Observable<Badge[]>;
+  private readonly limit = 3000;
 
   constructor() {
     this.interval = interval(1000)
