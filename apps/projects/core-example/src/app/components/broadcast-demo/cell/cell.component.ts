@@ -1,16 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-cell',
   templateUrl: './cell.component.html',
   styleUrls: ['./cell.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CellComponent implements OnInit {
+export class CellComponent {
+  @Input() id: number;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private readonly data: DataService) {
   }
-
 }
