@@ -16,7 +16,8 @@
     "deploy:startup": "ng build startup --prod && firebase deploy --only hosting:startup",
     "deploy:snake": "ng build snake --prod && firebase deploy --only hosting:rattlesnake",
     "nonogramm": "ng serve nonogramm",
-    "startup": "ng serve startup"
+    "startup": "ng serve startup",
+    "sync snake ios": "cd projects/snake/apps && npx cap sync ios"
   },
   "private": true,
   "dependencies": {
