@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Plugins } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
+
+const { SplashScreen } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -17,5 +20,7 @@ export class AppComponent implements OnInit {
     this.translate.use(lang);
     const data = require(`../i18n/${lang}.json`);
     this.translate.setTranslation(lang, data, true);
+
+    SplashScreen.hide();
   }
 }
