@@ -1,3 +1,5 @@
+@import "../../../../../../values";
+
 :host {
   display: flex;
   width: 100%;
@@ -11,14 +13,17 @@
 
   .left, .right {
     flex: 1;
-    text-align: center;
 
     .material-icons {
+      display: block;
+      margin: auto;
+      color: $brandColorDark;
+      text-align: center;
+      font-size: 9rem;
       -ms-user-select: none;
       -moz-user-select: none;
       -webkit-user-select: none;
       user-select: none;
-      font-size: 6rem;
     }
   }
 }
