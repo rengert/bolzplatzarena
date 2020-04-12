@@ -2,6 +2,10 @@
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~material-design-icons/iconfont/material-icons.css";
 
+
+$brandColor: #f99c38;
+$brandColorDark: #d17519;
+
 html {
   touch-action: manipulation;
   font-size: 10px;
@@ -22,6 +26,10 @@ html {
       min-width: 320px;
       max-width: 475px;
       margin: auto;
+
+      .mat-flat-button.mat-primary {
+        background-color: $brandColorDark;
+      }
     }
   }
 }
