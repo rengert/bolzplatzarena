@@ -1,8 +1,19 @@
 :host {
   display: block;
 
+  mat-card-title {
+    text-align: center;
+    border-bottom: 1px solid grey;
+    margin: 0 0 3rem 0;
+  }
+
+  mat-card-content {
+    margin: 0 0 2rem 0;
+  }
+
   mat-radio-button {
     display: block;
+    margin: .5rem;
   }
 
   button {
