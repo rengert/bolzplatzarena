@@ -37,12 +37,12 @@
       "PRIVACY_NOTE": "ANGABEN GEMÄSS § 5 TMG:<br><br>Thomas Renger<br>Tullastraße 55B <br>76131 Karlsruhe <br><br>E-Mail: info@bolzplatzaena.net<br><br>VERANTWORTLICH FÜR DEN INHALT NACH § 55 ABS. 2 RSTV: <br><br>Thomas Renger"
     },
     "SETTINGS": {
-      "HEADLINE": "Einstellungen",
+      "HEADLINE": "SNAKE",
       "LABELS": {
         "GAME_MODE": "Spielmodus",
         "LEVEL": "Schwierigkeit",
         "NAME": "Name für die Highscore",
-        "USER": "Benutzer"
+        "USER": "Name für die Highscore (wenn du aufgenommen werden willst)"
       },
       "HIGHSCORE": "Highscore",
       "SAVE": "Speichern & Starten"
