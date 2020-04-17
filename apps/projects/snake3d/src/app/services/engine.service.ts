@@ -1,4 +1,3 @@
-/* tslint:disable:binary-expression-operand-order */
 import { ElementRef, Injectable, NgZone } from '@angular/core';
 import {
   Color3,
@@ -128,40 +127,40 @@ export class EngineService {
       'axisX',
       [
         Vector3.Zero(),
-        new Vector3(size, 0, 0), new Vector3(size * 0.95, 0.05 * size, 0),
-        new Vector3(size, 0, 0), new Vector3(size * 0.95, -0.05 * size, 0),
+        new Vector3(size, 0, 0), new Vector3(size * 0.95, size * 0.05, 0),
+        new Vector3(size, 0, 0), new Vector3(size * 0.95, size * -0.05, 0),
       ],
       this.scene,
     );
 
     axisX.color = new Color3(1, 0, 0);
     const xChar = makeTextPlane('X', 'red', size / 10);
-    xChar.position = new Vector3(0.9 * size, -0.05 * size, 0);
+    xChar.position = new Vector3(size * 0.9, size * -0.05, 0);
 
     const axisY = Mesh.CreateLines(
       'axisY',
       [
-        Vector3.Zero(), new Vector3(0, size, 0), new Vector3(-0.05 * size, size * 0.95, 0),
-        new Vector3(0, size, 0), new Vector3(0.05 * size, size * 0.95, 0),
+        Vector3.Zero(), new Vector3(0, size, 0), new Vector3(size * -0.05, size * 0.95, 0),
+        new Vector3(0, size, 0), new Vector3(size * 0.05, size * 0.95, 0),
       ],
       this.scene,
     );
 
     axisY.color = new Color3(0, 1, 0);
     const yChar = makeTextPlane('Y', 'green', size / 10);
-    yChar.position = new Vector3(0, 0.9 * size, -0.05 * size);
+    yChar.position = new Vector3(0, size * 0.9, size * -0.05);
 
     const axisZ = Mesh.CreateLines(
       'axisZ',
       [
-        Vector3.Zero(), new Vector3(0, 0, size), new Vector3(0, -0.05 * size, size * 0.95),
-        new Vector3(0, 0, size), new Vector3(0, 0.05 * size, size * 0.95),
+        Vector3.Zero(), new Vector3(0, 0, size), new Vector3(0, size * -0.05, size * 0.95),
+        new Vector3(0, 0, size), new Vector3(0, size * 0.05, size * 0.95),
       ],
       this.scene,
     );
 
     axisZ.color = new Color3(0, 0, 1);
     const zChar = makeTextPlane('Z', 'blue', size / 10);
-    zChar.position = new Vector3(0, 0.05 * size, 0.9 * size);
+    zChar.position = new Vector3(0, size * 0.05, size * 0.9);
   }
 }

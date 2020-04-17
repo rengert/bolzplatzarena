@@ -733,24 +733,11 @@
           "options": {
             "tsConfig": [
               "projects/snake3d/tsconfig.app.json",
-              "projects/snake3d/tsconfig.spec.json",
-              "projects/snake3d/e2e/tsconfig.json"
+              "projects/snake3d/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/snake3d/e2e/protractor.conf.js",
-            "devServerTarget": "snake3d:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "snake3d:serve:production"
-            }
           }
         }
       }
