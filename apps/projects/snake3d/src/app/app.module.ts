@@ -10,8 +10,8 @@ import { WindowService } from './services/window.service';
     AppComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
   ],
   providers: [
     WindowService,
