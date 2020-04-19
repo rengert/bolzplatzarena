@@ -633,6 +633,114 @@
           }
         }
       }
+    },
+    "snake3d": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/snake3d",
+      "sourceRoot": "projects/snake3d/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/snake3d",
+            "index": "projects/snake3d/src/index.html",
+            "main": "projects/snake3d/src/main.ts",
+            "polyfills": "projects/snake3d/src/polyfills.ts",
+            "tsConfig": "projects/snake3d/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/snake3d/src/favicon.ico",
+              "projects/snake3d/src/assets"
+            ],
+            "styles": [
+              "projects/snake3d/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/snake3d/src/environments/environment.ts",
+                  "with": "projects/snake3d/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "snake3d:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "snake3d:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "snake3d:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/snake3d/src/test.ts",
+            "polyfills": "projects/snake3d/src/polyfills.ts",
+            "tsConfig": "projects/snake3d/tsconfig.spec.json",
+            "karmaConfig": "projects/snake3d/karma.conf.js",
+            "assets": [
+              "projects/snake3d/src/favicon.ico",
+              "projects/snake3d/src/assets"
+            ],
+            "styles": [
+              "projects/snake3d/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/snake3d/tsconfig.app.json",
+              "projects/snake3d/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ultradice"

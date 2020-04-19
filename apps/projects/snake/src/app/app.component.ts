@@ -15,12 +15,12 @@ export class AppComponent implements OnInit {
   constructor(private readonly translate: TranslateService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const lang = 'de';
     this.translate.use(lang);
     const data = require(`../i18n/${lang}.json`);
     this.translate.setTranslation(lang, data, true);
 
-    SplashScreen.hide();
+    await SplashScreen.hide();
   }
 }
