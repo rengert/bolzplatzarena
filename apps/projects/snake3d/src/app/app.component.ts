@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EngineService } from './services/engine.service';
+import { GameService } from './services/game.service';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,12 @@ export class AppComponent implements OnInit {
 
   @ViewChild('rendererCanvas', { static: true }) private readonly rendererCanvas: ElementRef<HTMLCanvasElement>;
 
-  constructor(private readonly engine: EngineService) {
+  constructor(private readonly engine: EngineService, private readonly game: GameService) {
   }
 
   ngOnInit(): void {
-    this.engine.createScene(this.rendererCanvas);
+    const scene = this.engine.createScene(this.rendererCanvas);
+    this.game.init();
     this.engine.animate();
   }
 }
