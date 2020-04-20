@@ -39,6 +39,7 @@ export class GameService {
     material.alpha = 1;
     material.diffuseColor = new Color3(1, 0.2, 0.7);
     this.snake.body[0].mesh.material = material;
+    this.engine.camera.lockedTarget = this.snake.body[0].mesh;
     this.nextFrame();
   }
 
@@ -54,7 +55,7 @@ export class GameService {
     for (let i = 0; i < this.snake.body.length; i++) {
       const current = this.snake.body[i];
       const next = this.snake.body[i + 1];
-      if (next) {
+      if (next !== undefined) {
         next.targets.push(current.mesh.position.clone());
       }
 

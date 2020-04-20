@@ -1,15 +1,15 @@
 import { ElementRef, Injectable, NgZone } from '@angular/core';
-import { Color4, Engine, FreeCamera, HemisphericLight, Light, Mesh, Scene, Vector3 } from '@babylonjs/core';
+import { Color4, Engine, FollowCamera, HemisphericLight, Light, Mesh, Scene, Vector3 } from '@babylonjs/core';
 import { WindowService } from './window.service';
 
 @Injectable({ providedIn: 'root' })
 export class EngineService {
+  camera: FollowCamera;
+  scene: Scene;
+
   private canvas: HTMLCanvasElement;
   private engine: Engine;
-  private camera: FreeCamera;
-  public scene: Scene;
   private light: Light;
-  private sphere: Mesh;
 
   constructor(private readonly ngZone: NgZone,
               private readonly windowRef: WindowService,
@@ -25,12 +25,12 @@ export class EngineService {
     this.scene = new Scene(this.engine);
     this.scene.clearColor = new Color4(0.1, 0.1, 0.1, 1);
 
-    this.camera = new FreeCamera('camera1', new Vector3(0, 5, -10), this.scene);
+    this.camera = new FollowCamera('camera1', new Vector3(0, 5, -10), this.scene);
     this.camera.setTarget(Vector3.Zero());
 
     this.light = new HemisphericLight('light1', new Vector3(0, 1, 0), this.scene);
 
-    const ground = Mesh.CreateGround('ground1', 12, 12, 2, this.scene);
+    Mesh.CreateGround('ground1', 12, 12, 2, this.scene);
   }
 
   animate(): void {
