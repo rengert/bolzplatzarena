@@ -29,7 +29,7 @@ export class GameService {
       body: [],
     };
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 125; i++) {
       const mesh = Mesh.CreateSphere(`ddd${i}`, 32, 0.5, this.engine.scene);
       mesh.position.y = 0.5;
       mesh.position.x = i * 0.5;
@@ -45,37 +45,38 @@ export class GameService {
   private nextFrame(): void {
     setTimeout(async () => {
       await this.updatePositions();
-    }, 16);
+    }, 8);
   }
 
   private async updatePositions(): Promise<void> {
     const coord = getRelativeCoord(this.direction);
 
-    const head = this.snake.body[0];
-    const body = this.snake.body[1];
-    body.targets.push(head.mesh.position.clone());
+    for (let i = 0; i < this.snake.body.length; i++) {
+      const current = this.snake.body[i];
+      const next = this.snake.body[i + 1];
+      if (next) {
+        next.targets.push(current.mesh.position.clone());
+      }
 
-    head.mesh.position.x += coord.x * 0.01;
-    head.mesh.position.z += coord.y * 0.01;
+      if (i === 0) {
+        current.mesh.position.x += coord.x * 0.01;
+        current.mesh.position.z += coord.y * 0.01;
+      } else {
+        // follow
+        const target = current.targets[0];
+        const delta = target.subtract(current.mesh.position)
+          .normalize();
 
-    // follow
-    const target = body.targets[0];
-    console.log('target: ', target.x, target.z);
-    console.log('mesh: ', body.mesh.position.x, body.mesh.position.z);
+        current.mesh.position.x += delta.x > 0 ? 0.01 : 0;
+        current.mesh.position.x -= delta.x < 0 ? 0.01 : 0;
+        current.mesh.position.z += delta.z > 0 ? 0.01 : 0;
+        current.mesh.position.z -= delta.z < 0 ? 0.01 : 0;
 
-    const delta = target.subtract(body.mesh.position)
-      .normalize();
-
-    body.mesh.position.x += delta.x > 0 ? 0.01 : 0;
-    body.mesh.position.x -= delta.x < 0 ? 0.01 : 0;
-    body.mesh.position.z += delta.z > 0 ? 0.01 : 0;
-    body.mesh.position.z -= delta.z < 0 ? 0.01 : 0;
-
-    if (target.equalsWithEpsilon(body.mesh.position)) {
-      body.mesh.position = target.clone();
-      console.log('reached: ', body.targets.length);
-      body.targets.shift();
-      console.log('reached after: ', body.targets.length);
+        if (target.equalsWithEpsilon(current.mesh.position)) {
+          current.mesh.position = target.clone();
+          current.targets.shift();
+        }
+      }
     }
 
     this.nextFrame();
