@@ -1,4 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Direction } from '../../../snake/src/app/app.constants';
+import { getDirection } from '../../../snake/src/app/modules/board/services/directions.util';
 import { EngineService } from './services/engine.service';
 import { GameService } from './services/game.service';
 
@@ -19,5 +21,13 @@ export class AppComponent implements OnInit {
     const scene = this.engine.createScene(this.rendererCanvas);
     this.game.init();
     this.engine.animate();
+  }
+
+  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
+    this.handleDirection(e.key as Direction);
+  }
+
+  handleDirection(direction: Direction): void {
+    this.game.direction = getDirection(this.game.direction, direction);
   }
 }
