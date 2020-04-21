@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Color3, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
+import { BehaviorSubject } from 'rxjs';
 import { Direction } from '../../../../snake/src/app/app.constants';
 import { getRelativeCoord } from '../utils/directions.util';
 import { EngineService } from './engine.service';
@@ -17,6 +18,8 @@ interface Snake {
   providedIn: 'root',
 })
 export class GameService {
+  readonly result$ = new BehaviorSubject<number>(0);
+
   direction: Direction = Direction.Right;
 
   private snake: Snake;
@@ -25,6 +28,7 @@ export class GameService {
   private readonly normal: StandardMaterial;
 
   private apple: Mesh;
+  private result = 0;
 
   constructor(private readonly engine: EngineService) {
   }
@@ -107,11 +111,17 @@ export class GameService {
       const head = this.snake.body[0];
       if (head.mesh.intersectsMesh(this.apple)) {
         this.createApples();
+        this.updateResult(50);
       }
     }
-
+    this.updateResult(0.01);
     this.nextFrame();
 
     return;
+  }
+
+  private updateResult(value: number): void {
+    this.result += value;
+    this.result$.next(this.result);
   }
 }
