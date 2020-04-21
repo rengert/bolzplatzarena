@@ -4,15 +4,16 @@ import { WindowService } from './window.service';
 
 @Injectable({ providedIn: 'root' })
 export class EngineService {
-  camera: FollowCamera;
   scene: Scene;
+  camera: FollowCamera;
 
   private canvas: HTMLCanvasElement;
   private engine: Engine;
   private light: Light;
 
-  constructor(private readonly ngZone: NgZone,
-              private readonly windowRef: WindowService,
+  constructor(
+    private readonly ngZone: NgZone,
+    private readonly windowRef: WindowService,
   ) {
   }
 
@@ -43,12 +44,12 @@ export class EngineService {
         this.scene.render();
       };
 
-      if (this.windowRef.document.readyState !== 'loading') {
-        this.engine.runRenderLoop(rendererLoopCallback);
-      } else {
+      if (this.windowRef.document.readyState === 'loading') {
         this.windowRef.window.addEventListener('DOMContentLoaded', () => {
           this.engine.runRenderLoop(rendererLoopCallback);
         });
+      } else {
+        this.engine.runRenderLoop(rendererLoopCallback);
       }
 
       this.windowRef.window.addEventListener('resize', () => {
