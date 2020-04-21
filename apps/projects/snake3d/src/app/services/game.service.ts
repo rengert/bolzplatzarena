@@ -43,15 +43,19 @@ export class GameService {
       mesh.position.y = 0.5;
       mesh.position.x = i * 0.51;
 
-      mesh.material = new StandardMaterial(`StandardMaterial${i}`, this.engine.scene);
-      mesh.material.alpha = 1;
-      (mesh.material as StandardMaterial).diffuseColor = new Color3(1, 1, 1);
+      const material = new StandardMaterial(`StandardMaterial${i}`, this.engine.scene);
+      material.alpha = 1;
+      material.diffuseColor = new Color3(1, 1, 1);
+
+      mesh.material = material;
 
       this.snake.body.push({ mesh, targets: [] });
     }
+
     const material = new StandardMaterial('head', this.engine.scene);
     material.alpha = 1;
     material.diffuseColor = new Color3(1, 0.2, 0.7);
+
     this.snake.body[0].mesh.material = material;
     this.engine.camera.lockedTarget = this.snake.body[0].mesh;
 
@@ -67,9 +71,11 @@ export class GameService {
     this.apple.position.x = Math.floor(Math.random() * 5);
     this.apple.position.z = Math.floor(Math.random() * 5);
 
-    this.apple.material = new StandardMaterial('Gold', this.engine.scene);
-    this.apple.material.alpha = 1;
-    (this.apple.material as StandardMaterial).diffuseColor = new Color3(0.23, 0.98, 0.53);
+    const material = new StandardMaterial('Gold', this.engine.scene);
+    material.alpha = 1;
+    material.diffuseColor = new Color3(0.23, 0.98, 0.53);
+
+    this.apple.material = material;
   }
 
   private nextFrame(): void {
