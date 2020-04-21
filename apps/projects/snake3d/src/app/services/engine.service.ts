@@ -25,9 +25,11 @@ export class EngineService {
     this.scene = new Scene(this.engine);
     this.scene.clearColor = new Color4(0.1, 0.1, 0.1, 1);
 
-    this.camera = new FollowCamera('camera1', new Vector3(0, 5, -10), this.scene);
-    this.camera.setTarget(Vector3.Zero());
+    const camera = new FollowCamera('camera1', new Vector3(0, 105, -10), this.scene);
+    camera.setTarget(Vector3.Zero());
+    camera.heightOffset = 20;
 
+    this.camera = camera;
     this.light = new HemisphericLight('light1', new Vector3(0, 1, 0), this.scene);
 
     Mesh.CreateGround('ground1', 12, 12, 2, this.scene);
