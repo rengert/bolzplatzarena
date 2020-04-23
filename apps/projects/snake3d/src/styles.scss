@@ -1,15 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
-body {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 0;
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~material-design-icons/iconfont/material-icons.css";
+@import "values";
 
-  #renderCanvas {
-    width: 500px;
-    height: 500px;
-    touch-action: none;
+html {
+  margin: 0;
+  padding: 0;
+  touch-action: manipulation;
+  font-size: 10px;
+  background-color: grey;
+
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+
+  body {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+
+    padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
+    padding-top: env(safe-area-inset-top); /* iOS 11.2 */
+
+    app-root {
+      display: flex;
+      flex: 1;
+
+      .mat-flat-button.mat-primary {
+        background-color: $brandColorDark;
+      }
+
+      a:link, a:visited {
+        color: $brandColor;
+      }
+    }
   }
 }
