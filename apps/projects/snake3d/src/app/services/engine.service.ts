@@ -19,16 +19,15 @@ export class EngineService {
 
   createScene(canvas: ElementRef<HTMLCanvasElement>): void {
     this.canvas = canvas.nativeElement;
-    this.canvas.style.height = '100%';
-    this.canvas.style.width = '100%';
+
     this.engine = new Engine(this.canvas, true);
 
     this.scene = new Scene(this.engine);
     this.scene.clearColor = new Color4(0.1, 0.1, 0.1, 1);
 
-    const camera = new FollowCamera('camera1', new Vector3(0, 105, -10), this.scene);
+    const camera = new FollowCamera('camera1', new Vector3(0, 105, -5), this.scene);
     camera.setTarget(Vector3.Zero());
-    camera.heightOffset = 20;
+    camera.heightOffset = 15;
 
     this.camera = camera;
     this.light = new HemisphericLight('light1', new Vector3(0, 1, 0), this.scene);

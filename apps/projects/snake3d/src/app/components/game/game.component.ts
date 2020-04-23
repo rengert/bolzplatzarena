@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Direction } from '../../../../../snake/src/app/app.constants';
 import { getDirection } from '../../../../../snake/src/app/modules/board/services/directions.util';
 import { EngineService } from '../../services/engine.service';
@@ -10,7 +10,7 @@ import { GameService } from '../../services/game.service';
   styleUrls: ['./game.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements AfterViewInit {
   readonly result$ = this.game.result$;
 
   @ViewChild('rendererCanvas', { static: true }) private readonly rendererCanvas: ElementRef<HTMLCanvasElement>;
@@ -18,7 +18,7 @@ export class GameComponent implements OnInit {
   constructor(private readonly engine: EngineService, private readonly game: GameService) {
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     const scene = this.engine.createScene(this.rendererCanvas);
     this.game.init();
     this.engine.animate();

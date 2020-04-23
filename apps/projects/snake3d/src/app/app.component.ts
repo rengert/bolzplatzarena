@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent implements OnInit {
   constructor(private readonly translate: TranslateService) {
   }
-  
+
   ngOnInit(): void {
     const lang = 'de';
     this.translate.use(lang);
