@@ -4,6 +4,8 @@
 @import "values";
 
 html {
+  margin: 0;
+  padding: 0;
   touch-action: manipulation;
   font-size: 10px;
   background-color: grey;
@@ -14,15 +16,22 @@ html {
   user-select: none;
 
   body {
-    padding: .5rem .25rem;
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+
     padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
     padding-top: env(safe-area-inset-top); /* iOS 11.2 */
 
     app-root {
-      display: block;
-      min-width: 320px;
-      max-width: 475px;
-      margin: auto;
+      display: flex;
+      flex: 1;
 
       .mat-flat-button.mat-primary {
         background-color: $brandColorDark;
@@ -32,20 +41,5 @@ html {
         color: $brandColor;
       }
     }
-  }
-}
-
-body {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 0;
-
-  #renderCanvas {
-    width: 500px;
-    height: 500px;
-    touch-action: none;
   }
 }

@@ -1,5 +1,9 @@
 :host {
   display: block;
+  padding: .5rem .25rem;
+  margin: auto;
+  min-width: 320px;
+  max-width: 475px;
 
   mat-card-title {
     text-align: center;
