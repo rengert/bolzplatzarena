@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Color3, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { BehaviorSubject } from 'rxjs';
+import { createUuid } from '../../../../core/src/lib/utils/common.util';
 import { Direction } from '../../../../snake/src/app/app.constants';
 import { getRelativeCoord } from '../utils/directions.util';
 import { EngineService } from './engine.service';
@@ -118,6 +119,14 @@ export class GameService {
       if (head.mesh.intersectsMesh(this.apple)) {
         this.createApples();
         this.updateResult(50);
+        const last = this.snake.body[this.snake.body.length - 1];
+        const newItem = {
+          mesh: last.mesh.clone(createUuid()),
+          targets: [],
+        };
+        newItem.mesh.position.x += 0.51;
+        newItem.mesh.position.z += 0.51;
+        this.snake.body.push(newItem);
       }
     }
     this.updateResult(0.01);
