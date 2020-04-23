@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-title translate>COMPONENTS.SETTINGS.HEADLINE</mat-card-title>
+  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.USER</mat-card-subtitle>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label translate>COMPONENTS.SETTINGS.LABELS.NAME</mat-label>
+      <input matInput placeholder="Corban Dallas" [(ngModel)]="user">
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.LEVEL</mat-card-subtitle>
+  <mat-card-content>
+    <mat-radio-group
+      aria-labelledby="level-label"
+      [(ngModel)]="level">
+      <mat-radio-button *ngFor="let item of levels; trackBy: ('key' | trackByProperty)"
+                        [value]="item.value">
+        {{ 'GLOBAL.ENUM.LEVEL.' + item.key | uppercase | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.GAME_MODE</mat-card-subtitle>
+  <mat-card-content>
+    <mat-radio-group
+      aria-labelledby="level-label"
+      [(ngModel)]="gameMode">
+      <mat-radio-button *ngFor="let item of modes; trackBy: ('key' | trackByProperty)"
+                        [value]="item.value">
+        {{ 'GLOBAL.ENUM.GAME_MODE.' + item.key | uppercase | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button color="primary" (click)="save()">
+      {{ 'COMPONENTS.SETTINGS.SAVE' | translate }}
+    </button>
+    <button mat-flat-button color="primary" [routerLink]="['highscore']">
+      {{ 'COMPONENTS.SETTINGS.HIGHSCORE' | translate }}
+    </button>
+    <button mat-flat-button color="primary" [routerLink]="['privacy']">
+      {{ 'GLOBAL.LINKS.PRIVACY' | translate }}
+    </button>
+  </mat-card-actions>
+</mat-card>
