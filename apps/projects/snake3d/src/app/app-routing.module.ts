@@ -9,7 +9,7 @@ const routes: Routes = [
     component: SettingsComponent,
   },
   {
-    path: 'game',
+    path: 'snake',
     component: GameComponent,
   },
 ];
