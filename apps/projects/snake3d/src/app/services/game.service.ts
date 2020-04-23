@@ -120,13 +120,17 @@ export class GameService {
         this.createApples();
         this.updateResult(50);
         const last = this.snake.body[this.snake.body.length - 1];
-        const newItem = {
-          mesh: last.mesh.clone(createUuid()),
-          targets: [],
-        };
-        newItem.mesh.position.x += 0.51;
-        newItem.mesh.position.z += 0.51;
-        this.snake.body.push(newItem);
+        const mesh = Mesh.CreateSphere(`tail${createUuid()}`, 32, 0.5, this.engine.scene);
+        mesh.position.y = last.mesh.position.y;
+        mesh.position.z = last.mesh.position.z + 0.51;
+        mesh.position.x = last.mesh.position.x + 0.51;
+
+        const material = new StandardMaterial(`StandardMaterial${createUuid()}`, this.engine.scene);
+        material.alpha = 1;
+        material.diffuseColor = new Color3(1, 1, 1);
+
+        mesh.material = material;
+        this.snake.body.push({ mesh, targets: [] });
       }
     }
     this.updateResult(0.01);
