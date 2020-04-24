@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Color3, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
+import { Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { BehaviorSubject } from 'rxjs';
+import { createUuid } from '../../../../core/src/lib/utils/common.util';
 import { Direction } from '../../../../snake/src/app/app.constants';
 import { getRelativeCoord } from '../utils/directions.util';
 import { EngineService } from './engine.service';
 
 interface Body {
-  mesh: Mesh;
+  mesh: InstancedMesh | Mesh;
   targets: Vector3[];
 }
 
@@ -24,9 +25,8 @@ export class GameService {
 
   private snake: Snake;
 
-  private readonly collision: StandardMaterial;
-  private readonly normal: StandardMaterial;
-
+  private standardMaterial: StandardMaterial;
+  private normalSphereTemplate: Mesh;
   private apple: Mesh;
   private result = 0;
 
@@ -38,26 +38,30 @@ export class GameService {
       body: [],
     };
 
-    for (let i = 0; i < 5; i++) {
-      const mesh = Mesh.CreateSphere(`ddd${i}`, 32, 0.5, this.engine.scene);
-      mesh.position.y = 0.5;
-      mesh.position.x = i * 0.51;
+    this.standardMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
+    this.standardMaterial.alpha = 1;
+    this.standardMaterial.diffuseColor = new Color3(1, 1, 1);
 
-      const material = new StandardMaterial(`StandardMaterial${i}`, this.engine.scene);
-      material.alpha = 1;
-      material.diffuseColor = new Color3(1, 1, 1);
+    this.normalSphereTemplate = Mesh.CreateSphere('NormalSphereTemplate', 32, 0.5, this.engine.scene);
+    this.normalSphereTemplate.material = this.standardMaterial;
+    this.normalSphereTemplate.setEnabled(false);
 
-      mesh.material = material;
-
-      this.snake.body.push({ mesh, targets: [] });
-    }
-
+    const head = Mesh.CreateSphere('SnakeHead', 32, 0.5, this.engine.scene);
     const material = new StandardMaterial('head', this.engine.scene);
     material.alpha = 1;
     material.diffuseColor = new Color3(1, 0.2, 0.7);
+    head.material = material;
+    head.position.y = 0.5;
+    this.snake.body.push({ mesh: head, targets: [] });
 
-    this.snake.body[0].mesh.material = material;
-    this.engine.camera.lockedTarget = this.snake.body[0].mesh;
+    for (let i = 1; i < 5; i++) {
+      const mesh = this.normalSphereTemplate.createInstance(`SnakeTail-${createUuid()}`);
+      mesh.position.y = 0.5;
+      mesh.position.x = i * 0.51;
+      this.snake.body.push({ mesh, targets: [] });
+    }
+
+    this.engine.camera.lockedTarget = head;
 
     this.createApples();
 
@@ -65,17 +69,16 @@ export class GameService {
   }
 
   private createApples(): void {
-    this.apple?.dispose();
+    if (this.apple === undefined) {
+      this.apple = Mesh.CreateSphere('Apple', 32, 0.5, this.engine.scene);
+      const material = new StandardMaterial('Gold', this.engine.scene);
+      material.alpha = 1;
+      material.diffuseColor = new Color3(0.23, 0.98, 0.53);
+      this.apple.material = material;
+    }
 
-    this.apple = Mesh.CreateSphere('Apple', 32, 0.5, this.engine.scene);
     this.apple.position.x = Math.floor(Math.random() * 5);
     this.apple.position.z = Math.floor(Math.random() * 5);
-
-    const material = new StandardMaterial('Gold', this.engine.scene);
-    material.alpha = 1;
-    material.diffuseColor = new Color3(0.23, 0.98, 0.53);
-
-    this.apple.material = material;
   }
 
   private nextFrame(): void {
@@ -113,12 +116,20 @@ export class GameService {
           current.targets.shift();
         }
       }
+    }
 
-      const head = this.snake.body[0];
-      if (head.mesh.intersectsMesh(this.apple)) {
-        this.createApples();
-        this.updateResult(50);
-      }
+    const head = this.snake.body[0];
+    if (head.mesh.intersectsMesh(this.apple)) {
+      this.createApples();
+      this.updateResult(50);
+      const last = this.snake.body[this.snake.body.length - 1];
+
+      const mesh = this.normalSphereTemplate.createInstance(`Tail-${createUuid()}`);
+      mesh.position.y = last.mesh.position.y;
+      mesh.position.z = last.mesh.position.z + 0.51;
+      mesh.position.x = last.mesh.position.x + 0.51;
+
+      this.snake.body.push({ mesh, targets: [] });
     }
     this.updateResult(0.01);
     this.nextFrame();
