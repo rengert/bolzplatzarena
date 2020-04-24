@@ -1,6 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Direction } from '../../../../../snake/src/app/app.constants';
-import { getDirection } from '../../../../../snake/src/app/modules/board/services/directions.util';
 import { EngineService } from '../../services/engine.service';
 import { GameService } from '../../services/game.service';
 
@@ -29,6 +28,6 @@ export class GameComponent implements AfterViewInit {
   }
 
   handleDirection(direction: Direction): void {
-    this.game.direction = getDirection(this.game.direction, direction);
+    this.game.setDirection(direction);
   }
 }
