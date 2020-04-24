@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { BehaviorSubject } from 'rxjs';
 import { createUuid } from '../../../../core/src/lib/utils/common.util';
-import { Direction } from '../../../../snake/src/app/app.constants';
-import { getRelativeCoord } from '../utils/directions.util';
+import { Direction } from '../app.constants';
+import { getDirection, getRelativeCoord } from '../utils/directions.util';
 import { EngineService } from './engine.service';
 
 interface Body {
@@ -21,7 +21,9 @@ interface Snake {
 export class GameService {
   readonly result$ = new BehaviorSubject<number>(0);
 
-  direction: Direction = Direction.Right;
+  private direction: Direction = Direction.Right;
+
+  private lost = false;
 
   private snake: Snake;
 
@@ -31,6 +33,13 @@ export class GameService {
   private result = 0;
 
   constructor(private readonly engine: EngineService) {
+  }
+
+  setDirection(direction: Direction): void {
+    if (this.lost) {
+      return;
+    }
+    this.direction = getDirection(this.direction, direction);
   }
 
   init(): void {
@@ -88,7 +97,7 @@ export class GameService {
   }
 
   private async updatePositions(): Promise<void> {
-    const coord = getRelativeCoord(this.direction);
+    const coord = getRelativeCoord(this.lost ? Direction.Falling : this.direction);
 
     for (let i = 0; i < this.snake.body.length; i++) {
       const current = this.snake.body[i];
@@ -99,7 +108,8 @@ export class GameService {
 
       if (i === 0) {
         current.mesh.position.x += coord.x * 0.01;
-        current.mesh.position.z += coord.y * 0.01;
+        current.mesh.position.y += coord.y * (this.lost ? 0.2 : 0.01);
+        current.mesh.position.z += coord.z * 0.01;
       } else {
         // follow
         const target = current.targets[0];
@@ -108,6 +118,8 @@ export class GameService {
 
         current.mesh.position.x += delta.x > 0 ? 0.01 : 0;
         current.mesh.position.x -= delta.x < 0 ? 0.01 : 0;
+        current.mesh.position.y += delta.y > 0 ? (this.lost ? 0.2 : 0.01) : 0;
+        current.mesh.position.y -= delta.y < 0 ? (this.lost ? 0.2 : 0.01) : 0;
         current.mesh.position.z += delta.z > 0 ? 0.01 : 0;
         current.mesh.position.z -= delta.z < 0 ? 0.01 : 0;
 
@@ -132,6 +144,12 @@ export class GameService {
       this.snake.body.push({ mesh, targets: [] });
     }
     this.updateResult(0.01);
+
+    if (Math.abs(head.mesh.position.x) > 6.25) {
+      this.lost = true;
+      delete this.engine.camera.lockedTarget;
+    }
+
     this.nextFrame();
 
     return;

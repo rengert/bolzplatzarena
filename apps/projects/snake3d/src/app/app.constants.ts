@@ -10,6 +10,7 @@ export enum Direction {
   Up = 'ArrowUp',
   Right = 'ArrowRight',
   Down = 'ArrowDown',
+  Falling = 'Falling',
 }
 
 export enum GameMode {
