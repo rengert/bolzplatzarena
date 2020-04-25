@@ -80,9 +80,17 @@
       <a target="_blank" href="https://www.ratgeberrecht.eu/leistungen/muster-datenschutzerklaerung.html">Muster-Datenschutzerklärung</a>
       der <a target="_blank" href="https://www.ratgeberrecht.eu/datenschutz/datenschutzerklaerung-generator-dsgvo.html">Anwaltskanzlei
       Weiß &amp; Partner</a></p>
-
-    <button mat-flat-button color="primary" [routerLink]="['/']">
-      {{ 'GLOBAL.LINKS.HOME' | translate }}
-    </button>
   </mat-card-content>
+  <mat-card-subtitle translate>COMPONENTS.PRIVACY.VERSION</mat-card-subtitle>
+  <mat-card-subtitle translate>{{ version.value }} {{ version.name }}</mat-card-subtitle>
+  <mat-card-content [innerHTML]="version.description"></mat-card-content>
+  <small>Dieser Text basiert auf folgendem Artikel aus der freien Enzyklopädie Wikipedia: <a
+    [href]="'https://de.wikipedia.org/wiki/' + version.slug" target="_blank">{{ version.name }}</a>
+    (<a
+      href="https://creativecommons.org/licenses/by-sa/3.0/de/legalcode" target="_blank">Lizenz</a>, <a
+      [href]="'https://de.wikipedia.org/w/index.php?action=history&title=' + version.slug " target="_blank">Liste der
+      Autoren</a>).</small>
+  <button mat-flat-button color="primary" [routerLink]="['/']">
+    {{ 'GLOBAL.LINKS.HOME' | translate }}
+  </button>
 </mat-card>
