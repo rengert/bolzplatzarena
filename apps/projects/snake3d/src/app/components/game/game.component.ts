@@ -18,8 +18,7 @@ export class GameComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const scene = this.engine.createScene(this.rendererCanvas);
-    this.game.init();
+    this.game.init(this.rendererCanvas);
     this.engine.animate();
   }
 

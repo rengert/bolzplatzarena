@@ -1,4 +1,4 @@
-import { ElementRef, Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Color4, Engine, FollowCamera, HemisphericLight, Light, Mesh, Scene, Vector3 } from '@babylonjs/core';
 import { WindowService } from './window.service';
 
@@ -17,8 +17,8 @@ export class EngineService {
   ) {
   }
 
-  createScene(canvas: ElementRef<HTMLCanvasElement>): void {
-    this.canvas = canvas.nativeElement;
+  createScene(canvas: HTMLCanvasElement, size: { width: number, height: number }): void {
+    this.canvas = canvas;
 
     this.engine = new Engine(this.canvas, true);
 
@@ -32,7 +32,7 @@ export class EngineService {
     this.camera = camera;
     this.light = new HemisphericLight('light1', new Vector3(0, 1, 0), this.scene);
 
-    Mesh.CreateGround('ground1', 12, 12, 2, this.scene);
+    Mesh.CreateGround('ground1', size.width, size.height, 2, this.scene);
   }
 
   animate(): void {

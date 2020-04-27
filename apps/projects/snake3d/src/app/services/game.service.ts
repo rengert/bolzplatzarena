@@ -1,10 +1,15 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 import { Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { BehaviorSubject } from 'rxjs';
 import { createUuid } from '../../../../core/src/lib/utils/common.util';
 import { Direction } from '../app.constants';
 import { getDirection, getRelativeCoord } from '../utils/directions.util';
 import { EngineService } from './engine.service';
+
+const SPEED = 0.01;
+const LOST_SPEED = 0.2;
+
+const COUNT_PER_MOVE = 0.01;
 
 interface Body {
   mesh: InstancedMesh | Mesh;
@@ -21,18 +26,27 @@ interface Snake {
 export class GameService {
   readonly result$ = new BehaviorSubject<number>(0);
 
+  readonly floor = -50;
+  readonly size = { width: 12, height: 12 };
+  readonly snakeBodySize = 0.5;
+  readonly minGap = 0.01;
+
   private direction: Direction = Direction.Right;
 
   private lost = false;
+  private result = 0;
 
   private snake: Snake;
 
   private standardMaterial: StandardMaterial;
   private normalSphereTemplate: Mesh;
   private apple: Mesh;
-  private result = 0;
 
   constructor(private readonly engine: EngineService) {
+  }
+
+  get speed(): number {
+    return this.lost ? LOST_SPEED : SPEED;
   }
 
   setDirection(direction: Direction): void {
@@ -42,7 +56,8 @@ export class GameService {
     this.direction = getDirection(this.direction, direction);
   }
 
-  init(): void {
+  init(canvas: ElementRef<HTMLCanvasElement>): void {
+    this.engine.createScene(canvas.nativeElement, this.size);
     this.snake = {
       body: [],
     };
@@ -51,22 +66,22 @@ export class GameService {
     this.standardMaterial.alpha = 1;
     this.standardMaterial.diffuseColor = new Color3(1, 1, 1);
 
-    this.normalSphereTemplate = Mesh.CreateSphere('NormalSphereTemplate', 32, 0.5, this.engine.scene);
+    this.normalSphereTemplate = Mesh.CreateSphere('NormalSphereTemplate', 32, this.snakeBodySize, this.engine.scene);
     this.normalSphereTemplate.material = this.standardMaterial;
     this.normalSphereTemplate.setEnabled(false);
 
-    const head = Mesh.CreateSphere('SnakeHead', 32, 0.5, this.engine.scene);
+    const head = Mesh.CreateSphere('SnakeHead', 32, this.snakeBodySize, this.engine.scene);
     const material = new StandardMaterial('head', this.engine.scene);
     material.alpha = 1;
     material.diffuseColor = new Color3(1, 0.2, 0.7);
     head.material = material;
-    head.position.y = 0.5;
+    head.position.y = this.snakeBodySize;
     this.snake.body.push({ mesh: head, targets: [] });
 
     for (let i = 1; i < 5; i++) {
       const mesh = this.normalSphereTemplate.createInstance(`SnakeTail-${createUuid()}`);
       mesh.position.y = 0.5;
-      mesh.position.x = i * 0.51;
+      mesh.position.x = i * (this.snakeBodySize + this.minGap);
       this.snake.body.push({ mesh, targets: [] });
     }
 
@@ -79,21 +94,21 @@ export class GameService {
 
   private createApples(): void {
     if (this.apple === undefined) {
-      this.apple = Mesh.CreateSphere('Apple', 32, 0.5, this.engine.scene);
+      this.apple = Mesh.CreateSphere('Apple', 32, this.snakeBodySize, this.engine.scene);
       const material = new StandardMaterial('Gold', this.engine.scene);
       material.alpha = 1;
       material.diffuseColor = new Color3(0.23, 0.98, 0.53);
       this.apple.material = material;
     }
 
-    this.apple.position.x = Math.floor(Math.random() * 5);
-    this.apple.position.z = Math.floor(Math.random() * 5);
+    this.apple.position.x = Math.floor(Math.random() * this.size.width - this.size.width / 2);
+    this.apple.position.z = Math.floor(Math.random() * this.size.height - this.size.height / 2);
   }
 
   private nextFrame(): void {
     setTimeout(async () => {
       await this.updatePositions();
-    }, 8);
+    }, 16);
   }
 
   private async updatePositions(): Promise<void> {
@@ -107,21 +122,21 @@ export class GameService {
       }
 
       if (i === 0) {
-        current.mesh.position.x += coord.x * 0.01;
-        current.mesh.position.y += coord.y * (this.lost ? 0.2 : 0.01);
-        current.mesh.position.z += coord.z * 0.01;
+        current.mesh.position.x += coord.x * SPEED;
+        current.mesh.position.y += coord.y * this.speed;
+        current.mesh.position.z += coord.z * SPEED;
       } else {
         // follow
         const target = current.targets[0];
         const delta = target.subtract(current.mesh.position)
           .normalize();
 
-        current.mesh.position.x += delta.x > 0 ? 0.01 : 0;
-        current.mesh.position.x -= delta.x < 0 ? 0.01 : 0;
-        current.mesh.position.y += delta.y > 0 ? (this.lost ? 0.2 : 0.01) : 0;
-        current.mesh.position.y -= delta.y < 0 ? (this.lost ? 0.2 : 0.01) : 0;
-        current.mesh.position.z += delta.z > 0 ? 0.01 : 0;
-        current.mesh.position.z -= delta.z < 0 ? 0.01 : 0;
+        current.mesh.position.x += delta.x > 0 ? SPEED : 0;
+        current.mesh.position.x -= delta.x < 0 ? SPEED : 0;
+        current.mesh.position.y += delta.y > 0 ? this.speed : 0;
+        current.mesh.position.y -= delta.y < 0 ? this.speed : 0;
+        current.mesh.position.z += delta.z > 0 ? SPEED : 0;
+        current.mesh.position.z -= delta.z < 0 ? SPEED : 0;
 
         if (target.equalsWithEpsilon(current.mesh.position)) {
           current.mesh.position = target.clone();
@@ -138,16 +153,25 @@ export class GameService {
 
       const mesh = this.normalSphereTemplate.createInstance(`Tail-${createUuid()}`);
       mesh.position.y = last.mesh.position.y;
-      mesh.position.z = last.mesh.position.z + 0.51;
-      mesh.position.x = last.mesh.position.x + 0.51;
+      mesh.position.z = last.mesh.position.z + (this.snakeBodySize + this.minGap);
+      mesh.position.x = last.mesh.position.x + (this.snakeBodySize + this.minGap);
 
       this.snake.body.push({ mesh, targets: [] });
     }
-    this.updateResult(0.01);
+    this.updateResult(COUNT_PER_MOVE);
 
-    if (Math.abs(head.mesh.position.x) > 6.25) {
+    const limitX = (this.size.width + this.snakeBodySize) / 2;
+    const limitZ = (this.size.height + this.snakeBodySize) / 2;
+    if ((Math.abs(head.mesh.position.x) > limitX)
+      || (Math.abs(head.mesh.position.z) > limitZ)) {
       this.lost = true;
       delete this.engine.camera.lockedTarget;
+    }
+
+    if (this.lost && !this.snake.body.some(item => item.mesh.position.y > this.floor)) {
+      // alert('Sie haben leider verloren!');
+
+      return;
     }
 
     this.nextFrame();
