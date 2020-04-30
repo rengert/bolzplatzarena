@@ -649,7 +649,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/snake3d",
+            "outputPath": "dist/snake3d/public",
             "index": "projects/snake3d/src/index.html",
             "main": "projects/snake3d/src/main.ts",
             "polyfills": "projects/snake3d/src/polyfills.ts",
