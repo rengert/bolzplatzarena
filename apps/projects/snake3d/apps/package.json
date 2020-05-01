@@ -1,0 +1,8 @@
+{
+  "name": "snake",
+  "version": "1.0.0",
+  "description": "snake3dçc",
+  "main": "index.js",
+  "author": "Thomas Renger",
+  "license": "ISC"
+}
