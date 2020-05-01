@@ -21,8 +21,8 @@
     }
   },
   "COMPONENTS": {
-    "BOARD": {
-      "SCORE": {
+    "GAME": {
+      "LABEL": {
         "POINTS": "Punkte",
         "APPLES": "Äpfel"
       }

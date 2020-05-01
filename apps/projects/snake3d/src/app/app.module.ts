@@ -10,6 +10,7 @@ import { GameComponent } from './components/game/game.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { WindowService } from './services/window.service';
+import { ToolBarComponent } from './components/game/tool-bar/tool-bar.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { WindowService } from './services/window.service';
     GameComponent,
     PrivacyComponent,
     SettingsComponent,
+    ToolBarComponent,
   ],
   imports: [
     AppRoutingModule,
