@@ -1,7 +1,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { ActionManager, Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
 import { createUuid } from '../../../../core/src/lib/utils/common.util';
 import { Direction } from '../app.constants';
 import { getDirection, getRelativeCoord } from '../utils/directions.util';
@@ -42,13 +42,15 @@ interface Result {
 @Injectable({ providedIn: 'root' })
 export class GameService {
   get result$(): Observable<Result> {
-    return this.innerResult$.pipe(
-      map(result => ({ ...result, points: Math.floor(result.points) })),
-      shareReplay(),
-    );
+    return this.externalResult$;
   }
 
   private readonly innerResult$ = new BehaviorSubject<Result>({ apples: 0, points: 0, lost: false });
+  private readonly externalResult$ = this.innerResult$.pipe(
+    map(result => ({ ...result, points: Math.floor(result.points) })),
+    distinctUntilChanged((a: Result, b: Result) => a.points === b.points && a.lost === b.lost),
+    shareReplay(1),
+  );
 
   private readonly floor = -50;
   private readonly size = { width: 12, height: 12 };
@@ -107,7 +109,7 @@ export class GameService {
     this.engine.camera.lockedTarget = this.snake.body[0].mesh;
 
     scene.actionManager = new ActionManager(scene);
-    scene.registerBeforeRender(() => {
+    scene.registerAfterRender(() => {
       this.beforeRender();
     });
   }
@@ -163,7 +165,7 @@ export class GameService {
     }
 
     if (!this.lost) {
-      this.updateResult(POINTS_PER_MOVE);
+      this.updateResult(POINTS_PER_MOVE, 0);
 
       if ((Math.abs(head.mesh.position.x) > this.limitX)
         || (Math.abs(head.mesh.position.z) > this.limitZ)) {
@@ -172,7 +174,7 @@ export class GameService {
       }
     }
 
-    if (this.result.lost && !this.snake.body.some(item => item.mesh.position.y > this.floor)) {
+    if (this.lost && !this.snake.body.some(item => item.mesh.position.y > this.floor)) {
       this.lose();
 
       return;

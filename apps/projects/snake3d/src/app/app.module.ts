@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { CoreModule } from '../../../core/src/lib/core.module';
+import { MaterialModule } from '../../../core/src/lib/modules/material/material.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { WindowService } from './services/window.service';
     BrowserModule,
     CoreModule,
     FormsModule,
+    MaterialModule,
     TranslateModule.forRoot(),
   ],
   providers: [
