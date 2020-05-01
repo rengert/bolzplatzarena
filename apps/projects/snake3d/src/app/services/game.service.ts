@@ -61,7 +61,7 @@ export class GameService {
   private direction: Direction = Direction.Right;
 
   private lost = false;
-  private result: Result = {
+  private readonly result: Result = {
     apples: 0,
     points: 0,
     lost: false,
@@ -113,6 +113,10 @@ export class GameService {
   }
 
   private beforeRender(): void {
+    if (this.result.lost) {
+      return;
+    }
+
     this.updatePositions();
   }
 
