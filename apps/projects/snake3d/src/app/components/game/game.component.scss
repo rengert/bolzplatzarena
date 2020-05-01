@@ -4,14 +4,12 @@
   flex: 1;
   height: 100%;
 
-  .result {
-    position: absolute;
-    top: 0;
-    z-index: 2;
-    background-color: #fff;
+  app-tool-bar {
   }
 
   canvas {
     flex: 1;
+    // border: .25rem solid #F5F5F5;
+    //    border-top: none;
   }
 }

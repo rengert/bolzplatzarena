@@ -10,8 +10,6 @@ import { GameService } from '../../services/game.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameComponent implements AfterViewInit {
-  readonly result$ = this.game.result$;
-
   @ViewChild('rendererCanvas', { static: true }) private readonly rendererCanvas: ElementRef<HTMLCanvasElement>;
 
   constructor(private readonly engine: EngineService, private readonly game: GameService) {

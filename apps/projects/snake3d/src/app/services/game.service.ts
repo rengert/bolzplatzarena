@@ -1,6 +1,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 import { createUuid } from '../../../../core/src/lib/utils/common.util';
 import { Direction } from '../app.constants';
 import { getDirection, getRelativeCoord } from '../utils/directions.util';
@@ -20,21 +21,36 @@ interface Snake {
   body: Body[];
 }
 
+interface Result {
+  apples: number;
+  points: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class GameService {
-  readonly result$ = new BehaviorSubject<number>(0);
+  get result$(): Observable<Result> {
+    return this.innerResult$.pipe(
+      map(result => ({ ...result, points: Math.floor(result.points) })),
+      shareReplay(),
+    );
+  }
 
-  readonly floor = -50;
-  readonly size = { width: 12, height: 12 };
-  readonly snakeBodySize = 0.5;
-  readonly minGap = 0.01;
+  private readonly innerResult$ = new BehaviorSubject<Result>({ apples: 0, points: 0 });
+
+  private readonly floor = -50;
+  private size = { width: 12, height: 12 };
+  private snakeBodySize = 0.5;
+  private minGap = 0.01;
 
   private direction: Direction = Direction.Right;
 
   private lost = false;
-  private result = 0;
+  private result: Result = {
+    apples: 0,
+    points: 0,
+  };
 
   private snake: Snake;
 
@@ -148,7 +164,7 @@ export class GameService {
     const head = this.snake.body[0];
     if (head.mesh.intersectsMesh(this.apple)) {
       this.createApples();
-      this.updateResult(50);
+      this.updateResult(50, 1);
       const last = this.snake.body[this.snake.body.length - 1];
 
       const mesh = this.normalSphereTemplate.createInstance(`Tail-${createUuid()}`);
@@ -179,8 +195,9 @@ export class GameService {
     return;
   }
 
-  private updateResult(value: number): void {
-    this.result += value;
-    this.result$.next(this.result);
+  private updateResult(value: number, apple = 0): void {
+    this.result.points += value;
+    this.result.apples += apple;
+    this.innerResult$.next(this.result);
   }
 }
