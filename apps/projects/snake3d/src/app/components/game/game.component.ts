@@ -1,11 +1,22 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Direction } from '../../../../../snake/src/app/app.constants';
 import { EngineService } from '../../services/engine.service';
 import { GameService } from '../../services/game.service';
-import { PrivacyComponent } from '../privacy/privacy.component';
+import { LoseScreenComponent } from './lose-screen/lose-screen.component';
 
 @Component({
   selector: 'app-game',
@@ -22,7 +33,10 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
     private readonly engine: EngineService,
     private readonly game: GameService,
     private readonly dialog: MatDialog,
+    private readonly changeDetectionRef: ChangeDetectorRef,
+    private readonly router: Router,
   ) {
+    this.game.reset();
   }
 
   ngOnInit(): void {
@@ -31,6 +45,7 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
     )
       .subscribe(() => {
         this.loseGame();
+        this.changeDetectionRef.detectChanges();
       });
   }
 
@@ -53,13 +68,13 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
 
   private loseGame(): void {
 
-    const dialogRef = this.dialog.open(PrivacyComponent, {
-      width: '250px',
+    const dialogRef = this.dialog.open(LoseScreenComponent, {
+      width: '1250px',
     });
 
     dialogRef.afterClosed()
       .subscribe(result => {
-        console.log('The dialog was closed');
+        this.router.navigate(['/']);
       });
 
     return;

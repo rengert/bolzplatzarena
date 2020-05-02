@@ -12,6 +12,7 @@ import { ToolBarComponent } from './components/game/tool-bar/tool-bar.component'
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { WindowService } from './services/window.service';
+import { LoseScreenComponent } from './components/game/lose-screen/lose-screen.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { WindowService } from './services/window.service';
     PrivacyComponent,
     SettingsComponent,
     ToolBarComponent,
+    LoseScreenComponent,
   ],
   imports: [
     AppRoutingModule,

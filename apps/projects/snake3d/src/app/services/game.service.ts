@@ -63,11 +63,12 @@ export class GameService {
   private direction: Direction = Direction.Right;
 
   private lost = false;
-  private readonly result: Result = {
+  private readonly emptyResult: Result = {
     apples: 0,
     points: 0,
     lost: false,
   };
+  private result: Result = { ...this.emptyResult };
 
   private snake: Snake;
 
@@ -89,7 +90,14 @@ export class GameService {
     this.direction = getDirection(this.direction, direction);
   }
 
+  reset(): void {
+    this.result = { ...this.emptyResult };
+    this.lost = false;
+    this.innerResult$.next(this.result);
+  }
+
   init(canvas: ElementRef<HTMLCanvasElement>): void {
+    this.reset();
     const scene = this.engine.createScene(canvas.nativeElement, this.size);
     this.snake = {
       body: [],
