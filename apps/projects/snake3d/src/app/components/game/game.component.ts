@@ -73,9 +73,8 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed()
-      .subscribe(result => {
-        this.router.navigate(['/']);
-      });
+      .subscribe(async result =>
+        this.router.navigate(['/']));
 
     return;
   }

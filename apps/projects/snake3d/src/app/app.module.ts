@@ -8,11 +8,11 @@ import { MaterialModule } from '../../../core/src/lib/modules/material/material.
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GameComponent } from './components/game/game.component';
+import { LoseScreenComponent } from './components/game/lose-screen/lose-screen.component';
 import { ToolBarComponent } from './components/game/tool-bar/tool-bar.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { WindowService } from './services/window.service';
-import { LoseScreenComponent } from './components/game/lose-screen/lose-screen.component';
 
 @NgModule({
   declarations: [
