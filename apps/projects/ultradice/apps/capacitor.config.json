@@ -1,0 +1,8 @@
+{
+  "appId": "net.bolzplatzarena.ultradice",
+  "appName": "ultradice",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "../../../dist/ultradice/public",
+  "cordova": {}
+}
