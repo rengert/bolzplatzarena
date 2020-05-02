@@ -1,0 +1,6 @@
+<mat-toolbar>
+  <div *ngIf="result$ | async as result" class="result">
+    <label>{{ 'COMPONENTS.GAME.LABEL.APPLES' | translate }}: <span>{{ result.apples }}</span></label>
+    <label>{{ 'COMPONENTS.GAME.LABEL.POINTS' | translate }}: <span>{{ result.points }}</span></label>
+  </div>
+</mat-toolbar>

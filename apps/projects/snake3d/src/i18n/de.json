@@ -25,6 +25,11 @@
       "LABEL": {
         "POINTS": "Punkte",
         "APPLES": "Äpfel"
+      },
+      "LOSE_SCREEN": {
+        "TITLE": "VERLOREN",
+        "SUBTITLE": "Sie haben das Spiel leider verloren.",
+        "TEXT": "Sie können Ihre Punkte gern in den Highscores eintragen oder einfach ein neues Spiel starten."
       }
     },
     "HIGHSCORE": {

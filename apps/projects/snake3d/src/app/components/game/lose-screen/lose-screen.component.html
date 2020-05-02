@@ -1,0 +1,13 @@
+<h2 mat-dialog-title translate>COMPONENTS.GAME.LOSE_SCREEN.TITLE</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 translate>COMPONENTS.GAME.LOSE_SCREEN.SUBTITLE</h3>
+  <p translate>COMPONENTS.GAME.LOSE_SCREEN.TEXT</p>
+  <h3>Zu schwer?</h3>
+  <p>Sieh in den Einstellungen nach, ob es nicht noch etwas einfacher geht.</p>
+  <p>Neu starten oder Spiel beenden?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">{{ 'COMPONENTS.GAME.LOSE_SCREEN.END_GAME' | translate }}</button>
+  <button mat-button [mat-dialog-close]="true"
+          cdkFocusInitial>{{ 'COMPONENTS.GAME.LOSE_SCREEN.RESTART' | translate }}</button>
+</mat-dialog-actions>

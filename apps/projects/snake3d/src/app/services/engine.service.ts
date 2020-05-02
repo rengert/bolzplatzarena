@@ -17,7 +17,7 @@ export class EngineService {
   ) {
   }
 
-  createScene(canvas: HTMLCanvasElement, size: { width: number, height: number }): void {
+  createScene(canvas: HTMLCanvasElement, size: { width: number, height: number }): Scene {
     this.canvas = canvas;
 
     this.engine = new Engine(this.canvas, true);
@@ -33,6 +33,8 @@ export class EngineService {
     this.light = new HemisphericLight('light1', new Vector3(0, 1, 0), this.scene);
 
     Mesh.CreateGround('ground1', size.width, size.height, 2, this.scene);
+
+    return this.scene;
   }
 
   animate(): void {
