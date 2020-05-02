@@ -1,4 +1,4 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { ElementRef, Injectable, NgZone } from '@angular/core';
 import { ActionManager, Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
@@ -76,7 +76,10 @@ export class GameService {
   private normalSphereTemplate: Mesh;
   private apple: Mesh;
 
-  constructor(private readonly engine: EngineService) {
+  constructor(
+    private readonly engine: EngineService,
+    private readonly ngZone: NgZone,
+  ) {
   }
 
   private get speed(): number {
@@ -232,7 +235,7 @@ export class GameService {
 
   private lose(): void {
     this.result.lost = true;
-    this.innerResult$.next(this.result);
+    this.ngZone.run(() => this.innerResult$.next(this.result));
   }
 
   private updateResult(value: number, apple = 0): void {
@@ -242,6 +245,6 @@ export class GameService {
 
     this.result.points += value;
     this.result.apples += apple;
-    this.innerResult$.next(this.result);
+    this.ngZone.run(() => this.innerResult$.next(this.result));
   }
 }
