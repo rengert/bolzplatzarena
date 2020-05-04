@@ -1,0 +1,8 @@
+{
+  "name": "ultradice",
+  "version": "1.0.0",
+  "description": "ultradice",
+  "main": "index.js",
+  "author": "Thomas Renger",
+  "license": "ISC"
+}
