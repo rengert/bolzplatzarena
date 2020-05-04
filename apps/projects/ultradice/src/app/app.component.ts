@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Plugins } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { ResultComponent } from './modules/game/components/result/result.component';
 import { GameService } from './services/game.service';
+
+const { SplashScreen } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -22,12 +25,13 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const lang = 'de';
     this.translate.use(lang);
     const data = require(`../i18n/${lang}.json`);
     this.translate.setTranslation(lang, data, true);
 
+    await SplashScreen.hide();
     this.subscription = this.gameService.state$.subscribe(
       value => {
         this.isVisible = value;
