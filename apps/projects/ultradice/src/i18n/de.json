@@ -3,7 +3,7 @@
     "TO_START": "Zurück zur Startseite"
   },
   "COMPONENTS": {
-    "APP": {
+    "APP_COMPONENT": {
       "STANDINGS": "Zwischenstand"
     },
     "GAME": {

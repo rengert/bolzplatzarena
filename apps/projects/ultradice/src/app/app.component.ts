@@ -16,12 +16,13 @@ const { SplashScreen } = Plugins;
 })
 export class AppComponent implements OnInit, OnDestroy {
   @Input() @HostBinding('class.visible') isVisible: boolean;
+
   private subscription = Subscription.EMPTY;
 
   constructor(
-    private readonly translate: TranslateService,
     private readonly dialog: MatDialog,
-    readonly gameService: GameService,
+    private readonly game: GameService,
+    private readonly translate: TranslateService,
   ) {
   }
 
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translate.setTranslation(lang, data, true);
 
     await SplashScreen.hide();
-    this.subscription = this.gameService.state$.subscribe(
+    this.subscription = this.game.state$.subscribe(
       value => {
         this.isVisible = value;
       },

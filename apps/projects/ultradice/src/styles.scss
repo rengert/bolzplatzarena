@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import 'app/assets/material-icons.css';
+@import "~material-design-icons/iconfont/material-icons.css";
 /* You can add global styles to this file, and also import other style files */
 
 html {
@@ -16,7 +16,7 @@ html {
     padding-top: env(safe-area-inset-top); /* iOS 11.2 */
     margin: 0;
 
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Verdana, sans-serif;
     background: transparent url(assets/images/background.jpg) top left;
 
     .mat-form-field-appearance-legacy {
