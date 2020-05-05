@@ -1,21 +1,29 @@
 :host {
-  display: block;
+  display: flex;
   background: transparent url('../../../../assets/images/game-sprite.png') 0 -41px no-repeat;
   width: 320px;
   height: 41px;
   color: #ededed;
-  font-weight: bold;
+  font-weight: normal;
+  line-height: 44px;
 
-  label {
-    float: left;
-    width: 200px;
+  .text {
+    width: 278px;
     text-align: left;
-    padding: 0.9rem 0.5rem 0 1rem;
+
+    span {
+      padding: 0 1rem;
+    }
   }
 
-  span {
-    float: right;
-    text-align: right;
-    padding: 0.9rem 1.1rem 0 0.5rem;
+  .value {
+    flex: 1;
+
+    span {
+      display: block;
+      padding: 0 0.5rem;
+      text-align: center;
+      font-size: .9em;
+    }
   }
 }
