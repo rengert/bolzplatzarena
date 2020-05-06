@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <p>{{ data.message }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false" translate>
+    {{ 'CORE.COMPONENTS.CONFIRM.NO' | translate }}
+  </button>
+  <button mat-button [mat-dialog-close]="true">
+    {{ 'CORE.COMPONENTS.CONFIRM.YES' | translate }}
+  </button>
+</div>

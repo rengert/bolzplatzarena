@@ -1,16 +1,14 @@
 :host {
-  app-link-button {
-    position: absolute;
-    bottom: 2px;
-    left: 50%;
-    margin-left: -160px;
-  }
+  display: flex;
+  flex-direction: column;
+  margin: 6rem auto 0 auto;
+  height: calc(100vh - 6rem - env(safe-area-inset-bottom) - env(safe-area-inset-top));
+  justify-content: center;
 
   .holder {
     width: 310px;
-    height: 74px;
-    margin: 6rem auto 0 auto;
-    overflow: hidden;
+    height: 65px;
+    margin: auto;
 
     app-dice {
       float: left;
@@ -22,12 +20,10 @@
   }
 
   .rules {
-    position: absolute;
-    flex: 1;
-    top: 13.25rem;
-    bottom: 3.0rem;
-    overflow: scroll;
     display: block;
+    padding: .25rem 0;
+    flex: 1;
+    overflow: auto;
     width: 100%;
 
     .inner {

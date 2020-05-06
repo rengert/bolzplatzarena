@@ -2,9 +2,23 @@
   "GLOBAL": {
     "TO_START": "Zurück zur Startseite"
   },
+  "CORE": {
+    "COMPONENTS": {
+      "CONFIRM": {
+        "NO": "Lieber nicht.",
+        "YES": "Yo, ich muss los!"
+      }
+    }
+  },
   "COMPONENTS": {
     "APP_COMPONENT": {
-      "STANDINGS": "Zwischenstand"
+      "STANDINGS": "Zwischenstand",
+      "END_GAME": {
+        "CONFIRM": {
+          "TITLE": "Spiel beenden",
+          "MESSAGE": "Wenn das Spiel beendet wird, gehen alle Spieldaten verloren. Die Statistiken werden aber dennoch erfasst. Bitte bestätige das Beenden des Spiels."
+        }
+      }
     },
     "GAME": {
       "CREATE": {
@@ -73,7 +87,8 @@
           "4": "4 gewürfelt",
           "5": "5 gewürfelt",
           "6": "6 gewürfelt"
-        }
+        },
+        "ALL": "Würfe gesamt"
       }
     }
   }

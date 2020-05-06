@@ -7,6 +7,7 @@
   width: 100%;
   color: white;
   font-size: 1em;
+  position: relative;
 
   button.trigger {
     right: 5px;
@@ -15,9 +16,13 @@
     border-radius: 25px;
     background-color: transparent;
     color: white;
-    border-width: 5px;
+    border: 5px solid rgba(255, 255, 255, 0.25);
     outline: none;
     display: none;
+
+    .mat-icon {
+      line-height: 15px;
+    }
   }
 }
 
