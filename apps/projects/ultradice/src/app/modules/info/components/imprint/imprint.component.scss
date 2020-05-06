@@ -1,19 +1,20 @@
 :host {
   background: transparent url('../../../../assets/images/notpad_background_normal.png') top center no-repeat;
-  margin-top: 10rem;
-  min-height: 250px;
-  display: block;
+
+  display: flex;
+  flex-direction: column;
+  margin: 6.5rem auto 0 auto;
+  height: calc(100vh - 6.5rem - env(safe-area-inset-bottom) - env(safe-area-inset-top));
+  justify-content: center;
 
   p {
-    padding-top: 3rem;
+    flex: 1;
+    padding: 3rem 0;
     font-size: 0.75em;
     color: black;
   }
 
   app-link-button {
-    position: absolute;
-    bottom: 2px;
-    left: 0;
     width: 100vw;
   }
 }
