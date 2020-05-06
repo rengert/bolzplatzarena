@@ -45,6 +45,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   displayRanking(): void {
-    this.dialog.open(ResultComponent);
+    this.dialog.open(ResultComponent, {
+      width: '90%',
+    });
   }
 }

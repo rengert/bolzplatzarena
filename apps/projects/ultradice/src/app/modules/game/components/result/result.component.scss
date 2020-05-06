@@ -1,6 +1,5 @@
 :host {
   display: block;
-  width: 260px;
 
   ol {
     padding: 0 0 0 1.3rem;
@@ -13,7 +12,7 @@
 
   div.holder {
     height: 73vh;
-    overflow: scroll;
+    overflow: auto;
 
     div {
       div {
