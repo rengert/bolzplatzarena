@@ -7,6 +7,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { DialogModule } from '../../../core/src/lib/modules/dialog/dialog.module';
+import { MaterialModule } from '../../../core/src/lib/modules/material/material.module';
 import { AppComponent } from './app.component';
 import { GameIsRunningGuard } from './guards/game-is-running.guard';
 import { EndResultComponent } from './modules/game/components/end-result/end-result.component';
@@ -33,6 +35,8 @@ import { ROUTES } from './routes';
     MatIconModule,
     MatMenuModule,
     MatDialogModule,
+    MaterialModule,
+    DialogModule,
   ],
   providers: [
     GameIsRunningGuard,

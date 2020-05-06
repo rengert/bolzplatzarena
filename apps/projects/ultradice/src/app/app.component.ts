@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { DialogService } from '../../../core/src/lib/modules/dialog/services/dialog.service';
 import { ResultComponent } from './modules/game/components/result/result.component';
 import { GameService } from './services/game.service';
 
@@ -18,11 +20,14 @@ export class AppComponent implements OnInit, OnDestroy {
   @Input() @HostBinding('class.visible') isVisible: boolean;
 
   private subscription = Subscription.EMPTY;
+  private endSubscription = Subscription.EMPTY;
 
   constructor(
     private readonly dialog: MatDialog,
+    private readonly dialogService: DialogService,
     private readonly game: GameService,
     private readonly translate: TranslateService,
+    private readonly router: Router,
   ) {
   }
 
@@ -42,11 +47,29 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.endSubscription.unsubscribe();
   }
 
   displayRanking(): void {
     this.dialog.open(ResultComponent, {
       width: '90%',
     });
+  }
+
+  endGame(): void {
+    this.endSubscription.unsubscribe();
+    this.endSubscription = this.dialogService.confirm({
+      title: this.translate.instant('COMPONENTS.APP_COMPONENT.END_GAME.CONFIRM.TITLE'),
+      message: this.translate.instant('COMPONENTS.APP_COMPONENT.END_GAME.CONFIRM.MESSAGE'),
+    })
+      .subscribe(async result => {
+        if (!result) {
+          return false;
+        }
+
+        await this.game.cleanUpGame();
+
+        return this.router.navigate(['/']);
+      });
   }
 }

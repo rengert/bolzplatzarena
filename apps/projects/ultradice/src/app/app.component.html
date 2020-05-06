@@ -6,7 +6,11 @@
     <mat-icon>dialpad</mat-icon>
     <span translate>COMPONENTS.APP_COMPONENT.STANDINGS</span>
   </button>
-  <button mat-menu-item disabled [routerLink]="['/home']">
+  <button mat-menu-item [routerLink]="['/']">
+    <mat-icon>dialpad</mat-icon>
+    <span>Zum Menü</span>
+  </button>
+  <button mat-menu-item (click)="endGame()">
     <mat-icon>dialpad</mat-icon>
     <span>Spiel beenden</span>
   </button>
