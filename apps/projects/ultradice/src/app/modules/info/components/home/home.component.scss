@@ -18,6 +18,15 @@
     li {
       padding: 0;
 
+      &.distance {
+        margin-top: 4rem;
+      }
+
+      &.small {
+        font-size: .5em;
+        line-height: 1.5em;
+      }
+
       a {
         color: #000;
 
