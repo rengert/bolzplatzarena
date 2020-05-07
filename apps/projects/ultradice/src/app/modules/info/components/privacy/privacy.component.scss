@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 310px;
+  height: calc(100vh - 7rem - env(safe-area-inset-bottom) - env(safe-area-inset-top));
+  margin: 7rem auto 0 auto;
+  font-size: 0.75em;
+
+  mat-card-content {
+    flex: 1;
+    overflow: auto;
+
+    text-align: justify;
+  }
+}
