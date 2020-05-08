@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-subtitle translate>COMPONENTS.VERSION.HEADLINE</mat-card-subtitle>
+    <mat-card-subtitle>{{ version.value }} {{ version.name }}</mat-card-subtitle>
+    <mat-card-content [innerHTML]="version.description"></mat-card-content>
+    <small>Dieser Text basiert auf folgendem Artikel aus der freien Enzyklopädie Wikipedia: <a
+      [href]="'https://de.wikipedia.org/wiki/' + version.slug" target="_blank">{{ version.name }}</a>
+      (<a
+        href="https://creativecommons.org/licenses/by-sa/3.0/de/legalcode" target="_blank">Lizenz</a>, <a
+        [href]="'https://de.wikipedia.org/w/index.php?action=history&title=' + version.slug " target="_blank">Liste der
+        Autoren</a>).</small>
+  </mat-card-content>
+</mat-card>
+<app-link-button>Zurück zu Start</app-link-button>

@@ -90,6 +90,9 @@
         },
         "ALL": "Würfe gesamt"
       }
+    },
+    "VERSION": {
+      "HEADLINE": "Version"
     }
   }
 }
