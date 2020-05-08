@@ -10,7 +10,7 @@ export function randomMoment(start: MomentInput, end: MomentInput): Moment {
   const randomNumber = (to: number, from = 0): number =>
     Math.floor(Math.random() * (to - from) + from);
 
-  if (start) {
+  if (start !== undefined) {
     const startTime = +moment(start);
     if (startTime > endTime) {
       throw new Error('End date is before start date!');
