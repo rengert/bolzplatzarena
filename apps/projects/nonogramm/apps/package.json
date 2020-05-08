@@ -1,0 +1,8 @@
+{
+  "name": "nonogramm",
+  "version": "1.0.0",
+  "description": "nonogramm",
+  "main": "index.js",
+  "author": "Thomas Renger",
+  "license": "ISC"
+}
