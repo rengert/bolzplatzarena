@@ -5,6 +5,13 @@
 html {
   font: 10px sans-serif;
   color: #000;
+
+  touch-action: manipulation;
+
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 body {

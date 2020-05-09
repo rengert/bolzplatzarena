@@ -49,6 +49,9 @@
     "WIN_SCREEN": {
       "CLOSE": "Spiel abschließen",
       "TITLE": "Gewonnen"
+    },
+    "PRIVACY": {
+      "TITLE": "Datenschutzerklärung"
     }
   }
 }

@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/home/navigation/navigation.component';
 import { ImprintComponent } from './components/imprint/imprint.component';
 import { VersionComponent } from './components/version/version.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { VersionComponent } from './components/version/version.component';
     VersionComponent,
     NavigationComponent,
     ImprintComponent,
+    PrivacyComponent,
   ],
   imports: [
     CommonModule,

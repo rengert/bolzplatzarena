@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameComponent } from './modules/game/components/game/game.component';
 import { HomeComponent } from './modules/home/components/home/home.component';
 import { ImprintComponent } from './modules/home/components/imprint/imprint.component';
+import { PrivacyComponent } from './modules/home/components/privacy/privacy.component';
 import { SettingsComponent } from './modules/settings/components/settings/settings.component';
 
 const routes: Routes = [
@@ -19,8 +20,12 @@ const routes: Routes = [
     component: SettingsComponent,
   },
   {
-    path: 'imprint',
+    path: 'impressum',
     component: ImprintComponent,
+  },
+  {
+    path: 'datenschutz',
+    component: PrivacyComponent,
   },
 ];
 
