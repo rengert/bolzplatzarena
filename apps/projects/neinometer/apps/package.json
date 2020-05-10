@@ -1,0 +1,8 @@
+{
+  "name": "neinometer",
+  "version": "1.0.0",
+  "description": "neinometer",
+  "main": "index.js",
+  "author": "Thomas Renger",
+  "license": "ISC"
+}
