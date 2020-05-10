@@ -35,7 +35,7 @@ export class BlockComponent implements OnChanges {
     }
 
     this.block.show = true;
-    this.failed = !this.block.expected && this.selectExpected;
+    this.failed = !this.block.expected && this.selectExpected || (!this.selectExpected && this.block.expected);
     this.good = this.block.expected;
     this.none = !this.block.expected;
 
