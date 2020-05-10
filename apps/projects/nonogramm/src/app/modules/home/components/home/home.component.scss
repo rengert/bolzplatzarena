@@ -1,5 +1,5 @@
 :host {
-  height: calc(100vh - 56px);
+  height: calc(100vh - 56px - env(safe-area-inset-top));
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -12,6 +12,10 @@
 
   app-version {
     margin: 2rem;
+    text-align: center;
+  }
+
+  div {
     text-align: center;
   }
 }
