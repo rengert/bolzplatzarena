@@ -1,0 +1,4 @@
+<button
+  *ngFor="let message of data"
+  [disabled]="semaphore"
+  (click)="sayNo(message)">{{ message.text }}</button>
