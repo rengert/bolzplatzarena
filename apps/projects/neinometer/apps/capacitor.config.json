@@ -1,0 +1,13 @@
+{
+  "appId": "net.bolzplatzarena.neinomenter",
+  "appName": "neinometer",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "../../../dist/neinometer/public",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
