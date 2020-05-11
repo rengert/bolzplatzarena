@@ -1,6 +1,6 @@
 {
   "appId": "net.bolzplatzarena.neinomenter",
-  "appName": "neinometer",
+  "appName": "neinomat",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "../../../dist/neinometer/public",
