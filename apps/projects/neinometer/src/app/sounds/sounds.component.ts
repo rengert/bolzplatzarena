@@ -19,12 +19,12 @@ export class SoundsComponent {
     {
       id: '1',
       text: ':)',
-      file: 'nein.doch',
+      file: 'nein.doch.mp3',
     },
     {
       id: '2',
       text: ':(',
-      file: 'nein.doch',
+      file: 'aehm.nee.m4a',
     },
     {
       id: '3',
@@ -74,7 +74,7 @@ export class SoundsComponent {
     }
 
     this.semaphore = true;
-    const audio = new Audio(`./assets/sounds/${message.file}.mp3`);
+    const audio = new Audio(`./assets/sounds/${message.file}`);
     audio.addEventListener('ended', () => {
       this.semaphore = false;
       this.changeDetectionRef.detectChanges();
