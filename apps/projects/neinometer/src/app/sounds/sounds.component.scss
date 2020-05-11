@@ -4,9 +4,10 @@
   justify-content: center;
 
   button {
+    flex: 1 0 33%;
     border: none;
     background: none;
     font-size: 4rem;
-    padding: 4rem;
+    padding: 3rem;
   }
 }
