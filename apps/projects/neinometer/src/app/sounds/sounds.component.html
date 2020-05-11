@@ -1,4 +1,4 @@
 <button
-  *ngFor="let message of data"
+  *ngFor="let message of data; trackBy: ('id' | trackByProperty)"
   [disabled]="semaphore"
   (click)="sayNo(message)">{{ message.text }}</button>

@@ -1,7 +1,7 @@
 {
-  "name": "neinometer",
+  "name": "neinomat",
   "version": "1.0.0",
-  "description": "neinometer",
+  "description": "neinomat",
   "main": "index.js",
   "author": "Thomas Renger",
   "license": "ISC"

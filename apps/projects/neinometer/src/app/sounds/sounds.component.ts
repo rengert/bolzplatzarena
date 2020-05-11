@@ -19,47 +19,47 @@ export class SoundsComponent {
     {
       id: '1',
       text: ':)',
-      file: 'nein.doch',
+      file: 'nein.m4a',
     },
     {
       id: '2',
       text: ':(',
-      file: 'nein.doch',
+      file: 'aehm.nee.m4a',
     },
     {
       id: '3',
       text: '=)',
-      file: 'nein.doch',
+      file: 'noe.m4a',
     },
     {
-      id: '1',
+      id: '4',
       text: ':P',
-      file: 'nein.doch',
+      file: 'scheisse.m4a',
     },
     {
-      id: '2',
+      id: '5',
       text: '=(',
-      file: 'nein.doch',
+      file: 'lachen.m4a',
     },
     {
-      id: '3',
+      id: '6',
       text: ';)',
-      file: 'nein.doch',
+      file: 'nachdenken.m4a',
     },
     {
-      id: '1',
+      id: '7',
       text: '8)',
-      file: 'nein.doch',
+      file: 'frage.m4a',
     },
     {
-      id: '2',
+      id: '8',
       text: '8(',
-      file: 'nein.doch',
+      file: 'richtig.m4a',
     },
     {
-      id: '3',
+      id: '9',
       text: '8P',
-      file: 'nein.doch',
+      file: 'urlaub.m4a',
     },
   ];
 
@@ -74,7 +74,7 @@ export class SoundsComponent {
     }
 
     this.semaphore = true;
-    const audio = new Audio(`./assets/sounds/${message.file}.mp3`);
+    const audio = new Audio(`./assets/sounds/${message.file}`);
     audio.addEventListener('ended', () => {
       this.semaphore = false;
       this.changeDetectionRef.detectChanges();
