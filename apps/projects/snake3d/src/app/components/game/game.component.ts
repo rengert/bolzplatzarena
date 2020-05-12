@@ -25,7 +25,7 @@ import { LoseScreenComponent } from './lose-screen/lose-screen.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
-  @ViewChild('rendererCanvas', { static: true }) private readonly rendererCanvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvasElement', { static: true }) private readonly canvasElement: ElementRef<HTMLCanvasElement>;
 
   private subscription = Subscription.EMPTY;
 
@@ -50,7 +50,7 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.game.init(this.rendererCanvas);
+    this.game.init(this.canvasElement);
     this.engine.animate();
   }
 
