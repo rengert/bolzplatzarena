@@ -20,7 +20,7 @@ function directionAsNumber(value: number): 1 | -1 | 0 {
 
 const SEGMENTS = 32;
 const SPEED = 0.01;
-const LOST_SPEED = 0.2;
+const LOST_SPEED = 0.5;
 const POINTS_PER_MOVE = 0.01;
 const POINTS_PER_APPLE = 50;
 
@@ -93,18 +93,20 @@ export class GameService {
     this.direction = getDirection(this.direction, direction);
   }
 
+  restart(): void {
+    this.reset();
+    this.createSnake();
+  }
+
   reset(): void {
     this.result = { ...this.emptyResult };
     this.lost = false;
-    this.innerResult$.next(this.result);
+    this.ngZone.run(() => this.innerResult$.next(this.result));
   }
 
   init(canvas: ElementRef<HTMLCanvasElement>): void {
     this.reset();
     const scene = this.engine.createScene(canvas.nativeElement, this.size);
-    this.snake = {
-      body: [],
-    };
 
     this.standardMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.standardMaterial.alpha = 1;
@@ -126,7 +128,7 @@ export class GameService {
   }
 
   private beforeRender(): void {
-    if (this.result.lost) {
+    if (this.result.lost || !this.snake.body.length) {
       return;
     }
 
@@ -134,6 +136,10 @@ export class GameService {
   }
 
   private createSnake(): void {
+    this.snake = {
+      body: [],
+    };
+
     const head = Mesh.CreateSphere('SnakeHead', SEGMENTS, this.snakeBodySize, this.engine.scene);
     const material = new StandardMaterial('head', this.engine.scene);
     material.alpha = 1;
@@ -185,7 +191,7 @@ export class GameService {
       }
     }
 
-    if (this.lost && !this.snake.body.some(item => item.mesh.position.y > this.floor)) {
+    if (this.lost && !!this.snake.body.length && !this.snake.body.some(item => item.mesh.position.y > this.floor)) {
       this.lose();
 
       return;
