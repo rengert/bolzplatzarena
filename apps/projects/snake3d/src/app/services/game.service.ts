@@ -20,7 +20,7 @@ function directionAsNumber(value: number): 1 | -1 | 0 {
 
 const SEGMENTS = 32;
 const SPEED = 0.01;
-const LOST_SPEED = 0.2;
+const LOST_SPEED = 0.5;
 const POINTS_PER_MOVE = 0.01;
 const POINTS_PER_APPLE = 50;
 
