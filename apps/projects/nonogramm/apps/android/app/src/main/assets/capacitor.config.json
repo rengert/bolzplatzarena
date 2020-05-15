@@ -1,0 +1,13 @@
+{
+  "appId": "net.bolzplatzarena.nonogramm",
+  "appName": "Nonogramm",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "../../../dist/nonogramm/public",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1
+    }
+  },
+  "cordova": {}
+}

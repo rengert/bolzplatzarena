@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Nonogramm</string>
+    <string name="title_activity_main">Nonogramm</string>
+    <string name="package_name">net.bolzplatzarena.nonogramm</string>
+    <string name="custom_url_scheme">net.bolzplatzarena.nonogramm</string>
+</resources>
