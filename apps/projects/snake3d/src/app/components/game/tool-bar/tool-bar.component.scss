@@ -1,7 +1,11 @@
-.result {
-  display: flex;
+:host {
+  position: fixed;
 
-  label {
-    margin-right: 2rem;
+  .result {
+    display: flex;
+
+    label {
+      margin-right: 2rem;
+    }
   }
 }

@@ -3,7 +3,8 @@ import { ActionManager, Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 }
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
 import { createUuid } from '../../../../core/src/lib/utils/common.util';
-import { Direction } from '../app.constants';
+import { Direction, GameMode, Level } from '../app.constants';
+import { Settings } from '../components/settings/settings.component';
 import { getDirection, getRelativeCoord } from '../utils/directions.util';
 import { EngineService } from './engine.service';
 
@@ -20,8 +21,7 @@ function directionAsNumber(value: number): 1 | -1 | 0 {
 
 const SEGMENTS = 32;
 const SPEED = 0.01;
-const LOST_SPEED = 0.5;
-const POINTS_PER_MOVE = 0.01;
+const LOST_SPEED = 0.75;
 const POINTS_PER_APPLE = 50;
 
 interface Body {
@@ -74,16 +74,34 @@ export class GameService {
 
   private standardMaterial: StandardMaterial;
   private normalSphereTemplate: Mesh;
-  private apple: Mesh;
+  private apple: Mesh | undefined;
+
+  private readonly settings: Settings;
 
   constructor(
     private readonly engine: EngineService,
     private readonly ngZone: NgZone,
   ) {
+    const data = localStorage.getItem('settings');
+    const defaultValue = {
+      level: Level.Normal,
+      gameMode: GameMode.Normal,
+      user: 'Anonym',
+    };
+    this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
   }
 
   private get speed(): number {
-    return this.lost ? LOST_SPEED : SPEED;
+    switch (this.settings.level) {
+      case(Level.Normal):
+        return 0.02;
+      case (Level.Hard):
+        return 0.05;
+      default:
+        return SPEED;
+    }
+
+    return SPEED;
   }
 
   setDirection(direction: Direction): void {
@@ -101,6 +119,7 @@ export class GameService {
   reset(): void {
     this.result = { ...this.emptyResult };
     this.lost = false;
+    this.apple = undefined;
     this.ngZone.run(() => this.innerResult$.next(this.result));
   }
 
@@ -151,7 +170,7 @@ export class GameService {
     for (let i = 1; i < 5; i++) {
       const mesh = this.normalSphereTemplate.createInstance(`SnakeTail-${createUuid()}`);
       mesh.position.y = this.snakeBodySize;
-      mesh.position.x = i * (this.snakeBodySize + this.minGap);
+      mesh.position.x = i * (this.snakeBodySize + this.speed);
       this.snake.body.push({ mesh, targets: [] });
     }
   }
@@ -175,14 +194,14 @@ export class GameService {
     this.moveSnake(coord);
 
     const head = this.snake.body[0];
-    if (head.mesh.intersectsMesh(this.apple)) {
+    if (head.mesh.intersectsMesh(this.apple !)) {
       this.updateResult(POINTS_PER_APPLE, 1);
       this.extendTail();
       this.createApples();
     }
 
     if (!this.lost) {
-      this.updateResult(POINTS_PER_MOVE, 0);
+      this.updateResult(this.speed, 0);
 
       if ((Math.abs(head.mesh.position.x) > this.limitX)
         || (Math.abs(head.mesh.position.z) > this.limitZ)) {
@@ -209,18 +228,18 @@ export class GameService {
       }
 
       if (i === 0) {
-        current.mesh.position.x += coord.x * SPEED;
-        current.mesh.position.y += coord.y * this.speed;
-        current.mesh.position.z += coord.z * SPEED;
+        current.mesh.position.x += coord.x * this.speed;
+        current.mesh.position.y += coord.y * LOST_SPEED;
+        current.mesh.position.z += coord.z * this.speed;
       } else {
         // follow
         const target = current.targets[0];
         const delta = target.subtract(current.mesh.position)
           .normalize();
 
-        current.mesh.position.x += directionAsNumber(delta.x) * SPEED;
-        current.mesh.position.y += directionAsNumber(delta.y) * this.speed;
-        current.mesh.position.z += directionAsNumber(delta.z) * SPEED;
+        current.mesh.position.x += directionAsNumber(delta.x) * this.speed;
+        current.mesh.position.y += directionAsNumber(delta.y) * LOST_SPEED;
+        current.mesh.position.z += directionAsNumber(delta.z) * this.speed;
 
         if (target.equalsWithEpsilon(current.mesh.position)) {
           current.mesh.position = target.clone();
@@ -234,8 +253,8 @@ export class GameService {
     const last = this.snake.body[this.snake.body.length - 1];
     const mesh = this.normalSphereTemplate.createInstance(`Tail-${createUuid()}`);
     mesh.position.y = last.mesh.position.y;
-    mesh.position.z = last.mesh.position.z + (this.snakeBodySize + this.minGap);
-    mesh.position.x = last.mesh.position.x + (this.snakeBodySize + this.minGap);
+    mesh.position.z = last.mesh.position.z + (this.snakeBodySize + this.speed);
+    mesh.position.x = last.mesh.position.x + (this.snakeBodySize + this.speed);
     this.snake.body.push({ mesh, targets: [] });
   }
 

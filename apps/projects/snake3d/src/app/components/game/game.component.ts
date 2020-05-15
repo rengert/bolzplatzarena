@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { Direction } from '../../../../../snake/src/app/app.constants';
+import { Direction } from '../../app.constants';
 import { EngineService } from '../../services/engine.service';
 import { GameService } from '../../services/game.service';
 import { LoseScreenComponent } from './lose-screen/lose-screen.component';
