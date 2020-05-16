@@ -77,7 +77,7 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
         if (result) {
           this.game.restart();
 
-          return;
+          return undefined;
         }
 
         return this.router.navigate(['/']);
