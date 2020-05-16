@@ -23,6 +23,8 @@ export class SettingsComponent {
   readonly levels: { key: string, value: Level }[];
   readonly modes: { key: string, value: GameMode }[];
 
+  readonly settings: Settings;
+
   constructor(private readonly router: Router) {
     this.levels = [
       { key: 'EASY', value: Level.Easy },
@@ -35,6 +37,16 @@ export class SettingsComponent {
       { key: 'NO_WALLS', value: GameMode.NoWalls },
       { key: 'GOLDEN_APPLE', value: GameMode.GoldenApple },
     ];
+
+    const data = localStorage.getItem('settings');
+    const defaultValue = {
+      level: Level.Normal,
+      gameMode: GameMode.Normal,
+      user: 'Anonym',
+    };
+    this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
+    this.user = this.settings.user;
+    this.level = this.settings.level;
   }
 
   async save(): Promise<void> {
