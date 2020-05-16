@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Color4, Engine, FollowCamera, HemisphericLight, Light, Mesh, Scene, Vector3 } from '@babylonjs/core';
+import { Color3, Color4, Engine, FollowCamera, HemisphericLight, Light, Mesh, Scene, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { WindowService } from './window.service';
 
 @Injectable({ providedIn: 'root' })
@@ -32,7 +32,12 @@ export class EngineService {
     this.camera = camera;
     this.light = new HemisphericLight('light1', new Vector3(0, 1, 0), this.scene);
 
-    Mesh.CreateGround('ground1', size.width, size.height, 2, this.scene);
+    const materialGround = new StandardMaterial('StandardMaterial', this.scene);
+    materialGround.alpha = 1;
+    materialGround.diffuseColor = new Color3(0.4392, 0.2824, 0.2353);
+
+    const ground = Mesh.CreateGround('ground1', size.width, size.height, 2, this.scene);
+    ground.material = materialGround;
 
     return this.scene;
   }

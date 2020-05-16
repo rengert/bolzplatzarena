@@ -129,7 +129,7 @@ export class GameService {
 
     this.standardMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.standardMaterial.alpha = 1;
-    this.standardMaterial.diffuseColor = new Color3(1, 1, 1);
+    this.standardMaterial.diffuseColor = new Color3(0.816, 0.457, 0.097);
 
     this.normalSphereTemplate = Mesh.CreateSphere('NormalSphereTemplate', SEGMENTS, this.snakeBodySize, this.engine.scene);
     this.normalSphereTemplate.material = this.standardMaterial;
@@ -162,7 +162,7 @@ export class GameService {
     const head = Mesh.CreateSphere('SnakeHead', SEGMENTS, this.snakeBodySize, this.engine.scene);
     const material = new StandardMaterial('head', this.engine.scene);
     material.alpha = 1;
-    material.diffuseColor = new Color3(1, 0.2, 0.7);
+    material.diffuseColor = new Color3(0.816, 0.457, 0.097);
     head.material = material;
     head.position.y = this.snakeBodySize;
     this.snake.body.push({ mesh: head, targets: [] });
