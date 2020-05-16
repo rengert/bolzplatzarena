@@ -277,6 +277,8 @@ export class GameService {
     mesh.position.z = last.mesh.position.z + (this.snakeBodySize + this.speed);
     mesh.position.x = last.mesh.position.x + (this.snakeBodySize + this.speed);
     this.snake.body.push({ mesh, targets: [] });
+
+    this.engine.shadowGenerator.addShadowCaster(mesh);
   }
 
   private lose(): void {
