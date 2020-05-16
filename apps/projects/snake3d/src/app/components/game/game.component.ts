@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { Direction } from '../../../../../snake/src/app/app.constants';
+import { Direction } from '../../app.constants';
 import { EngineService } from '../../services/engine.service';
 import { GameService } from '../../services/game.service';
 import { LoseScreenComponent } from './lose-screen/lose-screen.component';
@@ -43,7 +43,7 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
     this.subscription = this.game.result$.pipe(
       filter(result => result.lost),
     )
-      .subscribe(() => {
+      .subscribe(_ => {
         this.loseGame();
         this.changeDetectionRef.detectChanges();
       });
@@ -74,10 +74,12 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .subscribe(async result => {
+        await this.game.writeScore();
+
         if (result) {
           this.game.restart();
 
-          return;
+          return undefined;
         }
 
         return this.router.navigate(['/']);
