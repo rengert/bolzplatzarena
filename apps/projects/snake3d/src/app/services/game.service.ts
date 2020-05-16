@@ -1,5 +1,6 @@
 import { ElementRef, Injectable, NgZone } from '@angular/core';
 import { ActionManager, Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
+import moment from 'moment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
 import { createUuid } from '../../../../core/src/lib/utils/common.util';
@@ -7,6 +8,7 @@ import { Direction, GameMode, Level } from '../app.constants';
 import { Settings } from '../components/settings/settings.component';
 import { getDirection, getRelativeCoord } from '../utils/directions.util';
 import { EngineService } from './engine.service';
+import { HighscoreService } from './highscore.service';
 
 function directionAsNumber(value: number): 1 | -1 | 0 {
   if (value === 0) {
@@ -55,7 +57,6 @@ export class GameService {
   private readonly floor = -50;
   private readonly size = { width: 12, height: 12 };
   private readonly snakeBodySize = 0.5;
-  private readonly minGap = 0.01;
 
   private readonly limitX = (this.size.width + this.snakeBodySize) / 2;
   private readonly limitZ = (this.size.height + this.snakeBodySize) / 2;
@@ -80,6 +81,7 @@ export class GameService {
 
   constructor(
     private readonly engine: EngineService,
+    private readonly highscore: HighscoreService,
     private readonly ngZone: NgZone,
   ) {
     const data = localStorage.getItem('settings');
@@ -143,6 +145,19 @@ export class GameService {
     scene.actionManager = new ActionManager(scene);
     scene.registerAfterRender(() => {
       this.beforeRender();
+    });
+  }
+
+  async writeScore(): Promise<void> {
+    await this.highscore.add({
+      id: createUuid(),
+      name: this.settings.user,
+      score: Math.floor(this.result.points),
+      apples: this.result.apples,
+      level: this.settings.level,
+      gameMode: this.settings.gameMode,
+      date: moment()
+        .format(),
     });
   }
 

@@ -43,7 +43,7 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
     this.subscription = this.game.result$.pipe(
       filter(result => result.lost),
     )
-      .subscribe(() => {
+      .subscribe(_ => {
         this.loseGame();
         this.changeDetectionRef.detectChanges();
       });
@@ -74,6 +74,8 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .subscribe(async result => {
+        await this.game.writeScore();
+
         if (result) {
           this.game.restart();
 
