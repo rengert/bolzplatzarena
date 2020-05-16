@@ -29,7 +29,7 @@
       "LOSE_SCREEN": {
         "TITLE": "VERLOREN",
         "SUBTITLE": "Sie haben das Spiel leider verloren.",
-        "TEXT": "Sie können Ihre Punkte gern in den Highscores eintragen oder einfach ein neues Spiel starten.",
+        "TEXT": "Ihre Punkte wurden in den Highscores eintragen, spiel Sie gern nochmal!",
         "END_GAME": "Spiel beenden",
         "RESTART": "Spiel neustarten"
       }
