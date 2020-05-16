@@ -29,6 +29,7 @@ const POINTS_PER_APPLE = 50;
 interface Body {
   mesh: InstancedMesh | Mesh;
   targets: Vector3[];
+  name: string;
 }
 
 interface Snake {
@@ -180,13 +181,13 @@ export class GameService {
     material.diffuseColor = new Color3(0.816, 0.457, 0.097);
     head.material = material;
     head.position.y = this.snakeBodySize / 2;
-    this.snake.body.push({ mesh: head, targets: [] });
+    this.snake.body.push({ mesh: head, targets: [], name: 'head' });
 
     for (let i = 1; i < 5; i++) {
       const mesh = this.normalSphereTemplate.createInstance(`SnakeTail-${createUuid()}`);
       mesh.position.y = this.snakeBodySize / 2;
       mesh.position.x = i * (this.snakeBodySize + this.speed);
-      this.snake.body.push({ mesh, targets: [] });
+      this.snake.body.push({ mesh, targets: [], name: i.toString() });
       this.engine.shadowGenerator.addShadowCaster(mesh);
     }
 
@@ -231,13 +232,31 @@ export class GameService {
       }
     }
 
-    if (this.lost && !!this.snake.body.length && !this.snake.body.some(item => item.mesh.position.y > this.floor)) {
+    if ((this.lost
+      && !!this.snake.body.length
+      && !this.snake.body.some(item => item.mesh.position.y > this.floor))
+      || this.intersectsTail()) {
       this.lose();
 
       return;
     }
 
     return;
+  }
+
+  private intersectsTail(): boolean {
+    const head = this.snake.body[0];
+
+    const crash = this.snake.body.find((item, index) => index > 1
+      && head.mesh.intersectsMesh(item.mesh, true),
+    );
+
+    if (crash !== undefined) {
+      // tslint:disable-next-line:no-console
+      console.log(head, crash);
+    }
+
+    return crash !== undefined;
   }
 
   private moveSnake(coord: { x: number, y: number, z: number }): void {
@@ -276,12 +295,13 @@ export class GameService {
     mesh.position.y = last.mesh.position.y;
     mesh.position.z = last.mesh.position.z + (this.snakeBodySize + this.speed);
     mesh.position.x = last.mesh.position.x + (this.snakeBodySize + this.speed);
-    this.snake.body.push({ mesh, targets: [] });
+    this.snake.body.push({ mesh, targets: [], name: `${this.snake.body.length + 1}` });
 
     this.engine.shadowGenerator.addShadowCaster(mesh);
   }
 
   private lose(): void {
+    this.lost = true;
     this.result.lost = true;
     this.ngZone.run(() => this.innerResult$.next(this.result));
   }
