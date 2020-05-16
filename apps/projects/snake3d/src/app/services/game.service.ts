@@ -131,7 +131,7 @@ export class GameService {
 
     this.standardMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.standardMaterial.alpha = 1;
-    this.standardMaterial.diffuseColor = new Color3(0.816, 0.457, 0.097);
+    this.standardMaterial.diffuseColor = new Color3(0.976, 0.737, 0.22);
 
     this.normalSphereTemplate = Mesh.CreateSphere('NormalSphereTemplate', SEGMENTS, this.snakeBodySize, this.engine.scene);
     this.normalSphereTemplate.material = this.standardMaterial;
@@ -179,12 +179,12 @@ export class GameService {
     material.alpha = 1;
     material.diffuseColor = new Color3(0.816, 0.457, 0.097);
     head.material = material;
-    head.position.y = this.snakeBodySize;
+    head.position.y = this.snakeBodySize / 2;
     this.snake.body.push({ mesh: head, targets: [] });
 
     for (let i = 1; i < 5; i++) {
       const mesh = this.normalSphereTemplate.createInstance(`SnakeTail-${createUuid()}`);
-      mesh.position.y = this.snakeBodySize;
+      mesh.position.y = this.snakeBodySize / 2;
       mesh.position.x = i * (this.snakeBodySize + this.speed);
       this.snake.body.push({ mesh, targets: [] });
       this.engine.shadowGenerator.addShadowCaster(mesh);
