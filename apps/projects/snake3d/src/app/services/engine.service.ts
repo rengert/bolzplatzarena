@@ -1,15 +1,28 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Color3, Color4, Engine, FollowCamera, HemisphericLight, Light, Mesh, Scene, StandardMaterial, Vector3 } from '@babylonjs/core';
+import {
+  Color3,
+  Color4,
+  Engine,
+  FollowCamera,
+  HemisphericLight,
+  Mesh,
+  Scene,
+  ShadowGenerator,
+  SpotLight,
+  StandardMaterial,
+  Vector3,
+} from '@babylonjs/core';
 import { WindowService } from './window.service';
 
 @Injectable({ providedIn: 'root' })
 export class EngineService {
   scene: Scene;
   camera: FollowCamera;
+  shadowGenerator: ShadowGenerator;
+  spotLight: SpotLight;
 
   private canvas: HTMLCanvasElement;
   private engine: Engine;
-  private light: Light;
 
   constructor(
     private readonly ngZone: NgZone,
@@ -30,7 +43,12 @@ export class EngineService {
     camera.heightOffset = 15;
 
     this.camera = camera;
-    this.light = new HemisphericLight('light1', new Vector3(0, 1, 0), this.scene);
+    const light = new HemisphericLight('dir01', new Vector3(0, 10, 0), this.scene);
+
+    this.spotLight = new SpotLight('spot02',
+      new Vector3(0, 8, 0),
+      new Vector3(0, -1, 0), 1.1, 16, this.scene);
+    this.spotLight.intensity = 0.99;
 
     const materialGround = new StandardMaterial('StandardMaterial', this.scene);
     materialGround.alpha = 1;
@@ -38,6 +56,10 @@ export class EngineService {
 
     const ground = Mesh.CreateGround('ground1', size.width, size.height, 2, this.scene);
     ground.material = materialGround;
+    ground.receiveShadows = true;
+
+    this.shadowGenerator = new ShadowGenerator(1024, this.spotLight);
+    this.shadowGenerator.useExponentialShadowMap = true;
 
     return this.scene;
   }

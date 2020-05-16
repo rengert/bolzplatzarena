@@ -172,7 +172,10 @@ export class GameService {
       mesh.position.y = this.snakeBodySize;
       mesh.position.x = i * (this.snakeBodySize + this.speed);
       this.snake.body.push({ mesh, targets: [] });
+      this.engine.shadowGenerator.addShadowCaster(mesh);
     }
+
+    this.engine.shadowGenerator.addShadowCaster(head);
   }
 
   private createApples(): void {
@@ -186,6 +189,9 @@ export class GameService {
 
     this.apple.position.x = Math.floor(Math.random() * this.size.width - this.size.width / 2);
     this.apple.position.z = Math.floor(Math.random() * this.size.height - this.size.height / 2);
+
+    this.engine.spotLight.position.x = this.apple.position.x;
+    this.engine.spotLight.position.z = this.apple.position.z;
   }
 
   private updatePositions(): void {
