@@ -120,6 +120,7 @@ export class GameService {
   }
 
   reset(): void {
+    this.direction = Direction.Right;
     this.result = { ...this.emptyResult };
     this.lost = false;
     this.apple = undefined;
