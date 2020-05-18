@@ -145,8 +145,11 @@ export class GameService {
     this.engine.camera.lockedTarget = this.snake.body[0].mesh;
 
     scene.actionManager = new ActionManager(scene);
-    scene.registerAfterRender(() => {
+    scene.registerBeforeRender(() => {
       this.beforeRender();
+    });
+    scene.registerAfterRender(() => {
+      this.afterRender();
     });
   }
 
@@ -169,6 +172,31 @@ export class GameService {
     }
 
     this.updatePositions();
+  }
+
+  private afterRender(): void {
+    if (this.result.lost || !this.snake.body.length) {
+      return;
+    }
+
+    if (!this.lost) {
+      this.updateResult(this.speed, 0);
+
+      const head = this.snake.body[0];
+      if ((Math.abs(head.mesh.position.x) > this.limitX)
+        || (Math.abs(head.mesh.position.z) > this.limitZ)) {
+        this.lost = true;
+        delete this.engine.camera.lockedTarget;
+      }
+    }
+
+    if ((this.lost
+      && !this.snake.body.some(item => item.mesh.position.y > this.floor))
+      || this.intersectsTail()) {
+      this.lose();
+
+      return;
+    }
   }
 
   private createSnake(): void {
@@ -222,27 +250,6 @@ export class GameService {
       this.extendTail();
       this.createApples();
     }
-
-    if (!this.lost) {
-      this.updateResult(this.speed, 0);
-
-      if ((Math.abs(head.mesh.position.x) > this.limitX)
-        || (Math.abs(head.mesh.position.z) > this.limitZ)) {
-        this.lost = true;
-        delete this.engine.camera.lockedTarget;
-      }
-    }
-
-    if ((this.lost
-      && !!this.snake.body.length
-      && !this.snake.body.some(item => item.mesh.position.y > this.floor))
-      || this.intersectsTail()) {
-      this.lose();
-
-      return;
-    }
-
-    return;
   }
 
   private intersectsTail(): boolean {

@@ -64,6 +64,14 @@ export class EngineService {
     return this.scene;
   }
 
+  clean(): void {
+    this.scene?.dispose();
+    this.engine?.dispose();
+    this.camera?.dispose();
+    this.spotLight?.dispose();
+    this.shadowGenerator?.dispose();
+  }
+
   animate(): void {
     // We have to run this outside angular zones,
     // because it could trigger heavy changeDetection cycles.
