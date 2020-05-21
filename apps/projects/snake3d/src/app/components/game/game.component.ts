@@ -5,6 +5,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  NgZone,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -35,15 +36,19 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
     private readonly engine: EngineService,
     private readonly game: GameService,
     private readonly dialog: MatDialog,
-    private readonly changeDetectionRef: ChangeDetectorRef,
+    private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly router: Router,
+    private readonly ngZone: NgZone,
   ) {
     this.game.reset();
   }
 
   ngOnInit(): void {
     Plugins.App.addListener('backButton', () => {
-      this.stopGame();
+      this.ngZone.run(() => {
+        this.stopGame();
+        this.changeDetectorRef.markForCheck();
+      });
     });
 
     this.subscription = this.game.result$.pipe(
@@ -51,7 +56,7 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
     )
       .subscribe(_ => {
         this.loseGame();
-        this.changeDetectionRef.detectChanges();
+        this.changeDetectorRef.detectChanges();
       });
   }
 
