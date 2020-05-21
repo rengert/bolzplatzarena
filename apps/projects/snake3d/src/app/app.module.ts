@@ -12,13 +12,13 @@ import { AppComponent } from './app.component';
 import { ControlsComponent } from './components/game/controls/controls.component';
 import { GameComponent } from './components/game/game.component';
 import { LoseScreenComponent } from './components/game/lose-screen/lose-screen.component';
+import { PauseScreenComponent } from './components/game/pause-screen/pause-screen.component';
 import { ToolBarComponent } from './components/game/tool-bar/tool-bar.component';
 import { HighScoreTableComponent } from './components/highscore/high-score-table/high-score-table.component';
 import { HighscoreComponent } from './components/highscore/highscore.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { WindowService } from './services/window.service';
-import { PauseScreenComponent } from './components/game/pause-screen/pause-screen.component';
 
 @NgModule({
   declarations: [

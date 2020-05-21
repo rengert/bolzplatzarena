@@ -117,8 +117,8 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
         switch (result) {
           case 'stop':
             await this.game.writeScore();
-            this.router.navigate(['/']);
-            break;
+
+            return this.router.navigate(['/']);
           case 'quit':
             await this.game.writeScore();
             Plugins.App.exitApp();
@@ -128,6 +128,8 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
             this.game.continue();
             break;
         }
+
+        return undefined;
       });
   }
 }
