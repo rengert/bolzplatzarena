@@ -56,6 +56,7 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.engine.clean();
   }
 
   @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
