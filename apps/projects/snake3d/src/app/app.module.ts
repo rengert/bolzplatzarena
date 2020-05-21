@@ -18,6 +18,7 @@ import { HighscoreComponent } from './components/highscore/highscore.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { WindowService } from './services/window.service';
+import { PauseScreenComponent } from './components/game/pause-screen/pause-screen.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { WindowService } from './services/window.service';
     ToolBarComponent,
     LoseScreenComponent,
     ControlsComponent,
+    PauseScreenComponent,
   ],
   imports: [
     AppRoutingModule,

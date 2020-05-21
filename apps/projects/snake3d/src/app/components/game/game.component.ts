@@ -18,6 +18,7 @@ import { Direction } from '../../app.constants';
 import { EngineService } from '../../services/engine.service';
 import { GameService } from '../../services/game.service';
 import { LoseScreenComponent } from './lose-screen/lose-screen.component';
+import { PauseScreenComponent } from './pause-screen/pause-screen.component';
 
 @Component({
   selector: 'app-game',
@@ -68,6 +69,10 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
     this.handleDirection(e.key as Direction);
+
+    if (e.key === 'Escape') {
+      this.stopGame();
+    }
   }
 
   handleDirection(direction: Direction): void {
@@ -75,7 +80,6 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   private loseGame(): void {
-
     const dialogRef = this.dialog.open(LoseScreenComponent, {
       width: '1250px',
     });
@@ -99,16 +103,13 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
   private stopGame(): void {
     this.game.pause();
 
-    const dialogRef = this.dialog.open(LoseScreenComponent, {
+    const dialogRef = this.dialog.open(PauseScreenComponent, {
       width: '1250px',
     });
 
     dialogRef.afterClosed()
       .subscribe(async result => {
         switch (result) {
-          case 'continue':
-            this.game.continue();
-            break;
           case 'stop':
             await this.game.writeScore();
             this.router.navigate(['/']);
@@ -117,7 +118,9 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
             await this.game.writeScore();
             Plugins.App.exitApp();
             break;
+          case 'continue':
           default:
+            this.game.continue();
             break;
         }
       });

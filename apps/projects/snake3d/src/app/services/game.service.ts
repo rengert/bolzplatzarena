@@ -127,6 +127,7 @@ export class GameService {
     this.lost = false;
     this.apple = undefined;
     this.ngZone.run(() => this.innerResult$.next(this.result));
+    this.gamePaused.next(false);
   }
 
   init(canvas: ElementRef<HTMLCanvasElement>): void {
