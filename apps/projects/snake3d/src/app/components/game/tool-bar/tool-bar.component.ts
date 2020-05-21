@@ -11,6 +11,7 @@ import { GameService } from '../../../services/game.service';
 })
 export class ToolBarComponent implements OnInit {
   result$: Observable<any>;
+  gamePaused$: Observable<boolean>;
 
   constructor(
     private readonly game: GameService,
@@ -19,8 +20,17 @@ export class ToolBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.gamePaused$ = this.game.gamePaused;
     this.result$ = this.game.result$.pipe(
       tap(() => this.changeDetectionRef.detectChanges()),
     );
+  }
+
+  continue(): void {
+    this.game.continue();
+  }
+
+  pause(): void {
+    this.game.pause();
   }
 }

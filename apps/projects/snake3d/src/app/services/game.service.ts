@@ -23,6 +23,8 @@ function directionAsNumber(value: number): 1 | -1 | 0 {
 
 const SEGMENTS = 32;
 const SPEED = 0.01;
+const SPEED_NORMAL = 0.02;
+const SPEED_HARD = 0.05;
 const LOST_SPEED = 0.75;
 const POINTS_PER_APPLE = 50;
 
@@ -47,6 +49,8 @@ export class GameService {
   get result$(): Observable<Result> {
     return this.externalResult$;
   }
+
+  readonly gamePaused = new BehaviorSubject<boolean>(false);
 
   private readonly innerResult$ = new BehaviorSubject<Result>({ apples: 0, points: 0, lost: false });
   private readonly externalResult$ = this.innerResult$.pipe(
@@ -97,14 +101,12 @@ export class GameService {
   private get speed(): number {
     switch (this.settings.level) {
       case(Level.Normal):
-        return 0.02;
+        return SPEED_NORMAL;
       case (Level.Hard):
-        return 0.05;
+        return SPEED_HARD;
       default:
         return SPEED;
     }
-
-    return SPEED;
   }
 
   setDirection(direction: Direction): void {
@@ -153,6 +155,14 @@ export class GameService {
     });
   }
 
+  pause(): void {
+    this.gamePaused.next(true);
+  }
+
+  continue(): void {
+    this.gamePaused.next(false);
+  }
+
   async writeScore(): Promise<void> {
     await this.highscore.add({
       id: createUuid(),
@@ -167,6 +177,10 @@ export class GameService {
   }
 
   private beforeRender(): void {
+    if (this.gamePaused.value) {
+      return;
+    }
+
     if (this.result.lost || !this.snake.body.length) {
       return;
     }
@@ -175,6 +189,10 @@ export class GameService {
   }
 
   private afterRender(): void {
+    if (this.gamePaused.value) {
+      return;
+    }
+
     if (this.result.lost || !this.snake.body.length) {
       return;
     }

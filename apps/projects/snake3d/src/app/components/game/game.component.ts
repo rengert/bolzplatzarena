@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Plugins } from '@capacitor/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Direction } from '../../app.constants';
@@ -40,6 +41,10 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    Plugins.App.addListener('backButton', () => {
+      this.stopGame();
+    });
+
     this.subscription = this.game.result$.pipe(
       filter(result => result.lost),
     )
@@ -55,6 +60,8 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    Plugins.App.removeAllListeners();
+
     this.subscription.unsubscribe();
     this.engine.clean();
   }
@@ -87,5 +94,32 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
       });
 
     return;
+  }
+
+  private stopGame(): void {
+    this.game.pause();
+
+    const dialogRef = this.dialog.open(LoseScreenComponent, {
+      width: '1250px',
+    });
+
+    dialogRef.afterClosed()
+      .subscribe(async result => {
+        switch (result) {
+          case 'continue':
+            this.game.continue();
+            break;
+          case 'stop':
+            await this.game.writeScore();
+            this.router.navigate(['/']);
+            break;
+          case 'quit':
+            await this.game.writeScore();
+            Plugins.App.exitApp();
+            break;
+          default:
+            break;
+        }
+      });
   }
 }
