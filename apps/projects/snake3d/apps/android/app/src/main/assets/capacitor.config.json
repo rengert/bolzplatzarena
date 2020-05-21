@@ -1,0 +1,8 @@
+{
+  "appId": "net.bolzplatzarena.apple3d",
+  "appName": "snake3d",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "../../../dist/snake3d/public",
+  "cordova": {}
+}
