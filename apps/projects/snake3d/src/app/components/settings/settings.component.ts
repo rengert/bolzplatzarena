@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
+import { Plugins } from '@capacitor/core';
 import { GameMode, Level } from '../../../../../snake/src/app/app.constants';
 
 export interface Settings {
@@ -25,7 +26,10 @@ export class SettingsComponent {
 
   readonly settings: Settings;
 
-  constructor(private readonly router: Router) {
+  constructor(
+    private readonly router: Router,
+    private readonly ngZone: NgZone,
+  ) {
     this.levels = [
       { key: 'EASY', value: Level.Easy },
       { key: 'NORMAL', value: Level.Normal },
@@ -47,6 +51,12 @@ export class SettingsComponent {
     this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
     this.user = this.settings.user;
     this.level = this.settings.level;
+
+    Plugins.App.addListener('backButton', () => {
+      this.ngZone.run(() => {
+        Plugins.App.exitApp();
+      });
+    });
   }
 
   async save(): Promise<void> {

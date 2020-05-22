@@ -3,4 +3,9 @@
     <label>{{ 'COMPONENTS.GAME.LABEL.APPLES' | translate }}: <span>{{ result.apples }}</span></label>
     <label>{{ 'COMPONENTS.GAME.LABEL.POINTS' | translate }}: <span>{{ result.points }}</span></label>
   </div>
+  <button *ngIf="gamePaused$ | async; else pauseButton" (click)="continue()" mat-stroked-button>Weiter</button>
 </mat-toolbar>
+
+<ng-template #pauseButton>
+  <button (click)="pause()" mat-stroked-button>Pause</button>
+</ng-template>

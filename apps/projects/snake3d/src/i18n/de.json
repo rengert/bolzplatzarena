@@ -32,6 +32,14 @@
         "TEXT": "Ihre Punkte wurden in den Highscores eintragen, spiel Sie gern nochmal!",
         "END_GAME": "Spiel beenden",
         "RESTART": "Spiel neustarten"
+      },
+      "PAUSE_SCREEN": {
+        "TITLE": "Spiel pausiert",
+        "SUBTITLE": "Das Spiel wurde unterbrochen.",
+        "TEXT": "Möchten Sie das Spiel fortfahren, beenden und zu den Settings gelangen oder wollen Sie die App beenden?",
+        "STOP": "Spiel beenden",
+        "CONTINUE": "Spiel fortführen",
+        "QUIT": "App beenden"
       }
     },
     "HIGHSCORE": {
