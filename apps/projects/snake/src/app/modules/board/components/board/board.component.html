@@ -1,3 +1,4 @@
+<app-score [scoreBoard]="scoreBoard"></app-score>
 <div class="row" *ngFor="let row of board; let i = index;">
   <div *ngFor="let cell of row; let j = index; trackBy: 'id' | trackByProperty"
        class="column"
@@ -8,10 +9,6 @@
   </div>
 </div>
 
-<app-score [scoreBoard]="scoreBoard"></app-score>
-
 <app-controls *ngIf="!gameOver" (control)="handleDirection($event)"></app-controls>
-
 <app-navigation *ngIf="gameOver" (restart)="restart()"></app-navigation>
-
 <bpa-count-down *ngIf="!started"></bpa-count-down>

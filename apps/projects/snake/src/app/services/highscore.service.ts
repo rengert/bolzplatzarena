@@ -38,7 +38,7 @@ export class HighscoreService {
         .orderBy('score')
         .filter(item => item.gameMode === gameMode)
         .reverse()
-        .limit(10)
+        .limit(3)
         .toArray(),
     );
   }
@@ -49,7 +49,7 @@ export class HighscoreService {
       ref => ref
         .where('gameMode', '==', gameMode)
         .orderBy('score', 'desc')
-        .limit(10),
+        .limit(3),
     )
       .valueChanges();
   }

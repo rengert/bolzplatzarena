@@ -3,8 +3,22 @@
 @import "~material-design-icons/iconfont/material-icons.css";
 @import "values";
 
+@font-face {
+  font-family: 'Annie Use Your Telescope';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/annie-use-your-telescope-v10-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Annie Use Your Telescope Regular'), local('AnnieUseYourTelescope-Regular'),
+  url('./assets/fonts/annie-use-your-telescope-v10-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('./assets/fonts/annie-use-your-telescope-v10-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('./assets/fonts/annie-use-your-telescope-v10-latin-regular.woff') format('woff'), /* Modern Browsers */
+  url('./assets/fonts/annie-use-your-telescope-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('./assets/fonts/annie-use-your-telescope-v10-latin-regular.svg#AnnieUseYourTelescope') format('svg'); /* Legacy iOS */
+}
+
 html {
   touch-action: manipulation;
+  font-family: 'Annie Use Your Telescope', Verdana, sans-serif;
   font-size: 10px;
   background-color: grey;
 
@@ -12,6 +26,10 @@ html {
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+
+  * {
+    font-family: 'Annie Use Your Telescope', Verdana, sans-serif;
+  }
 
   body {
     padding: .5rem .25rem;
