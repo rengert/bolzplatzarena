@@ -1,0 +1,30 @@
+<h1>Moment Playground</h1>
+
+<p>Dieser Test prüft die Nutzung verschiedener Methoden zwei Datumswerte zu vergleiche.</p>
+<p>Basis sind zwei Zufallsdaten als ISO String (Beispiel: '2012-01-01T12:12:12.222')</p>
+<p> Es werden {{ loop | number }} Wiederholungen gemacht, um eine belastbare Zahl zu ermitteln.</p>
+
+<h2>Moment isBefore on Strings</h2>
+{{ timeMoment }}
+<h2>Date isBefore on Strings</h2>
+{{ timeDates }}
+<h2>Native isBefore on Strings</h2>
+{{ timeNative }}
+
+<section>
+  <button (click)="runIsBefore()">isBefore Starten</button>
+</section>
+
+<p>Dieser Test prüft die Nutzung verschiedener Methoden Tage einem Datum hinzuzufügen.</p>
+<p>Basis sind zwei Zufallsdaten als ISO String (Beispiel: '2012-01-01T12:12:12.222')</p>
+<p> Es werden {{ loop | number }} Wiederholungen gemacht, um eine belastbare Zahl zu ermitteln.</p>
+
+<h2>Moment addDays on Strings</h2>
+{{ timeAddDaysMoment }}
+<h2>Date addDays on Strings</h2>
+{{ timeAddDaysDates }}
+
+<section>
+  <button (click)="runAddDays()">addDays Starten</button>
+</section>
+
