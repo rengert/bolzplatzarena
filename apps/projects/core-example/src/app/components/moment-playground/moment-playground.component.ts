@@ -16,13 +16,20 @@ export class MomentPlaygroundComponent {
   timeAddDaysMoment: number;
   timeAddDaysDates: number;
 
-  private readonly loop = 100000;
+  timeCloneMoment: number;
+  timeCloneDates: number;
+
+  timeCreateMoment: number;
+  timeCreateDates: number;
+
+  readonly loop = 100000;
 
   runIsBefore(): void {
     const start = new Date().getTime();
     let text = '';
+    const date = moment('2011-01-01T12:12:12.123');
     for (let i = 0; i < this.loop; i++) {
-      text += (moment('2011-01-01T12:12:12.123')
+      text += (date
         .isBefore('2010-01-01T12:12:12.123'));
     }
     this.timeMoment = new Date().getTime() - start;
@@ -38,8 +45,9 @@ export class MomentPlaygroundComponent {
 
     const startDates = new Date().getTime();
     text = '';
+    const dateObj = new Date('2012-01-01T12:12:12.123').getTime();
     for (let i = 0; i < this.loop; i++) {
-      text += new Date('2012-01-01T12:12:12.123').getTime() < new Date('2010-01-01T12:12:12.123').getTime();
+      text += dateObj < new Date('2010-01-01T12:12:12.123').getTime();
     }
     this.timeDates = new Date().getTime() - startDates;
     console.log(text);
@@ -62,5 +70,35 @@ export class MomentPlaygroundComponent {
     }
     this.timeAddDaysDates = new Date().getTime() - startDates;
     console.log(text);
+  }
+
+  runClone(): void {
+    const start = new Date().getTime();
+    const data = moment('2011-01-01T12:12:12.123');
+    for (let i = 0; i < this.loop; i++) {
+      const clone = data.clone();
+    }
+    this.timeCloneMoment = new Date().getTime() - start;
+
+    const startDates = new Date().getTime();
+    const date = new Date('2011-01-01T12:12:12.123');
+    for (let i = 0; i < this.loop; i++) {
+      const clone = new Date(date.getTime());
+    }
+    this.timeCloneDates = new Date().getTime() - startDates;
+  }
+
+  runCreate(): void {
+    const start = new Date().getTime();
+    for (let i = 0; i < this.loop; i++) {
+      const data = moment('2011-01-01T12:12:12.123');
+    }
+    this.timeCreateMoment = new Date().getTime() - start;
+
+    const startDates = new Date().getTime();
+    for (let i = 0; i < this.loop; i++) {
+      const date = new Date('2011-01-01T12:12:12.123');
+    }
+    this.timeCreateDates = new Date().getTime() - startDates;
   }
 }
