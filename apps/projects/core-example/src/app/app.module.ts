@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BroadcastDemoComponent } from './components/broadcast-demo/broadcast-demo.component';
 import { CellComponent } from './components/broadcast-demo/cell/cell.component';
+import { MomentPlaygroundComponent } from './components/moment-playground/moment-playground.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { SelectionDemoComponent } from './components/selection-demo/selection-demo.component';
 
@@ -19,6 +20,7 @@ import { SelectionDemoComponent } from './components/selection-demo/selection-de
     SelectionDemoComponent,
     BroadcastDemoComponent,
     CellComponent,
+    MomentPlaygroundComponent,
   ],
   imports: [
     CommonModule,
