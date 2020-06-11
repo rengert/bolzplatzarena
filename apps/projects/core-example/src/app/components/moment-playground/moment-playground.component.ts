@@ -21,55 +21,47 @@ export class MomentPlaygroundComponent {
 
   timeCreateMoment: number;
   timeCreateDates: number;
+  timeCreateMomentWithDate: number;
 
   readonly loop = 100000;
 
   runIsBefore(): void {
     const start = new Date().getTime();
-    let text = '';
     const date = moment('2011-01-01T12:12:12.123');
+    const second = moment('2010-01-01T12:12:12.123');
     for (let i = 0; i < this.loop; i++) {
-      text += (date
-        .isBefore('2010-01-01T12:12:12.123'));
+      const data = date.isBefore(second);
     }
     this.timeMoment = new Date().getTime() - start;
-    console.log(text);
 
     const startNative = new Date().getTime();
-    text = '';
     for (let i = 0; i < this.loop; i++) {
-      text += ('2012-01-01T12:12:12.123' < '2010-01-01T12:12:12.123').toString();
+      ('2012-01-01T12:12:12.123' < '2010-01-01T12:12:12.123').toString();
     }
     this.timeNative = new Date().getTime() - startNative;
-    console.log(text);
 
     const startDates = new Date().getTime();
-    text = '';
     const dateObj = new Date('2012-01-01T12:12:12.123').getTime();
     for (let i = 0; i < this.loop; i++) {
-      text += dateObj < new Date('2010-01-01T12:12:12.123').getTime();
+      const data = dateObj < new Date('2010-01-01T12:12:12.123').getTime();
     }
     this.timeDates = new Date().getTime() - startDates;
-    console.log(text);
   }
 
   runAddDays(): void {
     const start = new Date().getTime();
-    let text = '';
+    const date = moment('2011-01-01T12:12:12.123');
     for (let i = 0; i < this.loop; i++) {
-      text += (moment('2011-01-01T12:12:12.123')
-        .add(i, 'd')).format('YYYY-MM-DD HH:mm');
+      date.add(i, 'd');
     }
     this.timeAddDaysMoment = new Date().getTime() - start;
-    console.log(text);
 
     const startDates = new Date().getTime();
-    text = '';
+    const dateObject = new Date('2011-01-01T12:12:12.123');
     for (let i = 0; i < this.loop; i++) {
-      text += addDays(new Date('2011-01-01T12:12:12.123'), i);
+      addDays(dateObject, i);
     }
     this.timeAddDaysDates = new Date().getTime() - startDates;
-    console.log(text);
   }
 
   runClone(): void {
@@ -100,5 +92,11 @@ export class MomentPlaygroundComponent {
       const date = new Date('2011-01-01T12:12:12.123');
     }
     this.timeCreateDates = new Date().getTime() - startDates;
+
+    const startBoth = new Date().getTime();
+    for (let i = 0; i < this.loop; i++) {
+      const data = moment(new Date('2011-01-01T12:12:12.123'));
+    }
+    this.timeCreateMomentWithDate = new Date().getTime() - startBoth;
   }
 }
