@@ -46,10 +46,12 @@
 <p>Dieser Test prüft die Nutzung verschiedener Methoden ein Datum zu erzeugen von einem String.</p>
 <p>Basis sind zwei Zufallsdaten als ISO String (Beispiel: '2012-01-01T12:12:12.222')</p>
 <p> Es werden {{ loop | number }} Wiederholungen gemacht, um eine belastbare Zahl zu ermitteln.</p>
-<h4>Moment clone on moment</h4>
+<h4>Moment create</h4>
 {{ timeCreateMoment }}
-<h4>Date clone on date</h4>
+<h4>Date create</h4>
 {{ timeCreateDates }}
+<h4>Moment create with date</h4>
+{{ timeCreateMomentWithDate }}
 
 <section>
   <button (click)="runCreate()">create Starten</button>
