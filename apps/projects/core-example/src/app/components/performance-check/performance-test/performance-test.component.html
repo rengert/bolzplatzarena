@@ -1,0 +1,12 @@
+<h2>{{ test.name }} - {{ testResult.loop }}</h2>
+<section *ngFor="let result of testResult.results">
+  <label>{{ result.name }} - {{ result.result | number }}ms</label>
+  <span class="result">
+    <span *ngIf="testResult.max"
+          [style.width]="(result.result * 100 / testResult.max) + '%'"></span>
+  </span>
+</section>
+<button (click)="runTest()">Test starten</button>
+<div *ngIf="running | async" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
