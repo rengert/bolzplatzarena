@@ -13,7 +13,7 @@ export const createMomentTest: Test = {
       method: createDateFromString,
     },
     {
-      name: 'create Noment from Date',
+      name: 'create Moment from Date',
       method: createMomentFromDate,
     },
   ],

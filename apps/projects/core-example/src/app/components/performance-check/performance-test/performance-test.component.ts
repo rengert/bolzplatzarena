@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { maxBy, minBy } from 'lodash';
+import { BehaviorSubject } from 'rxjs';
 
 export interface Scenario {
   name: string;
@@ -34,13 +35,18 @@ export class PerformanceTestComponent implements OnChanges {
   @Input() loop: number;
 
   testResult: TestResult;
+  readonly running = new BehaviorSubject<boolean>(false);
 
   ngOnChanges(): void {
     this.testResult = this.getResults();
   }
 
   runTest(): void {
-    this.testResult = this.getResults(true);
+    this.running.next(true);
+    setTimeout(() => {
+      this.testResult = this.getResults(true);
+      this.running.next(false);
+    }, 1000);
   }
 
   private getResults(run = false): TestResult {

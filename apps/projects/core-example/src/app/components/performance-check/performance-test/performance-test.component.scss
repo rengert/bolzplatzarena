@@ -1,5 +1,6 @@
 :host {
   display: block;
+  position: relative;
   width: 300px;
   padding: 1rem;
   margin: 1rem;
@@ -39,6 +40,23 @@
         border-radius: 15px;
         background: #11943f;
       }
+    }
+  }
+
+  .spinner {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+
+    align-items: center;
+
+    mat-spinner {
+      margin: auto;
     }
   }
 }
