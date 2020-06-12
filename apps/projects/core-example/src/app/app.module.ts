@@ -11,6 +11,8 @@ import { BroadcastDemoComponent } from './components/broadcast-demo/broadcast-de
 import { CellComponent } from './components/broadcast-demo/cell/cell.component';
 import { MomentPlaygroundComponent } from './components/moment-playground/moment-playground.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { PerformanceCheckComponent } from './components/performance-check/performance-check.component';
+import { PerformanceTestComponent } from './components/performance-check/performance-test/performance-test.component';
 import { SelectionDemoComponent } from './components/selection-demo/selection-demo.component';
 
 @NgModule({
@@ -21,6 +23,8 @@ import { SelectionDemoComponent } from './components/selection-demo/selection-de
     BroadcastDemoComponent,
     CellComponent,
     MomentPlaygroundComponent,
+    PerformanceCheckComponent,
+    PerformanceTestComponent,
   ],
   imports: [
     CommonModule,
