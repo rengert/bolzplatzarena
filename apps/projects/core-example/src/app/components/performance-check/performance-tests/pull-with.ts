@@ -8,6 +8,7 @@ const pullArray = [...Array(5)
 
 export const pullWithAllTest: Test = {
   name: 'lodash pullAll vs. plain ts',
+  loop: 1000,
   scenarios: [
     {
       name: 'lodash pullAllWith',
