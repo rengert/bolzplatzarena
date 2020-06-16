@@ -1,9 +1,9 @@
 import { pullAllWith } from 'lodash';
 import { Test } from '../performance-test/performance-test.component';
 
-const array = [...Array(2500)
+const array = [...Array(25000)
   .keys()];
-const pullArray = [...Array(5)
+const pullArray = [...Array(75)
   .keys()];
 
 export const pullWithAllTest: Test = {
@@ -15,18 +15,31 @@ export const pullWithAllTest: Test = {
       method: pullAllWithTest,
     },
     {
-      name: 'pull with find',
-      method: pullWithFind,
+      name: 'pull with find & inlcudes',
+      method: pullWithFindAndIncludes,
     },
+    {
+      name: 'pull with find & some',
+      method: pullWithFindAndSome,
+    },
+
   ],
 };
 
 function pullAllWithTest(): void {
   const localArray = [...array];
-  pullAllWith(localArray, array, (a, b) => a === b);
+  pullAllWith(localArray, pullArray, (a, b) => a === b);
+  console.log(localArray.length);
 }
 
-function pullWithFind(): void {
-  let localArray = [...array];
+function pullWithFindAndIncludes(): void {
+  let localArray = array;
   localArray = localArray.filter(item => !pullArray.includes(item));
+  console.log(localArray.length);
+}
+
+function pullWithFindAndSome(): void {
+  let localArray = array;
+  localArray = localArray.filter(item => !pullArray.some(a => item === a));
+  console.log(localArray.length);
 }
