@@ -1,5 +1,7 @@
+import { Injectable } from "@angular/core";
 const getWindow = (): Window => window;
 
+@Injectable()
 export class WindowService {
   private readonly windowObject: Window;
 

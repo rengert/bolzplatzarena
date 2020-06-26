@@ -7,6 +7,9 @@
     "tslint:recommended"
   ],
   "rules": {
+    "deprecation": {
+      "severity": "warning"
+    },
     "no-unnecessary-class": [
       true,
       "allow-constructor-only",
