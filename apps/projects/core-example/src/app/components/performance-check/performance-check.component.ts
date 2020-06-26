@@ -22,4 +22,8 @@ export class PerformanceCheckComponent {
     reduceTest,
     uniqueTest,
   ];
+
+  trackByFn(index: number): number {
+    return index;
+  }
 }
