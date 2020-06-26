@@ -5,6 +5,7 @@ import { createMomentTest } from './performance-tests/moment';
 import { pullWithAllTest } from './performance-tests/pull-with';
 import { reduceTest } from './performance-tests/reduce';
 import { someTest } from './performance-tests/some';
+import { uniqueTest } from './performance-tests/unique';
 
 @Component({
   selector: 'app-performance-check',
@@ -19,5 +20,6 @@ export class PerformanceCheckComponent {
     someTest,
     forTest,
     reduceTest,
+    uniqueTest,
   ];
 }
