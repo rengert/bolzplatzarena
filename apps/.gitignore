@@ -47,3 +47,10 @@ Thumbs.db
 /projects/snake/apps/node_modules/.cache/
 /projects/neinometer/apps/.gradle/
 /projects/nonogramm/apps/.gradle/
+/.firebase/
+/projects/snake/apps/.gradle/
+/projects/snake3d/apps/.gradle/
+/projects/snake3d/apps/android/.idea/
+/projects/snake3d/apps/node_modules/.cache/
+/projects/snake/apps/android/.gradle/
+/projects/snake/apps/android/.idea/

@@ -1,0 +1,13 @@
+<h2 mat-dialog-title translate>COMPONENTS.GAME.PAUSE_SCREEN.TITLE</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 translate>COMPONENTS.GAME.PAUSE_SCREEN.SUBTITLE</h3>
+  <p translate>COMPONENTS.GAME.PAUSE_SCREEN.TEXT</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="'stop'">
+    {{ 'COMPONENTS.GAME.PAUSE_SCREEN.STOP' | translate }}</button>
+  <button mat-button [mat-dialog-close]="'quit'">
+    {{ 'COMPONENTS.GAME.PAUSE_SCREEN.QUIT' | translate }}</button>
+  <button mat-button [mat-dialog-close]="'continue'">
+    {{ 'COMPONENTS.GAME.PAUSE_SCREEN.CONTINUE' | translate }}</button>
+</mat-dialog-actions>
