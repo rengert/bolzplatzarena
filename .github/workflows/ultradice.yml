@@ -24,7 +24,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-modules-
     - run: cd apps && npm install
-    - run: cd apps && npm run lint:ultradice
     - run: cd apps && npm run build:ultradice
       env:
         CI: true

@@ -24,8 +24,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-modules-
     - run: cd apps && npm install
-    - run: cd apps && npm run lint:startup
     - run: cd apps && npm run build:startup
-    - run: cd apps && npm run test:startup
       env:
         CI: true

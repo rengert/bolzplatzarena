@@ -2,6 +2,8 @@
   "name": "bolzplatzarena",
   "version": "0.0.0",
   "scripts": {
+    "lint:all": "ng lint",
+    "test:all": "ng test --watch=false --browsers=ChromeHeadless",
     "build:snake": "ng build snake --prod",
     "lint:snake": "ng lint snake",
     "build:ultradice": "ng build ultradice --prod",
