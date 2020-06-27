@@ -22,24 +22,20 @@ export const pullWithAllTest: Test = {
       name: 'pull with find & some',
       method: pullWithFindAndSome,
     },
-
   ],
 };
 
 function pullAllWithTest(): void {
   const localArray = [...array];
   pullAllWith(localArray, pullArray, (a, b) => a === b);
-  console.log(localArray.length);
 }
 
 function pullWithFindAndIncludes(): void {
   let localArray = array;
   localArray = localArray.filter(item => !pullArray.includes(item));
-  console.log(localArray.length);
 }
 
 function pullWithFindAndSome(): void {
   let localArray = array;
   localArray = localArray.filter(item => !pullArray.some(a => item === a));
-  console.log(localArray.length);
 }

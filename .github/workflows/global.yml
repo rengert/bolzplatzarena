@@ -1,4 +1,4 @@
-name: Ultradice build & lint & test
+name: Global build & lint & test
 
 on: [push]
 
@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 7
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -24,6 +24,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-modules-
     - run: cd apps && npm install
-    - run: cd apps && npm run build:ultradice
+    - run: cd apps && npm run lint:all
+    - run: cd apps && npm run test:all
       env:
         CI: true

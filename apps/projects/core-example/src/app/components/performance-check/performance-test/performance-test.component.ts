@@ -49,6 +49,10 @@ export class PerformanceTestComponent implements OnChanges {
     }, 1000);
   }
 
+  trackByFn(index: number, item: Result): string {
+    return item.name;
+  }
+
   private getResults(run = false): TestResult {
     const results = this.test.scenarios.map(
       scenario => ({

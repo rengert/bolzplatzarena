@@ -1,5 +1,5 @@
 <h2>{{ test.name }} - {{ testResult.loop }}</h2>
-<section *ngFor="let result of testResult.results">
+<section *ngFor="let result of testResult.results; trackBy: trackByFn">
   <label>{{ result.name }} - {{ result.result | number }}ms</label>
   <span class="result">
     <span *ngIf="testResult.max"

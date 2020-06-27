@@ -36,7 +36,7 @@ export class MomentPlaygroundComponent {
 
     const startNative = new Date().getTime();
     for (let i = 0; i < this.loop; i++) {
-      ('2012-01-01T12:12:12.123' < '2010-01-01T12:12:12.123').toString();
+      const data = '2012-01-01T12:12:12.123'.localeCompare('2010-01-01T12:12:12.123') < 0;
     }
     this.timeNative = new Date().getTime() - startNative;
 
