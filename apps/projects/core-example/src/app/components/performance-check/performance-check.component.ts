@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Test } from './performance-test/performance-test.component';
 import { forTest } from './performance-tests/for';
+import { keyByTest } from './performance-tests/key-by';
 import { createMomentTest } from './performance-tests/moment';
 import { pullWithAllTest } from './performance-tests/pull-with';
 import { reduceTest } from './performance-tests/reduce';
 import { someTest } from './performance-tests/some';
+import { duplicateArrayTest } from './performance-tests/spread';
 import { uniqueTest } from './performance-tests/unique';
 
 @Component({
@@ -21,6 +23,8 @@ export class PerformanceCheckComponent {
     forTest,
     reduceTest,
     uniqueTest,
+    keyByTest,
+    duplicateArrayTest,
   ];
 
   trackByFn(index: number): number {
