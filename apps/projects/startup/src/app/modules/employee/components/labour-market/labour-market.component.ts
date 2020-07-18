@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { SpeedDialService } from '@bpa/core';
 import { Observable } from 'rxjs';
-import { SpeedDialService } from '../../../../../../../core/src/lib/modules/button/services/speed-dial.service';
 import { BaseComponent } from '../../../../components/base/base.component';
 import { Worker } from '../../../../models/worker.model';
 import { EmployeeStorageService } from '../../services/storage/employee-storage.service';

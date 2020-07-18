@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { SpeedDialService } from '@bpa/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { SpeedDialService } from '../../../../../../../core/src/lib/modules/button/services/speed-dial.service';
 import { BaseComponent } from '../../../../components/base/base.component';
 import { Office } from '../../../../models/office.model';
 import { OfficeService } from '../../services/office.service';

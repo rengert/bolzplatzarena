@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ConsentComponent } from '../../../core/src/lib/modules/privacy/components/consent/consent.component';
-import { PrivacyGuard } from '../../../core/src/lib/modules/privacy/guards/privacy.guard';
+import { ConsentComponent, PrivacyGuard } from '@bpa/core';
 import { NotesComponent } from './components/content/notes/notes.component';
 import { PrivacyComponent } from './components/content/privacy/privacy.component';
 import { DebugComponent } from './components/debug/debug.component';

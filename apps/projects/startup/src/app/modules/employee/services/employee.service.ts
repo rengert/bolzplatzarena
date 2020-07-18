@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { createUuid, randomMoment } from '@bpa/core';
 import moment, { Moment } from 'moment';
-import { createUuid, randomMoment } from '../../../../../../core/src/lib/utils/common.util';
 import { Level } from '../../../models/level.model';
 import { Profession } from '../../../models/profession.model';
 import { Worker } from '../../../models/worker.model';

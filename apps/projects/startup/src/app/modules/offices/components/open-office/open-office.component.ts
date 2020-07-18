@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SpeedDialService } from '@bpa/core';
 import { Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
-import { SpeedDialService } from '../../../../../../../core/src/lib/modules/button/services/speed-dial.service';
 import { BaseComponent } from '../../../../components/base/base.component';
 import { City } from '../../../../models/city.model';
 import { Office } from '../../../../models/office.model';
