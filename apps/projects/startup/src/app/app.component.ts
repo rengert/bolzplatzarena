@@ -9,6 +9,7 @@ import { LoggerService } from '@bpa/core';
 })
 export class AppComponent {
   constructor(private readonly logger: LoggerService<AppComponent>) {
-    this.logger.debug('Application started');
+    this.logger.name = 'AppComponent';
+    this.logger.info('Application started');
   }
 }

@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Logger } from './logger.service';
+import { Logger, Message, Verbosity } from '../models/interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ConsoleLoggerService implements Logger {
-  debug(message: string): void {
+  log(message: Message): void {
     // tslint:disable-next-line:no-console
-    console.debug(message);
-  }
-
-  error(message: string, data: any): void {
-    console.error(message, data);
-  }
-
-  log(message: string): void {
-    // tslint:disable-next-line:no-console
-    console.log(message);
+    const { debug, info, error, warn } = console;
+    let send: any;
+    switch (message.verbosity) {
+      case Verbosity.Error:
+        send = error;
+        break;
+      case Verbosity.Info:
+        send = info;
+        break;
+      case Verbosity.Warning:
+        send = warn;
+        break;
+      default:
+        send = debug;
+        break;
+    }
+    send(`[${message.verbosity}] [${message.component}] ${message.text}`);
   }
 }

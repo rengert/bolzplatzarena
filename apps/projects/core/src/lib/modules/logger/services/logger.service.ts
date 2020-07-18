@@ -1,46 +1,40 @@
-import { Injectable } from '@angular/core';
-import { ConsoleLoggerService } from './console-logger.service';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { Logger, Message, Verbosity } from '../models/interfaces';
 
-export interface Logger {
-  log(message: string): void;
+export const LOGGER = new InjectionToken<Logger>('Logger');
 
-  debug(message: string): void;
-
-  error(message: string, data: any): void;
-}
-
-function createMessage<T>(message: string): string {
-  // const type = (typeof T).toString();
-
-  return message;
+function createMessage<T>(message: string, component = 'unknown', verbosity = Verbosity.Debug): Message {
+  return {
+    text: message,
+    component,
+    verbosity,
+  };
 }
 
 @Injectable({ providedIn: 'root' })
-export class LoggerService<T> implements Logger {
-  private readonly logger: Logger[] = [];
+export class LoggerService<T> {
+  name: string;
 
-  constructor(private readonly consoleLogger: ConsoleLoggerService) {
-    this.logger.push(consoleLogger);
+  constructor(@Inject(LOGGER) private readonly logger: Logger[] = []) {
   }
 
   debug(message: string): void {
-    const logMessage = createMessage(message);
-    this.logger.forEach(logger => {
-      logger.debug(logMessage);
-    });
+    this.logMessage(createMessage(message, this.name, Verbosity.Debug));
   }
 
-  error(message: string, data: any): void {
-    const logMessage = createMessage(message);
-    this.logger.forEach(logger => {
-      logger.error(logMessage, data);
-    });
+  error(message: string, data?: any): void {
+    this.logMessage(createMessage(message, this.name, Verbosity.Error));
   }
 
-  log(message: string): void {
-    const logMessage = createMessage(message);
-    this.logger.forEach(logger => {
-      logger.log(logMessage);
-    });
+  info(message: string): void {
+    this.logMessage(createMessage(message, this.name, Verbosity.Info));
+  }
+
+  warning(message: string): void {
+    this.logMessage(createMessage(message, this.name, Verbosity.Warning));
+  }
+
+  private logMessage(message: Message): void {
+    this.logger.forEach(logger => logger.log(message));
   }
 }

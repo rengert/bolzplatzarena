@@ -5,7 +5,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { ButtonModule, CoreModule, MaterialModule } from '@bpa/core';
+import { ButtonModule, ConsoleLoggerService, CoreModule, LOGGER, MaterialModule } from '@bpa/core';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,6 +55,7 @@ import { OfficesModule } from './modules/offices/offices.module';
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always', appearance: 'fill' } },
+    { provide: LOGGER, useClass: ConsoleLoggerService, multi: true },
   ],
   bootstrap: [AppComponent],
   exports: [
