@@ -15,9 +15,8 @@ export class DebugComponent {
     await this.debug.deleteStartup();
   }
 
-  deleteOffices(): void {
-    this.debug.deleteOffices()
-      .subscribe();
+  async deleteOffices(): Promise<void> {
+    await this.debug.deleteOffices();
   }
 
   async clearLabourMarket(): Promise<void> {
