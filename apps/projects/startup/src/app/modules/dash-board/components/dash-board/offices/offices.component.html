@@ -1,6 +1,6 @@
 <mat-card>
   <h2>Deine Standorte</h2>
-  <table mat-table [dataSource]="offices$" class="mat-elevation-z8">
+  <table mat-table [dataSource]="offices$">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
       <td mat-cell *matCellDef="let office"> {{ office.name }} </td>

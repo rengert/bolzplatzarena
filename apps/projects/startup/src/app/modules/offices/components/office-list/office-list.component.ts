@@ -21,8 +21,10 @@ export class OfficeListComponent extends BaseComponent implements OnInit {
 
   constructor(
     speedDial: SpeedDialService,
-    private readonly offices: OfficeService) {
+    private readonly offices: OfficeService,
+  ) {
     super(speedDial);
+
     this.buttons = [
       { key: 'OpenOffice', icon: 'home_work', route: ['open-office'] },
     ];
@@ -30,6 +32,7 @@ export class OfficeListComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     super.ngOnInit();
+
     this.data$ = this.offices.get$()
       .pipe(
         map(offices => new MatTableDataSource<Office>(offices)),
