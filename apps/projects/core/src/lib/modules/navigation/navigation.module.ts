@@ -3,9 +3,7 @@ import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule],
 })
-export class StorageModule {
+export class NavigationModule {
 }

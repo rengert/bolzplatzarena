@@ -2,7 +2,7 @@
   <button mat-icon-button (click)="snav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  &nbsp;<h1>Startup</h1>
+  &nbsp;<h1>Startup - {{ title$ | async }}</h1>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #snav [mode]="'over'">
