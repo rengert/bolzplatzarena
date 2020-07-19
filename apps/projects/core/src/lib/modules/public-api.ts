@@ -10,3 +10,5 @@ export * from './logger/logger.module';
 export * from './button/services/speed-dial.service';
 
 export * from './storage/services/abstract-storage.service';
+
+export * from './navigation/navigation.module';

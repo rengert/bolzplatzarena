@@ -4,7 +4,7 @@ import { switchMap } from 'rxjs/operators';
 
 export abstract class AbstractStorageService<T extends { id: string }> {
   protected readonly items: Dexie.Table<T>;
-  private readonly refresh$ = new BehaviorSubject(null);
+  private readonly refresh$ = new BehaviorSubject(undefined);
 
   constructor(private readonly storage: Dexie, private readonly name: string) {
     this.items = this.storage.table<T>(name);

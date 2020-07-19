@@ -9,7 +9,7 @@ export * from './lib/modules/material/material.module';
 
 export * from './lib/core.module';
 
-export * from './lib/modules/public_api';
+export * from './lib/modules/public-api';
 
 export * from './lib/utils/common.util';
 export * from './lib/utils/date.util';
