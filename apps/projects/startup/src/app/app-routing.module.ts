@@ -26,20 +26,23 @@ const routes: Routes = [
             path: '',
             canActivate: [AtLeastOneOfficeGuard],
             children: [
-              { path: '', component: DashBoardComponent },
+              { path: '', component: DashBoardComponent, data: { title: 'Dashboard' } },
             ],
           },
           {
             path: 'open-office',
             component: OpenOfficeComponent,
+            data: { title: 'Neuen Standort eröffnen' },
           },
           {
             path: 'offices',
             component: OfficeListComponent,
+            data: { title: 'Standorte' },
           },
           {
             path: 'offices/:id',
             component: OfficeComponent,
+            data: { title: 'Standort' },
           },
           {
             path: 'employee',
@@ -47,20 +50,21 @@ const routes: Routes = [
               {
                 path: 'market',
                 component: LabourMarketComponent,
+                data: { title: 'Arbeitsmarkt' },
               },
             ],
           },
         ],
       },
       {
-        path: 'launch', component: LaunchStartupComponent,
+        path: 'launch', component: LaunchStartupComponent, data: { title: 'Gründen' },
       },
     ],
   },
-  { path: 'debug', component: DebugComponent },
-  { path: 'consent', component: ConsentComponent },
-  { path: 'notes', component: NotesComponent },
-  { path: 'privacy', component: PrivacyComponent },
+  { path: 'debug', component: DebugComponent, data: { title: 'Debugging' } },
+  { path: 'consent', component: ConsentComponent, data: { title: 'Consent' } },
+  { path: 'notes', component: NotesComponent, data: { title: 'Notes' } },
+  { path: 'privacy', component: PrivacyComponent, data: { title: 'Privacy' } },
 ];
 
 @NgModule({
