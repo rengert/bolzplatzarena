@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { AbstractStorageService } from '@bpa/core';
 import { Worker } from '../../../../models/worker.model';
 import { AppStorageService } from '../../../../services/storage/app-storage.service';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class EmployeeStorageService {
-  constructor(private readonly appStorage: AppStorageService) {
+@Injectable({ providedIn: 'root' })
+export class EmployeeStorageService extends AbstractStorageService<Worker> {
+  constructor(storage: AppStorageService) {
+    super(storage, 'worker');
   }
 
-  get$(): Observable<Worker[]> {
-    return from(this.appStorage.workers.toArray());
+  protected loadNavigationProperties(item: Worker): void {
+    //
   }
 }

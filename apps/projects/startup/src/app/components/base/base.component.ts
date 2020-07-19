@@ -15,13 +15,13 @@ export class BaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.buttons && this.buttons.length) {
+    if (this.buttons?.length) {
       this.speedDial.register(this.buttons);
     }
   }
 
   ngOnDestroy(): void {
-    if (this.buttons && this.buttons.length) {
+    if (this.buttons?.length) {
       this.speedDial.unregsiter(this.buttons);
     }
   }

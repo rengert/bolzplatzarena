@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CoreModule } from '../../../../../core/src/lib/core.module';
-import { MaterialModule } from '../../../../../core/src/lib/modules/material/material.module';
+import { CoreModule, MaterialModule } from '@bpa/core';
 import { LabourMarketComponent } from './components/labour-market/labour-market.component';
 
 @NgModule({

@@ -1,0 +1,5 @@
+{
+  "name": "@bpa/core",
+  "main": "projects.ts",
+  "typings": "projects.ts"
+}

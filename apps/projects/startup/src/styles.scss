@@ -12,4 +12,18 @@ mat-form-field {
 
 table {
   width: 100%;
+
+  th.mat-header-cell:first-of-type,
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type {
+    padding-left: 0;
+  }
+
+  th.mat-header-cell,
+  td.mat-cell,
+  td.mat-footer-cell {
+    padding-right: 1rem;
+  }
 }
+
+

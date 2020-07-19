@@ -4,10 +4,15 @@ import { MaterialModule } from '../material/material.module';
 import { ConsentComponent } from './components/consent/consent.component';
 
 @NgModule({
-  declarations: [ConsentComponent],
+  declarations: [
+    ConsentComponent,
+  ],
   imports: [
     CommonModule,
     MaterialModule,
+  ],
+  exports: [
+    ConsentComponent,
   ],
 })
 export class PrivacyModule {

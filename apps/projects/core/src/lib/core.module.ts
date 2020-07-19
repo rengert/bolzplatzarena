@@ -18,7 +18,7 @@ import { TrackByPropertyPipe } from './pipes/track-by-property.pipe';
     MaterialModule,
     PrivacyModule,
   ],
-  exports: [AgePipe, DistancePipe, IndicatorModule, TrackByPropertyPipe, TrackByCoordPipe, MaterialModule],
+  exports: [AgePipe, DistancePipe, IndicatorModule, PrivacyModule, TrackByPropertyPipe, TrackByCoordPipe, MaterialModule],
 })
 export class CoreModule {
 }

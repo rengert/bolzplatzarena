@@ -1,5 +1,5 @@
 {
-  "name": "core",
+  "name": "@bpa/core",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/animations": "~9.1.4",

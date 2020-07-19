@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Level } from '../../../models/level.model';
 import { ProfessionService } from '../../../modules/profession/services/profession.service';
@@ -9,14 +9,11 @@ import { ProfessionService } from '../../../modules/profession/services/professi
   styleUrls: ['./levels.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LevelsComponent implements OnInit {
+export class LevelsComponent {
   readonly columns = ['name', 'description', 'type', 'salaryFactor'];
-  data$: Observable<Level[]>;
+  readonly data$: Observable<Level[]>;
 
   constructor(private readonly profession: ProfessionService) {
-  }
-
-  ngOnInit(): void {
     this.data$ = this.profession.getLevels$();
   }
 }

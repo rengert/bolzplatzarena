@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { SpeedDialService } from '@bpa/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { SpeedDialService } from '../../../../../../../core/src/lib/modules/button/services/speed-dial.service';
 import { BaseComponent } from '../../../../components/base/base.component';
 import { Office } from '../../../../models/office.model';
 import { OfficeService } from '../../services/office.service';
@@ -21,8 +21,10 @@ export class OfficeListComponent extends BaseComponent implements OnInit {
 
   constructor(
     speedDial: SpeedDialService,
-    private readonly offices: OfficeService) {
+    private readonly offices: OfficeService,
+  ) {
     super(speedDial);
+
     this.buttons = [
       { key: 'OpenOffice', icon: 'home_work', route: ['open-office'] },
     ];
@@ -30,6 +32,7 @@ export class OfficeListComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     super.ngOnInit();
+
     this.data$ = this.offices.get$()
       .pipe(
         map(offices => new MatTableDataSource<Office>(offices)),
