@@ -6,6 +6,7 @@ import { Profession } from '../../../models/profession.model';
 import { Worker } from '../../../models/worker.model';
 import { AppStorageService } from '../../../services/storage/app-storage.service';
 import { ProfessionService } from '../../profession/services/profession.service';
+import { EmployeeStorageService } from './storage/employee-storage.service';
 
 function getRandom<T>(data: T[]): T {
   return data[Math.floor(Math.random() * data.length)];
@@ -40,11 +41,12 @@ function getRandomPercentage(): number {
 export class EmployeeService {
   constructor(
     private readonly appStorage: AppStorageService,
+    private readonly employeeStorage: EmployeeStorageService,
     private readonly profession: ProfessionService,
   ) {
   }
 
-  async seed(): Promise<string> {
+  async seed(): Promise<void> {
     const professions = await this.profession.get$()
       .toPromise();
     const levels = await this.profession.getLevels$()
@@ -64,7 +66,7 @@ export class EmployeeService {
     data.push(this.random(professions, levels));
     data.push(this.random(professions, levels));
 
-    return this.appStorage.workers.bulkAdd(data);
+    await this.employeeStorage.bulkAdd(data);
   }
 
   random(professions: Profession[], levels: Level[]): Worker {

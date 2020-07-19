@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SpeedDialService } from '@bpa/core';
 import { Observable } from 'rxjs';
 import { BaseComponent } from '../../../../components/base/base.component';
@@ -11,9 +11,9 @@ import { EmployeeStorageService } from '../../services/storage/employee-storage.
   styleUrls: ['./labour-market.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LabourMarketComponent extends BaseComponent implements OnInit {
+export class LabourMarketComponent extends BaseComponent {
   readonly displayedColumns: string[] = ['name', 'age', 'domicil', 'distance', 'position', 'salary', 'level', 'percentage'];
-  data$: Observable<Worker[]>;
+  readonly data$: Observable<Worker[]>;
 
   constructor(
     speedDial: SpeedDialService,
@@ -23,9 +23,6 @@ export class LabourMarketComponent extends BaseComponent implements OnInit {
     this.buttons = [
       { key: 'HeadHunter', icon: 'portrait', route: ['head-hunter'] },
     ];
-  }
-
-  ngOnInit(): void {
-    this.data$ = this.employeeStorage.get$();
+    this.data$ = this.employeeStorage.getAll$();
   }
 }

@@ -1,7 +1,7 @@
 <mat-card>
   <h2>Arbeitsmarkt</h2>
 
-  <table *ngIf="data$ | async as data" mat-table [dataSource]="data" class="mat-elevation-z8">
+  <table *ngIf="data$ | async as data" mat-table [dataSource]="data">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
       <td mat-cell *matCellDef="let worker"> {{ worker.firstname }} {{ worker.lastname }}</td>
