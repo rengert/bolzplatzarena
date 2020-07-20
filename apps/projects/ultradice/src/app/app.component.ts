@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -23,8 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private endSubscription = Subscription.EMPTY;
 
   constructor(
-    private readonly dialog: MatDialog,
-    private readonly dialogService: DialogService,
+    private readonly dialog: DialogService,
     private readonly game: GameService,
     private readonly translate: TranslateService,
     private readonly router: Router,
@@ -58,7 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   endGame(): void {
     this.endSubscription.unsubscribe();
-    this.endSubscription = this.dialogService.confirm({
+    this.endSubscription = this.dialog.confirm({
       title: this.translate.instant('COMPONENTS.APP_COMPONENT.END_GAME.CONFIRM.TITLE'),
       message: this.translate.instant('COMPONENTS.APP_COMPONENT.END_GAME.CONFIRM.MESSAGE'),
     })
