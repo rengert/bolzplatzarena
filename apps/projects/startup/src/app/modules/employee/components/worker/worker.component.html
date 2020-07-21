@@ -1,0 +1,17 @@
+<mat-card *ngIf="(worker$ | async)! as worker">
+  <mat-card-header>
+    <mat-card-title>{{ worker.firstname }} {{ worker.lastname }}</mat-card-title>
+    <mat-card-subtitle>
+      {{ worker.profession.name }}
+      <small>{{ worker.profession.description }}</small>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    sw
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button>Gehalt verhandeln</button>
+    <button mat-stroked-button>Interesse Anfragen</button>
+    <button mat-stroked-button>Angebot Abgeben</button>
+  </mat-card-actions>
+</mat-card>

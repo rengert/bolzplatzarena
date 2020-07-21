@@ -8,6 +8,7 @@ import { LaunchStartupComponent } from './components/launch-startup/launch-start
 import { StartupLaunchedGuard } from './guards/startup-launched.guard';
 import { DashBoardComponent } from './modules/dash-board/components/dash-board/dash-board.component';
 import { LabourMarketComponent } from './modules/employee/components/labour-market/labour-market.component';
+import { WorkerComponent } from './modules/employee/components/worker/worker.component';
 import { OfficeListComponent } from './modules/offices/components/office-list/office-list.component';
 import { OfficeComponent } from './modules/offices/components/office/office.component';
 import { OpenOfficeComponent } from './modules/offices/components/open-office/open-office.component';
@@ -51,6 +52,11 @@ const routes: Routes = [
                 path: 'market',
                 component: LabourMarketComponent,
                 data: { title: 'Arbeitsmarkt' },
+              },
+              {
+                path: ':id',
+                component: WorkerComponent,
+                data: { title: 'Informationen zur Person' },
               },
             ],
           },
