@@ -7,6 +7,7 @@ import { DebugComponent } from './components/debug/debug.component';
 import { LaunchStartupComponent } from './components/launch-startup/launch-startup.component';
 import { StartupLaunchedGuard } from './guards/startup-launched.guard';
 import { DashBoardComponent } from './modules/dash-board/components/dash-board/dash-board.component';
+import { EmployeeComponent } from './modules/employee/components/employee/employee.component';
 import { LabourMarketComponent } from './modules/employee/components/labour-market/labour-market.component';
 import { WorkerComponent } from './modules/employee/components/worker/worker.component';
 import { OfficeListComponent } from './modules/offices/components/office-list/office-list.component';
@@ -48,6 +49,11 @@ const routes: Routes = [
           {
             path: 'employee',
             children: [
+              {
+                path: 'own',
+                component: EmployeeComponent,
+                data: { title: 'Mitarbeiter' },
+              },
               {
                 path: 'market',
                 component: LabourMarketComponent,

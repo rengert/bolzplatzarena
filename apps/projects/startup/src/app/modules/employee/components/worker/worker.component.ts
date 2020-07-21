@@ -23,4 +23,9 @@ export class WorkerComponent implements OnInit {
   ngOnInit(): void {
     this.worker$ = this.employeeStorage.byId(this.id);
   }
+
+  async employ(worker: Worker): Promise<void> {
+    worker.employed = true;
+    await this.employeeStorage.put([worker], false);
+  }
 }

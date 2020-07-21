@@ -13,6 +13,10 @@
       <mat-icon>people</mat-icon>
       <span matLine>Arbeitsmarkt</span>
     </mat-list-item>
+    <mat-list-item [routerLink]="['employee/own']" (click)="navigation.emit()">
+      <mat-icon>people</mat-icon>
+      <span matLine>Mitarbeiter</span>
+    </mat-list-item>
   </div>
   <div class="button">
     <mat-divider></mat-divider>
