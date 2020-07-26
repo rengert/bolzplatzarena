@@ -7,13 +7,13 @@ import { Worker } from '../../../../models/worker.model';
 import { EmployeeStorageService } from '../../services/storage/employee-storage.service';
 
 @Component({
-  selector: 'app-labout-market',
-  templateUrl: './labour-market.component.html',
-  styleUrls: ['./labour-market.component.scss'],
+  selector: 'app-employee',
+  templateUrl: './employee.component.html',
+  styleUrls: ['./employee.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LabourMarketComponent extends BaseComponent {
-  readonly displayedColumns: string[] = ['name', 'age', 'domicil', 'distance', 'position', 'salary', 'level', 'percentage'];
+export class EmployeeComponent extends BaseComponent {
+  readonly displayedColumns: string[] = ['name', 'age', 'position', 'salary', 'level', 'percentage'];
   readonly data$: Observable<Worker[]>;
 
   constructor(
@@ -25,7 +25,7 @@ export class LabourMarketComponent extends BaseComponent {
       { key: 'HeadHunter', icon: 'portrait', route: ['head-hunter'] },
     ];
     this.data$ = this.employeeStorage.getAll$().pipe(
-      map(data => data.filter(worker => !worker.employed)),
+      map(data => data.filter(worker => worker.employed)),
     );
   }
 }

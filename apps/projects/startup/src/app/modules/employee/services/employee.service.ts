@@ -88,6 +88,7 @@ export class EmployeeService {
       domicile,
       percentage,
       birthday: birthday.format(),
+      employed: false,
     };
   }
 }

@@ -8,4 +8,5 @@ export interface Worker extends Person {
   level: Level;
   domicile: string;
   percentage: number;
+  employed: boolean;
 }
