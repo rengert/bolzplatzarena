@@ -1,8 +1,8 @@
-name: master
+name: Deployments
 
 on:
   push:
-    branches: [ deploy ]
+    branches: [ develop ]
 
 jobs:
   deploy:
