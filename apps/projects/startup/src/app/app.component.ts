@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LoggerService } from '@bpa/core';
+import { LoggerService, NotificationService, TitleBarService } from '@bpa/core';
 import { Observable } from 'rxjs';
-import { TitleBarService } from '../../../core/src/lib/modules/navigation/services/title-bar.service';
+import { delay, filter, tap } from 'rxjs/operators';
+import { StartupService } from './services/startup.service';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,21 @@ import { TitleBarService } from '../../../core/src/lib/modules/navigation/servic
 export class AppComponent {
   readonly title$: Observable<string | undefined>;
 
-  constructor(private readonly logger: LoggerService<AppComponent>, private readonly titleBar: TitleBarService) {
+  constructor(
+    private readonly logger: LoggerService<AppComponent>,
+    private readonly notification: NotificationService,
+    private readonly startUp: StartupService,
+    private readonly titleBar: TitleBarService,
+  ) {
     this.logger.name = 'AppComponent';
     this.logger.info('Application started');
 
     this.title$ = this.titleBar.title$;
+
+    this.startUp.get$().pipe(
+      filter(data => !!data),
+      delay(999),
+      tap(data => this.notification.show(`Willkommen ${data.founder.firstname}!`)),
+    ).subscribe();
   }
 }

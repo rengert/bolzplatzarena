@@ -12,3 +12,7 @@ export * from './button/services/speed-dial.service';
 export * from './storage/services/abstract-storage.service';
 
 export * from './navigation/navigation.module';
+export * from './navigation/services/title-bar.service';
+
+export * from './notification/notification.module';
+export * from './notification/services/notification.service';
