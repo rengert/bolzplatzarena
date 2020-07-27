@@ -26,7 +26,7 @@ jobs:
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
-      - run: npm install
-      - run: npm run deploy:startup
+      - run: cd apps && npm install
+      - run: cd apps && npm run deploy:startup
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
