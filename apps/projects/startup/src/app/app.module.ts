@@ -24,6 +24,7 @@ import { BaseModule } from './modules/base/base.module';
 import { DashBoardModule } from './modules/dash-board/dash-board.module';
 import { EmployeeModule } from './modules/employee/employee.module';
 import { OfficesModule } from './modules/offices/offices.module';
+import { CreditComponent } from './components/credit/credit.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { OfficesModule } from './modules/offices/offices.module';
     ProfessionsComponent,
     StartupAvatarComponent,
     CitiesComponent,
+    CreditComponent,
   ],
   imports: [
     AppRoutingModule,

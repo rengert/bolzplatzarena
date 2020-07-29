@@ -38,6 +38,7 @@ export class StartupService {
         birthday: '',
       },
       offices: [],
+      credit: 100000,
     };
 
     return this.startupStorage.save$(startup);

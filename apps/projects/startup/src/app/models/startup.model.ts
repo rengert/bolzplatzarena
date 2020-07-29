@@ -6,4 +6,5 @@ export interface Startup {
   description: string;
   founder: Person;
   offices: Office[];
+  credit: number;
 }

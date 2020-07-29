@@ -1,0 +1,5 @@
+<ng-container *ngIf="credit$ | async as credit">
+  <ng-container *ngIf="credit">
+    <p>{{ credit | number }} €</p>
+  </ng-container>
+</ng-container>
