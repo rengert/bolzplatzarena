@@ -13,7 +13,7 @@ export class CreditComponent {
   readonly credit$: Observable<number>;
 
   constructor(private readonly startUp: StartupService) {
-    this.credit$ = this.startUp.get$().pipe(
+    this.credit$ = this.startUp.watch$().pipe(
       filter(data => !!data),
       map(data => data.credit),
     );

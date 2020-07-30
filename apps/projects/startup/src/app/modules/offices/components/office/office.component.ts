@@ -23,7 +23,7 @@ export class OfficeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.office$ = this.startup.get$()
+    this.office$ = this.startup.watch$()
       .pipe(
         map(startup => startup?.offices?.find(office => office.id === this.id)),
         map(office => {

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoggerService, NotificationService, TitleBarService } from '@bpa/core';
 import { Observable } from 'rxjs';
-import { delay, filter, tap } from 'rxjs/operators';
+import { delay, filter, first, tap } from 'rxjs/operators';
 import { StartupService } from './services/startup.service';
 
 @Component({
@@ -24,10 +24,11 @@ export class AppComponent {
 
     this.title$ = this.titleBar.title$;
 
-    this.startUp.get$().pipe(
+    this.startUp.watch$().pipe(
       filter(data => !!data),
       delay(999),
       tap(data => this.notification.show(`Willkommen ${data.founder.firstname}!`)),
+      first(),
     ).subscribe();
   }
 }
