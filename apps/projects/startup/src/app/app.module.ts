@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { BaseComponent } from './components/base/base.component';
 import { NotesComponent } from './components/content/notes/notes.component';
 import { PrivacyComponent } from './components/content/privacy/privacy.component';
+import { CreditComponent } from './components/credit/credit.component';
 import { CitiesComponent } from './components/debug/cities/cities.component';
 import { DebugComponent } from './components/debug/debug.component';
 import { LevelsComponent } from './components/debug/levels/levels.component';
@@ -38,6 +39,7 @@ import { OfficesModule } from './modules/offices/offices.module';
     ProfessionsComponent,
     StartupAvatarComponent,
     CitiesComponent,
+    CreditComponent,
   ],
   imports: [
     AppRoutingModule,
