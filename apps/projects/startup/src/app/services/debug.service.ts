@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EmployeeService } from '../modules/employee/services/employee.service';
 import { EmployeeStorageService } from '../modules/employee/services/storage/employee-storage.service';
+import { CreditService } from './credit.service';
 import { StartupService } from './startup.service';
 import { AppStorageService } from './storage/app-storage.service';
 import { StartupStorageService } from './storage/startup-storage.service';
@@ -9,6 +10,7 @@ import { StartupStorageService } from './storage/startup-storage.service';
 export class DebugService {
   constructor(
     private readonly appStorage: AppStorageService,
+    private readonly credit: CreditService,
     private readonly employee: EmployeeService,
     private readonly employeeStorage: EmployeeStorageService,
     private readonly startup: StartupService,
@@ -16,7 +18,7 @@ export class DebugService {
   }
 
   async deleteOffices(): Promise<void> {
-    const startup = await this.startup.get$()
+    const startup = await this.startup.watch$()
       .toPromise();
     startup.offices = [];
     await this.startup.update(startup)
@@ -30,5 +32,9 @@ export class DebugService {
   async clearLabourMarket(): Promise<void> {
     await this.employeeStorage.clear();
     await this.employee.seed();
+  }
+
+  async changeCredit(value: number): Promise<void> {
+    await this.credit.change(value);
   }
 }

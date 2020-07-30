@@ -11,14 +11,14 @@ export class OfficeService {
   }
 
   get$(): Observable<Office[]> {
-    return this.startup.get$()
+    return this.startup.watch$()
       .pipe(
         map(startup => startup.offices),
       );
   }
 
   open(office: Office): Observable<Startup> {
-    return this.startup.get$()
+    return this.startup.watch$()
       .pipe(
         first(),
         tap(startup => startup.offices.push(office)),

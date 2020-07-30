@@ -16,8 +16,15 @@ export class StartupStorageService {
       );
   }
 
-  get$(): Observable<Startup> {
+  watch$(): Observable<Startup> {
     return this.storage.watch<Startup>('startup')
+      .pipe(
+        map(data => data as Startup),
+      );
+  }
+
+  get$(): Observable<Startup> {
+    return this.storage.get<Startup>('startup')
       .pipe(
         map(data => data as Startup),
       );
@@ -25,9 +32,7 @@ export class StartupStorageService {
 
   save$(startup: Startup): Observable<Startup> {
     return this.storage.set('startup', startup)
-      .pipe(
-        mapTo(startup),
-      );
+      .pipe(mapTo(startup));
   }
 
   async delete(): Promise<undefined> {

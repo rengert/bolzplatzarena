@@ -23,8 +23,12 @@ export class StartupService {
     return this.startupStorage.launched$();
   }
 
-  get$(): Observable<Startup> {
-    return this.startupStorage.get$();
+  watch$(): Observable<Startup> {
+    return this.startupStorage.watch$();
+  }
+
+  async get$(): Promise<Startup> {
+    return this.startupStorage.get$().toPromise();
   }
 
   launch$(config: LaunchStartup): Observable<Startup> {

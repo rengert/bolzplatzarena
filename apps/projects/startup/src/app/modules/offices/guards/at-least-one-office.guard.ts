@@ -12,7 +12,7 @@ export class AtLeastOneOfficeGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
-    return this.startup.get$()
+    return this.startup.watch$()
       .pipe(
         map(startup => {
           const hasOffices = !!startup.offices.length;

@@ -22,4 +22,8 @@ export class DebugComponent {
   async clearLabourMarket(): Promise<void> {
     await this.debug.clearLabourMarket();
   }
+
+  async changeCredit(value: number): Promise<void> {
+    await this.debug.changeCredit(value);
+  }
 }

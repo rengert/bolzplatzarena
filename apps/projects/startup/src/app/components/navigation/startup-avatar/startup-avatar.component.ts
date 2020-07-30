@@ -16,6 +16,6 @@ export class StartupAvatarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.startup$ = this.startup.get$();
+    this.startup$ = this.startup.watch$();
   }
 }
