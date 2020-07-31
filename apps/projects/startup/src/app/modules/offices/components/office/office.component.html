@@ -1,4 +1,6 @@
 <mat-card *ngIf="(office$ | async)! as office">
   <h2>{{ office.name }}</h2>
   <h4>{{ office.address }}</h4>
+  <label>Platz für Mitarbeiter: </label> {{ office.space }}
+  <br><label>Ausbaukosten: </label> {{ office.nextUpgradCost }}
 </mat-card>
