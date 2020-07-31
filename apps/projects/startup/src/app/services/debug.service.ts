@@ -18,8 +18,7 @@ export class DebugService {
   }
 
   async deleteOffices(): Promise<void> {
-    const startup = await this.startup.watch$()
-      .toPromise();
+    const startup = await this.startup.get$();
     startup.offices = [];
     await this.startup.update(startup)
       .toPromise();

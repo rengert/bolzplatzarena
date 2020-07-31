@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Worker } from '../../../../models/worker.model';
 
 @Component({
   selector: 'app-employee-table',
