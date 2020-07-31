@@ -17,6 +17,10 @@
       <mat-icon>people</mat-icon>
       <span matLine>Mitarbeiter</span>
     </mat-list-item>
+    <mat-list-item [routerLink]="['credit/audit']" (click)="navigation.emit()">
+      <mat-icon>money</mat-icon>
+      <span matLine>Einnahmen / Ausgaben</span>
+    </mat-list-item>
   </div>
   <div class="button">
     <mat-divider></mat-divider>

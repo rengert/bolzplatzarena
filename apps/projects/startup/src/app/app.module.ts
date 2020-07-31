@@ -21,6 +21,7 @@ import { LaunchStartupComponent } from './components/launch-startup/launch-start
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { StartupAvatarComponent } from './components/navigation/startup-avatar/startup-avatar.component';
 import { BaseModule } from './modules/base/base.module';
+import { CreditModule } from './modules/credit/credit.module';
 import { DashBoardModule } from './modules/dash-board/dash-board.module';
 import { EmployeeModule } from './modules/employee/employee.module';
 import { OfficesModule } from './modules/offices/offices.module';
@@ -48,6 +49,7 @@ import { OfficesModule } from './modules/offices/offices.module';
     ButtonModule,
     CommonModule,
     CoreModule,
+    CreditModule,
     DashBoardModule,
     EmployeeModule,
     MaterialModule,
