@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
-interface Audit {
+export interface Audit {
   value: number;
   reason: string;
   date: number;
@@ -20,5 +22,12 @@ export class CreditStorageService {
       date: new Date().valueOf(),
     });
     await this.storage.set('credit-audit', data).toPromise();
+  }
+
+  watchAudit$(): Observable<Audit[]> {
+    return this.storage.watch<Audit[]>('credit-audit').pipe(
+      filter(data => !!data),
+      map(data => data as Audit[]),
+    );
   }
 }
