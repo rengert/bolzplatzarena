@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Worker } from '../../../../../models/worker.model';
 import { EmployeeStorageService } from '../../../../employee/services/storage/employee-storage.service';
 
@@ -15,8 +14,6 @@ export class EmployeeComponent {
   readonly data$: Observable<Worker[]>;
 
   constructor(private readonly employeeStorage: EmployeeStorageService) {
-    this.data$ = this.employeeStorage.getAll$().pipe(
-      map(data => data.filter(worker => worker.employed)),
-    );
+    this.data$ = this.employeeStorage.getEmployed$();
   }
 }
