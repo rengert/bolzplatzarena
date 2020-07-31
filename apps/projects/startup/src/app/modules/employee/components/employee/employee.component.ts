@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SpeedDialService } from '@bpa/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { BaseComponent } from '../../../../components/base/base.component';
 import { Worker } from '../../../../models/worker.model';
 import { EmployeeStorageService } from '../../services/storage/employee-storage.service';
@@ -24,8 +23,6 @@ export class EmployeeComponent extends BaseComponent {
     this.buttons = [
       { key: 'HeadHunter', icon: 'portrait', route: ['head-hunter'] },
     ];
-    this.data$ = this.employeeStorage.getAll$().pipe(
-      map(data => data.filter(worker => worker.employed)),
-    );
+    this.data$ = this.employeeStorage.getEmployed$();
   }
 }

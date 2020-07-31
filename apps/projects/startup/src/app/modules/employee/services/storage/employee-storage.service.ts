@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractStorageService } from '@bpa/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Worker } from '../../../../models/worker.model';
 import { AppStorageService } from '../../../../services/storage/app-storage.service';
 
@@ -7,6 +9,12 @@ import { AppStorageService } from '../../../../services/storage/app-storage.serv
 export class EmployeeStorageService extends AbstractStorageService<Worker> {
   constructor(storage: AppStorageService) {
     super(storage, 'worker');
+  }
+
+  getEmployed$(): Observable<Worker[]> {
+    return this.getAll$().pipe(
+      map(data => data.filter(worker => worker.employed)),
+    );
   }
 
   protected loadNavigationProperties(item: Worker): void {
