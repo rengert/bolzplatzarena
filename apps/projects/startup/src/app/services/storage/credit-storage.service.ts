@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
+import { orderBy } from 'lodash';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -27,7 +28,7 @@ export class CreditStorageService {
   watchAudit$(): Observable<Audit[]> {
     return this.storage.watch<Audit[]>('credit-audit').pipe(
       filter(data => !!data),
-      map(data => data as Audit[]),
+      map(data => orderBy((data as Audit[]), item => [item.date], ['desc'])),
     );
   }
 }
