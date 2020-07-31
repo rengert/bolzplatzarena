@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CONSTANTS } from '../../../../constants';
 import { Office } from '../../../../models/office.model';
+import { CreditService } from '../../../../services/credit.service';
 import { StartupService } from '../../../../services/startup.service';
 
 interface OfficeDetails extends Office {
   space: number;
-  nextUpgradCost?: number;
+  nextUpgradeCost?: number;
 }
 
 @Component({
@@ -23,26 +24,36 @@ export class OfficeComponent implements OnInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
+    private readonly credit: CreditService,
     private readonly startup: StartupService,
   ) {
     this.id = this.activatedRoute.snapshot.params.id;
   }
 
   ngOnInit(): void {
-    this.office$ = this.startup.watch$()
-      .pipe(
-        map(startup => startup?.offices?.find(office => office.id === this.id)),
-        map(office => {
-          if (!office) {
-            throw new Error('Incorrect url opened');
-          }
+    this.office$ = this.startup.watch$().pipe(
+      map(startup => startup?.offices?.find(office => office.id === this.id)),
+      map(office => {
+        if (!office) {
+          throw new Error('Incorrect url opened');
+        }
 
-          return {
-            ...office,
-            space: CONSTANTS.office.space[office.size],
-            nextUpgradCost: CONSTANTS.office.prices.upgrade[office.size + 1],
-          };
-        }),
-      );
+        return {
+          ...office,
+          space: CONSTANTS.office.space[office.size],
+          nextUpgradeCost: CONSTANTS.office.prices.upgrade[office.size + 1],
+        };
+      }),
+    );
+  }
+
+  async upgrade({ id, nextUpgradeCost, name }: OfficeDetails): Promise<void> {
+    const startup = await this.startup.get$();
+    const office = startup.offices.find(item => item.id === id);
+    if (office && !!nextUpgradeCost) {
+      office.size++;
+      await this.startup.update(startup).toPromise();
+      await this.credit.change(nextUpgradeCost, `${name} wurde ausgebaut`);
+    }
   }
 }

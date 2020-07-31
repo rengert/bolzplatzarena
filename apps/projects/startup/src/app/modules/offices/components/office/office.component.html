@@ -2,5 +2,6 @@
   <h2>{{ office.name }}</h2>
   <h4>{{ office.address }}</h4>
   <label>Platz für Mitarbeiter: </label> {{ office.space }}
-  <br><label>Ausbaukosten: </label> {{ office.nextUpgradCost }}
+  <br><label>Ausbaukosten: </label> {{ office.nextUpgradeCost }}
+  <button mat-stroked-button *ngIf="office.nextUpgradeCost" (click)="upgrade(office)">Büro ausbauen</button>
 </mat-card>
