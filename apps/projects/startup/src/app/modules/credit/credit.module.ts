@@ -12,6 +12,9 @@ import { CreditAuditComponent } from './components/credit-audit/credit-audit.com
     CoreModule,
     RouterModule,
   ],
+  exports: [
+    CreditAuditComponent,
+  ],
 })
 export class CreditModule {
 }
