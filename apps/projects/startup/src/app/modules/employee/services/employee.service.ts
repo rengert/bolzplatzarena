@@ -6,6 +6,7 @@ import { Profession } from '../../../models/profession.model';
 import { Worker } from '../../../models/worker.model';
 import { AppStorageService } from '../../../services/storage/app-storage.service';
 import { ProfessionService } from '../../profession/services/profession.service';
+import { NameService } from './name.service';
 import { EmployeeStorageService } from './storage/employee-storage.service';
 
 function getRandom<T>(data: T[]): T {
@@ -42,29 +43,21 @@ export class EmployeeService {
   constructor(
     private readonly appStorage: AppStorageService,
     private readonly employeeStorage: EmployeeStorageService,
+    private readonly name: NameService,
     private readonly profession: ProfessionService,
   ) {
   }
 
-  async seed(): Promise<void> {
+  async seed(count = 20): Promise<void> {
     const professions = await this.profession.get$()
       .toPromise();
     const levels = await this.profession.getLevels$()
       .toPromise();
 
     const data: Worker[] = [];
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
-    data.push(this.random(professions, levels));
+    for (let i = 0; i < count; i++) {
+      data.push(this.random(professions, levels));
+    }
 
     await this.employeeStorage.bulkAdd(data);
   }
@@ -75,7 +68,7 @@ export class EmployeeService {
     const birthday: Moment = getRandomBirthday();
     const salary: number = getRandomSalary(position, level, birthday);
     const domicile: string = getRandomDomicile();
-    const { firstname, lastname } = getRandomNames();
+    const { firstname, lastname } = this.name.random();
     const percentage: number = getRandomPercentage();
 
     return {
