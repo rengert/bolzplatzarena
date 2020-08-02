@@ -5,8 +5,7 @@ interface Dictionary<T> {
   [id: number]: T;
 }
 
-const array = [...Array(2000)
-  .keys()].map(item => ({
+const array = [...Array(2000).keys()].map(item => ({
   id: item,
   value: Math.floor(Math.random() * 100),
 }));

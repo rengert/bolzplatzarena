@@ -5,7 +5,6 @@ import { DataService } from '../../../../services/data.service';
   selector: 'app-dice',
   templateUrl: './dice.component.html',
   styleUrls: ['./dice.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiceComponent {
   @Input() id = '0';

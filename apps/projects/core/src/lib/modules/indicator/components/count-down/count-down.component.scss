@@ -1,4 +1,6 @@
-*, *:before, *:after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -74,14 +76,6 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
       animation: rotation 1.3s linear infinite;
     }
 
-    .inner {
-      overflow: hidden;
-      position: relative;
-      height: 100%;
-      background: $bgColor;
-      border-radius: inherit;
-    }
-
     .colored-block {
       position: absolute;
       left: 50%;
@@ -103,11 +97,12 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
     .inner {
       overflow: hidden;
       position: relative;
-      width: 100%;
       height: 100%;
+      width: 100%;
+      background: $bgColor;
+      border-radius: inherit;
     }
   }
-
 
   .numbers {
     overflow: visible;
@@ -151,11 +146,14 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
 }
 
 @keyframes contAnim {
-  15%, 100% {
+  15%,
+  100% {
     margin-left: $sizeBig/-2;
     width: $sizeBig;
   }
-  25%, 90% {
+
+  25%,
+  90% {
     margin-left: $size/-2;
     width: $size;
   }
@@ -167,30 +165,38 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
     stroke-dashoffset: 0;
     opacity: 0;
   }
-  25%, 41% {
+
+  25%,
+  41% {
     opacity: 1;
     stroke-dasharray: $num3Len, $totalLen;
     stroke-dashoffset: -$numJoin3-0;
   }
-  53%, 66% {
+
+  53%,
+  66% {
     stroke-dasharray: $num2Len, $totalLen;
     stroke-dashoffset: -$num3Len - $numJoin2-3 -$numJoin3-0;
   }
+
   76% {
     stroke-dasharray: $num1Len + $numJoin1-2/2, $totalLen;
     stroke-dashoffset: -$num3Len - $numJoin2-3 - $num2Len - $numJoin1-2 -$numJoin3-0;
   }
-  88%, 100% {
+
+  88%,
+  100% {
     stroke-dasharray: $num1Len, $totalLen;
     stroke-dashoffset: -$num3Len - $numJoin2-3 - $num2Len - $numJoin1-2 -$numJoin3-0;
   }
+
   92% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
-
 }
 
 @keyframes rotation {
@@ -204,17 +210,21 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
     border-radius: $contBr;
     transform: rotate(0);
   }
-  30%, 43% {
+
+  30%,
+  43% {
     border-radius: 50%;
     transform: rotate(360deg);
   }
 
-  52%, 65% {
+  52%,
+  65% {
     border-radius: 0;
     transform: rotate(720deg);
   }
 
-  78%, 90% {
+  78%,
+  90% {
     border-radius: 50%;
     transform: rotate(1080deg);
   }
@@ -226,10 +236,13 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
 }
 
 @keyframes hideText {
-  15%, 100% {
+  15%,
+  100% {
     opacity: 1;
   }
-  20%, 96% {
+
+  20%,
+  96% {
     opacity: 0;
   }
 }

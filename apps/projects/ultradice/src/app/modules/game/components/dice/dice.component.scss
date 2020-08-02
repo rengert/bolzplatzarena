@@ -60,91 +60,36 @@
 
 // 1
 .cube__face--front {
+  transform: rotateY(0deg) translateZ(23px);
   background-position-y: -12px;
 }
 
 // 2
 .cube__face--right {
+  transform: rotateY(90deg) translateZ(23px);
   background-position-y: -86px;
-}
-
-// 6
-.cube__face--back {
-  background-position-y: -382px;
-}
-
-// 5
-.cube__face--left {
-  background-position-y: -308px;
 }
 
 // 3
 .cube__face--top {
+  transform: rotateX(90deg) translateZ(23px);
   background-position-y: -160px;
 }
 
 // 4
 .cube__face--bottom {
+  transform: rotateX(-90deg) translateZ(23px);
   background-position-y: -234px;
 }
 
-
-/* positions */
-
-.cube__face--front {
-  transform: rotateY(0deg) translateZ(23px);
-}
-
-.cube__face--right {
-  transform: rotateY(90deg) translateZ(23px);
-}
-
-.cube__face--back {
-  transform: rotateY(180deg) translateZ(23px);
-}
-
+// 5
 .cube__face--left {
   transform: rotateY(-90deg) translateZ(23px);
+  background-position-y: -308px;
 }
 
-.cube__face--top {
-  transform: rotateX(90deg) translateZ(23px);
+// 6
+.cube__face--back {
+  transform: rotateY(180deg) translateZ(23px);
+  background-position-y: -382px;
 }
-
-.cube__face--bottom {
-  transform: rotateX(-90deg) translateZ(23px);
-}
-
-/*:host {
-  background: transparent url(../../../../assets/images/dice-sprite.png) top left no-repeat;
-  display: block;
-  width: 66px;
-  margin-left: -5px;
-  height: 74px;
-  background-position-x: -74px;
-}
-
-:host(.fixed) {
-  background-position-x: 0;
-}
-
-:host([data-value="2"]) {
-  background-position-y: -74px;
-}
-
-:host([data-value="3"]) {
-  background-position-y: -148px;
-}
-
-:host([data-value="4"]) {
-  background-position-y: -222px;
-}
-
-:host([data-value="5"]) {
-  background-position-y: -296px;
-}
-
-:host([data-value="6"]) {
-  background-position-y: -370px;
-}
-*/

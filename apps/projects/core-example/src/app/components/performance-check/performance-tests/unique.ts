@@ -1,8 +1,7 @@
 import { uniq } from 'lodash';
 import { Test } from '../performance-test/performance-test.component';
 
-const array = [...Array(25000)
-  .keys()].map(item => ({
+const array = [...Array(25000).keys()].map(item => ({
   id: item,
   value: Math.floor(Math.random() * 100),
 }));

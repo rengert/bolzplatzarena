@@ -1,10 +1,8 @@
 import { pullAllWith } from 'lodash';
 import { Test } from '../performance-test/performance-test.component';
 
-const array = [...Array(25000)
-  .keys()];
-const pullArray = [...Array(75)
-  .keys()];
+const array = [...Array(25000).keys()];
+const pullArray = [...Array(75).keys()];
 
 export const pullWithAllTest: Test = {
   name: 'lodash pullAll vs. plain ts',

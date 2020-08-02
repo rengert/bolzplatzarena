@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -7,10 +7,6 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./count-down.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CountDownComponent implements OnInit {
+export class CountDownComponent {
   readonly visible$ = new BehaviorSubject<boolean>(true);
-
-  ngOnInit(): void {
-    // setTimeout(() => this.visible$.next(false), 3500);
-  }
 }
