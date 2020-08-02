@@ -35,7 +35,7 @@
 @media screen and (max-width: 320px) {
   :host {
     &.good {
-      &:after {
+      &::after {
         line-height: 1.3rem;
         font-size: 2rem;
       }

@@ -1,7 +1,6 @@
 import { Test } from '../performance-test/performance-test.component';
 
-const array = [...Array(25000)
-  .keys()];
+const array = [...Array(25000).keys()];
 
 export const forTest: Test = {
   name: 'for vs. each',

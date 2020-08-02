@@ -1,7 +1,6 @@
 import { Test } from '../performance-test/performance-test.component';
 
-const array = [...Array(250000)
-  .keys()];
+const array = [...Array(250000).keys()];
 
 export const duplicateArrayTest: Test = {
   name: 'duplicate array',

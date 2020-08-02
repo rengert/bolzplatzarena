@@ -4,7 +4,7 @@ import { switchMap } from 'rxjs/operators';
 
 export abstract class AbstractStorageService<T extends { id: string }> {
   protected readonly items: Dexie.Table<T>;
-  private readonly refresh$ = new BehaviorSubject(undefined);
+  private readonly refresh$ = new BehaviorSubject<boolean>(false);
 
   constructor(private readonly storage: Dexie, private readonly name: string) {
     this.items = this.storage.table<T>(name);
@@ -40,14 +40,17 @@ export abstract class AbstractStorageService<T extends { id: string }> {
         .filter(i => dataShouldBe.indexOf(i) === -1);
       await this.items.bulkDelete(items);
     }
+    this.refresh$.next(true);
   }
 
   async bulkAdd(data: T[]): Promise<void> {
     await this.items.bulkAdd(data);
+    this.refresh$.next(true);
   }
 
   async clear(): Promise<void> {
     await this.items.clear();
+    this.refresh$.next(true);
   }
 
   protected abstract loadNavigationProperties(item: T): void;
