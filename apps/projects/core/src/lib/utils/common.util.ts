@@ -45,3 +45,34 @@ export function distance(start: { latitude: number, longitude: number }, end: { 
 
   return result / 1000;
 }
+
+export function randomEnum<T>(anEnum: T): T[keyof T] {
+  const enumValues = Object.keys(anEnum)
+    .map(n => Number.parseInt(n, 10))
+    .filter(n => !Number.isNaN(n)) as unknown as T[keyof T][];
+  const randomIndex = Math.floor(Math.random() * enumValues.length);
+  const randomEnumValue = enumValues[randomIndex];
+
+  return randomEnumValue;
+}
+
+export function titleCaseWord(word: string): string {
+  if (!word) {
+    return word;
+  }
+
+  return word[0].toUpperCase() + word.substr(1).toLowerCase();
+}
+
+export function randomItems<T>(names: T[], count = 1): T[] {
+  const result: T[] = [];
+  while (result.length < count) {
+    const name = names[Math.floor(Math.random() * names.length)];
+
+    if (name && !result.includes(name)) {
+      result.push(name);
+    }
+  }
+
+  return result;
+}
