@@ -6,6 +6,17 @@ enum Sex {
   Female,
 }
 
+function randomName(names: string[], count: number, separator = ' '): string {
+  const generatedNames = randomItems(names, count);
+
+  let result = generatedNames.join(separator);
+  if (separator === '') {
+    result = titleCaseWord(result);
+  }
+
+  return result;
+}
+
 @Injectable({ providedIn: 'root' })
 export class NameService {
   private readonly givenNamesFemale = ['Anna', 'Beata', 'Christiane', 'Daniela', 'Eva', 'Friederike', 'Gerda', 'Heike', 'Ina', 'Julia', 'Klara', 'Lara', 'Maria', 'Nora', 'Olga', 'Petra', 'Rita', 'Sabrina', 'Thea', 'Ulrike', 'Viktoria', 'Wilma', 'Vera', 'Zara'];
@@ -24,29 +35,15 @@ export class NameService {
     };
   }
 
-  private givenName(sex: Sex, count: number, divider = ' '): string {
+  private givenName(sex: Sex, count: number, separator = ' '): string {
     const names = sex === Sex.Female
       ? this.givenNamesFemale
       : this.givenNamesMale;
 
-    const generatedNames = randomItems(names, count);
-
-    let result = generatedNames.join(divider);
-    if (divider === '') {
-      result = titleCaseWord(result);
-    }
-
-    return result;
+    return randomName(names, count, separator);
   }
 
-  private lastName(count: number, divider = ' '): string {
-    const generatedNames = randomItems(this.lastNames, count);
-
-    let result = generatedNames.join(divider);
-    if (divider === '') {
-      result = titleCaseWord(result);
-    }
-
-    return result + generatedNames.length.toString();
+  private lastName(count: number, separator = ' '): string {
+    return randomName(this.lastNames, count, separator);
   }
 }
