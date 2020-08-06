@@ -283,7 +283,10 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/startup/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "lodash"
+            ]
           },
           "configurations": {
             "production": {
