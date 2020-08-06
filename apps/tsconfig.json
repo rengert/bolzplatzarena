@@ -54,6 +54,12 @@
     },
     {
       "path": "./projects/neinometer/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ascii-racer/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ascii-racer/tsconfig.spec.json"
     }
   ]
 }
