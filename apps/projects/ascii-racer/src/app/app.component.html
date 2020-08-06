@@ -1,3 +1,5 @@
-<div *ngFor="let row of data | async">
-  <span *ngFor="let cell of row" [class.racer]="cell === 'H'" class="">{{ cell }}</span>
+<div *ngFor="let row of data | async; let line = index">
+  <span *ngFor="let cell of row; let column = index"
+        [class.green]="cell === '1'"
+        [class.racer]="column === racerPosition && line === racerPositionY">{{ column === racerPosition && line === racerPositionY ? 'H' : cell }}</span>
 </div>

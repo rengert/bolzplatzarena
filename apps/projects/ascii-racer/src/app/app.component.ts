@@ -1,6 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+enum Direction {
+  Left = 'ArrowLeft',
+  Up = 'ArrowUp',
+  Right = 'ArrowRight',
+  Down = 'ArrowDown',
+}
 
 @Component({
   selector: 'app-root',
@@ -9,19 +16,30 @@ import { map } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'ascii-racer';
+  racerPosition = 20;
   readonly data: Observable<string[][]>;
   readonly speed = 100;
-  private readonly trackWitdth = 100;
-  private readonly trackLength = 50;
+  readonly trackWitdth = 100;
+  readonly trackLength = 50;
+  racerPositionY = 45;
 
   private last: string[][];
   private track = [25, 35];
-  private racerPosition = 20;
 
   constructor() {
     this.data = timer(0, this.speed).pipe(
       map(_ => this.createTrack()),
     );
+  }
+
+  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
+    const direction = e.key as Direction;
+    if (direction === Direction.Left) {
+      this.racerPosition--;
+    }
+    if (direction === Direction.Right) {
+      this.racerPosition++;
+    }
   }
 
   private createTrack(): string[][] {
@@ -30,10 +48,11 @@ export class AppComponent {
       for (let i = 0; i < this.trackLength; i++) {
         this.last[i] = [];
         for (let j = 0; j < this.trackWitdth; j++) {
-          this.last[i][j] = this.track.includes(j) ? '1' : '0';
+          this.last[i][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
         }
       }
     } else {
+      this.last = this.last.reverse();
       this.last = this.last.splice(1, this.last.length - 1);
       this.last[this.trackLength - 1] = [];
       const random = Math.floor(Math.random() * 3);
@@ -51,12 +70,8 @@ export class AppComponent {
       }
       for (let j = 0; j < this.trackWitdth; j++) {
         this.last[this.trackLength - 1][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
-        if (j === this.racerPosition) {
-          this.last[this.trackLength - 1][j] = 'H';
-        }
       }
     }
-
-    return this.last;
+    return this.last.reverse();
   }
 }
