@@ -24,7 +24,7 @@ export class AppComponent {
   racerPositionY = 45;
 
   private last: string[][];
-  private track = [25, 35];
+  private readonly track = [25, 35];
 
   constructor() {
     this.data = timer(0, this.speed).pipe(
@@ -40,6 +40,10 @@ export class AppComponent {
     if (direction === Direction.Right) {
       this.racerPosition++;
     }
+  }
+
+  trackByFn(_: number, item: any): any {
+    return item;
   }
 
   private createTrack(): string[][] {
@@ -67,11 +71,14 @@ export class AppComponent {
             this.track[1] -= 1;
           }
           break;
+        default:
+          break;
       }
       for (let j = 0; j < this.trackWitdth; j++) {
         this.last[this.trackLength - 1][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
       }
     }
+
     return this.last.reverse();
   }
 }

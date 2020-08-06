@@ -957,24 +957,11 @@
           "options": {
             "tsConfig": [
               "projects/ascii-racer/tsconfig.app.json",
-              "projects/ascii-racer/tsconfig.spec.json",
-              "projects/ascii-racer/e2e/tsconfig.json"
+              "projects/ascii-racer/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/ascii-racer/e2e/protractor.conf.js",
-            "devServerTarget": "ascii-racer:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ascii-racer:serve:production"
-            }
           }
         }
       }
