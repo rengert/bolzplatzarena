@@ -37,8 +37,8 @@ export class StartupStorageService {
       .pipe(mapTo(startup));
   }
 
-  setMoment(key: string, value: Moment): Promise<void> {
-    return this.storage.set(key, value.toISOString()).toPromise();
+  async setMoment(key: string, value: Moment): Promise<void> {
+    await this.storage.set(key, value.toISOString()).toPromise();
   }
 
   async getMoment(key: string): Promise<Moment | undefined> {
@@ -47,7 +47,7 @@ export class StartupStorageService {
       return createMoment(data);
     }
 
-    return;
+    return undefined;
   }
 
   async delete(): Promise<undefined> {

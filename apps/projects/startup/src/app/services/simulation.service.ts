@@ -27,7 +27,7 @@ export class SimulationService {
             .then(value => value || createMoment('2000-01-01'));
         }
 
-        return of(date as Moment);
+        return of(date);
       }),
       map(date => date.clone().add(1, 'hours')),
       // todo do not use the speeeder .... calculate using speeder
