@@ -18,17 +18,17 @@ export class AppComponent {
   title = 'ascii-racer';
   racerPosition = 20;
   readonly data: Observable<string[][]>;
-  readonly speed = 100;
+  readonly speed = 50;
   readonly trackWitdth = 100;
   readonly trackLength = 50;
-  racerPositionY = 45;
+  racerPositionY = 49;
 
   private last: string[][];
   private readonly track = [25, 35];
 
   constructor() {
     this.data = timer(0, this.speed).pipe(
-      map(_ => this.createTrack()),
+      map(_ => this.updateTrack()),
     );
   }
 
@@ -46,39 +46,42 @@ export class AppComponent {
     return item;
   }
 
-  private createTrack(): string[][] {
+  private updateTrack(): string[][] {
     if (!this.last) {
-      this.last = [];
-      for (let i = 0; i < this.trackLength; i++) {
-        this.last[i] = [];
-        for (let j = 0; j < this.trackWitdth; j++) {
-          this.last[i][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
+      this.createTrack();
+    }
+    this.last = this.last.reverse();
+    this.last = this.last.splice(1, this.last.length - 1);
+    this.last[this.trackLength - 1] = [];
+    const random = Math.floor(Math.random() * 3);
+    switch (random) {
+      case 0:
+        this.track[0] += 1;
+        this.track[1] += 1;
+        break;
+      case 1:
+        if (this.track[0] > 0) {
+          this.track[0] -= 1;
+          this.track[1] -= 1;
         }
-      }
-    } else {
-      this.last = this.last.reverse();
-      this.last = this.last.splice(1, this.last.length - 1);
-      this.last[this.trackLength - 1] = [];
-      const random = Math.floor(Math.random() * 3);
-      switch (random) {
-        case 0:
-          this.track[0] += 1;
-          this.track[1] += 1;
-          break;
-        case 1:
-          if (this.track[0] > 0) {
-            this.track[0] -= 1;
-            this.track[1] -= 1;
-          }
-          break;
-        default:
-          break;
-      }
-      for (let j = 0; j < this.trackWitdth; j++) {
-        this.last[this.trackLength - 1][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
-      }
+        break;
+      default:
+        break;
+    }
+    for (let j = 0; j < this.trackWitdth; j++) {
+      this.last[this.trackLength - 1][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
     }
 
     return this.last.reverse();
+  }
+
+  private createTrack(): void {
+    this.last = [];
+    for (let i = 0; i < this.trackLength; i++) {
+      this.last[i] = [];
+      for (let j = 0; j < this.trackWitdth; j++) {
+        this.last[i][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
+      }
+    }
   }
 }
