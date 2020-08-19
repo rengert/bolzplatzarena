@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Moment } from 'moment';
+import { Observable } from 'rxjs';
 import { SimulationService } from '../../services/simulation.service';
 
 @Component({
