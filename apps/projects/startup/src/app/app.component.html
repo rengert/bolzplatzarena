@@ -3,7 +3,10 @@
     <mat-icon>menu</mat-icon>
   </button>
   &nbsp;<h1>Startup - {{ title$ | async }}</h1>
-  <app-credit></app-credit>
+  <section>
+    <app-credit></app-credit>
+    <app-date></app-date>
+  </section>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #snav [mode]="'over'">
