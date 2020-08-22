@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Moment } from 'moment';
 import { StartupService } from './startup.service';
 import { CreditStorageService } from './storage/credit-storage.service';
 
@@ -10,18 +11,18 @@ export class CreditService {
   ) {
   }
 
-  async change(value: number, reason?: string): Promise<void> {
+  async change(value: number, date: Moment, reason?: string): Promise<void> {
     const startUp = await this.startup.get$();
     startUp.credit += value;
     await this.startup.update(startUp)
       .toPromise();
 
     if (reason) {
-      await this.audit(value, reason);
+      await this.audit(value, reason, date);
     }
   }
 
-  async audit(value: number, reason: string): Promise<void> {
-    await this.creditStorage.addAudit(value, reason);
+  async audit(value: number, reason: string, date: Moment): Promise<void> {
+    await this.creditStorage.addAudit(value, reason, date);
   }
 }

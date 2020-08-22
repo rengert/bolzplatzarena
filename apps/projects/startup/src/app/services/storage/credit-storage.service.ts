@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Moment } from 'moment';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
@@ -13,12 +14,12 @@ export class CreditStorageService {
   constructor(private readonly storage: StorageService) {
   }
 
-  async addAudit(value: number, reason: string): Promise<void> {
+  async addAudit(value: number, reason: string, date: Moment): Promise<void> {
     const data = (await this.storage.get<Audit[]>('credit-audit').toPromise() ?? []) as Audit[];
     data.push({
       value,
       reason,
-      date: new Date().valueOf(),
+      date: date.valueOf(),
     });
     await this.storage.set('credit-audit', data).toPromise();
   }

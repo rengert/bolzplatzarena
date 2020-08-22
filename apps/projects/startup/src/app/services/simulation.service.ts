@@ -3,6 +3,7 @@ import { createMoment } from '@bpa/core';
 import { Moment } from 'moment';
 import { BehaviorSubject, Observable, of, timer } from 'rxjs';
 import { filter, first, map, switchMap, tap } from 'rxjs/operators';
+import { CreditService } from './credit.service';
 import { StartupService } from './startup.service';
 import { StartupStorageService } from './storage/startup-storage.service';
 
@@ -12,10 +13,11 @@ export class SimulationService {
   private readonly date = new BehaviorSubject<Moment | undefined>(undefined);
 
   // runs every xxx ms
-  private readonly speed = 1000;
+  private readonly speed = 100;
 
   constructor(
-    startupSe: StartupService,
+    private readonly credit: CreditService,
+    startup: StartupService,
     startupStorage: StartupStorageService,
   ) {
     this.date$ = this.date.pipe(
@@ -23,7 +25,7 @@ export class SimulationService {
       map(data => data !),
     );
 
-    startupSe.launched$().pipe(
+    startup.launched$().pipe(
       filter(data => data),
       first(),
       switchMap(_ => timer(0, this.speed).pipe(
@@ -43,5 +45,14 @@ export class SimulationService {
         switchMap(date => startupStorage.setMoment('simulationDate', date)),
       )),
     ).subscribe();
+
+    this.date$.subscribe(date => void this.handleCosts(date));
+  }
+
+  async handleCosts(date: Moment): Promise<void> {
+    if (date.date() === 1 && date.hour() === 0) {
+      // monthly costs
+      await this.credit.change(-1000, date, 'Miete');
+    }
   }
 }
