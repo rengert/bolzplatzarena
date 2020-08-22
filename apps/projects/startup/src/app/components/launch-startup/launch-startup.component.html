@@ -1,4 +1,20 @@
-<mat-card>
+<mat-card *ngIf="!challenageAccepted">
+  <mat-card-title>Kill Alphabet</mat-card-title>
+  <mat-card-subtitle>Bähm</mat-card-subtitle>
+  <mat-card-content>
+    Am 7. September 1998 wolltest Du eine toll Firma gründen, die tollste überhaupt.
+    <br>Die Idee war genial.
+    <br> Aber du musstest ja unbedingt das Wochenende zuvor feiern gehen und im Suff ... der Rest ist Geschichte.
+    <br>Wenige Tage bevor du an den Start gegangen wärst, ...
+    <br><br>Nun viele Jahre später ist es soweit. Du willst Rache.
+    <br>Was fehlt ist Geld. Viel Geld.
+    <br>Aber eines ist klar ... WANNA KILL ALPHABET
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="challenageAccepted = true">Challange accepted</button>
+  </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="challenageAccepted">
   <form [formGroup]="form" (ngSubmit)="launch()">
     <h2>GründerIn des Startups</h2>
     <div class="row">

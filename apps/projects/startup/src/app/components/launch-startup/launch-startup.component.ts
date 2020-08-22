@@ -9,6 +9,7 @@ import { LaunchStartup, StartupService } from '../../services/startup.service';
   styleUrls: ['./launch-startup.component.scss'],
 })
 export class LaunchStartupComponent {
+  challenageAccepted = false;
   readonly form = new FormGroup({
     sex: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
