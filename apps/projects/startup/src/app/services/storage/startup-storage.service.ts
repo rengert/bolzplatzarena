@@ -12,7 +12,7 @@ export class StartupStorageService {
   }
 
   launched$(): Observable<boolean> {
-    return this.storage.get<Startup>('startup')
+    return this.storage.watch<Startup>('startup')
       .pipe(
         map(startup => startup !== undefined),
       );
