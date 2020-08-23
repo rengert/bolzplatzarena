@@ -26,6 +26,8 @@ import { CreditModule } from './modules/credit/credit.module';
 import { DashBoardModule } from './modules/dash-board/dash-board.module';
 import { EmployeeModule } from './modules/employee/employee.module';
 import { OfficesModule } from './modules/offices/offices.module';
+import { PropertySimulatorService } from './services/simulators/property-simulator.service';
+import { SIMULATOR } from './services/simulators/simulator';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { OfficesModule } from './modules/offices/offices.module';
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always', appearance: 'fill' } },
     { provide: LOGGER, useClass: ConsoleLoggerService, multi: true },
+    { provide: SIMULATOR, useClass: PropertySimulatorService, multi: true },
   ],
   bootstrap: [AppComponent],
   exports: [
