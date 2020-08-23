@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { createMoment } from '@bpa/core';
 import { Moment } from 'moment';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
@@ -11,10 +12,12 @@ export interface Audit {
 
 @Injectable({ providedIn: 'root' })
 export class CreditStorageService {
-  constructor(private readonly storage: StorageService) {
+  constructor(
+    private readonly storage: StorageService,
+  ) {
   }
 
-  async addAudit(value: number, reason: string, date: Moment): Promise<void> {
+  async addAudit(value: number, reason: string, date: Moment = createMoment(0)): Promise<void> {
     const data = (await this.storage.get<Audit[]>('credit-audit').toPromise() ?? []) as Audit[];
     data.push({
       value,

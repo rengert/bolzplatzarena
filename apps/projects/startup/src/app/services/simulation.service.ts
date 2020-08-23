@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { createMoment } from '@bpa/core';
 import { Moment } from 'moment';
 import { BehaviorSubject, Observable, of, timer } from 'rxjs';
 import { filter, first, map, switchMap, tap } from 'rxjs/operators';
-import { CreditService } from './credit.service';
+import { SIMULATOR, Simulator } from './simulators/simulator';
 import { StartupService } from './startup.service';
 import { StartupStorageService } from './storage/startup-storage.service';
 
@@ -13,12 +13,12 @@ export class SimulationService {
   private readonly date = new BehaviorSubject<Moment | undefined>(undefined);
 
   // runs every xxx ms
-  private readonly speed = 100;
+  private readonly speed = 10;
 
   constructor(
-    private readonly credit: CreditService,
     startup: StartupService,
     startupStorage: StartupStorageService,
+    @Inject(SIMULATOR) private readonly simulators: Simulator[] = [],
   ) {
     this.date$ = this.date.pipe(
       filter(value => !!value),
@@ -46,13 +46,10 @@ export class SimulationService {
       )),
     ).subscribe();
 
-    this.date$.subscribe(date => void this.handleCosts(date));
+    this.date$.subscribe(date => void this.handleCosts(date.clone()));
   }
 
-  async handleCosts(date: Moment): Promise<void> {
-    if (date.date() === 1 && date.hour() === 0) {
-      // monthly costs
-      await this.credit.change(-1000, date, 'Miete');
-    }
+  handleCosts(date: Moment): void {
+    this.simulators.forEach(simulator => simulator.handle(date));
   }
 }

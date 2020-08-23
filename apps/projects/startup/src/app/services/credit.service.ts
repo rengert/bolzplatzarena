@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { createMoment } from '@bpa/core';
 import { Moment } from 'moment';
 import { StartupService } from './startup.service';
 import { CreditStorageService } from './storage/credit-storage.service';
@@ -11,7 +12,7 @@ export class CreditService {
   ) {
   }
 
-  async change(value: number, date: Moment, reason?: string): Promise<void> {
+  async change(value: number, reason?: string, date = createMoment(0)): Promise<void> {
     const startUp = await this.startup.get$();
     startUp.credit += value;
     await this.startup.update(startUp)
