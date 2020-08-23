@@ -16,12 +16,12 @@ export class PropertySimulatorService implements Simulator {
   ) {
   }
 
-  handle(date: Moment): void {
+  async handle(date: Moment): Promise<void> {
     if (!match(date)) {
       return;
     }
     this.logger.debug('handle the properties');
 
-    this.credit.change(-1000, 'Monatliche Miete', date);
+    await this.credit.change(-1000, 'Monatliche Miete', date);
   }
 }

@@ -46,7 +46,7 @@ export class SimulationService {
       )),
     ).subscribe();
 
-    this.date$.subscribe(date => void this.handleCosts(date.clone()));
+    this.date$.subscribe(date => this.handleCosts(date.clone()));
   }
 
   handleCosts(date: Moment): void {
