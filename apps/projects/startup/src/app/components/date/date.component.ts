@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Moment } from 'moment';
 import { Observable } from 'rxjs';
-import { SimulationService } from '../../services/simulation.service';
+import { TimeSimulatorService } from '../../services/simulators/time-simulator.service';
 
 @Component({
   selector: 'app-date',
@@ -12,7 +12,7 @@ import { SimulationService } from '../../services/simulation.service';
 export class DateComponent {
   readonly date$: Observable<Moment>;
 
-  constructor(private readonly simulation: SimulationService) {
-    this.date$ = this.simulation.date$;
+  constructor(timeSimulator: TimeSimulatorService) {
+    this.date$ = timeSimulator.date$;
   }
 }
