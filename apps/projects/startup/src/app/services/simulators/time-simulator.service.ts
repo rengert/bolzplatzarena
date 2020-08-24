@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { createMoment } from '@bpa/core';
 import { Moment } from 'moment';
 import { BehaviorSubject, Observable, timer } from 'rxjs';
 import { filter, first, map, mapTo, switchMap, tap } from 'rxjs/operators';
-import { createMoment } from '../../../../../core/src';
 import { StartupService } from '../startup.service';
 
 @Injectable({ providedIn: 'root' })

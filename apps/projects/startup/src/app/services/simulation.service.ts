@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
 import { Moment } from 'moment';
-import { tap } from 'rxjs/operators';
 import { SIMULATOR, Simulator } from './simulators/simulator';
 import { TimeSimulatorService } from './simulators/time-simulator.service';
 import { StartupService } from './startup.service';
@@ -12,9 +11,7 @@ export class SimulationService {
     timeSimulator: TimeSimulatorService,
     @Inject(SIMULATOR) private readonly simulators: Simulator[] = [],
   ) {
-    timeSimulator.date$
-      .pipe(tap(_ => console.log('ä')))
-      .subscribe(date => this.handleCosts(date.clone()));
+    timeSimulator.date$.subscribe(date => this.handleCosts(date.clone()));
   }
 
   handleCosts(date: Moment): void {
