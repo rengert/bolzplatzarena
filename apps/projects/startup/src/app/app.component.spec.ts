@@ -3,6 +3,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { LoggerService, NotificationService, TitleBarService } from '@bpa/core';
 import { instance, mock } from 'ts-mockito';
 import { AppComponent } from './app.component';
+import { SIMULATOR } from './services/simulators/simulator';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -19,6 +20,8 @@ describe('AppComponent', () => {
         { provide: LoggerService, useFactory: () => instance(loggerServiceMock) },
         { provide: NotificationService, useFactory: () => instance(loggerServiceMock) },
         { provide: TitleBarService, useFactory: () => instance(titleBarMock) },
+        { provide: SIMULATOR, useValue: [], multi: true },
+
       ],
     })
       .compileComponents();
