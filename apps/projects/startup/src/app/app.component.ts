@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoggerService, NotificationService, TitleBarService } from '@bpa/core';
 import { Observable } from 'rxjs';
 import { delay, filter, first, tap } from 'rxjs/operators';
+import { SimulationService } from './services/simulation.service';
 import { StartupService } from './services/startup.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class AppComponent {
     private readonly notification: NotificationService,
     private readonly startUp: StartupService,
     private readonly titleBar: TitleBarService,
+    simulation: SimulationService,
   ) {
     this.logger.name = 'AppComponent';
     this.logger.info('Application started');

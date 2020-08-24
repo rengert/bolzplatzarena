@@ -11,7 +11,7 @@ export class TimeSimulatorService {
   private readonly date = new BehaviorSubject<Moment | undefined>(undefined);
 
   // runs every xxx ms
-  private readonly speed = 500;
+  private readonly speed = 100;
 
   constructor(startup: StartupService) {
     this.date$ = this.date.pipe(
