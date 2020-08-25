@@ -10,7 +10,11 @@ export class OfficeService {
   constructor(private readonly startup: StartupService) {
   }
 
-  get$(): Observable<Office[]> {
+  async get$(): Promise<Office[]> {
+    return this.startup.get$().then(startup => startup.offices);
+  }
+
+  watch$(): Observable<Office[]> {
     return this.startup.watch$()
       .pipe(
         map(startup => startup.offices),

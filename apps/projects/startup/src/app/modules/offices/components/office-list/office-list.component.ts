@@ -33,7 +33,7 @@ export class OfficeListComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
 
-    this.data$ = this.offices.get$()
+    this.data$ = this.offices.watch$()
       .pipe(
         map(offices => new MatTableDataSource<Office>(offices)),
         tap(data => data.filter = this.filterTerm),

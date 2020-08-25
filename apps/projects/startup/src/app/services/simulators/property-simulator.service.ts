@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoggerService } from '@bpa/core';
 import { Moment } from 'moment';
+import { OfficeService } from '../../modules/offices/services/office.service';
 import { CreditService } from '../credit.service';
 import { Simulator } from './simulator';
 
@@ -13,6 +14,7 @@ export class PropertySimulatorService implements Simulator {
   constructor(
     private readonly credit: CreditService,
     private readonly logger: LoggerService<PropertySimulatorService>,
+    private readonly offices: OfficeService,
   ) {
   }
 
@@ -22,6 +24,9 @@ export class PropertySimulatorService implements Simulator {
     }
     this.logger.debug('handle the properties');
 
-    await this.credit.change(-1000, 'Monatliche Miete', date);
+    await this.offices.get$().then(
+      async offices => offices.forEach(
+        office => this.credit.change(-office.monthlyCost, `Monatliche Miete ${office.name}`, date)),
+    );
   }
 }

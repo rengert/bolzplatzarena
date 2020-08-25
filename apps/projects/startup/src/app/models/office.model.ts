@@ -6,4 +6,5 @@ export interface Office extends BaseModel {
   address: string;
   city: City;
   size: number;
+  monthlyCost: number;
 }
