@@ -48,8 +48,9 @@ export class OpenOfficeComponent extends BaseComponent implements OnInit {
   }
 
   openOffice(office: Office): void {
-    const newOffice = {
+    const newOffice: Office = {
       ...office,
+      monthlyCost: 1000,
       size: 0,
       id: uuid(),
     };

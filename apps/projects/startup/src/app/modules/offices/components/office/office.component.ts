@@ -52,6 +52,7 @@ export class OfficeComponent implements OnInit {
     const office = startup.offices.find(item => item.id === id);
     if (office && !!nextUpgradeCost) {
       office.size++;
+      office.monthlyCost = (office.size + 1) * 1000;
       await this.startup.update(startup).toPromise();
       await this.credit.change(nextUpgradeCost, `${name} wurde ausgebaut`);
     }

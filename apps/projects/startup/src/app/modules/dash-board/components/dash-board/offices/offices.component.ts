@@ -13,6 +13,6 @@ export class OfficesComponent {
   readonly offices$: Observable<Office[]>;
 
   constructor(private readonly office: OfficeService) {
-    this.offices$ = this.office.get$();
+    this.offices$ = this.office.watch$();
   }
 }
