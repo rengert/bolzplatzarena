@@ -1,18 +1,30 @@
 import { Injectable } from '@angular/core';
-import { createMoment } from '@bpa/core';
 import { Moment } from 'moment';
+import { TimeSimulatorService } from './simulators/time-simulator.service';
 import { StartupService } from './startup.service';
 import { CreditStorageService } from './storage/credit-storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class CreditService {
+  private date: Moment;
+
   constructor(
-    private readonly startup: StartupService,
     private readonly creditStorage: CreditStorageService,
+    private readonly startup: StartupService,
+    timeSimulator: TimeSimulatorService,
   ) {
+    timeSimulator.date$.subscribe(date => this.date = date);
   }
 
-  async change(value: number, reason?: string, date = createMoment(0)): Promise<void> {
+  async add(value: number, reason?: string, date = this.date): Promise<void> {
+    await this.change(value, reason, date);
+  }
+
+  async substract(value: number, reason?: string, date = this.date): Promise<void> {
+    await this.change(-value, reason, date);
+  }
+
+  async change(value: number, reason?: string, date = this.date): Promise<void> {
     const startUp = await this.startup.get$();
     startUp.credit += value;
     await this.startup.update(startUp)

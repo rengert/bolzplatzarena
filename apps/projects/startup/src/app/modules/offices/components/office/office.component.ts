@@ -54,7 +54,7 @@ export class OfficeComponent implements OnInit {
       office.size++;
       office.monthlyCost = (office.size + 1) * 1000;
       await this.startup.update(startup).toPromise();
-      await this.credit.change(nextUpgradeCost, `${name} wurde ausgebaut`);
+      await this.credit.substract(nextUpgradeCost, `${name} wurde ausgebaut`);
     }
   }
 }
