@@ -49,11 +49,12 @@ export class SalarySimulatorService implements Simulator {
     this.logger.debug('handle the bonus / christmas');
 
     await this.employeeStorage.getEmployed$().toPromise().then(
-      async workers => workers.forEach(
-        worker => {
-          this.credit.substract(CONSTANTS.payment.christmas, `Weihnachtsgeld ${worker.firstname} ${worker.lastname}`, date);
-          this.credit.substract(CONSTANTS.payment.bonus, `Bonus ${worker.firstname} ${worker.lastname}`, date);
-        }),
+      async workers => {
+        for (const worker of workers) {
+          await this.credit.substract(CONSTANTS.worker.payment.christmas, `Weihnachtsgeld ${worker.firstname} ${worker.lastname}`, date);
+          await this.credit.substract(CONSTANTS.worker.payment.bonus, `Bonus ${worker.firstname} ${worker.lastname}`, date);
+        }
+      },
     );
   }
 }

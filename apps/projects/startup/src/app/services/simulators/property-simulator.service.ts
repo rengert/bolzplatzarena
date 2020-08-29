@@ -26,7 +26,7 @@ export class PropertySimulatorService implements Simulator {
 
     await this.offices.get$().then(
       async offices => offices.forEach(
-        office => this.credit.change(-office.monthlyCost, `Monatliche Miete ${office.name}`, date)),
+        office => this.credit.substract(office.monthlyCost, `Monatliche Miete ${office.name}`, date)),
     );
   }
 }

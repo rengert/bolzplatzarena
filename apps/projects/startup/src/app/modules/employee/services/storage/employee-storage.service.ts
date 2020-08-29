@@ -17,7 +17,7 @@ export class EmployeeStorageService extends AbstractStorageService<Worker> {
     );
   }
 
-  getEmployed(): Promise<Worker[]> {
+  async getEmployed(): Promise<Worker[]> {
     return this.getEmployed$().pipe(
       first(),
     ).toPromise();

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CONSTANTS } from '../../../../constants';
 import { Worker } from '../../../../models/worker.model';
 import { CreditService } from '../../../../services/credit.service';
 import { EmployeeStorageService } from '../../services/storage/employee-storage.service';
@@ -29,6 +30,6 @@ export class WorkerComponent implements OnInit {
   async employ(worker: Worker): Promise<void> {
     worker.employed = true;
     await this.employeeStorage.put([worker], false);
-    await this.credit.change(-10000, 'Neuer Mitarbeiter (Arbeitsplatz / Ausrüstung / Verwaltung etc.)');
+    await this.credit.substract(CONSTANTS.worker.initial, 'Neuer Mitarbeiter (Arbeitsplatz / Ausrüstung / Verwaltung etc.)');
   }
 }

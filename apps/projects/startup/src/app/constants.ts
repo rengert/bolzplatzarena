@@ -6,8 +6,11 @@ export const CONSTANTS = {
     },
     space: [5, 10, 15, 22, 50],
   },
-  payment: {
-    bonus: 1000,
-    christmas: 1500,
+  worker: {
+    initial: 10000,
+    payment: {
+      bonus: 1000,
+      christmas: 1500,
+    },
   },
 };
