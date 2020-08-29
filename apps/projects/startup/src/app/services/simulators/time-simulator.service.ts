@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createMoment } from '@bpa/core';
 import { Moment } from 'moment';
 import { BehaviorSubject, Observable, timer } from 'rxjs';
-import { filter, first, map, mapTo, switchMap, tap } from 'rxjs/operators';
+import { filter, first, map, switchMap, tap } from 'rxjs/operators';
 import { StartupService } from '../startup.service';
 
 @Injectable({ providedIn: 'root' })
@@ -23,7 +23,7 @@ export class TimeSimulatorService {
       filter(data => data),
       first(),
       switchMap(_ => timer(0, this.speed).pipe(
-        mapTo(this.date.value),
+        map(__ => this.date.value),
         map(date => {
           if (!date) {
             const item = localStorage.getItem('simulationDate');
