@@ -13,6 +13,6 @@ export class CreditAuditComponent {
   readonly data$: Observable<Audit[]>;
 
   constructor(private readonly creditStorage: CreditStorageService) {
-    this.data$ = this.creditStorage.watchAudit$(10);
+    this.data$ = this.creditStorage.watchAudit$(50);
   }
 }

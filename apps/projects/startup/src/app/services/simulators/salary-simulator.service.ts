@@ -36,10 +36,10 @@ export class SalarySimulatorService implements Simulator {
     }
     this.logger.debug('handle the salary');
 
-    await this.employeeStorage.getEmployed().then(
-      async workers => workers.forEach(
-        worker => this.credit.substract(worker.salary, `Monatliches Gehalt ${worker.firstname} ${worker.lastname}`, date)),
-    );
+    const workers = await this.employeeStorage.getEmployed();
+    for (const worker of workers) {
+      await this.credit.substract(worker.salary, `Monatliches Gehalt ${worker.firstname} ${worker.lastname}`, date);
+    }
   }
 
   private async handleYearly(date: Moment): Promise<void> {
@@ -48,7 +48,7 @@ export class SalarySimulatorService implements Simulator {
     }
     this.logger.debug('handle the bonus / christmas');
 
-    await this.employeeStorage.getEmployed$().toPromise().then(
+    await this.employeeStorage.getEmployed().then(
       async workers => {
         for (const worker of workers) {
           await this.credit.substract(CONSTANTS.worker.payment.christmas, `Weihnachtsgeld ${worker.firstname} ${worker.lastname}`, date);
