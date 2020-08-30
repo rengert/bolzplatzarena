@@ -35,9 +35,9 @@ export class DebugService {
   }
 
   async changeCredit(value: number, add: boolean): Promise<void> {
-    await add
+    await (add
       ? this.credit.add(value)
-      : this.credit.substract(value);
+      : this.credit.substract(value));
   }
 
   reset(): void {
