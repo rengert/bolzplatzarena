@@ -14,7 +14,8 @@ export class DebugService {
     private readonly employee: EmployeeService,
     private readonly employeeStorage: EmployeeStorageService,
     private readonly startup: StartupService,
-    private readonly startupStorage: StartupStorageService) {
+    private readonly startupStorage: StartupStorageService,
+  ) {
   }
 
   async deleteOffices(): Promise<void> {
@@ -33,7 +34,15 @@ export class DebugService {
     await this.employee.seed();
   }
 
-  async changeCredit(value: number): Promise<void> {
-    await this.credit.change(value);
+  async changeCredit(value: number, add: boolean): Promise<void> {
+    await add
+      ? this.credit.add(value)
+      : this.credit.substract(value);
+  }
+
+  reset(): void {
+    localStorage.clear();
+    indexedDB.deleteDatabase('startup');
+    indexedDB.deleteDatabase('ngStorage');
   }
 }

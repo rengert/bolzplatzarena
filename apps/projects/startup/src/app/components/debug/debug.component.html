@@ -5,9 +5,11 @@
   <button mat-raised-button color="primary" (click)="deleteOffices()">Büros löschen</button>
   <button mat-raised-button color="primary" (click)="clearLabourMarket()">Arbeitsmarket zurückstzen / initialisiere
   </button>
-  <p>Geld verdienen leicht gemacht</p>
-  <button mat-raised-button color="primary" (click)="changeCredit(1000)">Geld verdienen</button>
-  <button mat-raised-button color="primary" (click)="changeCredit(-1000)">Geld ausgeben</button>
+  <button mat-raised-button color="primary" (click)="reset()">Komplett zurücksetzen</button>
+  <h2>Geld verdienen leicht gemacht</h2>
+  <p>Diese Funktionen dienen dazu, den aktuellen Kontostand zu beeinflussen.</p>
+  <button mat-raised-button color="primary" (click)="changeCredit(1000, true)">Geld verdienen</button>
+  <button mat-raised-button color="primary" (click)="changeCredit(1000, false)">Geld ausgeben</button>
 </mat-card>
 <mat-card>
   <h2>Berufe</h2>
