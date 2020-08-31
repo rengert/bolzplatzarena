@@ -11,6 +11,12 @@ export class DebugComponent {
   constructor(private readonly debug: DebugService) {
   }
 
+  reset(): void {
+    this.debug.reset();
+
+    window.location.reload();
+  }
+
   async deleteStartup(): Promise<void> {
     await this.debug.deleteStartup();
   }
@@ -23,7 +29,7 @@ export class DebugComponent {
     await this.debug.clearLabourMarket();
   }
 
-  async changeCredit(value: number): Promise<void> {
-    await this.debug.changeCredit(value);
+  async changeCredit(value: number, add = true): Promise<void> {
+    await this.debug.changeCredit(value, add);
   }
 }

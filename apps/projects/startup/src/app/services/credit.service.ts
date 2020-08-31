@@ -24,7 +24,7 @@ export class CreditService {
     await this.change(-value, reason, date);
   }
 
-  async change(value: number, reason?: string, date = this.date): Promise<void> {
+  private async change(value: number, reason?: string, date = this.date): Promise<void> {
     const startUp = await this.startup.get$();
     startUp.credit += value;
     await this.startup.update(startUp)
@@ -35,7 +35,7 @@ export class CreditService {
     }
   }
 
-  async audit(value: number, reason: string, date: Moment): Promise<void> {
+  private async audit(value: number, reason: string, date: Moment): Promise<void> {
     await this.creditStorage.addAudit(value, reason, date);
   }
 }
