@@ -15,21 +15,21 @@ export class AppComponent {
   readonly title$: Observable<string | undefined>;
 
   constructor(
-    private readonly logger: LoggerService<AppComponent>,
-    private readonly notification: NotificationService,
-    private readonly startUp: StartupService,
-    private readonly titleBar: TitleBarService,
+    logger: LoggerService<AppComponent>,
+    notification: NotificationService,
     simulation: SimulationService,
+    startUp: StartupService,
+    titleBar: TitleBarService,
   ) {
-    this.logger.name = 'AppComponent';
-    this.logger.info('Application started');
+    logger.name = 'AppComponent';
+    logger.info('Application started');
 
-    this.title$ = this.titleBar.title$;
+    this.title$ = titleBar.title$;
 
-    this.startUp.watch$().pipe(
+    startUp.watch$().pipe(
       filter(data => !!data),
       delay(999),
-      tap(data => this.notification.show(`Willkommen ${data.founder.firstname}!`)),
+      tap(data => notification.show(`Willkommen ${data.founder.firstname}!`)),
       first(),
     ).subscribe();
   }
