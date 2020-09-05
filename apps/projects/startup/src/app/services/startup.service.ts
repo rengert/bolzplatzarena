@@ -31,6 +31,10 @@ export class StartupService {
     return this.startupStorage.get$().toPromise();
   }
 
+  async delete(): Promise<void> {
+    await this.startupStorage.delete();
+  }
+
   launch$(config: LaunchStartup): Observable<Startup> {
     const startup: Startup = {
       name: config.startup,
