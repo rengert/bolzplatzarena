@@ -12,8 +12,8 @@ import { StartupService } from '../../services/startup.service';
 export class CreditComponent {
   readonly credit$: Observable<number>;
 
-  constructor(private readonly startUp: StartupService) {
-    this.credit$ = this.startUp.watch$().pipe(
+  constructor(startUp: StartupService) {
+    this.credit$ = startUp.watch$().pipe(
       filter(data => !!data),
       map(data => data.credit),
     );

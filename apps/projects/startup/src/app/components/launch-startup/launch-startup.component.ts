@@ -20,7 +20,10 @@ export class LaunchStartupComponent {
     companyDescription: new FormControl('', Validators.required),
   });
 
-  constructor(private readonly startup: StartupService, private readonly router: Router) {
+  constructor(
+    private readonly startup: StartupService,
+    private readonly router: Router,
+  ) {
   }
 
   launch(): void {

@@ -7,6 +7,7 @@ export * from './logger/services/console-logger.service';
 export * from './logger/services/logger.service';
 export * from './logger/logger.module';
 
+export * from './button/button.module';
 export * from './button/services/speed-dial.service';
 
 export * from './storage/services/abstract-storage.service';

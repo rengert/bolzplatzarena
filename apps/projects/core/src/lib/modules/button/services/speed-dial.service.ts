@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Button } from '../components/speed-dial/speed-dial.component';
 
-@Injectable({
-  providedIn: 'root',
-})
+export interface Button {
+  key: string;
+  icon: string;
+  route: string[];
+}
+
+@Injectable({ providedIn: 'root' })
 export class SpeedDialService {
   private readonly update$ = new BehaviorSubject<Button[]>([]);
   private items: Button[] = [];
