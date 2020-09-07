@@ -23,14 +23,14 @@ export class StartupStorageService {
     );
   }
 
-  get(): Promise<Startup> {
+  async get(): Promise<Startup> {
     return this.storage.get<Startup>('startup').pipe(
       first(),
       map(data => data as Startup),
     ).toPromise();
   }
 
-  save(startup: Startup): Promise<void> {
+  async save(startup: Startup): Promise<void> {
     return this.storage.set('startup', startup).toPromise();
   }
 
@@ -47,7 +47,7 @@ export class StartupStorageService {
     return undefined;
   }
 
-  delete(): Promise<undefined> {
+  async delete(): Promise<undefined> {
     return this.storage.delete('startup').toPromise();
   }
 }

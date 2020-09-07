@@ -26,7 +26,7 @@ export class LaunchStartupComponent {
   ) {
   }
 
-  launch(): Promise<void> {
+  async launch(): Promise<void> {
     return this.launchStartup({ ...this.form.value });
   }
 

@@ -39,8 +39,8 @@ export class OpenOfficeComponent extends BaseComponent {
     this.cities$ = this.staticData.getCities$();
   }
 
-  open(): void {
-    this.openOffice({ ...this.form.value });
+  async open(): Promise<void> {
+    return this.openOffice({ ...this.form.value });
   }
 
   async openOffice(office: Office): Promise<void> {

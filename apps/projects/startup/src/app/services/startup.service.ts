@@ -27,7 +27,7 @@ export class StartupService {
     return this.startupStorage.watch$();
   }
 
-  get(): Promise<Startup> {
+  async get(): Promise<Startup> {
     return this.startupStorage.get();
   }
 
@@ -35,7 +35,7 @@ export class StartupService {
     await this.startupStorage.delete();
   }
 
-  launch(config: LaunchStartup): Promise<void> {
+  async launch(config: LaunchStartup): Promise<void> {
     const startup: Startup = {
       name: config.startup,
       description: config.companyDescription,
@@ -52,7 +52,7 @@ export class StartupService {
     return this.startupStorage.save(startup);
   }
 
-  update(startup: Startup): Promise<void> {
+  async update(startup: Startup): Promise<void> {
     return this.startupStorage.save(startup);
   }
 }

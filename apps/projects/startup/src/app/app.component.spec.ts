@@ -1,12 +1,12 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { LoggerService, NotificationService, TitleBarService } from '@bpa/core';
 import { instance, mock } from 'ts-mockito';
 import { AppComponent } from './app.component';
 import { SIMULATOR } from './services/simulators/simulator';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     const titleBarMock = mock(TitleBarService);
     const loggerServiceMock = mock(LoggerService);
     const notificationServiceMock = mock(NotificationService);

@@ -22,6 +22,6 @@ export class OfficeService {
   async open(office: Office): Promise<void> {
     const startup = await this.startup.get();
     startup.offices.push(office);
-    this.startup.update(startup);
+    await this.startup.update(startup);
   }
 }
