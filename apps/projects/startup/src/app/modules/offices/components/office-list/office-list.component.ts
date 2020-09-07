@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SpeedDialService } from '@bpa/core';
 import { Observable } from 'rxjs';
@@ -13,32 +13,30 @@ import { OfficeService } from '../../services/office.service';
   styleUrls: ['./office-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfficeListComponent extends BaseComponent implements OnInit {
+export class OfficeListComponent extends BaseComponent {
   readonly displayedColumns: string[] = ['name', 'city', 'address'];
   filterTerm: string;
   data$: Observable<MatTableDataSource<Office>>;
   data: MatTableDataSource<Office>;
 
   constructor(
+    office: OfficeService,
     speedDial: SpeedDialService,
-    private readonly offices: OfficeService,
   ) {
     super(speedDial);
 
     this.buttons = [
       { key: 'OpenOffice', icon: 'home_work', route: ['open-office'] },
     ];
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
-
-    this.data$ = this.offices.watch$()
-      .pipe(
-        map(offices => new MatTableDataSource<Office>(offices)),
-        tap(data => data.filter = this.filterTerm),
-        tap(data => this.data = data),
-      );
+    this.data$ = office.watch$().pipe(
+      map(data => new MatTableDataSource<Office>(data)),
+      tap(data => {
+        data.filter = this.filterTerm;
+      }),
+      tap(data => {
+        this.data = data;
+      }),
+    );
   }
 
   applyFilter(): void {

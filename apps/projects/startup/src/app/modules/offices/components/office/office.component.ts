@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,7 +18,7 @@ interface OfficeDetails extends Office {
   styleUrls: ['./office.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfficeComponent implements OnInit {
+export class OfficeComponent {
   office$: Observable<OfficeDetails>;
   private readonly id: string;
 
@@ -28,11 +28,8 @@ export class OfficeComponent implements OnInit {
     private readonly startup: StartupService,
   ) {
     this.id = this.activatedRoute.snapshot.params.id;
-  }
-
-  ngOnInit(): void {
     this.office$ = this.startup.watch$().pipe(
-      map(startup => startup?.offices?.find(office => office.id === this.id)),
+      map(data => data?.offices?.find(office => office.id === this.id)),
       map(office => {
         if (!office) {
           throw new Error('Incorrect url opened');
