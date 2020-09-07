@@ -27,15 +27,15 @@ export class StartupService {
     return this.startupStorage.watch$();
   }
 
-  async get$(): Promise<Startup> {
-    return this.startupStorage.get$().toPromise();
+  get(): Promise<Startup> {
+    return this.startupStorage.get();
   }
 
   async delete(): Promise<void> {
     await this.startupStorage.delete();
   }
 
-  launch$(config: LaunchStartup): Observable<Startup> {
+  launch(config: LaunchStartup): Promise<void> {
     const startup: Startup = {
       name: config.startup,
       description: config.companyDescription,
@@ -49,10 +49,10 @@ export class StartupService {
       credit: 100000,
     };
 
-    return this.startupStorage.save$(startup);
+    return this.startupStorage.save(startup);
   }
 
-  update(startup: Startup): Observable<Startup> {
-    return this.startupStorage.save$(startup);
+  update(startup: Startup): Promise<void> {
+    return this.startupStorage.save(startup);
   }
 }

@@ -13,7 +13,9 @@ export class CreditService {
     private readonly startup: StartupService,
     timeSimulator: TimeSimulatorService,
   ) {
-    timeSimulator.date$.subscribe(date => this.date = date);
+    timeSimulator.date$.subscribe(date => {
+      this.date = date;
+    });
   }
 
   async add(value: number, reason?: string, date = this.date): Promise<void> {
@@ -25,10 +27,9 @@ export class CreditService {
   }
 
   private async change(value: number, reason?: string, date = this.date): Promise<void> {
-    const startUp = await this.startup.get$();
+    const startUp = await this.startup.get();
     startUp.credit += value;
-    await this.startup.update(startUp)
-      .toPromise();
+    await this.startup.update(startUp);
 
     if (reason) {
       await this.audit(value, reason, date);

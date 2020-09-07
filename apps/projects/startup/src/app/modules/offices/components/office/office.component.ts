@@ -48,12 +48,12 @@ export class OfficeComponent implements OnInit {
   }
 
   async upgrade({ id, nextUpgradeCost, name }: OfficeDetails): Promise<void> {
-    const startup = await this.startup.get$();
+    const startup = await this.startup.get();
     const office = startup.offices.find(item => item.id === id);
     if (office && !!nextUpgradeCost) {
       office.size++;
       office.monthlyCost = (office.size + 1) * 1000;
-      await this.startup.update(startup).toPromise();
+      await this.startup.update(startup);
       await this.credit.substract(nextUpgradeCost, `${name} wurde ausgebaut`);
     }
   }

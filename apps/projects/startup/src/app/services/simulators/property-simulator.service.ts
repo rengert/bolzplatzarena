@@ -24,9 +24,10 @@ export class PropertySimulatorService implements Simulator {
     }
     this.logger.debug('handle the properties');
 
-    await this.offices.get$().then(
+    await this.offices.get().then(
       async offices => offices.forEach(
-        office => this.credit.substract(office.monthlyCost, `Monatliche Miete ${office.name}`, date)),
+        office => this.credit.substract(office.monthlyCost, `Monatliche Miete ${office.name}`, date),
+      ),
     );
   }
 }

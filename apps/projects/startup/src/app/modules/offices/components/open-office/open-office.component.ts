@@ -47,14 +47,15 @@ export class OpenOfficeComponent extends BaseComponent implements OnInit {
     this.openOffice({ ...this.form.value });
   }
 
-  openOffice(office: Office): void {
+  async openOffice(office: Office): Promise<void> {
     const newOffice: Office = {
       ...office,
       monthlyCost: 1000,
       size: 0,
       id: uuid(),
     };
-    this.office.open(newOffice)
-      .subscribe(_ => this.router.navigate(['/offices', newOffice.id]));
+
+    await this.office.open(newOffice)
+      .then(_ => this.router.navigate(['/offices', newOffice.id]));
   }
 }
