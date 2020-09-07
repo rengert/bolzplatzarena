@@ -3,7 +3,7 @@ import { createMoment } from '@bpa/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Moment } from 'moment';
 import { Observable } from 'rxjs';
-import { map, mapTo } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { Startup } from '../../models/startup.model';
 
 @Injectable({ providedIn: 'root' })
@@ -12,29 +12,26 @@ export class StartupStorageService {
   }
 
   launched$(): Observable<boolean> {
-    return this.storage.watch<Startup>('startup')
-      .pipe(
-        map(startup => startup !== undefined),
-      );
+    return this.storage.watch<Startup>('startup').pipe(
+      map(startup => !!startup),
+    );
   }
 
   watch$(): Observable<Startup> {
-    return this.storage.watch<Startup>('startup')
-      .pipe(
-        map(data => data as Startup),
-      );
+    return this.storage.watch<Startup>('startup').pipe(
+      map(data => data as Startup),
+    );
   }
 
-  get$(): Observable<Startup> {
-    return this.storage.get<Startup>('startup')
-      .pipe(
-        map(data => data as Startup),
-      );
+  async get(): Promise<Startup> {
+    return this.storage.get<Startup>('startup').pipe(
+      first(),
+      map(data => data as Startup),
+    ).toPromise();
   }
 
-  save$(startup: Startup): Observable<Startup> {
-    return this.storage.set('startup', startup)
-      .pipe(mapTo(startup));
+  async save(startup: Startup): Promise<void> {
+    return this.storage.set('startup', startup).toPromise();
   }
 
   async setMoment(key: string, value: Moment): Promise<void> {
@@ -51,7 +48,6 @@ export class StartupStorageService {
   }
 
   async delete(): Promise<undefined> {
-    return this.storage.delete('startup')
-      .toPromise();
+    return this.storage.delete('startup').toPromise();
   }
 }

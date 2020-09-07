@@ -48,6 +48,10 @@ export class EmployeeService {
   ) {
   }
 
+  async clear(): Promise<void> {
+    await this.employeeStorage.clear();
+  }
+
   async seed(count = 20): Promise<void> {
     const professions = await this.profession.get$()
       .toPromise();

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { Button } from '../../../../../core/src/lib/modules/button/components/speed-dial/speed-dial.component';
-import { SpeedDialService } from '../../../../../core/src/lib/modules/button/services/speed-dial.service';
+import { Button, SpeedDialService } from '@bpa/core';
 
 @Component({
   selector: 'app-base',

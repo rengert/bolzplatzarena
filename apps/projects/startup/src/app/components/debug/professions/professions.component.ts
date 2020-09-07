@@ -13,7 +13,7 @@ export class ProfessionsComponent {
   readonly columns = ['name', 'description', 'type', 'salaryFactor'];
   readonly data$: Observable<Profession[]>;
 
-  constructor(private readonly profession: ProfessionService) {
-    this.data$ = this.profession.get$();
+  constructor(profession: ProfessionService) {
+    this.data$ = profession.get$();
   }
 }

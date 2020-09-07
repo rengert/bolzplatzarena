@@ -9,7 +9,7 @@ import { LaunchStartup, StartupService } from '../../services/startup.service';
   styleUrls: ['./launch-startup.component.scss'],
 })
 export class LaunchStartupComponent {
-  challenageAccepted = false;
+  challengeAccepted = false;
   readonly form = new FormGroup({
     sex: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
@@ -20,15 +20,18 @@ export class LaunchStartupComponent {
     companyDescription: new FormControl('', Validators.required),
   });
 
-  constructor(private readonly startup: StartupService, private readonly router: Router) {
+  constructor(
+    private readonly startup: StartupService,
+    private readonly router: Router,
+  ) {
   }
 
-  launch(): void {
-    this.launchStartup({ ...this.form.value });
+  async launch(): Promise<void> {
+    return this.launchStartup({ ...this.form.value });
   }
 
-  launchStartup(config: LaunchStartup): void {
-    this.startup.launch$(config)
-      .subscribe(_ => this.router.navigate(['/']));
+  async launchStartup(config: LaunchStartup): Promise<void> {
+    await this.startup.launch(config)
+      .then(_ => this.router.navigate(['/']));
   }
 }

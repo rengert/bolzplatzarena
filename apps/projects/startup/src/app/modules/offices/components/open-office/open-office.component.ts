@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SpeedDialService } from '@bpa/core';
@@ -16,8 +16,8 @@ import { OfficeService } from '../../services/office.service';
   styleUrls: ['./open-office.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OpenOfficeComponent extends BaseComponent implements OnInit {
-  cities$: Observable<City[]>;
+export class OpenOfficeComponent extends BaseComponent {
+  readonly cities$: Observable<City[]>;
 
   readonly form = new FormGroup({
     city: new FormControl('', Validators.required),
@@ -35,26 +35,23 @@ export class OpenOfficeComponent extends BaseComponent implements OnInit {
     this.buttons = [
       { key: 'OfficeList', icon: 'assignment', route: ['offices'] },
     ];
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
 
     this.cities$ = this.staticData.getCities$();
   }
 
-  open(): void {
-    this.openOffice({ ...this.form.value });
+  async open(): Promise<void> {
+    return this.openOffice({ ...this.form.value });
   }
 
-  openOffice(office: Office): void {
+  async openOffice(office: Office): Promise<void> {
     const newOffice: Office = {
       ...office,
       monthlyCost: 1000,
       size: 0,
       id: uuid(),
     };
-    this.office.open(newOffice)
-      .subscribe(_ => this.router.navigate(['/offices', newOffice.id]));
+
+    await this.office.open(newOffice)
+      .then(_ => this.router.navigate(['/offices', newOffice.id]));
   }
 }

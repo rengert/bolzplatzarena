@@ -17,7 +17,7 @@ export class CitiesComponent {
   readonly columns = ['name', 'costFactor', 'distance'];
   readonly data$: Observable<City[]>;
 
-  constructor(private readonly staticData: StaticDataService) {
-    this.data$ = this.staticData.getCities$();
+  constructor(staticData: StaticDataService) {
+    this.data$ = staticData.getCities$();
   }
 }

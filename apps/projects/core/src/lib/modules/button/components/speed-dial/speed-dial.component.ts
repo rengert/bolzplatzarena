@@ -2,13 +2,7 @@ import { animate, keyframes, query, stagger, state, style, transition, trigger }
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { SpeedDialService } from '../../services/speed-dial.service';
-
-export interface Button {
-  key: string;
-  icon: string;
-  route: string[];
-}
+import { Button, SpeedDialService } from '../../services/speed-dial.service';
 
 const speedDialFabAnimations = [
   trigger('fabToggler', [

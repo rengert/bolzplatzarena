@@ -1,12 +1,12 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { Angulartics2Piwik } from 'angulartics2/piwik';
 import { instance, mock } from 'ts-mockito';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     const translateMock = mock(TranslateService);
     const analyticsMock = mock(Angulartics2Piwik);
     void TestBed.configureTestingModule({

@@ -12,7 +12,7 @@ export class CreditAuditComponent {
   readonly displayedColumns: string[] = ['date', 'value', 'reason'];
   readonly data$: Observable<Audit[]>;
 
-  constructor(private readonly creditStorage: CreditStorageService) {
-    this.data$ = this.creditStorage.watchAudit$(50);
+  constructor(creditStorage: CreditStorageService) {
+    this.data$ = creditStorage.watchAudit$(50);
   }
 }

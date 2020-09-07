@@ -16,13 +16,13 @@ export class EmployeeComponent extends BaseComponent {
   readonly data$: Observable<Worker[]>;
 
   constructor(
+    employeeStorage: EmployeeStorageService,
     speedDial: SpeedDialService,
-    private readonly employeeStorage: EmployeeStorageService,
   ) {
     super(speedDial);
     this.buttons = [
       { key: 'HeadHunter', icon: 'portrait', route: ['head-hunter'] },
     ];
-    this.data$ = this.employeeStorage.getEmployed$();
+    this.data$ = employeeStorage.getEmployed$();
   }
 }
