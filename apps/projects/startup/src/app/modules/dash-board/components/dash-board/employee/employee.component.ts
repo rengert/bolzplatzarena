@@ -13,7 +13,7 @@ export class EmployeeComponent {
   readonly displayedColumns: string[] = ['name', 'salary'];
   readonly data$: Observable<Worker[]>;
 
-  constructor(private readonly employeeStorage: EmployeeStorageService) {
-    this.data$ = this.employeeStorage.getEmployed$();
+  constructor(employeeStorage: EmployeeStorageService) {
+    this.data$ = employeeStorage.getEmployed$();
   }
 }

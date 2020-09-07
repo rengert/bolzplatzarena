@@ -17,14 +17,14 @@ export class LabourMarketComponent extends BaseComponent {
   readonly data$: Observable<Worker[]>;
 
   constructor(
+    employeeStorage: EmployeeStorageService,
     speedDial: SpeedDialService,
-    private readonly employeeStorage: EmployeeStorageService,
   ) {
     super(speedDial);
     this.buttons = [
       { key: 'HeadHunter', icon: 'portrait', route: ['head-hunter'] },
     ];
-    this.data$ = this.employeeStorage.getAll$().pipe(
+    this.data$ = employeeStorage.getAll$().pipe(
       map(data => data.filter(worker => !worker.employed)),
     );
   }

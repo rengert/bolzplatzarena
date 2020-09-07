@@ -12,7 +12,7 @@ import { OfficeService } from '../../../../offices/services/office.service';
 export class OfficesComponent {
   readonly offices$: Observable<Office[]>;
 
-  constructor(private readonly office: OfficeService) {
-    this.offices$ = this.office.watch$();
+  constructor(office: OfficeService) {
+    this.offices$ = office.watch$();
   }
 }
