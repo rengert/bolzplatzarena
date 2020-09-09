@@ -32,5 +32,17 @@ export class AppComponent {
       tap(data => notification.show(`Willkommen ${data.founder.firstname}!`)),
       first(),
     ).subscribe();
+
+    if (typeof Worker !== 'undefined') {
+      const worker = new Worker('./app.worker', { type: 'module' });
+      worker.onmessage = ({ data }) => {
+        // tslint:disable-next-line:no-console
+        console.log(`web worker: ${data}`);
+      };
+      worker.postMessage('started');
+    } else {
+      // Web Workers are not supported in this environment.
+      // You should add a fallback so that your program still executes correctly.
+    }
   }
 }
