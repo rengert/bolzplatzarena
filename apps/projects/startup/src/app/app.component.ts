@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { LoggerService, NotificationService, TitleBarService } from '@bpa/core';
 import { Observable } from 'rxjs';
 import { delay, filter, first, tap } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { StartupService } from './services/startup.service';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   readonly title$: Observable<string | undefined>;
 
   constructor(
@@ -32,17 +32,19 @@ export class AppComponent {
       tap(data => notification.show(`Willkommen ${data.founder.firstname}!`)),
       first(),
     ).subscribe();
+  }
 
-    if (typeof Worker !== 'undefined') {
+  ngOnInit(): void {
+    if (typeof Worker === 'undefined') {
+      // Web Workers are not supported in this environment.
+      // You should add a fallback so that your program still executes correctly.
+    } else {
       const worker = new Worker('./app.worker', { type: 'module' });
       worker.onmessage = ({ data }) => {
         // tslint:disable-next-line:no-console
         console.log(`web worker: ${data}`);
       };
       worker.postMessage('started');
-    } else {
-      // Web Workers are not supported in this environment.
-      // You should add a fallback so that your program still executes correctly.
     }
   }
 }
