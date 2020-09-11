@@ -286,7 +286,8 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "lodash"
-            ]
+            ],
+            "webWorkerTsConfig": "projects/startup/tsconfig.worker.json"
           },
           "configurations": {
             "production": {
@@ -362,7 +363,8 @@
           "options": {
             "tsConfig": [
               "projects/startup/tsconfig.app.json",
-              "projects/startup/tsconfig.spec.json"
+              "projects/startup/tsconfig.spec.json",
+              "projects/startup/tsconfig.worker.json"
             ],
             "exclude": [
               "**/node_modules/**"
