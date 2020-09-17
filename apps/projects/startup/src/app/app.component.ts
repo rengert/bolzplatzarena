@@ -15,9 +15,9 @@ export class AppComponent implements OnInit {
   readonly title$: Observable<string | undefined>;
 
   constructor(
+    private readonly simulation: SimulationService,
     logger: LoggerService<AppComponent>,
     notification: NotificationService,
-    simulation: SimulationService,
     startUp: StartupService,
     titleBar: TitleBarService,
   ) {
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
         // tslint:disable-next-line:no-console
         console.log(`web worker: ${data}`);
       };
-      worker.postMessage('started');
+      this.simulation.registerWorker(worker);
     }
   }
 }
