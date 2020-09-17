@@ -6,15 +6,22 @@ import { StartupService } from './startup.service';
 
 @Injectable({ providedIn: 'root' })
 export class SimulationService {
+  private readonly workers: Worker[] = [];
+
   constructor(
     startup: StartupService,
     timeSimulator: TimeSimulatorService,
     @Inject(SIMULATOR) private readonly simulators: Simulator[] = [],
   ) {
-    timeSimulator.date$.subscribe(date => this.handleCosts(date.clone()));
+    timeSimulator.date$.subscribe(date => this.handle(date.clone()));
   }
 
-  handleCosts(date: Moment): void {
+  handle(date: Moment): void {
     this.simulators.forEach(simulator => simulator.handle(date));
+    this.workers.forEach(worker => worker.postMessage({ command: 'bähm', date: date.valueOf().toString() }));
+  }
+
+  registerWorker(worker: Worker): void {
+    this.workers.push(worker);
   }
 }
