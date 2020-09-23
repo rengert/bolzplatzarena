@@ -24,11 +24,6 @@ interface Flat {
   name: string;
 }
 
-interface Measurement {
-  location: Location;
-  data: any;
-}
-
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
@@ -47,6 +42,7 @@ export class GridComponent {
   }
 
   update(eventData: any): void {
+    // tslint:disable-next-line:no-console
     console.log('data has been changed and be viewed in the data model', eventData.colDef.field);
   }
 }
