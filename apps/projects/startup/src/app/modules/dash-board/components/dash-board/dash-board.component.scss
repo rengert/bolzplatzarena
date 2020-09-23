@@ -1,10 +1,16 @@
 :host {
-  display: flex;
-  flex-wrap: wrap;
+  --column-count: 2;
+
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(var(--column-count), 1fr);
 
   .block {
-    width: 400px;
-    margin: 0 0 1rem 0;
+    grid-column-end: span 2;
+
+    &.half {
+      grid-column-end: span 1;
+    }
 
     @media only screen and (min-width: 800px) {
       margin: 0 1rem 1rem 0;

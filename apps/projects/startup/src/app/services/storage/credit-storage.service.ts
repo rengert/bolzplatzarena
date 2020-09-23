@@ -7,7 +7,7 @@ import { StorageService } from './storage.service';
 export interface Audit {
   value: number;
   reason: string;
-  date: number;
+  date: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -22,7 +22,7 @@ export class CreditStorageService {
     data.push({
       value,
       reason,
-      date: date.valueOf(),
+      date: date.format(),
     });
     await this.storage.set('credit-audit', data).toPromise();
   }

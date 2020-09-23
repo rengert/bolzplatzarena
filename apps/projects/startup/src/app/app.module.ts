@@ -1,5 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,6 +30,8 @@ import { OfficesModule } from './modules/offices/offices.module';
 import { PropertySimulatorService } from './services/simulators/property-simulator.service';
 import { SalarySimulatorService } from './services/simulators/salary-simulator.service';
 import { SIMULATOR } from './services/simulators/simulator';
+
+registerLocaleData(localeDe);
 
 @NgModule({
   declarations: [
@@ -64,6 +67,7 @@ import { SIMULATOR } from './services/simulators/simulator';
     NavigationModule,
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'de' },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always', appearance: 'fill' } },
     { provide: LOGGER, useClass: ConsoleLoggerService, multi: true },
 
