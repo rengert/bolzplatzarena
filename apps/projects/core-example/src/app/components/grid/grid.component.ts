@@ -47,7 +47,7 @@ export class GridComponent {
   }
 
   update(eventData: any): void {
-    console.log('data has been changed and be viewed in the data model', eventData.columnDef);
+    console.log('data has been changed and be viewed in the data model', eventData.colDef.field);
   }
 }
 
@@ -75,9 +75,9 @@ function locations(): Building[] {
 function data(): { [key: string]: any }[] {
   const dataList: { [key: string]: any }[] = [];
 
-  for (const i of [...Array(10).keys()]) {
+  for (const i of [...Array(5000).keys()]) {
     const result: { [key: string]: any } = {};
-    result.name = i;
+    result.name = `Lorem ipsum op som dum ${ i }`;
     result[`Whg${ i }A${ i }A${ i }`] = i;
     dataList.push(result);
   }
@@ -106,7 +106,7 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
           children: strand.flats.map(flat => ({
             headerName: flat.name,
             field: flat.id,
-            editable: false,
+            editable: true,
             filter: true,
             sortable: true,
           })),
