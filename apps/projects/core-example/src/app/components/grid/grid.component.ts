@@ -1,4 +1,23 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+
+interface ColumnDef {
+  headerName: string;
+  field?: string;
+  children?: ColumnDef[];
+  editable?: boolean;
+  filter?: boolean;
+  sortable?: boolean;
+}
+
+interface Location {
+  name: string;
+  parent: Location;
+}
+
+interface Measurement {
+  location: Location;
+  data: any;
+}
 
 @Component({
   selector: 'app-grid',
@@ -7,24 +26,77 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridComponent {
-  columnDefs = [
+  columnDefs = createColumnDef();
+  rowData = data();
+
+  update(eventData: any): void {
+    console.log('data has been changed and be viewed in the data model', eventData.columnDef);
+  }
+}
+
+function data(): { [key: string]: any }[] {
+  const dataList: { [key: string]: any }[] = [];
+
+  for (const i of [...Array(10).keys()]) {
+    const result: { [key: string]: any } = {};
+    result.name = i;
+    result[`Whg${ i }`] = i;
+    dataList.push(result);
+  }
+
+  return dataList;
+}
+
+function createColumnDef(): ColumnDef[] {
+  return [
     {
-      headerName: '', children: [{ headerName: 'Make', field: 'make', filter: true, sortable: true }],
-    },
-    {
-      headerName: 'Data', children: [
-        { headerName: 'Model', field: 'model', editable: true, filter: true, sortable: true },
-        { headerName: 'Price', field: 'price', editable: true, filter: true, sortable: true },
+      headerName: '',
+      children: [
+        {
+          headerName: '',
+          children: [
+            { headerName: 'LV', field: 'name', editable: false, filter: true, sortable: true },
+          ],
+        },
       ],
     },
     {
-      headerName: 'Special', children: [
-        { headerName: 'Model 2', field: 'model', editable: true, filter: true, sortable: true },
-        { headerName: 'Price 2', field: 'price', editable: true, filter: true, sortable: true },
+      headerName: 'Haus 1',
+      children: [
+        {
+          headerName: 'Strang 1',
+          children: [
+            { headerName: 'Whg 1.1.1', field: 'Whg111', editable: true, filter: true, sortable: true },
+            { headerName: 'Whg 1.1.2', field: 'Whg112', editable: true, filter: true, sortable: true },
+          ],
+        },
+        {
+          headerName: 'Strang 2',
+          children: [
+            { headerName: 'Whg 1.2.1', field: 'Whg121', editable: true, filter: true, sortable: true },
+            { headerName: 'Whg 1.2.2', field: 'Whg122', editable: true, filter: true, sortable: true },
+          ],
+        },
+      ],
+    },
+    {
+      headerName: 'Haus 2',
+      children: [
+        {
+          headerName: 'Strang 1',
+          children: [
+            { headerName: 'Whg 2.1.1', field: 'Whg211', editable: true, filter: true, sortable: true },
+            { headerName: 'Whg 2.1.2', field: 'Whg212', editable: true, filter: true, sortable: true },
+          ],
+        },
+        {
+          headerName: 'Strang 2',
+          children: [
+            { headerName: 'Whg 2.2.1', field: 'Whg221', editable: true, filter: true, sortable: true },
+            { headerName: 'Whg 2.2.2', field: 'Whg222', editable: true, filter: true, sortable: true },
+          ],
+        },
       ],
     },
   ];
-
-  rowData = [...Array(10000).keys()].map(value => (
-    { make: 'Toyota', model: 'Celica', price: value * 10 }));
 }
