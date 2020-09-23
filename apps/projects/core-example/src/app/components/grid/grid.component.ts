@@ -79,6 +79,8 @@ function data(): { [key: string]: any }[] {
     const result: { [key: string]: any } = {};
     result.name = `Lorem ipsum op som dum ${ i }`;
     result[`Whg${ i }A${ i }A${ i }`] = i;
+    // tslint:disable-next-line:binary-expression-operand-order
+    result.sum = 12.12 * i;
     dataList.push(result);
   }
 
@@ -93,7 +95,14 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
         {
           headerName: '',
           children: [
-            { headerName: 'LV', field: 'name', editable: false, filter: true, sortable: true },
+            {
+              headerName: 'LV',
+              field: 'name',
+              editable: false,
+              filter: true,
+              sortable: true,
+              pinned: 'left',
+            },
           ],
         },
       ],
@@ -109,9 +118,34 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
             editable: true,
             filter: true,
             sortable: true,
+            // tslint:disable-next-line:typedef
+            cellStyle(params) {
+              if (params.value) {
+
+                return {
+                  color: 'red',
+                  backgroundColor: 'green',
+                };
+              }
+
+              return {
+                backgroundColor: 'red',
+              };
+            },
           })),
         })),
       }),
     ),
+    {
+      headerName: '',
+      children: [
+        {
+          headerName: '',
+          children: [
+            { headerName: 'Summe', field: 'sum', editable: false, filter: true, sortable: true, pinned: 'right' },
+          ],
+        },
+      ],
+    },
   ];
 }
