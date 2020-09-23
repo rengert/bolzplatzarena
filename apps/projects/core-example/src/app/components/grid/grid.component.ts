@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 interface ColumnDef {
   headerName: string;
@@ -9,9 +9,19 @@ interface ColumnDef {
   sortable?: boolean;
 }
 
-interface Location {
+interface Building {
   name: string;
-  parent: Location;
+  strands: Strand[];
+}
+
+interface Strand {
+  name: string;
+  flats: Flat[];
+}
+
+interface Flat {
+  id: string;
+  name: string;
 }
 
 interface Measurement {
@@ -26,12 +36,40 @@ interface Measurement {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridComponent {
-  columnDefs = createColumnDef();
-  rowData = data();
+  readonly columnDefs: ColumnDef[];
+  readonly rowData: { [key: string]: any }[];
+
+  constructor() {
+    const locs = locations();
+
+    this.columnDefs = createColumnDef(locs);
+    this.rowData = data();
+  }
 
   update(eventData: any): void {
     console.log('data has been changed and be viewed in the data model', eventData.columnDef);
   }
+}
+
+function locations(): Building[] {
+  const result: Building[] = [];
+
+  for (let buildingNo = 1; buildingNo <= 10; buildingNo++) {
+    const building: Building = { name: `Haus ${ buildingNo }`, strands: [] };
+    for (let strandNo = 1; strandNo <= 2; strandNo++) {
+      const strand: Strand = { name: `Strang ${ buildingNo }.${ strandNo }`, flats: [] };
+      for (let levelNo = 1; levelNo <= 12; levelNo++) {
+        strand.flats.push({
+          id: `Whg${ buildingNo }A${ strandNo }A${ levelNo }`,
+          name: `Whg ${ buildingNo }.${ strandNo }.${ levelNo }`,
+        });
+      }
+      building.strands.push(strand);
+    }
+    result.push(building);
+  }
+
+  return result;
 }
 
 function data(): { [key: string]: any }[] {
@@ -40,14 +78,14 @@ function data(): { [key: string]: any }[] {
   for (const i of [...Array(10).keys()]) {
     const result: { [key: string]: any } = {};
     result.name = i;
-    result[`Whg${ i }`] = i;
+    result[`Whg${ i }A${ i }A${ i }`] = i;
     dataList.push(result);
   }
 
   return dataList;
 }
 
-function createColumnDef(): ColumnDef[] {
+function createColumnDef(locs: Building[]): ColumnDef[] {
   return [
     {
       headerName: '',
@@ -60,43 +98,20 @@ function createColumnDef(): ColumnDef[] {
         },
       ],
     },
-    {
-      headerName: 'Haus 1',
-      children: [
-        {
-          headerName: 'Strang 1',
-          children: [
-            { headerName: 'Whg 1.1.1', field: 'Whg111', editable: true, filter: true, sortable: true },
-            { headerName: 'Whg 1.1.2', field: 'Whg112', editable: true, filter: true, sortable: true },
-          ],
-        },
-        {
-          headerName: 'Strang 2',
-          children: [
-            { headerName: 'Whg 1.2.1', field: 'Whg121', editable: true, filter: true, sortable: true },
-            { headerName: 'Whg 1.2.2', field: 'Whg122', editable: true, filter: true, sortable: true },
-          ],
-        },
-      ],
-    },
-    {
-      headerName: 'Haus 2',
-      children: [
-        {
-          headerName: 'Strang 1',
-          children: [
-            { headerName: 'Whg 2.1.1', field: 'Whg211', editable: true, filter: true, sortable: true },
-            { headerName: 'Whg 2.1.2', field: 'Whg212', editable: true, filter: true, sortable: true },
-          ],
-        },
-        {
-          headerName: 'Strang 2',
-          children: [
-            { headerName: 'Whg 2.2.1', field: 'Whg221', editable: true, filter: true, sortable: true },
-            { headerName: 'Whg 2.2.2', field: 'Whg222', editable: true, filter: true, sortable: true },
-          ],
-        },
-      ],
-    },
+    ...locs.map(
+      loc => ({
+        headerName: loc.name,
+        children: loc.strands.map(strand => ({
+          headerName: strand.name,
+          children: strand.flats.map(flat => ({
+            headerName: flat.name,
+            field: flat.id,
+            editable: false,
+            filter: true,
+            sortable: true,
+          })),
+        })),
+      }),
+    ),
   ];
 }
