@@ -138,7 +138,7 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
               headerName: 'LV',
               field: 'name',
               editable: false,
-              filter: true,
+              filter: false,
               sortable: true,
               pinned: 'left',
             },
@@ -156,8 +156,8 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
             headerName: flat.name,
             field: flat.id,
             editable: true,
-            filter: true,
-            sortable: true,
+            filter: false,
+            sortable: false,
             // tslint:disable-next-line:typedef
             cellStyle(params: any) {
               if (params.value) {
@@ -186,8 +186,8 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
               headerName: 'Summe',
               field: 'sum',
               editable: false,
-              filter: true,
-              sortable: true,
+              filter: false,
+              sortable: false,
               pinned: 'right',
             },
           ],
