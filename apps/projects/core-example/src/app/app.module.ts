@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { BrowserModule } from '@angular/platform-browser';
+import { CoreModule, MaterialModule } from '@bpa/core';
 import { AgGridModule } from 'ag-grid-angular';
-import { CoreModule } from '../../../core/src/lib/core.module';
-import { MaterialModule } from '../../../core/src/lib/modules/material/material.module';
 
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BroadcastDemoComponent } from './components/broadcast-demo/broadcast-demo.component';
@@ -37,6 +37,7 @@ import { SelectionDemoComponent } from './components/selection-demo/selection-de
     MaterialModule,
     MatBadgeModule,
     AgGridModule.withComponents([]),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
