@@ -1,4 +1,8 @@
+<button (click)="column('Whg 1.1.1', false)">Hide Whg 1.1.1</button>
+<button (click)="column('Whg 1.1.1', true)">Show Whg 1.1.1</button>
+<input type="text" [(ngModel)]="searchField" (ngModelChange)="search.next($event)">
 <ag-grid-angular [rowData]="rowData"
                  [columnDefs]="columnDefs"
+                 (gridReady)="onGridReady($event)"
                  (cellValueChanged)="update($event)"
                  class="ag-theme-alpine"></ag-grid-angular>

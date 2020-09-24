@@ -1,12 +1,17 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ColumnApi, GridApi } from 'ag-grid-community';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 interface ColumnDef {
+  colId?: string;
   headerName: string;
   field?: string;
   children?: ColumnDef[];
   editable?: boolean;
   filter?: boolean;
   sortable?: boolean;
+  pinned?: 'left' | 'right';
 }
 
 interface Building {
@@ -30,20 +35,57 @@ interface Flat {
   styleUrls: ['./grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GridComponent {
+export class GridComponent implements OnDestroy {
+  searchField = '';
+
   readonly columnDefs: ColumnDef[];
   readonly rowData: { [key: string]: any }[];
+
+  readonly search = new BehaviorSubject<string>('');
+
+  private readonly subscription: Subscription;
+
+  private columnApi: ColumnApi;
+  private gridApi: GridApi;
 
   constructor() {
     const locs = locations();
 
     this.columnDefs = createColumnDef(locs);
     this.rowData = data();
+
+    this.subscription = this.search.pipe(
+      debounceTime(500),
+    ).subscribe(searchTerm => this.filter(searchTerm));
+  }
+
+  onGridReady(params: any): void {
+    this.columnApi = params.columnApi;
+    this.gridApi = params.api;
   }
 
   update(eventData: any): void {
     // tslint:disable-next-line:no-console
     console.log('data has been changed and be viewed in the data model', eventData.colDef.field);
+  }
+
+  column(name: string, visible: boolean): void {
+    this.columnApi.setColumnVisible(name, visible);
+  }
+
+  filter(searchTerm: string): void {
+    this.gridApi.setFilterModel(
+      {
+        LV: {
+          filterType: 'text',
+          type: 'contains',
+          filter: searchTerm,
+        },
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
 
@@ -73,7 +115,7 @@ function data(): { [key: string]: any }[] {
 
   for (const i of [...Array(5000).keys()]) {
     const result: { [key: string]: any } = {};
-    result.name = `Lorem ipsum op som dum ${ i }`;
+    result.name = `${ i }. Lorem ipsum op som dum`;
     result[`Whg${ i }A${ i }A${ i }`] = i;
     // tslint:disable-next-line:binary-expression-operand-order
     result.sum = 12.12 * i;
@@ -92,10 +134,11 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
           headerName: '',
           children: [
             {
+              colId: 'LV',
               headerName: 'LV',
               field: 'name',
               editable: false,
-              filter: true,
+              filter: false,
               sortable: true,
               pinned: 'left',
             },
@@ -109,13 +152,14 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
         children: loc.strands.map(strand => ({
           headerName: strand.name,
           children: strand.flats.map(flat => ({
+            colId: flat.name,
             headerName: flat.name,
             field: flat.id,
             editable: true,
-            filter: true,
-            sortable: true,
+            filter: false,
+            sortable: false,
             // tslint:disable-next-line:typedef
-            cellStyle(params) {
+            cellStyle(params: any) {
               if (params.value) {
 
                 return {
@@ -138,7 +182,14 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
         {
           headerName: '',
           children: [
-            { headerName: 'Summe', field: 'sum', editable: false, filter: true, sortable: true, pinned: 'right' },
+            {
+              headerName: 'Summe',
+              field: 'sum',
+              editable: false,
+              filter: false,
+              sortable: false,
+              pinned: 'right',
+            },
           ],
         },
       ],
