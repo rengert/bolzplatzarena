@@ -29,22 +29,13 @@ export class AppComponent implements OnInit {
     startUp.watch$().pipe(
       filter(data => !!data),
       delay(999),
-      tap(data => notification.show(`Willkommen ${data.founder.firstname}!`)),
+      tap(data => notification.show(`Willkommen ${ data.founder.firstname }!`)),
       first(),
     ).subscribe();
   }
 
   ngOnInit(): void {
-    if (typeof Worker === 'undefined') {
-      // Web Workers are not supported in this environment.
-      // You should add a fallback so that your program still executes correctly.
-    } else {
-      const worker = new Worker('./app.worker', { type: 'module' });
-      worker.onmessage = ({ data }) => {
-        // tslint:disable-next-line:no-console
-        console.log(`web worker: ${data}`);
-      };
-      this.simulation.registerWorker(worker);
-    }
+    this.simulation.registerWorker(new Worker('./workers/project.worker', { type: 'module' }));
+    this.simulation.registerWorker(new Worker('./app.worker', { type: 'module' }));
   }
 }

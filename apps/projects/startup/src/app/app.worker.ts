@@ -2,6 +2,7 @@
 /// <reference lib="webworker" />
 
 addEventListener('message', ({ data }) => {
-  const response = `worker response: source: ${JSON.stringify(data)}`;
-  postMessage(response);
+  const response = `app worker response: source: ${ JSON.stringify(data) }`;
+  // tslint:disable-next-line:no-console
+  console.log(response);
 });
