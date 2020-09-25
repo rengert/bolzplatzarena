@@ -1,14 +1,26 @@
 // tslint:disable-next-line:comment-type
 /// <reference lib="webworker" />
 
-import { createMoment } from '@bpa/core';
-import { log } from './worker.util';
+import { Command, log } from './worker.util';
 
 log('project worker started');
 
-addEventListener('message', ({ data }) => {
-  const response = `project worker: ${ JSON.stringify(data) }`;
-  log(response);
+addEventListener('message', ({ data }: { data: Command }) => {
+  const date = new Date(data.date);
 
-  console.log(createMoment(data));
+  if (date.getMinutes() === 0 && date.getSeconds() === 0) {
+    runHourly();
+  }
+
+  if (date.getHours() === 0 && date.getMinutes() === 0 && date.getSeconds() === 0) {
+    rundaily();
+  }
 });
+
+function runHourly(): void {
+  log('project hourly');
+}
+
+function rundaily(): void {
+  log('project daily');
+}

@@ -11,7 +11,7 @@ export class TimeSimulatorService {
   private readonly date = new BehaviorSubject<Moment | undefined>(undefined);
 
   // runs every xxx ms
-  private readonly speed = 100;
+  private readonly speed = 1000;
 
   get time(): Moment {
     return this.date.getValue() !;
