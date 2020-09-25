@@ -1,15 +1,26 @@
 // tslint:disable-next-line:comment-type
 /// <reference lib="webworker" />
 
+import { Command, log } from './worker.util';
+
 log('project worker started');
 
-addEventListener('message', ({ data }) => {
-  const response = `project worker response: source: ${ JSON.stringify(data) }`;
-  // postMessage(response);
-  log(response);
+addEventListener('message', ({ data }: { data: Command }) => {
+  const date = new Date(data.date);
+
+  if (date.getMinutes() === 0 && date.getSeconds() === 0) {
+    runHourly();
+  }
+
+  if (date.getHours() === 0 && date.getMinutes() === 0 && date.getSeconds() === 0) {
+    runDaily();
+  }
 });
 
-function log(message: string): void {
-  // tslint:disable-next-line:no-console
-  console.log(message);
+function runHourly(): void {
+  log('project hourly');
+}
+
+function runDaily(): void {
+  log('project daily');
 }

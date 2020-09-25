@@ -18,7 +18,7 @@ export class SimulationService {
 
   handle(date: Moment): void {
     this.simulators.forEach(simulator => simulator.handle(date));
-    this.workers.forEach(worker => worker.postMessage({ command: 'bähm', date: date.valueOf().toString() }));
+    this.workers.forEach(worker => worker.postMessage({ command: 'bähm', date: date.format() }));
   }
 
   registerWorker(worker: Worker): void {
