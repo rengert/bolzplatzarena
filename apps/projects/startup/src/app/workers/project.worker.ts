@@ -13,7 +13,7 @@ addEventListener('message', ({ data }: { data: Command }) => {
   }
 
   if (date.getHours() === 0 && date.getMinutes() === 0 && date.getSeconds() === 0) {
-    rundaily();
+    runDaily();
   }
 });
 
@@ -21,6 +21,6 @@ function runHourly(): void {
   log('project hourly');
 }
 
-function rundaily(): void {
+function runDaily(): void {
   log('project daily');
 }
