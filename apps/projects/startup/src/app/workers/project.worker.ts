@@ -1,5 +1,4 @@
-// tslint:disable-next-line:comment-type
-/// <reference lib="webworker" />
+import { log } from './worker.util';
 
 log('project worker started');
 
@@ -8,8 +7,3 @@ addEventListener('message', ({ data }) => {
   // postMessage(response);
   log(response);
 });
-
-function log(message: string): void {
-  // tslint:disable-next-line:no-console
-  console.log(message);
-}
