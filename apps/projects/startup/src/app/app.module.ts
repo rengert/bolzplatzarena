@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ButtonModule, ConsoleLoggerService, CoreModule, LOGGER, MaterialModule, NavigationModule } from '@bpa/core';
+import { WorkerModule } from 'angular-web-worker/angular';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { OfficesModule } from './modules/offices/offices.module';
 import { PropertySimulatorService } from './services/simulators/property-simulator.service';
 import { SalarySimulatorService } from './services/simulators/salary-simulator.service';
 import { SIMULATOR } from './services/simulators/simulator';
+import { PropertyWorker } from './workers/property.worker';
 
 registerLocaleData(localeDe);
 
@@ -65,6 +67,10 @@ registerLocaleData(localeDe);
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NavigationModule,
+
+    WorkerModule.forWorkers([
+      { worker: PropertyWorker, initFn: () => new Worker('./workers/property.worker.ts', { type: 'module' }) },
+    ]),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' },
