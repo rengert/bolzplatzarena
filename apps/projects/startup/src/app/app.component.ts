@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { LoggerService, NotificationService, TitleBarService } from '@bpa/core';
+import { WorkerClient, WorkerManager } from 'angular-web-worker/angular';
 import { Observable } from 'rxjs';
 import { delay, filter, first, tap } from 'rxjs/operators';
 import { SimulationService } from './services/simulation.service';
 import { StartupService } from './services/startup.service';
+import { PropertyWorker } from './workers/property.worker';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +16,11 @@ import { StartupService } from './services/startup.service';
 export class AppComponent implements OnInit {
   readonly title$: Observable<string | undefined>;
 
+  private client: WorkerClient<PropertyWorker>;
+
   constructor(
     private readonly simulation: SimulationService,
+    private readonly workerManager: WorkerManager,
     logger: LoggerService<AppComponent>,
     notification: NotificationService,
     startUp: StartupService,
@@ -29,13 +34,18 @@ export class AppComponent implements OnInit {
     startUp.watch$().pipe(
       filter(data => !!data),
       delay(999),
-      tap(data => notification.show(`Willkommen ${ data.founder.firstname }!`)),
+      tap(data => notification.show(`Willkommen ${data.founder.firstname}!`)),
       first(),
     ).subscribe();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.simulation.registerWorker(new Worker('./workers/project.worker', { type: 'module' }));
     this.simulation.registerWorker(new Worker('./app.worker', { type: 'module' }));
+
+    this.client = this.workerManager.createClient(PropertyWorker);
+    await this.client.connect();
+
+    this.client.call(client => client.call());
   }
 }

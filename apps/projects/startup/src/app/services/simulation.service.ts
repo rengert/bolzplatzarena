@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { WebWorkerType } from 'angular-web-worker/common';
 import { Moment } from 'moment';
 import { SIMULATOR, Simulator } from './simulators/simulator';
 import { TimeSimulatorService } from './simulators/time-simulator.service';
@@ -23,5 +24,9 @@ export class SimulationService {
 
   registerWorker(worker: Worker): void {
     this.workers.push(worker);
+  }
+
+  addWorker<T>(workerType: WebWorkerType<T>): void {
+
   }
 }
