@@ -13,7 +13,7 @@ export class DataService {
   private readonly limit = 3000;
 
   constructor() {
-    this.interval = interval(1000)
+    this.interval = interval(15000)
       .pipe(
         map(data => this.getData()),
         shareReplay(1),

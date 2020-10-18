@@ -14,10 +14,15 @@ interface Cell {
 })
 export class BroadcastDemoComponent implements OnInit {
   cells: Cell[] = [];
+  id = 1;
 
   ngOnInit(): void {
-    for (let id = 1; id <= 3000; id++) {
+    for (let id = 1; id <= 6000; id++) {
       this.cells.push({ id });
     }
+  }
+
+  set(): void {
+    this.id += 1;
   }
 }
