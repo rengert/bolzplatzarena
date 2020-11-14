@@ -7,8 +7,7 @@ export function createUuid(): string {
 
 export function randomMoment(start: MomentInput, end: MomentInput): Moment {
   const endTime = +moment(end);
-  const randomNumber = (to: number, from = 0): number =>
-    Math.floor(Math.random() * (to - from) + from);
+  const randomNumber = (to: number, from = 0): number => Math.floor(Math.random() * (to - from) + from);
 
   if (start !== undefined) {
     const startTime = +moment(start);
@@ -22,7 +21,7 @@ export function randomMoment(start: MomentInput, end: MomentInput): Moment {
   return moment(randomNumber(endTime));
 }
 
-export function distance(start: { latitude: number, longitude: number }, end: { latitude: number, longitude: number }): number {
+export function distance(start: { latitude: number; longitude: number; }, end: { latitude: number; longitude: number; }): number {
   if ((start.latitude === end.latitude)
     && (start.longitude === end.longitude)) {
     return 0;
@@ -51,9 +50,8 @@ export function randomEnum<T>(anEnum: T): T[keyof T] {
     .map(n => Number.parseInt(n, 10))
     .filter(n => !Number.isNaN(n)) as unknown as T[keyof T][];
   const randomIndex = Math.floor(Math.random() * enumValues.length);
-  const randomEnumValue = enumValues[randomIndex];
 
-  return randomEnumValue;
+  return enumValues[randomIndex];
 }
 
 export function titleCaseWord(word: string): string {

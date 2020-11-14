@@ -10,8 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
+          "tsconfig.json"
         ],
         "createDefaultProgram": true
       },
@@ -30,8 +29,7 @@
           {
             "type": "element",
             "prefix": [
-              "ngx",
-              "test"
+              "bpa"
             ],
             "style": "kebab-case"
           }
@@ -70,13 +68,20 @@
             "accessibility": "no-public"
           }
         ],
+        "@typescript-eslint/member-delimiter-style": [
+          "error",
+          {
+            "singleline": {
+              "delimiter": "semi",
+              "requireLast": true
+            }
+          }
+        ],
         "@typescript-eslint/no-empty-function": "error",
-        "@typescript-eslint/no-extraneous-class": "error",
         "@typescript-eslint/no-floating-promises": "error",
         "@typescript-eslint/no-for-in-array": "error",
         "@typescript-eslint/no-inferrable-types": "error",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-param-reassign": "error",
         "@typescript-eslint/no-require-imports": "error",
         "@typescript-eslint/no-this-alias": "error",
         "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
@@ -96,7 +101,7 @@
         "@typescript-eslint/unbound-method": "error",
         "arrow-body-style": [
           "error",
-          "always"
+          "as-needed"
         ],
         "arrow-parens": [
           "error",
@@ -106,7 +111,6 @@
           "error",
           "1tbs"
         ],
-        "class-methods-use-this": "error",
         "comma-dangle": [
           "error",
           "always-multiline"
@@ -166,7 +170,6 @@
         ],
         "no-sparse-arrays": "error",
         "no-template-curly-in-string": "error",
-        "no-useless-constructor": "error",
         "no-void": "off",
         "padding-line-between-statements": [
           "error",

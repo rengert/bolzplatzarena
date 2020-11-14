@@ -3,9 +3,9 @@
 import { getTestBed } from '@angular/core/testing';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-extraneous-dependencies,import/no-unassigned-import
 import 'zone.js/dist/zone';
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-extraneous-dependencies,import/no-unassigned-import
 import 'zone.js/dist/zone-testing';
 
 declare const require: {

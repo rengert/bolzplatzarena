@@ -10,9 +10,9 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/ultradice/tsconfig.app.json",
-          "projects/ultradice/tsconfig.spec.json",
-          "projects/ultradice/e2e/tsconfig.json"
+          "./tsconfig.app.json",
+          "./tsconfig.spec.json",
+          "./e2e/tsconfig.json"
         ],
         "createDefaultProgram": true
       },
@@ -67,7 +67,6 @@
         "@typescript-eslint/no-for-in-array": "error",
         "@typescript-eslint/no-inferrable-types": "error",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-param-reassign": "error",
         "@typescript-eslint/no-require-imports": "error",
         "@typescript-eslint/no-this-alias": "error",
         "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",

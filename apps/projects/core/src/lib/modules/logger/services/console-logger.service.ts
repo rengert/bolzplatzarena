@@ -8,13 +8,13 @@ export class ConsoleLoggerService implements Logger {
     const { debug, info, error, warn } = console;
     let send: any;
     switch (message.verbosity) {
-      case Verbosity.Error:
+      case Verbosity.error:
         send = error;
         break;
-      case Verbosity.Info:
+      case Verbosity.info:
         send = info;
         break;
-      case Verbosity.Warning:
+      case Verbosity.warning:
         send = warn;
         break;
       default:
