@@ -1,1 +1,3 @@
-{{ date$ | async | date: 'dd. MMM yy HH:00' }}
+<ng-container *ngIf="date$ | async as date">
+  {{ date.toDate() | date: 'dd. MMM yy HH:00' }}
+</ng-container>
