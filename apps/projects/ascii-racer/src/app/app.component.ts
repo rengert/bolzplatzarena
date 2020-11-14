@@ -2,11 +2,12 @@ import { Component, HostListener } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+// eslint-disable-next-line no-shadow
 enum Direction {
-  Left = 'ArrowLeft',
-  Up = 'ArrowUp',
-  Right = 'ArrowRight',
-  Down = 'ArrowDown',
+  left = 'ArrowLeft',
+  up = 'ArrowUp',
+  right = 'ArrowRight',
+  down = 'ArrowDown',
 }
 
 @Component({
@@ -28,17 +29,17 @@ export class AppComponent {
 
   constructor() {
     this.data = timer(0, this.speed).pipe(
-      map(_ => this.updateTrack()),
+      map(() => this.updateTrack()),
     );
   }
 
   @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
     const direction = e.key as Direction;
-    if (direction === Direction.Left) {
-      this.racerPosition--;
+    if (direction === Direction.left) {
+      this.racerPosition -= 1;
     }
-    if (direction === Direction.Right) {
-      this.racerPosition++;
+    if (direction === Direction.right) {
+      this.racerPosition += 1;
     }
   }
 

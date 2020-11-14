@@ -29,6 +29,7 @@
           {
             "type": "element",
             "prefix": [
+              "app",
               "bpa"
             ],
             "style": "kebab-case"
@@ -154,7 +155,6 @@
         ],
         "no-new-func": "error",
         "no-null/no-null": "error",
-        "no-plusplus": "error",
         "no-redeclare": "error",
         "no-restricted-syntax": [
           "error",
