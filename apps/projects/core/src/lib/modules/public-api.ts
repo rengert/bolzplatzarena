@@ -1,4 +1,4 @@
-// tslint:disable-next-line:file-name-casing
+// eslint-disable-next-line unicorn/filename-case
 export * from './privacy/privacy.module';
 export * from './privacy/components/consent/consent.component';
 export * from './privacy/guards/privacy.guard';

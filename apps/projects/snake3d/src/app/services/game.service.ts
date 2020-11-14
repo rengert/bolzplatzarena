@@ -279,7 +279,7 @@ export class GameService {
     );
 
     if (crash !== undefined) {
-      // tslint:disable-next-line:no-console
+      // eslint-disable-next-line no-console
       console.log(head, crash);
     }
 

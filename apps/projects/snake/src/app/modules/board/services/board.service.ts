@@ -4,7 +4,7 @@ import { Settings } from '../../../components/settings/settings.component';
 import { BoardSettings } from '../../../models/board-settings.model';
 import { Cell } from '../../../models/cell.model';
 
-// tslint:disable-next-line:no-null-keyword
+// eslint-disable-next-line no-null/no-null
 @Injectable({ providedIn: null })
 export class BoardService {
   private readonly settings: Settings;

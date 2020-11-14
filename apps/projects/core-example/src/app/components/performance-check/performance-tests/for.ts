@@ -28,7 +28,7 @@ function forEachLoop(): void {
 
 function forLoop(): void {
   let i = 0;
-  // tslint:disable-next-line:prefer-for-of
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let j = 0; j < array.length; j++) {
     i += array[j];
   }

@@ -65,7 +65,7 @@ export class GridComponent implements OnDestroy {
   }
 
   update(eventData: any): void {
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     console.log('data has been changed and be viewed in the data model', eventData.colDef.field);
   }
 
@@ -117,7 +117,7 @@ function data(): { [key: string]: any }[] {
     const result: { [key: string]: any } = {};
     result.name = `${ i }. Lorem ipsum op som dum`;
     result[`Whg${ i }A${ i }A${ i }`] = i;
-    // tslint:disable-next-line:binary-expression-operand-order
+    // eslint-disable-next-line yoda
     result.sum = 12.12 * i;
     dataList.push(result);
   }
@@ -158,7 +158,7 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
             editable: true,
             filter: false,
             sortable: false,
-            // tslint:disable-next-line:typedef
+            // eslint-disable-next-line
             cellStyle(params: any) {
               if (params.value) {
 

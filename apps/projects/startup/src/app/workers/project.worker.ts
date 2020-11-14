@@ -1,4 +1,4 @@
-// tslint:disable-next-line:comment-type
+// eslint-disable-next-line
 /// <reference lib="webworker" />
 
 import { Command, log } from './worker.util';

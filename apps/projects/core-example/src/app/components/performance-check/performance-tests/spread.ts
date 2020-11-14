@@ -30,7 +30,7 @@ function spreadTest(): void {
 }
 
 function concatTest(): void {
-  // tslint:disable-next-line:ban-ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const data = [].concat(array);
 }

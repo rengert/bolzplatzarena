@@ -4,7 +4,7 @@ import { Logger, Message, Verbosity } from '../models/interfaces';
 @Injectable({ providedIn: 'root' })
 export class ConsoleLoggerService implements Logger {
   log(message: Message): void {
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     const { debug, info, error, warn } = console;
     let send: any;
     switch (message.verbosity) {
