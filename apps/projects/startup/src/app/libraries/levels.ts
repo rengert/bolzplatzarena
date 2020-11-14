@@ -11,6 +11,7 @@ export const levels: Level[] = [
   {
     id: 'a90bce30-1eae-44eb-b67b-5eeda53a9e43',
     name: '',
+    // eslint-disable-next-line max-len
     description: 'Die Mitarbeiterin / der Mitarbeiter arbeit schon eine Weile in seinem Beruf und hat schon ordentlich was drauf. Abhängig von seinem Talent und seiner Motivation kann er sich allerdings noch steigern.',
     salaryFactor: 1.75,
     type: LevelType.Normal,
@@ -18,6 +19,7 @@ export const levels: Level[] = [
   {
     id: '2f0b370a-0225-458f-ad0c-8ca0d9b8936d',
     name: 'Senior',
+    // eslint-disable-next-line max-len
     description: 'Die Mitarbeiterin / der Mitarbeiter arbeit schon eine gefühlte Ewigkeit in seinem Beruf und ist dementsptrechend gut. Abhängig von seinem Talent und seiner Motivation kann er sich allerdings noch steigern.',
     salaryFactor: 2,
     type: LevelType.Senior,

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { randomEnum, randomItems, titleCaseWord } from '@bpa/core';
 
+// eslint-disable-next-line no-shadow
 enum Sex {
-  Male,
-  Female,
+  male,
+  female,
 }
 
 function randomName(names: string[], count: number, separator = ' '): string {
@@ -19,12 +20,13 @@ function randomName(names: string[], count: number, separator = ' '): string {
 
 @Injectable({ providedIn: 'root' })
 export class NameService {
+  // eslint-disable-next-line max-len
   private readonly givenNamesFemale = ['Anna', 'Beata', 'Christiane', 'Daniela', 'Eva', 'Friederike', 'Gerda', 'Heike', 'Ina', 'Julia', 'Klara', 'Lara', 'Maria', 'Nora', 'Olga', 'Petra', 'Rita', 'Sabrina', 'Thea', 'Ulrike', 'Viktoria', 'Wilma', 'Vera', 'Zara'];
   private readonly givenNamesMale = ['Achim', 'Bernd'];
   private readonly lastNames = ['Ahrens', '', 'Müller', 'Pfeifer', 'Prestel', 'Renger', 'Meyer', 'Schmidt', 'Weber'];
   private readonly nameSeperator = ['', '-', ' '];
 
-  random(): { firstname: string, lastname: string } {
+  random(): { firstname: string; lastname: string; } {
     const sex: Sex = randomEnum(Sex);
     const firstNameCount = Math.ceil(Math.random() * 2);
     const lastNameCount = Math.ceil(Math.random() * 2);
@@ -36,7 +38,7 @@ export class NameService {
   }
 
   private givenName(sex: Sex, count: number, separator = ' '): string {
-    const names = sex === Sex.Female
+    const names = sex === Sex.female
       ? this.givenNamesFemale
       : this.givenNamesMale;
 

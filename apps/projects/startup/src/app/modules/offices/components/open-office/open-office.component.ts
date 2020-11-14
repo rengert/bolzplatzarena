@@ -19,11 +19,7 @@ import { OfficeService } from '../../services/office.service';
 export class OpenOfficeComponent extends BaseComponent {
   readonly cities$: Observable<City[]>;
 
-  readonly form = new FormGroup({
-    city: new FormControl('', Validators.required),
-    name: new FormControl('', Validators.required),
-    address: new FormControl('', Validators.required),
-  });
+  readonly form: FormGroup;
 
   constructor(
     speedDial: SpeedDialService,
@@ -37,6 +33,15 @@ export class OpenOfficeComponent extends BaseComponent {
     ];
 
     this.cities$ = this.staticData.getCities$();
+
+    this.form = new FormGroup({
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      city: new FormControl('', Validators.required),
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      name: new FormControl('', Validators.required),
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      address: new FormControl('', Validators.required),
+    });
   }
 
   async open(): Promise<void> {
@@ -52,6 +57,6 @@ export class OpenOfficeComponent extends BaseComponent {
     };
 
     await this.office.open(newOffice)
-      .then(_ => this.router.navigate(['/offices', newOffice.id]));
+      .then(() => void this.router.navigate(['/offices', newOffice.id]));
   }
 }

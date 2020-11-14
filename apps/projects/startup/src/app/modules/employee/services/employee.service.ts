@@ -25,7 +25,7 @@ function getRandomDomicile(): string {
   return 'Berlin';
 }
 
-function getRandomNames(): { firstname: string, lastname: string } {
+function getRandomNames(): { firstname: string; lastname: string; } {
   return {
     firstname: 'Bob',
     lastname: 'Last',

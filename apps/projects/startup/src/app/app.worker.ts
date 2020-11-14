@@ -3,7 +3,7 @@
 
 import { Command, log } from './workers/worker.util';
 
-addEventListener('message', ({ data }: { data: Command }) => {
+addEventListener('message', ({ data }: { data: Command; }) => {
   // needs to be filled
   const date = new Date(data.date);
 
