@@ -9,5 +9,7 @@ import { Direction } from '../../../app.constants';
 })
 export class ControlsComponent {
   @Output() readonly control = new EventEmitter<Direction>();
-  Direction = Direction;
+
+  direction = Direction;
 }
+

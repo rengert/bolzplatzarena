@@ -1,6 +1,6 @@
 import { Direction } from '../app.constants';
 
-export function getRelativeCoord(direction: Direction): { x: number, y: number, z: number } {
+export function getRelativeCoord(direction: Direction): { x: number; y: number; z: number; } {
   let x = 0;
   let y = 0;
   let z = 0;

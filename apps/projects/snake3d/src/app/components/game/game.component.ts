@@ -43,6 +43,14 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
     this.game.reset();
   }
 
+  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
+    this.handleDirection(e.key as Direction);
+
+    if (e.key === 'Escape') {
+      this.stopGame();
+    }
+  }
+
   ngOnInit(): void {
     Plugins.App.addListener('backButton', () => {
       this.ngZone.run(() => {
@@ -70,14 +78,6 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.subscription.unsubscribe();
     this.engine.clean();
-  }
-
-  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
-    this.handleDirection(e.key as Direction);
-
-    if (e.key === 'Escape') {
-      this.stopGame();
-    }
   }
 
   handleDirection(direction: Direction): void {
