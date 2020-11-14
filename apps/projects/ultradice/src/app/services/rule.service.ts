@@ -72,7 +72,7 @@ export class RuleService {
     return result;
   };
 
-  private readonly getPair = (dices: number[], count: number): number => {
+  private getPair(dices: number[], count: number): number {
     let result = 0;
     const localDices = dices.sort()
       .reverse();
