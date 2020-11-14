@@ -40,7 +40,7 @@
     "@capacitor/angular": "^1.0.3",
     "@capacitor/core": "^2.4.2",
     "@capacitor/ios": "^2.4.2",
-    "@ngx-pwa/local-storage": "^10.1.0",
+    "@ngx-pwa/local-storage": "^11.0.1",
     "@ngx-translate/core": "^13.0.0",
     "@swimlane/ngx-charts": "^16.0.0",
     "ag-grid-angular": "^24.1.0",
