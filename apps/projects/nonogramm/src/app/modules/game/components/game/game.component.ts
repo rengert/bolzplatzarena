@@ -32,7 +32,12 @@ export class GameComponent implements OnInit {
   }
 
   resultGame(result: boolean): void {
-    result ? this.win() : this.lose();
+    if (result) {
+      this.win();
+
+      return;
+    }
+    this.lose();
   }
 
   private setupGame(config: Config): void {

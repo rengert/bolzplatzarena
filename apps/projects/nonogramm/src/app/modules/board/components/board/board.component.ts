@@ -15,16 +15,17 @@ const HEART_LIMIT = 3;
 })
 export class BoardComponent implements OnChanges {
   @Input() boardData: GameData;
+
+  @Output() readonly resultEvent = new EventEmitter<boolean>();
+
   @HostBinding('attr.class') cssClass: string;
+
   columnHints: Caption[][];
   rowHints: Caption[][];
   hearts: number;
   selectType = true;
-  @Output() readonly resultEvent = new EventEmitter<boolean>();
 
-  constructor(
-    private readonly storage: StorageService,
-  ) {
+  constructor(private readonly storage: StorageService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
