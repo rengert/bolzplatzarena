@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { first, map, shareReplay } from 'rxjs/operators';
 
 export interface Badge {
   id: number;
@@ -10,12 +10,13 @@ export interface Badge {
 @Injectable()
 export class DataService {
   private readonly interval: Observable<Badge[]>;
-  private readonly limit = 3000;
+  private readonly limit = 100000;
 
   constructor() {
-    this.interval = interval(1000)
+    this.interval = interval(5000)
       .pipe(
         map(data => this.getData()),
+        first(),
         shareReplay(1),
       );
   }

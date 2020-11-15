@@ -13,11 +13,15 @@ interface Cell {
   providers: [DataService],
 })
 export class BroadcastDemoComponent implements OnInit {
-  cells: Cell[] = [];
+  cells: Cell[][] = [];
 
   ngOnInit(): void {
-    for (let id = 1; id <= 3000; id++) {
-      this.cells.push({ id });
+    for (let line = 1; line <= 100; line++) {
+      const lineArray: Cell[] = [];
+      this.cells.push(lineArray);
+      for (let id = 1; id <= 300; id++) {
+        lineArray.push({ id: (line * 1000) + id });
+      }
     }
   }
 }
