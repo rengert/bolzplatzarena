@@ -1,3 +1,5 @@
 <h1>Broadcasting</h1>
 
-<app-cell *ngFor="let cell of cells; trackBy: 'id' | trackByProperty" [id]="cell.id"></app-cell>
+<div class="row" *ngFor="let row of cells; let index = index">
+  <app-cell *ngFor="let cell of row; trackBy: 'id' | trackByProperty" [id]="cell.id"></app-cell>
+</div>
