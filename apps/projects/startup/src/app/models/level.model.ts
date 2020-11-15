@@ -1,9 +1,10 @@
 import { BaseModel } from './base.model';
 
+// eslint-disable-next-line no-shadow
 export enum LevelType {
-  Junior = 0,
-  Normal = 1,
-  Senior = 2,
+  junior = 0,
+  normal = 1,
+  senior = 2,
 }
 
 export interface Level extends BaseModel {
