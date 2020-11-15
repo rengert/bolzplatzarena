@@ -1,31 +1,36 @@
+// eslint-disable-next-line no-shadow
 export enum Level {
-  Easy = 'Easy',
-  Normal = 'Normal',
-  Hard = 'Hard',
-  Faster = 'Faster',
+  easy = 'Easy',
+  normal = 'Normal',
+  hard = 'Hard',
+  faster = 'Faster',
 }
 
+// eslint-disable-next-line no-shadow
 export enum Direction {
-  Left = 'ArrowLeft',
-  Up = 'ArrowUp',
-  Right = 'ArrowRight',
-  Down = 'ArrowDown',
+  left = 'ArrowLeft',
+  up = 'ArrowUp',
+  right = 'ArrowRight',
+  down = 'ArrowDown',
 }
 
+// eslint-disable-next-line no-shadow
 export enum GameMode {
-  Normal = 'Normal',
-  NoWalls = 'NoWalls',
-  GoldenApple = 'GoldenApple',
+  normal = 'Normal',
+  noWalls = 'NoWalls',
+  goldenApple = 'GoldenApple',
 }
 
+// eslint-disable-next-line no-shadow
 export enum Speed {
-  Slow = 700,
-  Medium = 250,
-  Fast = 100,
+  slow = 700,
+  medium = 250,
+  fast = 100,
 }
 
-export class Points {
-  static perMove = 1;
-  static perApple = 50;
-  static perGoldenApple = 75;
-}
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const Points = {
+  perMove: 1,
+  perApple: 50,
+  perGoldenApple: 75,
+};

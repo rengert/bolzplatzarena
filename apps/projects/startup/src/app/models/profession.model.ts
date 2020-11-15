@@ -1,10 +1,11 @@
 import { BaseModel } from './base.model';
 
+// eslint-disable-next-line no-shadow
 export enum ProfessionType {
-  Acquisition,
-  Management,
-  Worker,
-  Scrum,
+  acquisition,
+  management,
+  worker,
+  scrum,
 }
 
 export interface Profession extends BaseModel {

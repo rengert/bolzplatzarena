@@ -12,7 +12,7 @@ const array = [...Array(2000).keys()].map(item => ({
 
 const badKeyBy = (data: any[], key: string) => (data ?? []).reduce((r, x) => ({ ...r, [key ? x[key] : x]: x }), {});
 
-function nativeKeyBy<T extends { [index: string]: number }>(data: T[], key: string): Dictionary<T> {
+function nativeKeyBy<T extends { [index: string]: number; }>(data: T[], key: string): Dictionary<T> {
   return (data ?? []).reduce((prev: Dictionary<T>, newValue: T) => {
     prev[newValue[key]] = newValue;
 

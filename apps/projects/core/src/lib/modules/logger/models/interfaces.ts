@@ -2,11 +2,12 @@ export interface Logger {
   log(message: Message): void;
 }
 
+// eslint-disable-next-line no-shadow
 export enum Verbosity {
-  Debug = 'Debug',
-  Info = 'Info',
-  Error = 'Error',
-  Warning = 'Warning',
+  debug = 'debug',
+  info = 'info',
+  error = 'Error',
+  warning = 'Warning',
 }
 
 export interface Message {

@@ -3,7 +3,7 @@ import { Logger, Message, Verbosity } from '../models/interfaces';
 
 export const LOGGER = new InjectionToken<Logger>('Logger');
 
-function createMessage<T>(message: string, component = 'unknown', verbosity = Verbosity.Debug): Message {
+function createMessage<T>(message: string, component = 'unknown', verbosity = Verbosity.debug): Message {
   return {
     text: message,
     component,
@@ -19,19 +19,19 @@ export class LoggerService<T> {
   }
 
   debug(message: string): void {
-    this.logMessage(createMessage(message, this.name, Verbosity.Debug));
+    this.logMessage(createMessage(message, this.name, Verbosity.debug));
   }
 
-  error(message: string, data?: any): void {
-    this.logMessage(createMessage(message, this.name, Verbosity.Error));
+  error(message: string): void {
+    this.logMessage(createMessage(message, this.name, Verbosity.error));
   }
 
   info(message: string): void {
-    this.logMessage(createMessage(message, this.name, Verbosity.Info));
+    this.logMessage(createMessage(message, this.name, Verbosity.info));
   }
 
   warning(message: string): void {
-    this.logMessage(createMessage(message, this.name, Verbosity.Warning));
+    this.logMessage(createMessage(message, this.name, Verbosity.warning));
   }
 
   private logMessage(message: Message): void {

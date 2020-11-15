@@ -8,10 +8,6 @@ export class PropertyWorker implements OnWorkerInit {
     console.log('call');
   }
 
-  constructor() {
-    console.log('created');
-  }
-
   onWorkerInit(): void {
     console.log('init');
   }

@@ -7,6 +7,7 @@ import { DialogService } from '../../../core/src/lib/modules/dialog/services/dia
 import { ResultComponent } from './modules/game/components/result/result.component';
 import { GameService } from './services/game.service';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const { SplashScreen } = Plugins;
 
 @Component({
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
   async ngOnInit(): Promise<void> {
     const lang = 'de';
     this.translate.use(lang);
+    // eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires
     const data = require(`../i18n/${lang}.json`);
     this.translate.setTranslation(lang, data, true);
 

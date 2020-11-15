@@ -16,13 +16,18 @@ export interface Settings {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent {
-  readonly Level = Level;
-
   user = '';
-  level: Level;
+  selectedLevel: Level;
   gameMode: GameMode;
-  readonly levels: { key: string, value: Level }[];
-  readonly modes: { key: string, value: GameMode }[];
+
+  readonly levels: {
+    key: string;
+    value: Level;
+  }[];
+  readonly modes: {
+    key: string;
+    value: GameMode;
+  }[];
 
   readonly settings: Settings;
 
@@ -31,26 +36,29 @@ export class SettingsComponent {
     private readonly ngZone: NgZone,
   ) {
     this.levels = [
-      { key: 'EASY', value: Level.Easy },
-      { key: 'NORMAL', value: Level.Normal },
-      { key: 'HARD', value: Level.Hard },
+      { key: 'EASY', value: Level.easy },
+      { key: 'NORMAL', value: Level.normal },
+      { key: 'HARD', value: Level.hard },
     ];
 
     this.modes = [
-      { key: 'NORMAL', value: GameMode.Normal },
-      { key: 'NO_WALLS', value: GameMode.NoWalls },
-      { key: 'GOLDEN_APPLE', value: GameMode.GoldenApple },
+      { key: 'NORMAL', value: GameMode.normal },
+      { key: 'NO_WALLS', value: GameMode.noWalls },
+      { key: 'GOLDEN_APPLE', value: GameMode.goldenApple },
     ];
 
     const data = localStorage.getItem('settings');
     const defaultValue = {
-      level: Level.Normal,
-      gameMode: GameMode.Normal,
+      level: Level.normal,
+      gameMode: GameMode.normal,
       user: 'Anonym',
     };
-    this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
+
+    this.settings = data
+      ? { ...defaultValue, ...(JSON.parse(data) as Settings) }
+      : defaultValue;
     this.user = this.settings.user;
-    this.level = this.settings.level;
+    this.selectedLevel = this.settings.level;
 
     Plugins.App.addListener('backButton', () => {
       this.ngZone.run(() => {
@@ -61,7 +69,7 @@ export class SettingsComponent {
 
   async save(): Promise<void> {
     const settings: Settings = {
-      level: this.level,
+      level: this.selectedLevel,
       gameMode: this.gameMode,
       user: this.user,
     };

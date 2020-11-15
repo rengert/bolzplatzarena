@@ -1,0 +1,24 @@
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "./projects/core-example/tsconfig.app.json",
+          "./projects/core-example/tsconfig.spec.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "plugins": [
+        "eslint-plugin-no-null",
+        "eslint-plugin-unicorn"
+      ]
+    }
+  ]
+}

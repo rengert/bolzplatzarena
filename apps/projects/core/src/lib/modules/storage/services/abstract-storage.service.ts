@@ -2,7 +2,7 @@ import Dexie from 'dexie';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-export abstract class AbstractStorageService<T extends { id: string }> {
+export abstract class AbstractStorageService<T extends { id: string; }> {
   protected readonly items: Dexie.Table<T>;
   private readonly refresh$ = new BehaviorSubject<boolean>(false);
 
@@ -23,7 +23,7 @@ export abstract class AbstractStorageService<T extends { id: string }> {
 
   getAll$(): Observable<T[]> {
     return this.refresh$.pipe(
-      switchMap(_ => this.getAll()),
+      switchMap(async () => this.getAll()),
     );
   }
 

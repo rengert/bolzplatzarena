@@ -15,32 +15,32 @@ export interface Settings {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent {
-  readonly Level = Level;
+  readonly level = Level;
 
   user = '';
-  level: Level;
+  selectedLevel: Level;
   gameMode: GameMode;
-  readonly levels: { key: string, value: Level }[];
-  readonly modes: { key: string, value: GameMode }[];
+  readonly levels: { key: string; value: Level; }[];
+  readonly modes: { key: string; value: GameMode; }[];
 
   constructor(private readonly router: Router) {
     this.levels = [
-      { key: 'EASY', value: Level.Easy },
-      { key: 'NORMAL', value: Level.Normal },
-      { key: 'HARD', value: Level.Hard },
-      { key: 'FASTER', value: Level.Faster },
+      { key: 'EASY', value: Level.easy },
+      { key: 'NORMAL', value: Level.normal },
+      { key: 'HARD', value: Level.hard },
+      { key: 'FASTER', value: Level.faster },
     ];
 
     this.modes = [
-      { key: 'NORMAL', value: GameMode.Normal },
-      { key: 'NO_WALLS', value: GameMode.NoWalls },
-      { key: 'GOLDEN_APPLE', value: GameMode.GoldenApple },
+      { key: 'NORMAL', value: GameMode.normal },
+      { key: 'NO_WALLS', value: GameMode.noWalls },
+      { key: 'GOLDEN_APPLE', value: GameMode.goldenApple },
     ];
   }
 
   async save(): Promise<void> {
     const settings: Settings = {
-      level: this.level,
+      level: this.selectedLevel,
       gameMode: this.gameMode,
       user: this.user,
     };

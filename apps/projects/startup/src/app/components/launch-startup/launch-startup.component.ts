@@ -11,12 +11,19 @@ import { LaunchStartup, StartupService } from '../../services/startup.service';
 export class LaunchStartupComponent {
   challengeAccepted = false;
   readonly form = new FormGroup({
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     sex: new FormControl('', Validators.required),
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     firstName: new FormControl('', Validators.required),
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     lastName: new FormControl('', Validators.required),
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     startup: new FormControl('', Validators.required),
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     companyType: new FormControl('', Validators.required),
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     companyTopic: new FormControl('', Validators.required),
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     companyDescription: new FormControl('', Validators.required),
   });
 
@@ -32,6 +39,6 @@ export class LaunchStartupComponent {
 
   async launchStartup(config: LaunchStartup): Promise<void> {
     await this.startup.launch(config)
-      .then(_ => this.router.navigate(['/']));
+      .then(() => void this.router.navigate(['/']));
   }
 }

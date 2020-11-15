@@ -30,7 +30,7 @@ export class EngineService {
   ) {
   }
 
-  createScene(canvas: HTMLCanvasElement, size: { width: number, height: number }): Scene {
+  createScene(canvas: HTMLCanvasElement, size: { width: number; height: number; }): Scene {
     this.canvas = canvas;
 
     this.engine = new Engine(this.canvas, true);

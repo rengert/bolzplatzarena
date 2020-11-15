@@ -39,7 +39,7 @@ export class GridComponent implements OnDestroy {
   searchField = '';
 
   readonly columnDefs: ColumnDef[];
-  readonly rowData: { [key: string]: any }[];
+  readonly rowData: { [key: string]: any; }[];
 
   readonly search = new BehaviorSubject<string>('');
 
@@ -65,7 +65,7 @@ export class GridComponent implements OnDestroy {
   }
 
   update(eventData: any): void {
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     console.log('data has been changed and be viewed in the data model', eventData.colDef.field);
   }
 
@@ -76,7 +76,7 @@ export class GridComponent implements OnDestroy {
   filter(searchTerm: string): void {
     this.gridApi.setFilterModel(
       {
-        LV: {
+        lv: {
           filterType: 'text',
           type: 'contains',
           filter: searchTerm,
@@ -93,13 +93,13 @@ function locations(): Building[] {
   const result: Building[] = [];
 
   for (let buildingNo = 1; buildingNo <= 10; buildingNo++) {
-    const building: Building = { name: `Haus ${ buildingNo }`, strands: [] };
+    const building: Building = { name: `Haus ${buildingNo}`, strands: [] };
     for (let strandNo = 1; strandNo <= 2; strandNo++) {
-      const strand: Strand = { name: `Strang ${ buildingNo }.${ strandNo }`, flats: [] };
+      const strand: Strand = { name: `Strang ${buildingNo}.${strandNo}`, flats: [] };
       for (let levelNo = 1; levelNo <= 12; levelNo++) {
         strand.flats.push({
-          id: `Whg${ buildingNo }A${ strandNo }A${ levelNo }`,
-          name: `Whg ${ buildingNo }.${ strandNo }.${ levelNo }`,
+          id: `Whg${buildingNo}A${strandNo}A${levelNo}`,
+          name: `Whg ${buildingNo}.${strandNo}.${levelNo}`,
         });
       }
       building.strands.push(strand);
@@ -110,14 +110,14 @@ function locations(): Building[] {
   return result;
 }
 
-function data(): { [key: string]: any }[] {
-  const dataList: { [key: string]: any }[] = [];
+function data(): { [key: string]: any; }[] {
+  const dataList: { [key: string]: any; }[] = [];
 
   for (const i of [...Array(5000).keys()]) {
-    const result: { [key: string]: any } = {};
-    result.name = `${ i }. Lorem ipsum op som dum`;
-    result[`Whg${ i }A${ i }A${ i }`] = i;
-    // tslint:disable-next-line:binary-expression-operand-order
+    const result: { [key: string]: any; } = {};
+    result.name = `${i}. Lorem ipsum op som dum`;
+    result[`Whg${i}A${i}A${i}`] = i;
+    // eslint-disable-next-line yoda
     result.sum = 12.12 * i;
     dataList.push(result);
   }
@@ -134,7 +134,7 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
           headerName: '',
           children: [
             {
-              colId: 'LV',
+              colId: 'lv',
               headerName: 'LV',
               field: 'name',
               editable: false,
@@ -158,7 +158,7 @@ function createColumnDef(locs: Building[]): ColumnDef[] {
             editable: true,
             filter: false,
             sortable: false,
-            // tslint:disable-next-line:typedef
+            // eslint-disable-next-line
             cellStyle(params: any) {
               if (params.value) {
 

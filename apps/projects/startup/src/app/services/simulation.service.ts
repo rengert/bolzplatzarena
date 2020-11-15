@@ -18,7 +18,7 @@ export class SimulationService {
   }
 
   handle(date: Moment): void {
-    this.simulators.forEach(simulator => simulator.handle(date));
+    this.simulators.forEach(async simulator => simulator.handle(date));
     this.workers.forEach(worker => worker.postMessage({ command: 'bähm', date: date.format() }));
   }
 
@@ -27,6 +27,6 @@ export class SimulationService {
   }
 
   addWorker<T>(workerType: WebWorkerType<T>): void {
-
+    //
   }
 }

@@ -2,9 +2,8 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SimpleSnackBar } from '@angular/material/snack-bar/simple-snack-bar';
 import { MatSnackBarRef } from '@angular/material/snack-bar/snack-bar-ref';
+import { createUuid, LoggerService } from '@bpa/core';
 import moment from 'moment';
-import { LoggerService } from '../../../../../../../core/src/lib/modules/logger/services/logger.service';
-import { createUuid } from '../../../../../../../core/src/lib/utils/common.util';
 import { Direction, GameMode, Points } from '../../../../app.constants';
 import { Settings } from '../../../../components/settings/settings.component';
 import { BoardSettings } from '../../../../models/board-settings.model';
@@ -35,7 +34,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   private readonly snackBarReferences: MatSnackBarRef<SimpleSnackBar>[] = [];
 
   private snake: Snake;
-  private tempDirection: Direction = Direction.Right;
+  private tempDirection: Direction = Direction.right;
 
   constructor(
     private readonly boardService: BoardService,
@@ -43,6 +42,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     private readonly logger: LoggerService<BoardComponent>,
     private readonly snackBar: MatSnackBar,
   ) {
+  }
+
+  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
+    this.handleDirection(e.key as Direction);
   }
 
   get boardSettings(): BoardSettings {
@@ -61,10 +64,6 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.snackBarReferences.forEach(item => item.dismiss());
-  }
-
-  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
-    this.handleDirection(e.key as Direction);
   }
 
   handleDirection(direction: Direction): void {
@@ -98,13 +97,13 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.setNewApple();
     this.setNewApple();
 
-    this.tempDirection = Direction.Right;
+    this.tempDirection = Direction.right;
   }
 
   private async updatePositions(): Promise<void> {
     this.started = true;
 
-    const coord: { x: number; y: number } = this.moveHead();
+    const coord: { x: number; y: number; } = this.moveHead();
 
     if (this.isOutside(coord) || isTail(this.snake, coord)) {
       if (!this.snake.goldenHead) {
@@ -116,7 +115,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.snake.goldenHead = false;
     }
 
-    this.scoreBoard.points += (this.boardSettings.settings.gameMode === GameMode.Normal ? Points.perMove : 0);
+    this.scoreBoard.points += (this.boardSettings.settings.gameMode === GameMode.normal ? Points.perMove : 0);
 
     const newHead = this.board[coord.x][coord.y];
     newHead.isSnake = true;
@@ -168,14 +167,14 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.gameOver = true;
   }
 
-  private moveHead(): { x: number; y: number } {
+  private moveHead(): { x: number; y: number; } {
     const head = this.snake.body[0];
     const { x, y } = getRelativeCoord(this.tempDirection);
     const coord = { x: head.x + x, y: head.y + y };
 
     this.snake.direction = this.tempDirection;
 
-    if (this.settings.gameMode === GameMode.NoWalls || this.snake.goldenHead) {
+    if (this.settings.gameMode === GameMode.noWalls || this.snake.goldenHead) {
       coord.x = this.getCoordSafe(coord.x, this.boardSettings.height);
       coord.y = this.getCoordSafe(coord.y, this.boardSettings.width);
     }
@@ -199,7 +198,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   private setSnake(): void {
     this.snake = {
       body: [],
-      direction: Direction.Right,
+      direction: Direction.right,
       goldenHead: false,
     };
 
@@ -220,7 +219,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     };
     if (!isTail(this.snake, coord)) {
       this.board[coord.x][coord.y].isApple = true;
-      this.board[coord.x][coord.y].isGoldenApple = (this.settings.gameMode === GameMode.GoldenApple)
+      this.board[coord.x][coord.y].isGoldenApple = (this.settings.gameMode === GameMode.goldenApple)
         ? Math.random() < this.boardSettings.chanceGoldenApple
         : false;
 
@@ -229,7 +228,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.setNewApple();
   }
 
-  private isOutside(coord: { x: number, y: number }): boolean {
+  private isOutside(coord: { x: number; y: number; }): boolean {
     return (coord.x >= this.boardSettings.height)
       || (coord.y >= this.boardSettings.width)
       || (coord.x < 0)

@@ -20,14 +20,16 @@ import { GameBlock } from '../../../../../models/game-block';
 })
 export class BlockComponent implements OnChanges {
   @Input() config: Config;
-  @Input() selectExpected: boolean;
   @Input() block: GameBlock;
+  @Input() selectExpected: boolean;
+
+  @Output() readonly action = new EventEmitter<boolean>();
+
   @HostBinding('class') cssClass = '';
   @HostBinding('class.failed') failed: boolean;
   @HostBinding('class.good') good: boolean;
-  none: boolean;
 
-  @Output() readonly action = new EventEmitter<boolean>();
+  none: boolean;
 
   @HostListener('click') onClick(): void {
     if (this.block.show) {
@@ -43,7 +45,7 @@ export class BlockComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ((changes.block !== null) && this.block.show) {
+    if (changes.block && this.block.show) {
       this.cssClass = `board-size-${this.config.size}`;
       this.good = this.block.expected;
       this.none = !this.block.expected;

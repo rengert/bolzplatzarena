@@ -1,9 +1,9 @@
 import { ElementRef, Injectable, NgZone } from '@angular/core';
 import { ActionManager, Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
+import { createUuid } from '@bpa/core';
 import moment from 'moment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
-import { createUuid } from '../../../../core/src/lib/utils/common.util';
 import { Direction, GameMode, Level } from '../app.constants';
 import { Settings } from '../components/settings/settings.component';
 import { getDirection, getRelativeCoord } from '../utils/directions.util';
@@ -44,6 +44,12 @@ interface Result {
   lost: boolean;
 }
 
+const emptyResult: Result = {
+  apples: 0,
+  points: 0,
+  lost: false,
+};
+
 @Injectable({ providedIn: 'root' })
 export class GameService {
   get result$(): Observable<Result> {
@@ -53,28 +59,20 @@ export class GameService {
   readonly gamePaused = new BehaviorSubject<boolean>(false);
 
   private readonly innerResult$ = new BehaviorSubject<Result>({ apples: 0, points: 0, lost: false });
-  private readonly externalResult$ = this.innerResult$.pipe(
-    map(result => ({ ...result, points: Math.floor(result.points) })),
-    distinctUntilChanged((a: Result, b: Result) => a.points === b.points && a.lost === b.lost),
-    shareReplay(1),
-  );
+  private readonly externalResult$: Observable<Result>;
 
   private readonly floor = -50;
   private readonly size = { width: 12, height: 12 };
   private readonly snakeBodySize = 0.5;
 
-  private readonly limitX = (this.size.width + this.snakeBodySize) / 2;
-  private readonly limitZ = (this.size.height + this.snakeBodySize) / 2;
+  private readonly limitX: number;
+  private readonly limitZ: number;
 
-  private direction: Direction = Direction.Right;
+  private direction: Direction = Direction.right;
 
   private lost = false;
-  private readonly emptyResult: Result = {
-    apples: 0,
-    points: 0,
-    lost: false,
-  };
-  private result: Result = { ...this.emptyResult };
+
+  private result: Result = { ...emptyResult };
 
   private snake: Snake;
 
@@ -89,20 +87,34 @@ export class GameService {
     private readonly highscore: HighscoreService,
     private readonly ngZone: NgZone,
   ) {
+    this.limitX = (this.size.width + this.snakeBodySize) / 2;
+    this.limitZ = (this.size.height + this.snakeBodySize) / 2;
+
     const data = localStorage.getItem('settings');
     const defaultValue = {
-      level: Level.Normal,
-      gameMode: GameMode.Normal,
+      level: Level.normal,
+      gameMode: GameMode.normal,
       user: 'Anonym',
     };
-    this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
+    this.settings = data
+      ? {
+        ...defaultValue,
+        ...(JSON.parse(data) as Settings),
+      }
+      : defaultValue;
+
+    this.innerResult$.pipe(
+      map(result => ({ ...result, points: Math.floor(result.points) })),
+      distinctUntilChanged((a: Result, b: Result) => a.points === b.points && a.lost === b.lost),
+      shareReplay(1),
+    );
   }
 
   private get speed(): number {
     switch (this.settings.level) {
-      case(Level.Normal):
+      case(Level.normal):
         return SPEED_NORMAL;
-      case (Level.Hard):
+      case (Level.hard):
         return SPEED_HARD;
       default:
         return SPEED;
@@ -122,8 +134,8 @@ export class GameService {
   }
 
   reset(): void {
-    this.direction = Direction.Right;
-    this.result = { ...this.emptyResult };
+    this.direction = Direction.right;
+    this.result = { ...emptyResult };
     this.lost = false;
     this.apple = undefined;
     this.ngZone.run(() => this.innerResult$.next(this.result));
@@ -205,7 +217,9 @@ export class GameService {
       if ((Math.abs(head.mesh.position.x) > this.limitX)
         || (Math.abs(head.mesh.position.z) > this.limitZ)) {
         this.lost = true;
-        delete this.engine.camera.lockedTarget;
+
+        // eslint-disable-next-line no-null/no-null
+        this.engine.camera.lockedTarget = null;
       }
     }
 
@@ -259,7 +273,7 @@ export class GameService {
   }
 
   private updatePositions(): void {
-    const coord = getRelativeCoord(this.lost ? Direction.Falling : this.direction);
+    const coord = getRelativeCoord(this.lost ? Direction.falling : this.direction);
 
     this.moveSnake(coord);
 
@@ -279,14 +293,14 @@ export class GameService {
     );
 
     if (crash !== undefined) {
-      // tslint:disable-next-line:no-console
+      // eslint-disable-next-line no-console
       console.log(head, crash);
     }
 
     return crash !== undefined;
   }
 
-  private moveSnake(coord: { x: number, y: number, z: number }): void {
+  private moveSnake(coord: { x: number; y: number; z: number; }): void {
     for (let i = 0; i < this.snake.body.length; i++) {
       const current = this.snake.body[i];
       const next = this.snake.body[i + 1];

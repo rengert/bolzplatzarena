@@ -4,7 +4,7 @@ import { Settings } from '../../../components/settings/settings.component';
 import { BoardSettings } from '../../../models/board-settings.model';
 import { Cell } from '../../../models/cell.model';
 
-// tslint:disable-next-line:no-null-keyword
+// eslint-disable-next-line no-null/no-null
 @Injectable({ providedIn: null })
 export class BoardService {
   private readonly settings: Settings;
@@ -12,11 +12,11 @@ export class BoardService {
   constructor() {
     const data = localStorage.getItem('settings');
     const defaultValue = {
-      level: Level.Normal,
-      gameMode: GameMode.Normal,
+      level: Level.normal,
+      gameMode: GameMode.normal,
       user: 'Anonym',
     };
-    this.settings = data === null ? defaultValue : { ...defaultValue, ...(JSON.parse(data) as Settings) };
+    this.settings = data ? { ...defaultValue, ...(JSON.parse(data) as Settings) } : defaultValue;
   }
 
   createNewLine(line: number, settings: BoardSettings): Cell[] {
@@ -49,16 +49,16 @@ export class BoardService {
 
   private getInterval(): Speed {
     switch (this.settings.level) {
-      case Level.Easy:
-        return Speed.Slow;
-      case Level.Normal:
-        return Speed.Medium;
-      case Level.Hard:
-        return Speed.Fast;
-      case Level.Faster:
-        return Speed.Fast;
+      case Level.easy:
+        return Speed.slow;
+      case Level.normal:
+        return Speed.medium;
+      case Level.hard:
+        return Speed.fast;
+      case Level.faster:
+        return Speed.fast;
       default:
-        return Speed.Fast;
+        return Speed.fast;
     }
   }
 }

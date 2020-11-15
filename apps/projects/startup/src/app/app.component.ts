@@ -46,6 +46,6 @@ export class AppComponent implements OnInit {
     this.client = this.workerManager.createClient(PropertyWorker);
     await this.client.connect();
 
-    this.client.call(client => client.call());
+    await this.client.call(client => client.call());
   }
 }

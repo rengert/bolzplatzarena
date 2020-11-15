@@ -1,28 +1,32 @@
+// eslint-disable-next-line no-shadow
 export enum Level {
-  Easy = 'Easy',
-  Normal = 'Normal',
-  Hard = 'Hard',
-  Faster = 'Faster',
+  easy = 'Easy',
+  normal = 'Normal',
+  hard = 'Hard',
+  faster = 'Faster',
 }
 
+// eslint-disable-next-line no-shadow
 export enum Direction {
-  Left = 'ArrowLeft',
-  Up = 'ArrowUp',
-  Right = 'ArrowRight',
-  Down = 'ArrowDown',
-  Falling = 'Falling',
+  left = 'ArrowLeft',
+  up = 'ArrowUp',
+  right = 'ArrowRight',
+  down = 'ArrowDown',
+  falling = 'Falling',
 }
 
+// eslint-disable-next-line no-shadow
 export enum GameMode {
-  Normal = 'Normal',
-  NoWalls = 'NoWalls',
-  GoldenApple = 'GoldenApple',
+  normal = 'Normal',
+  noWalls = 'NoWalls',
+  goldenApple = 'GoldenApple',
 }
 
+// eslint-disable-next-line no-shadow
 export enum Speed {
-  Slow = 700,
-  Medium = 250,
-  Fast = 100,
+  slow = 700,
+  medium = 250,
+  fast = 100,
 }
 
 export class Points {

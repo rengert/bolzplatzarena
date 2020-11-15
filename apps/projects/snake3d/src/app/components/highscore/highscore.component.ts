@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-// tslint:disable-next-line:no-import-side-effect
-import 'firebase/firestore';
 import { GameMode } from '../../app.constants';
 
 @Component({
@@ -10,12 +8,10 @@ import { GameMode } from '../../app.constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HighscoreComponent {
-  gameMode: GameMode = GameMode.Normal;
-  readonly GameMode = GameMode;
-
+  gameMode: GameMode = GameMode.normal;
   modes = [
-    { key: 'NORMAL', value: GameMode.Normal },
-    { key: 'NO_WALLS', value: GameMode.NoWalls },
-    { key: 'GOLDEN_APPLE', value: GameMode.GoldenApple },
+    { key: 'NORMAL', value: GameMode.normal },
+    { key: 'NO_WALLS', value: GameMode.noWalls },
+    { key: 'GOLDEN_APPLE', value: GameMode.goldenApple },
   ];
 }
