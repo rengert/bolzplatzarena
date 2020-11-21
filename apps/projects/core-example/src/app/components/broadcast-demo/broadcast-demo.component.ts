@@ -16,10 +16,10 @@ export class BroadcastDemoComponent implements OnInit {
   cells: Cell[][] = [];
 
   ngOnInit(): void {
-    for (let line = 1; line <= 200; line++) {
+    for (let line = 1; line <= 300; line++) {
       const lineArray: Cell[] = [];
       this.cells.push(lineArray);
-      for (let id = 1; id <= 600; id++) {
+      for (let id = 1; id <= 100; id++) {
         lineArray.push({ id: (line * 1000) + id });
       }
     }
