@@ -1,11 +1,12 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+
+import { FormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule, MaterialModule } from '@bpa/core';
 import { AgGridModule } from 'ag-grid-angular';
-
-import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BroadcastDemoComponent } from './components/broadcast-demo/broadcast-demo.component';
@@ -38,6 +39,7 @@ import { SelectionDemoComponent } from './components/selection-demo/selection-de
     MatBadgeModule,
     AgGridModule.withComponents([]),
     FormsModule,
+    ScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

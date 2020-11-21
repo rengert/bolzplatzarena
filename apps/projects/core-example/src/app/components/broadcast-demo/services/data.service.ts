@@ -10,10 +10,10 @@ export interface Badge {
 @Injectable()
 export class DataService {
   private readonly interval: Observable<Badge[]>;
-  private readonly limit = 10000;
+  private readonly limit = 1;
 
   constructor() {
-    this.interval = interval(5000)
+    this.interval = interval(60000)
       .pipe(
         map(data => this.getData()),
         shareReplay(1),

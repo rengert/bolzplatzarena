@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-cell',
@@ -13,10 +12,7 @@ export class CellComponent implements OnInit {
 
   badge$: Observable<string>;
 
-  constructor(private readonly data: DataService) {
-  }
-
   ngOnInit(): void {
-    this.badge$ = this.data.get$(this.id);
+    // this.badge$ = this.data.get$(this.id);
   }
 }

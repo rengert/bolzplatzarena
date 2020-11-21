@@ -1,5 +1,17 @@
 <h1>Broadcasting</h1>
 
-<div class="row" *ngFor="let row of cells; let index = index">
-  <app-cell *ngFor="let cell of row; trackBy: 'id' | trackByProperty" [id]="cell.id"></app-cell>
-</div>
+<cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" minBufferPx="600" maxBufferPx="650" class="test">
+  <div *cdkVirtualFor="let row of cells; let index = index" class="column">
+    <div *ngFor="let cell of row; let flindex = index" class="block">
+      <div class="box">
+        <div class="cell">{{ index }}L</div>
+        <div class="cell right">{{ flindex }}R</div>
+      </div>
+      <div class="box">
+        <div class="cell right">R</div>
+        <div class="cell">L</div>
+      </div>
+    </div>
+  </div>
+</cdk-virtual-scroll-viewport>
+
