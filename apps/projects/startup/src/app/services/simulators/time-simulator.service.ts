@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { createMoment } from '@bpa/core';
+import { createMoment, filterIsDefined } from '@bpa/core';
 import { Moment } from 'moment';
 import { BehaviorSubject, Observable, timer } from 'rxjs';
 import { filter, first, map, switchMap, tap } from 'rxjs/operators';
@@ -14,13 +14,16 @@ export class TimeSimulatorService {
   private readonly speed = 1000;
 
   get time(): Moment {
-    return this.date.getValue() !;
+    const time = this.date.getValue();
+    if (!time) {
+      throw Error('should not be accessed before initialization');
+    }
+    return time;
   }
 
   constructor(startup: StartupService) {
     this.date$ = this.date.pipe(
-      filter(value => !!value),
-      map(data => data !),
+      filterIsDefined(),
     );
 
     startup.launched$().pipe(
