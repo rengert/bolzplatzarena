@@ -1,5 +1,4 @@
-<mat-card>
-  <h2>Deine Standorte</h2>
+<bpa-icon-card header="Deine Startorte" icon="home_work" [route]="['offices']">
   <table mat-table [dataSource]="offices$">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -12,4 +11,4 @@
     <tr mat-header-row *matHeaderRowDef="['name', 'city']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['name', 'city'];" [routerLink]="['/offices', row.id]"></tr>
   </table>
-</mat-card>
+</bpa-icon-card>
