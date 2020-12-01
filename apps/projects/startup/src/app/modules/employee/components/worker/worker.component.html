@@ -1,18 +1,35 @@
 <mat-card *ngIf="(worker$ | async)! as worker">
-  <mat-card-header>
-    <mat-card-title>{{ worker.firstname }} {{ worker.lastname }}</mat-card-title>
-    <mat-card-subtitle>
-      {{ worker.profession.name }}
-      <small>{{ worker.profession.description }}</small>
-    </mat-card-subtitle>
-  </mat-card-header>
+  <mat-card-title>{{ worker.firstname }} {{ worker.lastname }}</mat-card-title>
+  <mat-card-subtitle>
+    {{ worker.profession.name }}
+    <small>{{ worker.profession.description }}</small>
+  </mat-card-subtitle>
   <mat-card-content>
-    sw
+    <table>
+      <tr>
+        <td>Wohnort</td>
+        <td>{{ worker.domicile }}</td>
+      </tr>
+      <tr>
+        <td>Stelle</td>
+        <td>{{ worker.profession.name }} ({{ worker.level.name }})</td>
+      </tr>
+      <tr>
+        <td>Gehalt</td>
+        <td>{{ worker.salary }}</td>
+      </tr>
+      <tr>
+        <td>Arbeitszeit</td>
+        <td>{{ worker.percentage }}</td>
+      </tr>
+    </table>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-stroked-button>Gehalt verhandeln</button>
-    <button mat-stroked-button>Interesse Anfragen</button>
-    <button mat-stroked-button>Angebot Abgeben</button>
-    <button mat-stroked-button (click)="employ(worker)">Angebot Abgeben</button>
+    <ng-container *ngIf="worker.employed; else notEmployed">
+      <button mat-stroked-button (click)="fire(worker)">Kündigen</button>
+    </ng-container>
+    <ng-template #notEmployed>
+      <button mat-stroked-button (click)="employ(worker)">Einstellen</button>
+    </ng-template>
   </mat-card-actions>
 </mat-card>
