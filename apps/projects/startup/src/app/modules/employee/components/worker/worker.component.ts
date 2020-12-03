@@ -28,4 +28,9 @@ export class WorkerComponent {
     await this.employeeStorage.put([worker], false);
     await this.credit.substract(CONSTANTS.worker.initial, 'Neuer Mitarbeiter (Arbeitsplatz / Ausrüstung / Verwaltung etc.)');
   }
+
+  async fire(worker: Worker): Promise<void> {
+    worker.employed = false;
+    await this.employeeStorage.put([worker], false);
+  }
 }

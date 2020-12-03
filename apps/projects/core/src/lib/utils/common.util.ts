@@ -1,4 +1,6 @@
 import moment, { Moment, MomentInput } from 'moment';
+import { OperatorFunction } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 export function createUuid(): string {
@@ -73,4 +75,20 @@ export function randomItems<T>(names: T[], count = 1): T[] {
   }
 
   return result;
+}
+
+export function isDefined<T>(item: T | undefined | null): item is T {
+  return (item !== undefined) && (item !== null);
+}
+
+export function filterIsDefined<T>(): OperatorFunction<T | undefined | null, T> {
+  return input$ => input$.pipe(filter(isDefined));
+}
+
+export function pop<T>(items: T[]): T {
+  const pop = items.pop();
+  if (!pop) {
+    throw Error('do not pop empty array');
+  }
+  return pop;
 }

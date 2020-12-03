@@ -2,14 +2,14 @@
   <button mat-icon-button (click)="snav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  &nbsp;<h1>Startup - {{ title$ | async }}</h1>
+  &nbsp;<h1>{{ title$ | async }}</h1>
   <section>
     <app-credit></app-credit>
     <app-date></app-date>
   </section>
 </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav #snav [mode]="'over'">
+  <mat-sidenav #snav mode="over">
     <app-navigation (navigation)="snav.toggle()"></app-navigation>
   </mat-sidenav>
   <main>

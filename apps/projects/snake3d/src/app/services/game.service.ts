@@ -278,7 +278,7 @@ export class GameService {
     this.moveSnake(coord);
 
     const head = this.snake.body[0];
-    if (head.mesh.intersectsMesh(this.apple !)) {
+    if (this.apple && head.mesh.intersectsMesh(this.apple)) {
       this.updateResult(POINTS_PER_APPLE, 1);
       this.extendTail();
       this.createApples();
