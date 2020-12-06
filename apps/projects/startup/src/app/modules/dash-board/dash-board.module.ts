@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CoreModule, MaterialModule } from '@bpa/core';
 import { BarChartModule } from '@swimlane/ngx-charts';
-import { CreditModule } from '../credit/credit.module';
 import { EmployeeModule } from '../employee/employee.module';
+import { CreditAuditComponent } from './components/dash-board/credit-audit/credit-audit.component';
 import { DashBoardComponent } from './components/dash-board/dash-board.component';
 import { EmployeeComponent } from './components/dash-board/employee/employee.component';
 import { OfficesComponent } from './components/dash-board/offices/offices.component';
@@ -17,10 +17,9 @@ import { StatisticsComponent } from './components/dash-board/statistics/statisti
     MaterialModule,
     RouterModule,
     BarChartModule,
-    CreditModule,
     EmployeeModule,
   ],
-  declarations: [DashBoardComponent, OfficesComponent, StatisticsComponent, EmployeeComponent],
+  declarations: [CreditAuditComponent, DashBoardComponent, OfficesComponent, StatisticsComponent, EmployeeComponent],
 })
 export class DashBoardModule {
 }

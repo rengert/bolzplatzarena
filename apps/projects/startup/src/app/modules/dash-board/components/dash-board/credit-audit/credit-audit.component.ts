@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Audit, CreditStorageService } from '../../../../services/storage/credit-storage.service';
+import { Audit, CreditStorageService } from '../../../../../services/storage/credit-storage.service';
 
 @Component({
   selector: 'app-credit-audit',
@@ -10,8 +10,6 @@ import { Audit, CreditStorageService } from '../../../../services/storage/credit
 })
 export class CreditAuditComponent implements OnInit {
   @Input() count = 100;
-
-  @HostBinding('class') class = 'full-size';
 
   readonly displayedColumns: string[] = ['date', 'value', 'reason'];
 

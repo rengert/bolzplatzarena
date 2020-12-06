@@ -73,7 +73,7 @@ const routes: Routes = [
               {
                 path: 'audit',
                 component: CreditAuditComponent,
-                data: { title: 'Ausgaben / Einnahmen' },
+                data: { title: 'Bilanz' },
               },
             ],
           },
