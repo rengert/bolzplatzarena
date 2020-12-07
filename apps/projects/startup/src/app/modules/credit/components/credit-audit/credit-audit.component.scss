@@ -1,3 +1,12 @@
-.mat-column-date {
-  min-width: 82px;
+:host {
+  display: flex;
+
+  .mat-column-date {
+    min-width: 96px;
+  }
+
+  mat-card {
+    flex: 1;
+  }
 }
+

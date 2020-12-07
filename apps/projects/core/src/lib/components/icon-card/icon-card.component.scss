@@ -1,7 +1,26 @@
-header {
+:host {
   display: flex;
+  max-height: 100%;
+  width: 100%;
+  overflow: hidden;
 
-  h2 {
+  mat-card {
+    display: flex;
+    flex-direction: column;
     flex: 1;
+
+    header {
+      display: flex;
+      border-bottom: 1px solid lightgrey;
+
+      h2 {
+        flex: 1;
+      }
+    }
+
+    mat-card-content {
+      flex: 1;
+      overflow: auto;
+    }
   }
 }

@@ -7,6 +7,7 @@ import { DebugComponent } from './components/debug/debug.component';
 import { LaunchStartupComponent } from './components/launch-startup/launch-startup.component';
 import { StartupLaunchedGuard } from './guards/startup-launched.guard';
 import { CreditAuditComponent } from './modules/credit/components/credit-audit/credit-audit.component';
+import { CreditComponent } from './modules/credit/components/credit/credit.component';
 import { DashBoardComponent } from './modules/dash-board/components/dash-board/dash-board.component';
 import { EmployeeComponent } from './modules/employee/components/employee/employee.component';
 import { LabourMarketComponent } from './modules/employee/components/labour-market/labour-market.component';
@@ -73,7 +74,12 @@ const routes: Routes = [
               {
                 path: 'audit',
                 component: CreditAuditComponent,
-                data: { title: 'Ausgaben / Einnahmen' },
+                data: { title: 'Bilanz' },
+              },
+              {
+                path: 'credit',
+                component: CreditComponent,
+                data: { title: 'Kredite' },
               },
             ],
           },
