@@ -61,11 +61,10 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.subscription = this.game.result$.pipe(
       filter(result => result.lost),
-    )
-      .subscribe(_ => {
-        this.loseGame();
-        this.changeDetectorRef.detectChanges();
-      });
+    ).subscribe(_ => {
+      this.loseGame();
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   ngAfterViewInit(): void {

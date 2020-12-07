@@ -94,7 +94,7 @@ export class GameService {
     const defaultValue = {
       level: Level.normal,
       gameMode: GameMode.normal,
-      user: 'Anonym',
+      user: 'Anonymous',
     };
     this.settings = data
       ? {
@@ -103,7 +103,7 @@ export class GameService {
       }
       : defaultValue;
 
-    this.innerResult$.pipe(
+    this.externalResult$ = this.innerResult$.pipe(
       map(result => ({ ...result, points: Math.floor(result.points) })),
       distinctUntilChanged((a: Result, b: Result) => a.points === b.points && a.lost === b.lost),
       shareReplay(1),
@@ -273,9 +273,9 @@ export class GameService {
   }
 
   private updatePositions(): void {
-    const coord = getRelativeCoord(this.lost ? Direction.falling : this.direction);
+    const coordinate = getRelativeCoord(this.lost ? Direction.falling : this.direction);
 
-    this.moveSnake(coord);
+    this.moveSnake(coordinate);
 
     const head = this.snake.body[0];
     if (this.apple && head.mesh.intersectsMesh(this.apple)) {
@@ -300,7 +300,7 @@ export class GameService {
     return crash !== undefined;
   }
 
-  private moveSnake(coord: { x: number; y: number; z: number; }): void {
+  private moveSnake(coordinate: { x: number; y: number; z: number; }): void {
     for (let i = 0; i < this.snake.body.length; i++) {
       const current = this.snake.body[i];
       const next = this.snake.body[i + 1];
@@ -309,9 +309,9 @@ export class GameService {
       }
 
       if (i === 0) {
-        current.mesh.position.x += coord.x * this.speed;
-        current.mesh.position.y += coord.y * LOST_SPEED;
-        current.mesh.position.z += coord.z * this.speed;
+        current.mesh.position.x += coordinate.x * this.speed;
+        current.mesh.position.y += coordinate.y * LOST_SPEED;
+        current.mesh.position.z += coordinate.z * this.speed;
       } else {
         // follow
         const target = current.targets[0];
