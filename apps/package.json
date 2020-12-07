@@ -48,7 +48,7 @@
     "angular-web-worker": "^1.0.6",
     "angulartics2": "^10.0.0",
     "dexie": "^3.0.3",
-    "firebase": "^7.24.0",
+    "firebase": "^8.1.2",
     "lodash": "^4.17.20",
     "material-design-icons": "^3.0.1",
     "moment": "^2.29.1",
