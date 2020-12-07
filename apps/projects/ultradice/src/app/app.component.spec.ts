@@ -4,18 +4,19 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LoggerService, NotificationService, TitleBarService } from '@bpa/core';
 import { TranslateService } from '@ngx-translate/core';
 import { instance, mock } from 'ts-mockito';
+import 'zone.js/dist/zone-testing';
 import { DialogService } from '../../../core/src/lib/modules/dialog/services/dialog.service';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(waitForAsync(() => {
+  beforeEach(waitForAsync(async () => {
     const titleBarMock = mock(TitleBarService);
     const loggerServiceMock = mock(LoggerService);
     const notificationServiceMock = mock(NotificationService);
     const dialogServiceMock = mock(DialogService);
     const translateService = mock(TranslateService);
 
-    void TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
       ],
