@@ -8,8 +8,10 @@
   .block {
     grid-column-end: span 2;
 
-    &.half {
-      grid-column-end: span 1;
+    @media screen and (min-width: 500px) {
+      &.half {
+        grid-column-end: span 1;
+      }
     }
   }
 }
