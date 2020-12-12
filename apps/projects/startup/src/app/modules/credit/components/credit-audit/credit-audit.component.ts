@@ -9,9 +9,8 @@ import { Audit, CreditStorageService } from '../../../../services/storage/credit
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreditAuditComponent implements OnInit {
-  @Input() count = 100;
-
   @HostBinding('class') class = 'full-size';
+  @Input() count = 100;
 
   readonly displayedColumns: string[] = ['date', 'value', 'reason'];
 
