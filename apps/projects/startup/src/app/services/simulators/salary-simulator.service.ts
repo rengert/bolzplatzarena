@@ -3,7 +3,7 @@ import { LoggerService } from '@bpa/core';
 import { Moment } from 'moment';
 import { CONSTANTS } from '../../constants';
 import { EmployeeStorageService } from '../../modules/employee/services/storage/employee-storage.service';
-import { CreditService } from '../credit.service';
+import { MoneyService } from '../money.service';
 import { Simulator } from './simulator';
 
 function matchMonthly(date: Moment): boolean {
@@ -19,7 +19,7 @@ function matchYearly(date: Moment): boolean {
 @Injectable({ providedIn: 'root' })
 export class SalarySimulatorService implements Simulator {
   constructor(
-    private readonly credit: CreditService,
+    private readonly credit: MoneyService,
     private readonly employeeStorage: EmployeeStorageService,
     private readonly logger: LoggerService<SalarySimulatorService>,
   ) {

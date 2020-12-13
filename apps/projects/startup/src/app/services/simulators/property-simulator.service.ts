@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoggerService } from '@bpa/core';
 import { Moment } from 'moment';
 import { OfficeService } from '../../modules/offices/services/office.service';
-import { CreditService } from '../credit.service';
+import { MoneyService } from '../money.service';
 import { Simulator } from './simulator';
 
 function match(date: Moment): boolean {
@@ -12,7 +12,7 @@ function match(date: Moment): boolean {
 @Injectable({ providedIn: 'root' })
 export class PropertySimulatorService implements Simulator {
   constructor(
-    private readonly credit: CreditService,
+    private readonly credit: MoneyService,
     private readonly logger: LoggerService<PropertySimulatorService>,
     private readonly offices: OfficeService,
   ) {

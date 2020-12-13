@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CONSTANTS } from '../../../../constants';
 import { Worker } from '../../../../models/worker.model';
-import { CreditService } from '../../../../services/credit.service';
+import { MoneyService } from '../../../../services/money.service';
 import { EmployeeStorageService } from '../../services/storage/employee-storage.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class WorkerComponent {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly credit: CreditService,
+    private readonly credit: MoneyService,
     private readonly employeeStorage: EmployeeStorageService,
   ) {
     const id = this.activatedRoute.snapshot.params.id;

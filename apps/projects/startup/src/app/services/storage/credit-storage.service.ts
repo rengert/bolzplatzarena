@@ -12,19 +12,17 @@ export interface Audit {
 
 @Injectable({ providedIn: 'root' })
 export class CreditStorageService {
-  constructor(
-    private readonly storage: StorageService,
-  ) {
+  constructor(private readonly storage: StorageService) {
   }
 
   async addAudit(value: number, reason: string, date: Moment = createMoment(0)): Promise<void> {
-    const data = (await this.storage.get<Audit[]>('credit-audit').toPromise() ?? []) as Audit[];
+    const data = await this.storage.getEntity<Audit[]>('credit-audit');
     data.push({
       value,
       reason,
       date: date.format(),
     });
-    await this.storage.set('credit-audit', data).toPromise();
+    await this.storage.setEntity('credit-audit', data);
   }
 
   watchAudit$(count: number): Observable<Audit[]> {

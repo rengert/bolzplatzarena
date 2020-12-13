@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CONSTANTS } from '../../../../constants';
 import { Office } from '../../../../models/office.model';
-import { CreditService } from '../../../../services/credit.service';
+import { MoneyService } from '../../../../services/money.service';
 import { StartupService } from '../../../../services/startup.service';
 
 interface OfficeDetails extends Office {
@@ -24,7 +24,7 @@ export class OfficeComponent {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly credit: CreditService,
+    private readonly credit: MoneyService,
     private readonly startup: StartupService,
   ) {
     this.id = this.activatedRoute.snapshot.params.id;

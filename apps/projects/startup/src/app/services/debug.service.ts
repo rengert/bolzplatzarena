@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EmployeeService } from '../modules/employee/services/employee.service';
-import { CreditService } from './credit.service';
+import { MoneyService } from './money.service';
 import { StartupService } from './startup.service';
 import { AppStorageService } from './storage/app-storage.service';
 
@@ -8,7 +8,7 @@ import { AppStorageService } from './storage/app-storage.service';
 export class DebugService {
   constructor(
     private readonly appStorage: AppStorageService,
-    private readonly credit: CreditService,
+    private readonly credit: MoneyService,
     private readonly employee: EmployeeService,
     private readonly startup: StartupService,
   ) {
