@@ -3,12 +3,16 @@ import { Credit } from '../models/credit.model';
 import { Observable, of } from 'rxjs';
 import { StorageService } from '../../../services/storage/storage.service';
 import { createUuid } from '@bpa/core';
+import { MoneyService } from '../../../services/money.service';
 
 export const CREDITS_STORAGE_KEY = 'credits';
 
 @Injectable({ providedIn: 'root' })
 export class CreditService {
-  constructor(private readonly storage: StorageService) {
+  constructor(
+    private readonly money: MoneyService,
+    private readonly storage: StorageService,
+  ) {
   }
 
   list$(): Observable<Credit[]> {
@@ -39,6 +43,7 @@ export class CreditService {
     if (credit.amount <= 0) {
       credits = credits.filter(({ id }) => id !== credit.id);
     }
+    await this.money.substract(value, 'Kreditrückzahlung');
     await this.storage.setEntity(CREDITS_STORAGE_KEY, credits);
   }
 
@@ -46,5 +51,6 @@ export class CreditService {
     const credits = await this.storage.getEntity<Credit[]>(CREDITS_STORAGE_KEY) ?? [];
     credits.push(credit);
     await this.storage.setEntity(CREDITS_STORAGE_KEY, credits);
+    await this.money.add(credit.originalAmount, 'Kreditaufnahmen');
   }
 }

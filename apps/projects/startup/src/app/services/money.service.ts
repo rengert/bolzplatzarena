@@ -5,7 +5,7 @@ import { StartupService } from './startup.service';
 import { CreditStorageService } from './storage/credit-storage.service';
 
 @Injectable({ providedIn: 'root' })
-export class CreditService {
+export class MoneyService {
   private date: Moment;
 
   constructor(
