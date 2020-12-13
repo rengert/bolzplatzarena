@@ -19,6 +19,11 @@ export class CreditComponent {
   }
 
   action(credit: Credit): void {
-    this.credit.borrow(credit, credit.originalAmount);
+    this.credit.borrow(credit);
+  }
+
+  repay(credit: Credit): void {
+    // todo: nur teilweise zurückzahlen
+    this.credit.repay(credit, credit.amount);
   }
 }

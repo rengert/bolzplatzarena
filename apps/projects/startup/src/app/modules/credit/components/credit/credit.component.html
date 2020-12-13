@@ -21,3 +21,27 @@
     </ng-container>
   </bpa-icon-card>
 </ng-container>
+<ng-container *ngIf="myCredits$ | async as credits">
+  <h2>Bestandskredite</h2>
+  <bpa-icon-card *ngFor="let credit of credits"
+                 [header]="credit.name" icon="attach_money">
+    <p>Lorem iposum</p>
+    <table>
+      <tr>
+        <td>Betrag</td>
+        <td>{{ credit.originalAmount }}</td>
+      </tr>
+      <tr>
+        <td>Zins</td>
+        <td>{{ credit.interestRate | percent: '1.2' }}</td>
+      </tr>
+      <tr>
+        <td>Laufzeit</td>
+        <td>{{ credit.months }}</td>
+      </tr>
+    </table>
+    <ng-container class="actions">
+      <button mat-stroked-button (click)="repay(credit)">Kredit zurückzahlen</button>
+    </ng-container>
+  </bpa-icon-card>
+</ng-container>
