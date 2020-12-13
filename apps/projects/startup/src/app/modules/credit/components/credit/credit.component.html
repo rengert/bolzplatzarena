@@ -15,6 +15,10 @@
         <td>Laufzeit</td>
         <td>{{ credit.months }}</td>
       </tr>
+      <tr>
+        <td>Kosten</td>
+        <td>{{ credit.amount }} ({{ credit.costPerMonth }} pro Monat)</td>
+      </tr>
     </table>
     <ng-container class="actions">
       <button mat-stroked-button (click)="action(credit)">Kredit aufnehmen</button>
@@ -38,6 +42,10 @@
       <tr>
         <td>Laufzeit</td>
         <td>{{ credit.months }}</td>
+      </tr>
+      <tr>
+        <td>Kosten</td>
+        <td>{{ credit.amount }} ({{ credit.costPerMonth }} pro Monat)</td>
       </tr>
     </table>
     <ng-container class="actions">

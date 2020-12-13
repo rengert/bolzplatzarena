@@ -6,6 +6,12 @@ import { createUuid } from '@bpa/core';
 import { MoneyService } from '../../../services/money.service';
 
 export const CREDITS_STORAGE_KEY = 'credits';
+export const CREDITS_MAX_INTEREST_RATE = 0.0125;
+
+enum Duration {
+  month = 1,
+  year = 12,
+}
 
 @Injectable({ providedIn: 'root' })
 export class CreditService {
@@ -20,15 +26,25 @@ export class CreditService {
   }
 
   generate$(): Observable<Credit[]> {
-    const result: Credit[] = [{
-      id: createUuid(),
-      name: 'Ergo Bank',
-      amount: 100000,
-      costPerMonth: 10000,
-      interestRate: 0.0125,
-      months: 12,
-      originalAmount: 100000,
-    }];
+    const result: Credit[] = [];
+    for (let i = 0; i < Math.random() * 5; i++) {
+      const originalAmount = Math.ceil(100 * Math.random()) * 1000;
+      const interestRate = Math.random() * CREDITS_MAX_INTEREST_RATE;
+      const months = Math.ceil(Math.random() * 2) * Duration.year;
+      const amount = Math.ceil(originalAmount * Math.pow(1 + interestRate, months));
+      result.push(
+        {
+          id: createUuid(),
+          name: 'Ergo Bank',
+          amount,
+          costPerMonth: Math.ceil(amount / months),
+          interestRate,
+          months,
+          originalAmount,
+        },
+      );
+    }
+
     return of(result);
   }
 
