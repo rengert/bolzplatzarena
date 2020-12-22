@@ -17,7 +17,7 @@ export class HighScoreTableComponent implements OnChanges, OnInit {
 
   data$: Observable<Highscore[]>;
 
-  private readonly mode = new BehaviorSubject<GameMode>(GameMode.Normal);
+  private readonly mode = new BehaviorSubject<GameMode>(GameMode.normal);
 
   constructor(private readonly highscore: HighscoreService) {
   }

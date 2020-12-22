@@ -103,7 +103,7 @@ export class GameService {
       }
       : defaultValue;
 
-    this.innerResult$.pipe(
+    this.externalResult$ = this.innerResult$.pipe(
       map(result => ({ ...result, points: Math.floor(result.points) })),
       distinctUntilChanged((a: Result, b: Result) => a.points === b.points && a.lost === b.lost),
       shareReplay(1),
@@ -245,7 +245,7 @@ export class GameService {
     head.position.y = this.snakeBodySize / 2;
     this.snake.body.push({ mesh: head, targets: [], name: 'head' });
 
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 2; i++) {
       const mesh = this.normalSphereTemplate.createInstance(`SnakeTail-${createUuid()}`);
       mesh.position.y = this.snakeBodySize / 2;
       mesh.position.x = i * (this.snakeBodySize + this.speed);
@@ -274,8 +274,8 @@ export class GameService {
 
   private updatePositions(): void {
     const coord = getRelativeCoord(this.lost ? Direction.falling : this.direction);
-
-    this.moveSnake(coord);
+    const { x, y, z } = this.engine.joystick.deltaPosition;
+    this.moveSnake({ x: -x, y: this.lost ? -1 : 0, z: -y });
 
     const head = this.snake.body[0];
     if (this.apple && head.mesh.intersectsMesh(this.apple)) {
@@ -303,10 +303,7 @@ export class GameService {
   private moveSnake(coord: { x: number; y: number; z: number; }): void {
     for (let i = 0; i < this.snake.body.length; i++) {
       const current = this.snake.body[i];
-      const next = this.snake.body[i + 1];
-      if (next !== undefined) {
-        next.targets.push(current.mesh.position.clone());
-      }
+      const before = this.snake.body[i - 1];
 
       if (i === 0) {
         current.mesh.position.x += coord.x * this.speed;
@@ -314,17 +311,14 @@ export class GameService {
         current.mesh.position.z += coord.z * this.speed;
       } else {
         // follow
-        const target = current.targets[0];
+        const target = before.mesh.position.clone();
         const delta = target.subtract(current.mesh.position)
           .normalize();
-
-        current.mesh.position.x += directionAsNumber(delta.x) * this.speed;
-        current.mesh.position.y += directionAsNumber(delta.y) * LOST_SPEED;
-        current.mesh.position.z += directionAsNumber(delta.z) * this.speed;
-
-        if (target.equalsWithEpsilon(current.mesh.position)) {
-          current.mesh.position = target.clone();
-          current.targets.shift();
+        console.log(delta);
+        if (Math.abs(delta.x) > 0.2 && Math.abs(delta.z) > 0.2) {
+          current.mesh.position.x += delta.x * this.speed;
+          current.mesh.position.y += delta.y;
+          current.mesh.position.z += delta.z * this.speed;
         }
       }
     }
