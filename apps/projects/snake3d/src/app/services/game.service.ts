@@ -1,42 +1,17 @@
 import { ElementRef, Injectable, NgZone } from '@angular/core';
-import { ActionManager, Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
+import { ActionManager, Color3, Mesh, StandardMaterial } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 import moment from 'moment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
-import { Direction, GameMode, Level } from '../app.constants';
+import { GameMode, Level } from '../app.constants';
 import { Settings } from '../components/settings/settings.component';
-import { getDirection, getRelativeCoord } from '../utils/directions.util';
 import { EngineService } from './engine.service';
 import { HighscoreService } from './highscore.service';
-
-function directionAsNumber(value: number): 1 | -1 | 0 {
-  if (value === 0) {
-    return 0;
-  }
-  if (value < 0) {
-    return -1;
-  }
-
-  return 1;
-}
+import { SnakeService, Speed } from './snake.service';
 
 const SEGMENTS = 32;
-const SPEED = 0.01;
-const SPEED_NORMAL = 0.02;
-const SPEED_HARD = 0.05;
-const LOST_SPEED = 0.75;
 const POINTS_PER_APPLE = 50;
-
-interface Body {
-  mesh: InstancedMesh | Mesh;
-  targets: Vector3[];
-  name: string;
-}
-
-interface Snake {
-  body: Body[];
-}
 
 interface Result {
   apples: number;
@@ -57,27 +32,26 @@ export class GameService {
   }
 
   readonly gamePaused = new BehaviorSubject<boolean>(false);
+  readonly speeds: { [key in Level]: Speed } = {
+    [Level.easy]: Speed.Slow,
+    [Level.normal]: Speed.Normal,
+    [Level.hard]: Speed.Fast,
+    [Level.faster]: Speed.Faster,
+  };
 
   private readonly innerResult$ = new BehaviorSubject<Result>({ apples: 0, points: 0, lost: false });
   private readonly externalResult$: Observable<Result>;
 
   private readonly floor = -50;
   private readonly size = { width: 12, height: 12 };
-  private readonly snakeBodySize = 0.5;
 
   private readonly limitX: number;
   private readonly limitZ: number;
-
-  private direction: Direction = Direction.right;
 
   private lost = false;
 
   private result: Result = { ...emptyResult };
 
-  private snake: Snake;
-
-  private standardMaterial: StandardMaterial;
-  private normalSphereTemplate: Mesh;
   private apple: Mesh | undefined;
 
   private readonly settings: Settings;
@@ -85,10 +59,17 @@ export class GameService {
   constructor(
     private readonly engine: EngineService,
     private readonly highscore: HighscoreService,
+    private readonly snake: SnakeService,
     private readonly ngZone: NgZone,
   ) {
-    this.limitX = (this.size.width + this.snakeBodySize) / 2;
-    this.limitZ = (this.size.height + this.snakeBodySize) / 2;
+    this.externalResult$ = this.innerResult$.pipe(
+      map(result => ({ ...result, points: Math.floor(result.points) })),
+      distinctUntilChanged((a: Result, b: Result) => a.points === b.points && a.lost === b.lost),
+      shareReplay(1),
+    );
+
+    this.limitX = (this.size.width + this.snake.bodySize) / 2;
+    this.limitZ = (this.size.height + this.snake.bodySize) / 2;
 
     const data = localStorage.getItem('settings');
     const defaultValue = {
@@ -102,41 +83,17 @@ export class GameService {
         ...(JSON.parse(data) as Settings),
       }
       : defaultValue;
-
-    this.externalResult$ = this.innerResult$.pipe(
-      map(result => ({ ...result, points: Math.floor(result.points) })),
-      distinctUntilChanged((a: Result, b: Result) => a.points === b.points && a.lost === b.lost),
-      shareReplay(1),
-    );
-  }
-
-  private get speed(): number {
-    switch (this.settings.level) {
-      case(Level.normal):
-        return SPEED_NORMAL;
-      case (Level.hard):
-        return SPEED_HARD;
-      default:
-        return SPEED;
-    }
-  }
-
-  setDirection(direction: Direction): void {
-    if (this.lost) {
-      return;
-    }
-    this.direction = getDirection(this.direction, direction);
   }
 
   restart(): void {
     this.reset();
-    this.createSnake();
+    this.snake.create(this.speeds[this.settings.level]);
   }
 
   reset(): void {
-    this.direction = Direction.right;
     this.result = { ...emptyResult };
     this.lost = false;
+    this.apple?.dispose();
     this.apple = undefined;
     this.ngZone.run(() => this.innerResult$.next(this.result));
     this.gamePaused.next(false);
@@ -146,18 +103,10 @@ export class GameService {
     this.reset();
     const scene = this.engine.createScene(canvas.nativeElement, this.size);
 
-    this.standardMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
-    this.standardMaterial.alpha = 1;
-    this.standardMaterial.diffuseColor = new Color3(0.976, 0.737, 0.22);
-
-    this.normalSphereTemplate = Mesh.CreateSphere('NormalSphereTemplate', SEGMENTS, this.snakeBodySize, this.engine.scene);
-    this.normalSphereTemplate.material = this.standardMaterial;
-    this.normalSphereTemplate.setEnabled(false);
-
-    this.createSnake();
+    this.snake.create(this.speeds[this.settings.level]);
     this.createApples();
 
-    this.engine.camera.lockedTarget = this.snake.body[0].mesh;
+    this.engine.camera.lockedTarget = this.snake.head;
 
     scene.actionManager = new ActionManager(scene);
     scene.registerBeforeRender(() => {
@@ -194,7 +143,7 @@ export class GameService {
       return;
     }
 
-    if (this.result.lost || !this.snake.body.length) {
+    if (this.result.lost || !this.snake.length) {
       return;
     }
 
@@ -206,16 +155,15 @@ export class GameService {
       return;
     }
 
-    if (this.result.lost || !this.snake.body.length) {
+    if (this.result.lost || !this.snake.length) {
       return;
     }
 
     if (!this.lost) {
-      this.updateResult(this.speed, 0);
+      this.updateResult(this.snake.speed, 0);
 
-      const head = this.snake.body[0];
-      if ((Math.abs(head.mesh.position.x) > this.limitX)
-        || (Math.abs(head.mesh.position.z) > this.limitZ)) {
+      const { x, z } = this.snake.position;
+      if ((Math.abs(x) > this.limitX) || (Math.abs(z) > this.limitZ)) {
         this.lost = true;
 
         // eslint-disable-next-line no-null/no-null
@@ -224,41 +172,17 @@ export class GameService {
     }
 
     if ((this.lost
-      && !this.snake.body.some(item => item.mesh.position.y > this.floor))
-      || this.intersectsTail()) {
+      && !(this.snake.position.y > this.floor))
+      || this.snake.intersectsTail) {
       this.lose();
 
       return;
     }
   }
 
-  private createSnake(): void {
-    this.snake = {
-      body: [],
-    };
-
-    const head = Mesh.CreateSphere('SnakeHead', SEGMENTS, this.snakeBodySize, this.engine.scene);
-    const material = new StandardMaterial('head', this.engine.scene);
-    material.alpha = 1;
-    material.diffuseColor = new Color3(0.816, 0.457, 0.097);
-    head.material = material;
-    head.position.y = this.snakeBodySize / 2;
-    this.snake.body.push({ mesh: head, targets: [], name: 'head' });
-
-    for (let i = 1; i < 2; i++) {
-      const mesh = this.normalSphereTemplate.createInstance(`SnakeTail-${createUuid()}`);
-      mesh.position.y = this.snakeBodySize / 2;
-      mesh.position.x = i * (this.snakeBodySize + this.speed);
-      this.snake.body.push({ mesh, targets: [], name: i.toString() });
-      this.engine.shadowGenerator.addShadowCaster(mesh);
-    }
-
-    this.engine.shadowGenerator.addShadowCaster(head);
-  }
-
   private createApples(): void {
     if (this.apple === undefined) {
-      this.apple = Mesh.CreateSphere('Apple', SEGMENTS, this.snakeBodySize, this.engine.scene);
+      this.apple = Mesh.CreateSphere('Apple', SEGMENTS, this.snake.bodySize, this.engine.scene);
       const material = new StandardMaterial('Gold', this.engine.scene);
       material.alpha = 1;
       material.diffuseColor = new Color3(0.23, 0.98, 0.53);
@@ -273,71 +197,21 @@ export class GameService {
   }
 
   private updatePositions(): void {
-    const coord = getRelativeCoord(this.lost ? Direction.falling : this.direction);
     const { x, y, z } = this.engine.joystick.deltaPosition;
-    this.moveSnake({ x: -x, y: this.lost ? -1 : 0, z: -y });
+    this.snake.move({ x: -x, y: this.lost ? -1 : 0, z: -y });
 
-    const head = this.snake.body[0];
-    if (this.apple && head.mesh.intersectsMesh(this.apple)) {
+    const head = this.snake.head;
+    if (this.apple && head.intersectsMesh(this.apple)) {
       this.updateResult(POINTS_PER_APPLE, 1);
-      this.extendTail();
+      this.snake.extendTail();
       this.createApples();
     }
-  }
-
-  private intersectsTail(): boolean {
-    const head = this.snake.body[0];
-
-    const crash = this.snake.body.find((item, index) => index > 1
-      && head.mesh.intersectsMesh(item.mesh, true),
-    );
-
-    if (crash !== undefined) {
-      // eslint-disable-next-line no-console
-      console.log(head, crash, head.mesh.position.subtract(crash.mesh.position).normalize());
-    }
-
-    return crash !== undefined;
-  }
-
-  private moveSnake(coord: { x: number; y: number; z: number; }): void {
-    for (let i = 0; i < this.snake.body.length; i++) {
-      const current = this.snake.body[i];
-      const before = this.snake.body[i - 1];
-
-      if (i === 0) {
-        current.mesh.position.x += coord.x * this.speed;
-        current.mesh.position.y += coord.y * LOST_SPEED;
-        current.mesh.position.z += coord.z * this.speed;
-      } else {
-        // follow
-        const target = before.mesh.position.clone();
-        const delta = target.subtract(current.mesh.position)
-          .normalize();
-        console.log(delta);
-        if (Math.abs(delta.x) > .75 || Math.abs(delta.z) > .75) {
-          current.mesh.position.x += delta.x * this.speed;
-          current.mesh.position.y += delta.y;
-          current.mesh.position.z += delta.z * this.speed;
-        }
-      }
-    }
-  }
-
-  private extendTail(): void {
-    const last = this.snake.body[this.snake.body.length - 1];
-    const mesh = this.normalSphereTemplate.createInstance(`Tail-${createUuid()}`);
-    mesh.position.y = last.mesh.position.y;
-    mesh.position.z = last.mesh.position.z + (this.snakeBodySize + this.speed);
-    mesh.position.x = last.mesh.position.x + (this.snakeBodySize + this.speed);
-    this.snake.body.push({ mesh, targets: [], name: `${this.snake.body.length + 1}` });
-
-    this.engine.shadowGenerator.addShadowCaster(mesh);
   }
 
   private lose(): void {
     this.lost = true;
     this.result.lost = true;
+    this.snake.kill();
     this.ngZone.run(() => this.innerResult$.next(this.result));
   }
 
