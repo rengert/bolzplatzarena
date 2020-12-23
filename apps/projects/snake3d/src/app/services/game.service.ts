@@ -294,7 +294,7 @@ export class GameService {
 
     if (crash !== undefined) {
       // eslint-disable-next-line no-console
-      console.log(head, crash);
+      console.log(head, crash, head.mesh.position.subtract(crash.mesh.position).normalize());
     }
 
     return crash !== undefined;
@@ -315,7 +315,7 @@ export class GameService {
         const delta = target.subtract(current.mesh.position)
           .normalize();
         console.log(delta);
-        if (Math.abs(delta.x) > 0.2 && Math.abs(delta.z) > 0.2) {
+        if (Math.abs(delta.x) > .75 || Math.abs(delta.z) > .75) {
           current.mesh.position.x += delta.x * this.speed;
           current.mesh.position.y += delta.y;
           current.mesh.position.z += delta.z * this.speed;
