@@ -70,15 +70,14 @@ export class SnakeService {
   }
 
   create(speed: Speed): void {
-    if (!this.standardMaterial) {
-      this.standardMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
-      this.standardMaterial.alpha = 1;
-      this.standardMaterial.diffuseColor = new Color3(0.976, 0.737, 0.22);
+    this.standardMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
+    this.standardMaterial.alpha = 1;
+    this.standardMaterial.diffuseColor = new Color3(0.976, 0.737, 0.22);
 
-      this.normalSphereTemplate = Mesh.CreateSphere('NormalSphereTemplate', SEGMENTS, this.bodySize, this.engine.scene);
-      this.normalSphereTemplate.material = this.standardMaterial;
-      this.normalSphereTemplate.setEnabled(false);
-    }
+    this.normalSphereTemplate = Mesh.CreateSphere('NormalSphereTemplate', SEGMENTS, this.bodySize, this.engine.scene);
+    this.normalSphereTemplate.material = this.standardMaterial;
+    this.normalSphereTemplate.setEnabled(false);
+
     if (this.snake) {
       this.snake.body.forEach(item => item.mesh.dispose());
     }
@@ -96,7 +95,7 @@ export class SnakeService {
     head.position.y = this.bodySize / 2;
     this.snake.body.push({ mesh: head, targets: [], name: 'head' });
 
-    for (let i = 1; i < 2; i++) {
+    for (let i = 1; i < 3; i++) {
       const mesh = this.normalSphereTemplate.createInstance(`SnakeTail-${createUuid()}`);
       mesh.position.y = this.bodySize;
       mesh.position.x = i * (this.bodySize + this.speed);
@@ -114,7 +113,7 @@ export class SnakeService {
 
       if (i === 0) {
         current.mesh.position.x += coord.x * this.speed;
-        current.mesh.position.y += coord.y;
+        current.mesh.position.y += coord.y * 0.09;
         current.mesh.position.z += coord.z * this.speed;
       } else {
         // follow
@@ -123,8 +122,8 @@ export class SnakeService {
         if (Math.abs(delta.x) > .5 || Math.abs(delta.z) > .5) {
           current.mesh.position.x += delta.x * this.speed * 2;
           current.mesh.position.z += delta.z * this.speed * 2;
+          current.mesh.position.y += delta.y * 0.09;
         } else {
-          current.mesh.position.y += delta.y;
         }
       }
     }
