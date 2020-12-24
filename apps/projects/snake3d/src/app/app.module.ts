@@ -3,13 +3,11 @@ import { AngularFireModule } from '@angular/fire';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
-import { CoreModule } from '../../../core/src/lib/core.module';
-import { MaterialModule } from '../../../core/src/lib/modules/material/material.module';
+import { CoreModule, MaterialModule } from '@bpa/core';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ControlsComponent } from './components/game/controls/controls.component';
 import { GameComponent } from './components/game/game.component';
 import { LoseScreenComponent } from './components/game/lose-screen/lose-screen.component';
 import { PauseScreenComponent } from './components/game/pause-screen/pause-screen.component';
@@ -26,12 +24,11 @@ import { WindowService } from './services/window.service';
     GameComponent,
     HighscoreComponent,
     HighScoreTableComponent,
+    LoseScreenComponent,
+    PauseScreenComponent,
     PrivacyComponent,
     SettingsComponent,
     ToolBarComponent,
-    LoseScreenComponent,
-    ControlsComponent,
-    PauseScreenComponent,
   ],
   imports: [
     AppRoutingModule,

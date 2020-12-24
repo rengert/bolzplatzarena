@@ -46,6 +46,21 @@
       ]
     },
     {
+      "target": "rattlesnake3d",
+      "public": "dist/snake3d/public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
       "target": "thestartup",
       "public": "dist/startup",
       "ignore": [

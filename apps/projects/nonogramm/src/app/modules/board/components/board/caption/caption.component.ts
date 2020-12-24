@@ -12,6 +12,7 @@ export class CaptionComponent implements OnChanges {
   @Input() config: Config;
   @Input() numbers: Caption[];
   @Input() @HostBinding('class.vertical') vertical: boolean;
+
   @HostBinding('class') cssClass: string;
   @HostBinding('class') numbersClass: string;
 

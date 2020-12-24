@@ -4,7 +4,6 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  HostListener,
   NgZone,
   OnDestroy,
   OnInit,
@@ -15,7 +14,6 @@ import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { Direction } from '../../app.constants';
 import { EngineService } from '../../services/engine.service';
 import { GameService } from '../../services/game.service';
 import { LoseScreenComponent } from './lose-screen/lose-screen.component';
@@ -41,14 +39,6 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
     private readonly ngZone: NgZone,
   ) {
     this.game.reset();
-  }
-
-  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
-    this.handleDirection(e.key as Direction);
-
-    if (e.key === 'Escape') {
-      this.stopGame();
-    }
   }
 
   ngOnInit(): void {
@@ -78,10 +68,6 @@ export class GameComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.subscription.unsubscribe();
     this.engine.clean();
-  }
-
-  handleDirection(direction: Direction): void {
-    this.game.setDirection(direction);
   }
 
   private loseGame(): void {

@@ -12,11 +12,10 @@ import { StorageService } from '../../../../services/storage.service';
 })
 export class SettingsComponent implements OnInit {
   level: Level;
-  levels: Level[] = [Level.easy, Level.medium, Level.heavy];
   size: Size;
-  sizes: Size[] = [
-    Size.small, Size.medium, Size.large,
-  ];
+
+  readonly levels: Level[] = [Level.easy, Level.medium, Level.heavy];
+  readonly sizes: Size[] = [Size.small, Size.medium, Size.large];
 
   constructor(
     private readonly storage: StorageService,

@@ -71,7 +71,7 @@ export class GameComponent implements OnInit {
           return;
         }
         this.storage.cleanGame();
-        await this.router.navigate(['']);
+        void this.router.navigate(['']);
       });
   }
 }

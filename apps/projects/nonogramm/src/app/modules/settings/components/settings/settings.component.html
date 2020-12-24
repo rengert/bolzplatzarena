@@ -2,9 +2,8 @@
   <mat-card-title translate>COMPONENTS.SETTINGS.HEADLINE</mat-card-title>
   <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.LEVEL</mat-card-subtitle>
   <mat-card-content>
-    <mat-radio-group
-      aria-labelledby="level-label"
-      [(ngModel)]="level">
+    <mat-radio-group aria-labelledby="level-label"
+                     [(ngModel)]="level">
       <mat-radio-button *ngFor="let item of levels; trackBy: ('value' | trackByProperty)"
                         [value]="item">
         {{ 'GLOBAL.ENUM.LEVEL.' + item | uppercase | translate }}
@@ -13,9 +12,8 @@
   </mat-card-content>
   <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.SIZE</mat-card-subtitle>
   <mat-card-content>
-    <mat-radio-group
-      aria-labelledby="size-label"
-      [(ngModel)]="size">
+    <mat-radio-group aria-labelledby="size-label"
+                     [(ngModel)]="size">
       <mat-radio-button *ngFor="let item of sizes; trackBy: ('value' | trackByProperty)"
                         [value]="item">
         {{ 'GLOBAL.ENUM.SIZE.' + item | translate }}

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { GameMode } from '../../../app.constants';
@@ -11,26 +11,23 @@ import { HighscoreService } from '../../../services/highscore.service';
   styleUrls: ['./high-score-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HighScoreTableComponent implements OnChanges, OnInit {
+export class HighScoreTableComponent implements OnChanges {
   @Input() gameMode: GameMode;
   @Input() remote: boolean;
 
-  data$: Observable<Highscore[]>;
+  readonly data$: Observable<Highscore[]>;
 
   private readonly mode = new BehaviorSubject<GameMode>(GameMode.normal);
 
-  constructor(private readonly highscore: HighscoreService) {
+  constructor(highscore: HighscoreService) {
+    this.data$ = this.mode.pipe(
+      switchMap(mode => this.remote
+        ? highscore.getRemote$(mode)
+        : highscore.getByMode$(mode)),
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.mode.next(this.gameMode);
-  }
-
-  ngOnInit(): void {
-    this.data$ = this.mode.pipe(
-      switchMap(mode => this.remote
-        ? this.highscore.getRemote$(mode)
-        : this.highscore.getByMode$(mode)),
-    );
   }
 }
