@@ -93,6 +93,7 @@ export class GameService {
   reset(): void {
     this.result = { ...emptyResult };
     this.lost = false;
+    this.snake.kill();
     this.apple?.dispose();
     this.apple = undefined;
     this.ngZone.run(() => this.innerResult$.next(this.result));
@@ -197,7 +198,7 @@ export class GameService {
   }
 
   private updatePositions(): void {
-    const { x, y, z } = this.engine.joystick.deltaPosition;
+    const { x, y } = this.engine.joystick.deltaPosition;
     this.snake.move({ x: -x, y: this.lost ? -1 : 0, z: -y });
 
     const head = this.snake.head;

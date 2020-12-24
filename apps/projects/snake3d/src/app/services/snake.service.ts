@@ -114,7 +114,7 @@ export class SnakeService {
 
       if (i === 0) {
         current.mesh.position.x += coord.x * this.speed;
-        current.mesh.position.y += coord.y * 1;
+        current.mesh.position.y += coord.y;
         current.mesh.position.z += coord.z * this.speed;
       } else {
         // follow
@@ -122,8 +122,9 @@ export class SnakeService {
         const delta = target.subtract(current.mesh.position);
         if (Math.abs(delta.x) > .5 || Math.abs(delta.z) > .5) {
           current.mesh.position.x += delta.x * this.speed * 2;
-          current.mesh.position.y += delta.y;
           current.mesh.position.z += delta.z * this.speed * 2;
+        } else {
+          current.mesh.position.y += delta.y;
         }
       }
     }
@@ -141,6 +142,9 @@ export class SnakeService {
   }
 
   kill(): void {
+    if (!this.snake) {
+      return;
+    }
     this.snake.body.forEach(body => body.mesh.dispose());
     this.snake.body = [];
   }
