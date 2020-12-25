@@ -1,18 +1,20 @@
 import { Injectable, NgZone } from '@angular/core';
 import {
+  BackgroundMaterial,
   Color3,
   Color4,
+  DirectionalLight,
   Engine,
   FollowCamera,
-  HemisphericLight,
   Mesh,
   Scene,
   ShadowGenerator,
   SpotLight,
-  StandardMaterial,
+  Texture,
   Vector3,
   VirtualJoystick,
 } from '@babylonjs/core';
+import { SkyMaterial } from '@babylonjs/materials';
 import { WindowService } from './window.service';
 
 @Injectable({ providedIn: 'root' })
@@ -42,30 +44,43 @@ export class EngineService {
     this.engine = new Engine(this.canvas, true);
 
     this.scene = new Scene(this.engine);
-    this.scene.clearColor = new Color4(0.1, 0.1, 0.1, 1);
+    this.scene.clearColor = new Color4(0.5, 0.8, 0.5, 1);
+    this.scene.ambientColor = new Color3(0.3, 0.3, 0.3);
 
     const camera = new FollowCamera('camera1', new Vector3(0, 105, -5), this.scene);
     camera.setTarget(Vector3.Zero());
     camera.heightOffset = 15;
 
     this.camera = camera;
-    const light = new HemisphericLight('dir01', new Vector3(0, 10, 0), this.scene);
+    const light = new DirectionalLight('hemi', new Vector3(-1, -3, 1), this.scene);
+    light.position = new Vector3(3, 9, 3);
+    light.diffuse = new Color3(1, 1, 1);
+    light.specular = new Color3(1, 1, 1);
 
-    this.spotLight = new SpotLight('spot02',
-      new Vector3(0, 8, 0),
-      new Vector3(0, -1, 0), 1.1, 16, this.scene);
-    this.spotLight.intensity = 0.99;
-
-    const materialGround = new StandardMaterial('StandardMaterial', this.scene);
+    const materialGround = new BackgroundMaterial('StandardMaterial', this.scene);
+    const texture = new Texture('assets/textures/grass.jpg', this.scene);
+    texture.uScale = 12;
+    texture.vScale = 12;
     materialGround.alpha = 1;
-    materialGround.diffuseColor = new Color3(0.4392, 0.2824, 0.2353);
+    materialGround.diffuseTexture = texture;
+    materialGround.shadowLevel = 0.125;
 
     const ground = Mesh.CreateGround('ground1', size.width, size.height, 2, this.scene);
     ground.material = materialGround;
     ground.receiveShadows = true;
 
-    this.shadowGenerator = new ShadowGenerator(1024, this.spotLight);
+    this.shadowGenerator = new ShadowGenerator(1024, light);
     this.shadowGenerator.useExponentialShadowMap = true;
+
+    // Sky material
+    var skyboxMaterial = new SkyMaterial('skyMaterial', this.scene);
+    skyboxMaterial.backFaceCulling = false;
+    skyboxMaterial.luminance = 1;
+    skyboxMaterial.inclination = 0;
+
+    // Sky mesh (box)
+    var skybox = Mesh.CreateBox('skyBox', 1000.0, this.scene);
+    skybox.material = skyboxMaterial;
 
     this.virtualJoystick = new VirtualJoystick(false);
     this.virtualJoystick.alwaysVisible = true;

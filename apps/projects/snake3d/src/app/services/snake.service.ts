@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
+import { Color3, InstancedMesh, Mesh, StandardMaterial, Texture, Vector3 } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 import { EngineService } from './engine.service';
 
 const SEGMENTS = 32;
+const DISTANCE_TAIL = 0.35;
+const TAIL_FOLLOW_SPEED = 2.125;
+const FALLING_SPEED = 0.125;
+const HEAD_COLOR = new Color3(0.816, 0.457, 0.097);
+const BODY_COLOR = new Color3(0.40, 0.40, 0);
+const BODY_SIZE = 0.5;
 
 export enum Speed {
   Slow = 0.01,
@@ -34,7 +40,7 @@ export class SnakeService {
   }
 
   get bodySize(): number {
-    return 0.5;
+    return BODY_SIZE;
   }
 
   get head(): InstancedMesh | Mesh {
@@ -42,14 +48,9 @@ export class SnakeService {
   }
 
   get intersectsTail(): boolean {
-    const crash = this.snake.body.find((item, index) => index > 1
+    const crash = this.snake.body.find((item, index) => index > 2
       && this.head.intersectsMesh(item.mesh, true),
     );
-
-    if (crash) {
-      console.log(crash, this.head);
-    }
-
     return !!crash;
   }
 
@@ -72,7 +73,8 @@ export class SnakeService {
   create(speed: Speed): void {
     this.standardMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.standardMaterial.alpha = 1;
-    this.standardMaterial.diffuseColor = new Color3(0.976, 0.737, 0.22);
+    this.standardMaterial.diffuseColor = BODY_COLOR;
+    this.standardMaterial.bumpTexture = new Texture('assets/textures/wGyk6os.png', this.engine.scene);
 
     this.normalSphereTemplate = Mesh.CreateSphere('NormalSphereTemplate', SEGMENTS, this.bodySize, this.engine.scene);
     this.normalSphereTemplate.material = this.standardMaterial;
@@ -90,14 +92,16 @@ export class SnakeService {
     const head = Mesh.CreateSphere('SnakeHead', SEGMENTS, this.bodySize, this.engine.scene);
     const material = new StandardMaterial('head', this.engine.scene);
     material.alpha = 1;
-    material.diffuseColor = new Color3(0.816, 0.457, 0.097);
+    material.diffuseColor = HEAD_COLOR;
+    material.bumpTexture = new Texture('assets/textures/wGyk6os.png', this.engine.scene);
+
     head.material = material;
     head.position.y = this.bodySize / 2;
     this.snake.body.push({ mesh: head, targets: [], name: 'head' });
 
     for (let i = 1; i < 3; i++) {
       const mesh = this.normalSphereTemplate.createInstance(`SnakeTail-${createUuid()}`);
-      mesh.position.y = this.bodySize;
+      mesh.position.y = this.bodySize / 4;
       mesh.position.x = i * (this.bodySize + this.speed);
       this.snake.body.push({ mesh, targets: [], name: i.toString() });
       this.engine.shadowGenerator.addShadowCaster(mesh);
@@ -113,28 +117,27 @@ export class SnakeService {
 
       if (i === 0) {
         current.mesh.position.x += coord.x * this.speed;
-        current.mesh.position.y += coord.y * 0.09;
+        current.mesh.position.y += coord.y * FALLING_SPEED;
         current.mesh.position.z += coord.z * this.speed;
       } else {
         // follow
         const target = before.mesh.position.clone();
         const delta = target.subtract(current.mesh.position);
-        if (Math.abs(delta.x) > .5 || Math.abs(delta.z) > .5) {
-          current.mesh.position.x += delta.x * this.speed * 2;
-          current.mesh.position.z += delta.z * this.speed * 2;
-          current.mesh.position.y += delta.y * 0.09;
-        } else {
+        if (Math.abs(delta.x) > DISTANCE_TAIL || Math.abs(delta.z) > DISTANCE_TAIL) {
+          current.mesh.position.x += delta.x * this.speed * TAIL_FOLLOW_SPEED;
+          current.mesh.position.z += delta.z * this.speed * TAIL_FOLLOW_SPEED;
+          current.mesh.position.y += delta.y * FALLING_SPEED;
         }
       }
     }
   }
 
   extendTail(): void {
-    const last = this.snake.body[this.snake.body.length - 1];
+    const end = this.snake.body[this.snake.body.length - 1];
     const mesh = this.normalSphereTemplate.createInstance(`Tail-${createUuid()}`);
-    mesh.position.y = last.mesh.position.y;
-    mesh.position.z = last.mesh.position.z + (this.bodySize + this.speed);
-    mesh.position.x = last.mesh.position.x + (this.bodySize + this.speed);
+    mesh.position.y = end.mesh.position.y;
+    mesh.position.z = end.mesh.position.z + (this.bodySize + this.speed);
+    mesh.position.x = end.mesh.position.x + (this.bodySize + this.speed);
     this.snake.body.push({ mesh, targets: [], name: `${this.snake.body.length + 1}` });
 
     this.engine.shadowGenerator.addShadowCaster(mesh);
