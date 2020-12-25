@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Color3, InstancedMesh, Mesh, StandardMaterial, Texture, Vector3 } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
-import { last } from 'lodash';
 import { EngineService } from './engine.service';
 
 const SEGMENTS = 32;
@@ -102,7 +101,7 @@ export class SnakeService {
 
     for (let i = 1; i < 3; i++) {
       const mesh = this.normalSphereTemplate.createInstance(`SnakeTail-${createUuid()}`);
-      mesh.position.y = this.bodySize;
+      mesh.position.y = this.bodySize / 4;
       mesh.position.x = i * (this.bodySize + this.speed);
       this.snake.body.push({ mesh, targets: [], name: i.toString() });
       this.engine.shadowGenerator.addShadowCaster(mesh);
@@ -134,7 +133,7 @@ export class SnakeService {
   }
 
   extendTail(): void {
-    const end = last(this.snake.body) !;
+    const end = this.snake.body[this.snake.body.length - 1];
     const mesh = this.normalSphereTemplate.createInstance(`Tail-${createUuid()}`);
     mesh.position.y = end.mesh.position.y;
     mesh.position.z = end.mesh.position.z + (this.bodySize + this.speed);

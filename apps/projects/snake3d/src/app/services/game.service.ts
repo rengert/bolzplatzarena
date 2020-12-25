@@ -192,9 +192,6 @@ export class GameService {
 
     this.apple.position.x = Math.floor(Math.random() * this.size.width - this.size.width / 2);
     this.apple.position.z = Math.floor(Math.random() * this.size.height - this.size.height / 2);
-
-    this.engine.spotLight.position.x = this.apple.position.x;
-    this.engine.spotLight.position.z = this.apple.position.z;
   }
 
   private updatePositions(): void {
