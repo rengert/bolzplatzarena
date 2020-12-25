@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Color3, InstancedMesh, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
+import { Color3, InstancedMesh, Mesh, StandardMaterial, Texture, Vector3 } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 import { EngineService } from './engine.service';
 
@@ -8,6 +8,7 @@ const DISTANCE_TAIL = 0.35;
 const TAIL_FOLLOW_SPEED = 2.125;
 const FALLING_SPEED = 0.125;
 const HEAD_COLOR = new Color3(0.816, 0.457, 0.097);
+const BODY_COLOR = new Color3(0.40, 0.40, 0);
 const BODY_SIZE = 0.5;
 
 export enum Speed {
@@ -72,7 +73,8 @@ export class SnakeService {
   create(speed: Speed): void {
     this.standardMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.standardMaterial.alpha = 1;
-    this.standardMaterial.diffuseColor = new Color3(0.976, 0.737, 0.22);
+    this.standardMaterial.diffuseColor = BODY_COLOR;
+    this.standardMaterial.bumpTexture = new Texture('assets/textures/wGyk6os.png', this.engine.scene);
 
     this.normalSphereTemplate = Mesh.CreateSphere('NormalSphereTemplate', SEGMENTS, this.bodySize, this.engine.scene);
     this.normalSphereTemplate.material = this.standardMaterial;
