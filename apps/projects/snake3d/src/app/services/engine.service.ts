@@ -47,9 +47,9 @@ export class EngineService {
     this.scene.clearColor = new Color4(0.5, 0.8, 0.5, 1);
     this.scene.ambientColor = new Color3(0.3, 0.3, 0.3);
 
-    const camera = new FollowCamera('camera1', new Vector3(0, 105, -5), this.scene);
+    const camera = new FollowCamera('camera1', new Vector3(5, 4, -47), this.scene);
     camera.setTarget(Vector3.Zero());
-    camera.heightOffset = 15;
+    camera.heightOffset = 12;
 
     this.camera = camera;
     const light = new DirectionalLight('hemi', new Vector3(-1, -3, 1), this.scene);
@@ -68,18 +68,21 @@ export class EngineService {
     const ground = Mesh.CreateGround('ground1', size.width, size.height, 2, this.scene);
     ground.material = materialGround;
     ground.receiveShadows = true;
+    ground.position.y - 2.05;
 
     this.shadowGenerator = new ShadowGenerator(1024, light);
     this.shadowGenerator.useExponentialShadowMap = true;
 
     // Sky material
-    var skyboxMaterial = new SkyMaterial('skyMaterial', this.scene);
+    const skyboxMaterial = new SkyMaterial('skyMaterial', this.scene);
     skyboxMaterial.backFaceCulling = false;
-    skyboxMaterial.luminance = 1;
-    skyboxMaterial.inclination = 0;
+    skyboxMaterial.luminance = 0.1;
+    skyboxMaterial.inclination = -0.5;
+    skyboxMaterial.turbidity = 40;
+    skyboxMaterial.cameraOffset.y = 12;
 
     // Sky mesh (box)
-    var skybox = Mesh.CreateBox('skyBox', 1000.0, this.scene);
+    var skybox = Mesh.CreateBox('skyBox', 50.0, this.scene);
     skybox.material = skyboxMaterial;
 
     this.virtualJoystick = new VirtualJoystick(false);
