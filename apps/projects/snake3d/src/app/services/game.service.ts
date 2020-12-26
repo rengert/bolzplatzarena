@@ -12,6 +12,7 @@ import { SnakeService, Speed } from './snake.service';
 
 const SEGMENTS = 32;
 const POINTS_PER_APPLE = 50;
+const APPLE_COLOR = new Color3(1, 0.25, 0);
 
 interface Result {
   apples: number;
@@ -161,8 +162,6 @@ export class GameService {
     }
 
     if (!this.lost) {
-      this.updateResult(this.snake.speed, 0);
-
       const { x, z } = this.snake.position;
       if ((Math.abs(x) > this.limitX) || (Math.abs(z) > this.limitZ)) {
         this.lost = true;
@@ -182,11 +181,11 @@ export class GameService {
   }
 
   private createApples(): void {
-    if (this.apple === undefined) {
+    if (!this.apple) {
       this.apple = Mesh.CreateSphere('Apple', SEGMENTS, this.snake.bodySize, this.engine.scene);
-      const material = new StandardMaterial('Gold', this.engine.scene);
+      const material = new StandardMaterial('RED', this.engine.scene);
       material.alpha = 1;
-      material.diffuseColor = new Color3(0.23, 0.98, 0.53);
+      material.diffuseColor = APPLE_COLOR;
       this.apple.material = material;
     }
 
@@ -198,8 +197,8 @@ export class GameService {
     const { x, y } = this.engine.joystick.deltaPosition;
     this.snake.move({ x: -x, y: this.lost ? -1 : 0, z: -y });
 
-    const head = this.snake.head;
-    if (this.apple && head.intersectsMesh(this.apple)) {
+    // todo: need to check why the first check is always true, thats why the x / y check is included
+    if (((x !== 0) || (y !== 0)) && this.apple && this.apple.intersectsMesh(this.snake.head, true, true)) {
       this.updateResult(POINTS_PER_APPLE, 1);
       this.snake.extendTail();
       this.createApples();
