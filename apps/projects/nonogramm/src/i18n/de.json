@@ -4,6 +4,7 @@
     "APP": {
       "NAME": "NONOGRAMM"
     },
+    "BACK": "Zurück zur Übersicht",
     "ENUM": {
       "LEVEL": {
         "EASY": "Einfach",

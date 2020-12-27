@@ -1,4 +1,11 @@
 :host {
-  display: block;
-  padding: 1rem;
+  height: calc(100vh - 2rem - env(safe-area-inset-top));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  width: 100%;
 }
