@@ -1,7 +1,6 @@
-<mat-card>
-  <mat-card-title translate>COMPONENTS.SETTINGS.HEADLINE</mat-card-title>
-  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.LEVEL</mat-card-subtitle>
-  <mat-card-content>
+<bpa-icon-card [header]="'COMPONENTS.SETTINGS.HEADLINE' | translate">
+  <section class="setting">
+    <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.LEVEL</mat-card-subtitle>
     <mat-radio-group aria-labelledby="level-label"
                      [(ngModel)]="level">
       <mat-radio-button *ngFor="let item of levels; trackBy: ('value' | trackByProperty)"
@@ -9,9 +8,9 @@
         {{ 'GLOBAL.ENUM.LEVEL.' + item | uppercase | translate }}
       </mat-radio-button>
     </mat-radio-group>
-  </mat-card-content>
-  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.SIZE</mat-card-subtitle>
-  <mat-card-content>
+  </section>
+  <section class="setting">
+    <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.SIZE</mat-card-subtitle>
     <mat-radio-group aria-labelledby="size-label"
                      [(ngModel)]="size">
       <mat-radio-button *ngFor="let item of sizes; trackBy: ('value' | trackByProperty)"
@@ -19,10 +18,10 @@
         {{ 'GLOBAL.ENUM.SIZE.' + item | translate }}
       </mat-radio-button>
     </mat-radio-group>
-  </mat-card-content>
-  <mat-card-actions>
+  </section>
+  <section class="actions">
     <button mat-flat-button color="primary" (click)="save()">
       {{ 'COMPONENTS.SETTINGS.SAVE' | translate }}
     </button>
-  </mat-card-actions>
-</mat-card>
+  </section>
+</bpa-icon-card>

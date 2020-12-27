@@ -37,23 +37,13 @@ html {
 }
 
 body {
-  margin: 0;
+  margin: 1rem;
 }
 
 mat-icon {
   cursor: pointer;
 }
 
-mat-card {
+bpa-icon-card {
   max-width: 400px;
-  margin: auto;
-
-  mat-card-title {
-    border-bottom: 1px solid #ededed;
-
-    &.mat-card-title {
-      padding-bottom: .5rem;
-      margin-bottom: 1.5rem;
-    }
-  }
 }

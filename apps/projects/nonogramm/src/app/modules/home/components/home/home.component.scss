@@ -1,15 +1,15 @@
 :host {
-  height: calc(100vh - 56px - env(safe-area-inset-top));
+  height: calc(100vh - 2rem - env(safe-area-inset-top));
   display: flex;
   flex-direction: column;
   align-content: center;
 
   app-navigation {
-    display: block;
-    margin: auto;
+    flex: 1;
   }
 
   app-version {
+    display: block;
     margin: 2rem;
     text-align: center;
   }

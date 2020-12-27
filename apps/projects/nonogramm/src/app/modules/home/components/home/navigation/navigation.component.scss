@@ -1,5 +1,11 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 bpa-icon-card {
-  overflow: visible;
+  flex-grow: 0;
 
   section {
     padding: 1rem 0;
