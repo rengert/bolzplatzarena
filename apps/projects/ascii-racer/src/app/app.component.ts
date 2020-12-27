@@ -26,7 +26,7 @@ export class AppComponent {
   racerPositionY = 49;
 
   private last: string[][];
-  private readonly track = [25, 35];
+  private readonly track = [15, 35];
 
   constructor() {
     this.data$ = timer(0, this.speed).pipe(
@@ -73,6 +73,9 @@ export class AppComponent {
     }
     for (let j = 0; j < this.trackWitdth; j++) {
       this.last[this.trackLength - 1][j] = j < this.track[0] || j > this.track[1] ? '1' : '8';
+      if (j === this.track[0] + 10) {
+        this.last[this.trackLength - 1][j] = '|';
+      }
     }
 
     return this.last.reverse();
@@ -84,6 +87,9 @@ export class AppComponent {
       this.last[i] = [];
       for (let j = 0; j < this.trackWitdth; j++) {
         this.last[i][j] = j < this.track[0] || j > this.track[1] ? '1' : '8';
+        if (j === this.track[0] + 10) {
+          this.last[i][j] = '|';
+        }
       }
     }
   }

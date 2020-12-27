@@ -1,12 +1,18 @@
 span {
-  color: grey;
+  color: #000000;
+  background-color: #000000;
 
   &.green {
+    background-color: saddlebrown;
     color: green;
 
     &.racer {
       color: red;
     }
+  }
+
+  &.middle {
+    color: #FFFFFF;
   }
 }
 
