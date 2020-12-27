@@ -14,6 +14,7 @@
     "build:nonogramm": "ng build nonogramm --prod",
     "lint:nonogramm": "ng lint nonogramm",
     "test:nonogramm": "ng test nonogramm --watch=false --browsers=ChromeHeadless",
+    "deploy:ascii-racer": "ng build ascii-racer --prod && firebase deploy --only hosting:ascii-racer",
     "deploy:nonogramm": "ng build nonogramm --prod && firebase deploy --only hosting:nonogramm",
     "deploy:startup": "ng build startup --prod && firebase deploy --only hosting:thestartup",
     "deploy:snake": "ng build snake --prod && firebase deploy --only hosting:rattlesnake",

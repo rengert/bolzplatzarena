@@ -74,6 +74,21 @@
           "destination": "/index.html"
         }
       ]
+    },
+    {
+      "target": "ascii-racer",
+      "public": "dist/ascii-racer",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
     }
   ]
 }
