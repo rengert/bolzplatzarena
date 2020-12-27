@@ -1,4 +1,4 @@
-<div *ngFor="let row of data | async; trackBy: trackByFn; let line = index;">
+<div *ngFor="let row of data$ | async; trackBy: trackByFn; let line = index;">
   <span *ngFor="let cell of row; trackBy: trackByFn; let column = index"
         [class.green]="cell === '1'"
         [class.racer]="column === racerPosition && line === racerPositionY">{{ column === racerPosition && line === racerPositionY ? 'H' : cell }}</span>

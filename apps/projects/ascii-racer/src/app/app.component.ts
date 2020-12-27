@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
+import { last } from 'lodash';
 import { Observable, timer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 // eslint-disable-next-line no-shadow
 enum Direction {
@@ -18,7 +19,7 @@ enum Direction {
 export class AppComponent {
   title = 'ascii-racer';
   racerPosition = 20;
-  readonly data: Observable<string[][]>;
+  readonly data$: Observable<string[][]>;
   readonly speed = 50;
   readonly trackWitdth = 100;
   readonly trackLength = 50;
@@ -28,8 +29,9 @@ export class AppComponent {
   private readonly track = [25, 35];
 
   constructor() {
-    this.data = timer(0, this.speed).pipe(
+    this.data$ = timer(0, this.speed).pipe(
       map(() => this.updateTrack()),
+      tap(data => this.check(data)),
     );
   }
 
@@ -83,6 +85,13 @@ export class AppComponent {
       for (let j = 0; j < this.trackWitdth; j++) {
         this.last[i][j] = j < this.track[0] || j > this.track[1] ? '1' : '8';
       }
+    }
+  }
+
+  private check(data: string[][]) {
+    const lastLine = last(data);
+    if (lastLine && lastLine[this.racerPosition] === '1') {
+      console.log('Das war ein Unfall');
     }
   }
 }
