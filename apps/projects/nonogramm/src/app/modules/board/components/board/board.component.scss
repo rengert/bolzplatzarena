@@ -1,17 +1,16 @@
 :host {
-  display: block;
   text-align: center;
 
   .columns {
     display: flex;
     width: 303px;
-    margin: 0 0 5px 54px;
+    margin: 0 0 5px 62px;
   }
 
   .rows {
     display: flex;
     height: 301px;
-    width: 50px;
+    width: 58px;
     padding: 2px 2px 0 0;
     clear: both;
     float: left;
