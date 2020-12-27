@@ -21,7 +21,8 @@
     "nonogramm": "ng serve nonogramm",
     "startup": "ng serve startup",
     "sync snake ios": "cd projects/snake/apps && npx cap sync ios",
-    "sync snake3d ios": "cd projects/snake3d/apps && npx cap sync ios"
+    "sync snake3d ios": "cd projects/snake3d/apps && npx cap sync ios",
+    "sync nonogramm ios": "cd projects/nonogramm/apps && npx cap sync ios"
   },
   "private": true,
   "dependencies": {

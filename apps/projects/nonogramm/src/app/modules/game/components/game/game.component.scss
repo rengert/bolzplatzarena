@@ -4,19 +4,13 @@
   justify-items: center;
   align-items: center;
 
-  app-board {
-    display: block;
-    max-width: 100%;
-    margin: 0.5rem;
-  }
-
   .buttons {
     max-width: 100%;
     margin: auto;
-    padding: 0 0 0 52px;
     text-align: center;
 
     button {
+      font-size: 1.5rem;
       margin: 1rem;
     }
   }

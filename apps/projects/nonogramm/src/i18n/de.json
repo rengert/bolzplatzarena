@@ -4,6 +4,7 @@
     "APP": {
       "NAME": "NONOGRAMM"
     },
+    "BACK": "Zurück zur Übersicht",
     "ENUM": {
       "LEVEL": {
         "EASY": "Einfach",
@@ -44,7 +45,7 @@
         "LEVEL": "Schwierigkeit",
         "SIZE": "Größe"
       },
-      "SAVE": "Speichern"
+      "SAVE": "Speichern & Zurück zur Übersicht"
     },
     "WIN_SCREEN": {
       "CLOSE": "Spiel abschließen",

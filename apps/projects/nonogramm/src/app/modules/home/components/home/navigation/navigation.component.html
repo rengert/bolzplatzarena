@@ -1,12 +1,16 @@
-<button mat-flat-button color="primary" (click)="newGame()">
-  {{ 'COMPONENTS.NAVIGATION.NEW' | translate }}
-</button>
-<button *ngIf="gameStarted" mat-flat-button color="primary" [routerLink]="['game']">
-  {{ 'COMPONENTS.NAVIGATION.CONTINUE' | translate }}
-</button>
-<button *ngIf="!gameStarted" mat-flat-button disabled color="primary">
-  {{ 'COMPONENTS.NAVIGATION.CONTINUE' | translate }}
-</button>
-<button mat-flat-button color="primary" [routerLink]="['settings']">
-  {{ 'COMPONENTS.NAVIGATION.SETTINGS' | translate }}
-</button>
+<bpa-icon-card header="Nonogramm">
+  <section>
+    <button mat-flat-button color="primary" (click)="newGame()">
+      {{ 'COMPONENTS.NAVIGATION.NEW' | translate }}
+    </button>
+    <button *ngIf="gameStarted" mat-flat-button color="primary" [routerLink]="['game']">
+      {{ 'COMPONENTS.NAVIGATION.CONTINUE' | translate }}
+    </button>
+    <button *ngIf="!gameStarted" mat-flat-button disabled color="primary">
+      {{ 'COMPONENTS.NAVIGATION.CONTINUE' | translate }}
+    </button>
+    <button mat-flat-button color="primary" [routerLink]="['settings']">
+      {{ 'COMPONENTS.NAVIGATION.SETTINGS' | translate }}
+    </button>
+  </section>
+</bpa-icon-card>
