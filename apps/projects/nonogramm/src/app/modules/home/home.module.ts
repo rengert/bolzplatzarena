@@ -9,6 +9,7 @@ import { NavigationComponent } from './components/home/navigation/navigation.com
 import { ImprintComponent } from './components/imprint/imprint.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { VersionComponent } from './components/version/version.component';
+import { CoreModule } from '@bpa/core';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { VersionComponent } from './components/version/version.component';
     PrivacyComponent,
   ],
   imports: [
+    CoreModule,
     CommonModule,
     MatButtonModule,
     RouterModule,
