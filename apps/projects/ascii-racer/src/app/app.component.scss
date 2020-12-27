@@ -1,8 +1,16 @@
-span.green {
-  color: green;
+span {
+  color: grey;
+
+  &.green {
+    color: green;
+
+    &.racer {
+      color: red;
+    }
+  }
 }
 
 .racer {
-  color: red;
+  color: blue;
   font-weight: bold;
 }

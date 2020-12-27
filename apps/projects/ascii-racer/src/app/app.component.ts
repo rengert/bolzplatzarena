@@ -70,7 +70,7 @@ export class AppComponent {
         break;
     }
     for (let j = 0; j < this.trackWitdth; j++) {
-      this.last[this.trackLength - 1][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
+      this.last[this.trackLength - 1][j] = j < this.track[0] || j > this.track[1] ? '1' : '8';
     }
 
     return this.last.reverse();
@@ -81,7 +81,7 @@ export class AppComponent {
     for (let i = 0; i < this.trackLength; i++) {
       this.last[i] = [];
       for (let j = 0; j < this.trackWitdth; j++) {
-        this.last[i][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
+        this.last[i][j] = j < this.track[0] || j > this.track[1] ? '1' : '8';
       }
     }
   }
