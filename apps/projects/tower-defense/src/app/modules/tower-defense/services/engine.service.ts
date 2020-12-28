@@ -12,7 +12,6 @@ import {
   SpotLight,
   Texture,
   Vector3,
-  VirtualJoystick,
 } from '@babylonjs/core';
 import { SkyMaterial } from '@babylonjs/materials';
 import { WindowService } from '@bpa/core';
@@ -26,16 +25,11 @@ export class EngineService {
 
   private canvas: HTMLCanvasElement;
   private engine: Engine;
-  private virtualJoystick: VirtualJoystick;
 
   constructor(
     private readonly ngZone: NgZone,
     private readonly windowRef: WindowService,
   ) {
-  }
-
-  get joystick(): VirtualJoystick {
-    return this.virtualJoystick;
   }
 
   createScene(canvas: HTMLCanvasElement, size: { width: number; height: number; }): Scene {
@@ -85,9 +79,6 @@ export class EngineService {
     var skybox = Mesh.CreateBox('skyBox', 50.0, this.scene);
     skybox.material = skyboxMaterial;
 
-    this.virtualJoystick = new VirtualJoystick(false);
-    this.virtualJoystick.alwaysVisible = true;
-
     return this.scene;
   }
 
@@ -97,7 +88,6 @@ export class EngineService {
     this.camera?.dispose();
     this.spotLight?.dispose();
     this.shadowGenerator?.dispose();
-    this.virtualJoystick.releaseCanvas();
   }
 
   animate(): void {

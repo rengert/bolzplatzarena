@@ -16,7 +16,7 @@ import { HighScoreTableComponent } from './components/highscore/high-score-table
 import { HighscoreComponent } from './components/highscore/highscore.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SettingsComponent } from './components/settings/settings.component';
-import { WindowService } from './services/window.service';
+import { WindowService } from '../../../core/src/lib/services/window.service';
 
 @NgModule({
   declarations: [
