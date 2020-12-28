@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
+import { last, round } from 'lodash';
 import { Observable, timer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 // eslint-disable-next-line no-shadow
 enum Direction {
@@ -16,20 +17,26 @@ enum Direction {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'ascii-racer';
-  racerPosition = 20;
-  readonly data: Observable<string[][]>;
+  readonly data$: Observable<string[][]>;
   readonly speed = 50;
   readonly trackWitdth = 100;
   readonly trackLength = 50;
+
+  title = 'ascii-racer';
+  racerPosition = 20;
   racerPositionY = 49;
 
+  crashs = 0;
+  way = 0;
+
   private last: string[][];
-  private readonly track = [25, 35];
+  private readonly track = [15, 35];
 
   constructor() {
-    this.data = timer(0, this.speed).pipe(
+    this.data$ = timer(0, this.speed).pipe(
       map(() => this.updateTrack()),
+      tap(() => this.way = round(this.way + 0.001, 3)),
+      tap(data => this.check(data)),
     );
   }
 
@@ -70,7 +77,10 @@ export class AppComponent {
         break;
     }
     for (let j = 0; j < this.trackWitdth; j++) {
-      this.last[this.trackLength - 1][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
+      this.last[this.trackLength - 1][j] = j < this.track[0] || j > this.track[1] ? '1' : '8';
+      if (j === this.track[0] + 10) {
+        this.last[this.trackLength - 1][j] = '|';
+      }
     }
 
     return this.last.reverse();
@@ -81,8 +91,19 @@ export class AppComponent {
     for (let i = 0; i < this.trackLength; i++) {
       this.last[i] = [];
       for (let j = 0; j < this.trackWitdth; j++) {
-        this.last[i][j] = j < this.track[0] || j > this.track[1] ? '1' : '0';
+        this.last[i][j] = j < this.track[0] || j > this.track[1] ? '1' : '8';
+        if (j === this.track[0] + 10) {
+          this.last[i][j] = '|';
+        }
       }
+    }
+  }
+
+  private check(data: string[][]) {
+    const lastLine = last(data);
+    if (lastLine && lastLine[this.racerPosition] === '1') {
+      this.crashs++;
+      console.log('Das war ein Unfall');
     }
   }
 }

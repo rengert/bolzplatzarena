@@ -1,8 +1,22 @@
-span.green {
-  color: green;
+span {
+  color: #000000;
+  background-color: #000000;
+
+  &.green {
+    background-color: saddlebrown;
+    color: green;
+
+    &.racer {
+      color: red;
+    }
+  }
+
+  &.middle {
+    color: #FFFFFF;
+  }
 }
 
 .racer {
-  color: red;
+  color: blue;
   font-weight: bold;
 }
