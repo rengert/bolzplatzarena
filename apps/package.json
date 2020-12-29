@@ -51,6 +51,7 @@
     "ag-grid-community": "^24.1.0",
     "angular-web-worker": "^1.0.6",
     "angulartics2": "^10.0.0",
+    "astar-typescript": "^1.2.5",
     "dexie": "^3.0.3",
     "firebase": "^8.2.1",
     "lodash": "^4.17.20",
