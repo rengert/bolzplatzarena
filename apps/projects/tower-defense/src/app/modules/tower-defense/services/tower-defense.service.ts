@@ -3,23 +3,9 @@ import { EngineService } from './engine.service';
 import { ActionManager, Color3, ExecuteCodeAction, Mesh, MeshBuilder, Scene, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 import { AStarFinder } from 'astar-typescript';
-
-interface Coordinate {
-  x: number;
-  y: number;
-}
-
-interface Field {
-  free: boolean;
-  mesh: Mesh;
-}
-
-interface Enemy {
-  energy: number;
-  mesh: Mesh;
-  target?: Coordinate;
-  source: Coordinate;
-}
+import { Field } from '../models/field.model';
+import { Coordinate } from '../models/coordinate.model';
+import { Enemy } from '../models/enemy.model';
 
 @Injectable({ providedIn: 'root' })
 export class TowerDefenseService {
@@ -158,6 +144,8 @@ export class TowerDefenseService {
       }
     }
   }
+
+  /** rendering stuff **/
 
   private beforeRender(): void {
     const path = this.pathFinding();
