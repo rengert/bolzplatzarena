@@ -105,14 +105,14 @@ export class TowerDefenseService {
     ));
   }
 
-  private pathFinding(): number[][] {
+  private pathFinding(start = this.start): number[][] {
     const finder = new AStarFinder({
       diagonalAllowed: false,
       grid: {
         matrix: this.fields.map(arr => arr.map(item => item.free ? 0 : 1)),
       },
     });
-    return finder.findPath(this.start, this.end);
+    return finder.findPath(start, this.end);
   }
 
   private highlightPath(path: number[][]): void {
@@ -131,15 +131,12 @@ export class TowerDefenseService {
 
   private updateEnemies(path: number[][]): void {
     for (const enemy of this.enemies) {
-      if (!enemy.target) {
-        const [y, x] = path[path.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y) + 1] !;
-        enemy.target = { x, y };
-      }
+      const [y, x] = path[path.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y) + 1] !;
+      enemy.target = { x, y };
       const target = this.fields[enemy.target.x][enemy.target.y];
-      let deltaTargetSource = target.mesh.position.subtract(this.fields[enemy.source.x][enemy.source.y].mesh.position);
-      enemy.mesh.position.x += deltaTargetSource.x * 0.02;
-      enemy.mesh.position.z += deltaTargetSource.z * 0.02;
-      enemy.mesh.position.y += deltaTargetSource.y * 0.02;
+      let deltaTargetSource = target.mesh.position.subtract(enemy.mesh.position);
+      enemy.mesh.position.x += deltaTargetSource.x * 0.05;
+      enemy.mesh.position.z += deltaTargetSource.z * 0.05;
 
       const enemyDelta = target.mesh.position.subtract(enemy.mesh.position);
       enemyDelta.y = 0;
@@ -154,7 +151,7 @@ export class TowerDefenseService {
     const path = this.pathFinding();
     this.highlightPath(path);
 
-    if (this.enemies.length < 2000) {
+    if (this.enemies.length < 200) {
       const mesh = Mesh.CreateSphere(`enemy-${createUuid()}`, 32, 0.125, this.engine.scene);
       mesh.material = this.enemyMaterial;
       mesh.position.x = -this.size.width / 2 + 0.5;
