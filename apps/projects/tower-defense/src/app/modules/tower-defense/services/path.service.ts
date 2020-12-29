@@ -7,9 +7,6 @@ import { Field } from '../models/field.model';
 export class PathService {
   private fields: Field[][];
 
-  constructor() {
-  }
-
   init(fields: Field[][]): void {
     this.fields = fields;
   }

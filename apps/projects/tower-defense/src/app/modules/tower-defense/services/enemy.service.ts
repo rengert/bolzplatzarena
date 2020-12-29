@@ -7,9 +7,7 @@ import { Field } from '../models/field.model';
 import { Coordinate } from '../models/coordinate.model';
 import { PathService } from './path.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class EnemyService {
   #items: Enemy[] = [];
 
