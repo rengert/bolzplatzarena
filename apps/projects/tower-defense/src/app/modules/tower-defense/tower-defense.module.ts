@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TowerDefenseComponent } from './components/tower-defense/tower-defense.component';
 
-
-
 @NgModule({
   declarations: [TowerDefenseComponent],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+  ],
+  exports: [TowerDefenseComponent],
 })
-export class TowerDefenseModule { }
+export class TowerDefenseModule {
+}
