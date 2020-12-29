@@ -1,11 +1,11 @@
 import { Injectable, NgZone } from '@angular/core';
 import {
+  ArcRotateCamera,
   BackgroundMaterial,
   Color3,
   Color4,
   DirectionalLight,
   Engine,
-  FollowCamera,
   Mesh,
   Scene,
   ShadowGenerator,
@@ -19,7 +19,6 @@ import { WindowService } from '@bpa/core';
 @Injectable({ providedIn: 'root' })
 export class EngineService {
   scene: Scene;
-  camera: FollowCamera;
   shadowGenerator: ShadowGenerator;
   spotLight: SpotLight;
 
@@ -41,17 +40,17 @@ export class EngineService {
     this.scene.clearColor = new Color4(0.5, 0.8, 0.5, 1);
     this.scene.ambientColor = new Color3(0.3, 0.3, 0.3);
 
-    const camera = new FollowCamera('camera1', new Vector3(5, 4, -47), this.scene);
+    const camera = new ArcRotateCamera('camera1', 0, 0, 20, new Vector3(0, 0, 0), this.scene);
     camera.setTarget(Vector3.Zero());
-    camera.heightOffset = 12;
+    //camera.heightOffset = 12;
 
-    this.camera = camera;
     const light = new DirectionalLight('hemi', new Vector3(-1, -3, 1), this.scene);
     light.position = new Vector3(3, 9, 3);
     light.diffuse = new Color3(1, 1, 1);
     light.specular = new Color3(1, 1, 1);
 
     const materialGround = new BackgroundMaterial('StandardMaterial', this.scene);
+    // todo: find textture
     const texture = new Texture('assets/textures/grass.jpg', this.scene);
     texture.uScale = 12;
     texture.vScale = 12;
@@ -85,7 +84,7 @@ export class EngineService {
   clean(): void {
     this.scene?.dispose();
     this.engine?.dispose();
-    this.camera?.dispose();
+    // this.camera?.dispose();
     this.spotLight?.dispose();
     this.shadowGenerator?.dispose();
   }
