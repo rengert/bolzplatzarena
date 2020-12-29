@@ -1030,24 +1030,11 @@
           "options": {
             "tsConfig": [
               "projects/tower-defense/tsconfig.app.json",
-              "projects/tower-defense/tsconfig.spec.json",
-              "projects/tower-defense/e2e/tsconfig.json"
+              "projects/tower-defense/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/tower-defense/e2e/protractor.conf.js",
-            "devServerTarget": "tower-defense:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "tower-defense:serve:production"
-            }
           }
         }
       }

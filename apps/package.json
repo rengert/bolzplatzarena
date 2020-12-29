@@ -19,6 +19,7 @@
     "deploy:startup": "ng build startup --prod && firebase deploy --only hosting:thestartup",
     "deploy:snake": "ng build snake --prod && firebase deploy --only hosting:rattlesnake",
     "deploy:snake3d": "ng build snake3d --prod && firebase deploy --only hosting:rattlesnake3d",
+    "deploy:tower-defense": "ng build tower-defense --prod && firebase deploy --only hosting:the-tower-defense",
     "nonogramm": "ng serve nonogramm",
     "startup": "ng serve startup",
     "sync snake ios": "cd projects/snake/apps && npx cap sync ios",

@@ -89,6 +89,21 @@
           "destination": "/index.html"
         }
       ]
+    },
+    {
+      "target": "the-tower-defense",
+      "public": "dist/tower-defense",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
     }
   ]
 }
