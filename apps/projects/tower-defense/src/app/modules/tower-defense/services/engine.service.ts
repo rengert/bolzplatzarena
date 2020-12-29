@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import {
+  ActionManager,
   ArcRotateCamera,
   BackgroundMaterial,
   Color3,
@@ -77,6 +78,8 @@ export class EngineService {
     // Sky mesh (box)
     var skybox = Mesh.CreateBox('skyBox', 50.0, this.scene);
     skybox.material = skyboxMaterial;
+
+    this.scene.actionManager = new ActionManager(this.scene);
 
     return this.scene;
   }

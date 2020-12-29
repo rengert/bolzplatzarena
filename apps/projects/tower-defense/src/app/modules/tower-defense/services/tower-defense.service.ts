@@ -1,13 +1,16 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { EngineService } from './engine.service';
-import { Color3, InstancedMesh, Mesh, Scene, StandardMaterial } from '@babylonjs/core';
+import { ActionManager, Color3, ExecuteCodeAction, Mesh, Scene, StandardMaterial } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TowerDefenseService {
-  meshes: InstancedMesh[][];
+  meshes: Mesh[][];
+
+  material: StandardMaterial;
+  hoverMaterial: StandardMaterial;
 
   constructor(private readonly engine: EngineService) {
   }
@@ -34,23 +37,38 @@ export class TowerDefenseService {
   }
 
   private initPlayground(scene: Scene, size: { width: number, height: number }): void {
-    const material = new StandardMaterial('StandardMaterial', this.engine.scene);
-    material.alpha = 1;
-    material.diffuseColor = new Color3(102, 113, 214);
+    this.material = new StandardMaterial('StandardMaterial', this.engine.scene);
+    this.material.alpha = 1;
+    this.material.diffuseColor = new Color3(0.123, 0.456, 0.789);
 
-    const template = Mesh.CreateSphere('template', 16, 1, this.engine.scene);
-    template.material = material;
-    template.setEnabled(false);
+    this.hoverMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
+    this.hoverMaterial.alpha = 1;
+    this.hoverMaterial.diffuseColor = new Color3(0.123, 1, 0.789);
+
     this.meshes = [];
     for (let i = 0; i < size.width; i++) {
       this.meshes[i] = [];
       for (let j = 0; j < size.height; j++) {
-        const mesh = template.createInstance(`field-${createUuid()}`);
+        const mesh = Mesh.CreateSphere(`field-${createUuid()}`, 16, 1, this.engine.scene);
+        mesh.material = this.material;
         mesh.position.x = i - size.width / 2 + 0.5;
         mesh.position.z = j - size.height / 2 + 0.5;
+        this.defineAction(mesh, scene, j, i);
         this.meshes[i][j] = mesh;
       }
     }
+  }
+
+  private defineAction(instance: Mesh, scene: Scene, j: number, i: number): void {
+    instance.actionManager = new ActionManager(scene);
+    instance.actionManager.registerAction(new ExecuteCodeAction(
+      ActionManager.OnPickTrigger,
+      () => {
+        instance.material = instance.material === this.material
+          ? this.hoverMaterial
+          : this.material;
+      },
+    ));
   }
 
   private beforeRender(): void {
