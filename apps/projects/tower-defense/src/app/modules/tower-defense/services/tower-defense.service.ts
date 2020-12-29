@@ -1,17 +1,16 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { EngineService } from './engine.service';
-import { ActionManager, Color3, ExecuteCodeAction, Mesh, MeshBuilder, Scene, StandardMaterial, Vector3 } from '@babylonjs/core';
+import { ActionManager, Color3, ExecuteCodeAction, MeshBuilder, Scene, StandardMaterial } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
-import { AStarFinder } from 'astar-typescript';
 import { Field } from '../models/field.model';
 import { Coordinate } from '../models/coordinate.model';
-import { Enemy } from '../models/enemy.model';
+import { EnemyService } from './enemy.service';
+import { PathService } from './path.service';
 
 @Injectable({ providedIn: 'root' })
 export class TowerDefenseService {
   private fields: Field[][];
 
-  private enemyMaterial: StandardMaterial;
   private material: StandardMaterial;
   private blockedMaterial: StandardMaterial;
   private hoverMaterial: StandardMaterial;
@@ -20,19 +19,27 @@ export class TowerDefenseService {
   private readonly end: Coordinate = { x: 19, y: 9 };
   private readonly size = { width: 10, height: 20 };
 
-  private path: Coordinate[];
-
-  private enemies: Enemy[] = [];
-
-  constructor(private readonly engine: EngineService) {
+  constructor(
+    private readonly engine: EngineService,
+    private readonly enemy: EnemyService,
+    private readonly path: PathService,
+  ) {
   }
 
   init(canvas: ElementRef<HTMLCanvasElement>): void {
+    // scene
     const scene = this.initScene(canvas, this.size);
+
+    // playground
     this.initPlayground(scene, this.size);
-    const path = this.pathFinding();
+
+    // path finding
+    this.path.init(this.fields);
+    const path = this.path.find(this.start, this.end);
     this.highlightPath(path);
-    console.log(path);
+
+    // enemies
+    this.enemy.init(this.fields);
   }
 
   private initScene(canvas: ElementRef<HTMLCanvasElement>, size: { width: number, height: number }): Scene {
@@ -49,10 +56,6 @@ export class TowerDefenseService {
     this.blockedMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.blockedMaterial.alpha = 1;
     this.blockedMaterial.diffuseColor = new Color3(0.823, 0.1, 0.789);
-
-    this.enemyMaterial = new StandardMaterial('Enemy', this.engine.scene);
-    this.enemyMaterial.alpha = 1;
-    this.enemyMaterial.diffuseColor = new Color3(0.99, 0, 0);
 
     scene.registerBeforeRender(() => {
       this.beforeRender();
@@ -92,16 +95,6 @@ export class TowerDefenseService {
     ));
   }
 
-  private pathFinding(start = this.start): number[][] {
-    const finder = new AStarFinder({
-      diagonalAllowed: false,
-      grid: {
-        matrix: this.fields.map(arr => arr.map(item => item.free ? 0 : 1)),
-      },
-    });
-    return finder.findPath(start, this.end);
-  }
-
   private highlightPath(path: number[][]): void {
     // reset
     for (let i = 0; i < this.fields.length; i++) {
@@ -116,51 +109,17 @@ export class TowerDefenseService {
     }
   }
 
-  private updateEnemies(path: number[][]): void {
-    for (const enemy of this.enemies) {
-      let enemyPath = path;
-      let indexSource = enemyPath.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y);
-      if (indexSource === -1) {
-        enemyPath = this.pathFinding({ x: enemy.source.y, y: enemy.source.x });
-        indexSource = enemyPath.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y);
-      }
-      if (indexSource === enemyPath.length - 1) {
-        continue;
-      }
-      const [y, x] = enemyPath[indexSource + 1] !;
-      enemy.target = { x, y };
-      const target = this.fields[enemy.target.x][enemy.target.y];
-      let deltaTargetSource = target.mesh.position.subtract(enemy.mesh.position);
-      enemy.mesh.position.x += deltaTargetSource.x * 0.05;
-      enemy.mesh.position.z += deltaTargetSource.z * 0.05;
-
-      const enemyDelta = target.mesh.position.subtract(enemy.mesh.position);
-      enemyDelta.y = 0;
-      if (enemyDelta.equalsWithEpsilon(Vector3.Zero())) {
-        enemy.source = enemy.target;
-        enemy.target = undefined;
-        enemy.mesh.position.x += Math.random() * 0.1;
-        enemy.mesh.position.z += Math.random() * 0.1;
-      }
-    }
-  }
-
   /** rendering stuff **/
 
   private beforeRender(): void {
-    const path = this.pathFinding();
+    const path = this.path.find(this.start, this.end);
     this.highlightPath(path);
 
-    if (this.enemies.length < 20 && Math.random() * 10 > 9.9) {
-      const mesh = Mesh.CreateSphere(`enemy-${createUuid()}`, 32, 0.125, this.engine.scene);
-      mesh.material = this.enemyMaterial;
-      mesh.position.x = -this.size.width / 2 + 0.5;
-      mesh.position.z = -this.size.height / 2 + 0.5;
-      mesh.position.y = 1;
-      this.enemies.push({ mesh, energy: 1, source: this.start });
+    if (this.enemy.items.length < 20 && Math.random() * 10 > 9.9) {
+      this.enemy.appear(this.start, this.end);
     }
 
-    this.updateEnemies(path);
+    this.enemy.update(path);
   }
 
   private afterRender(): void {
