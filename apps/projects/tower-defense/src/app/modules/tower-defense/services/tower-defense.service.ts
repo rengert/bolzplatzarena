@@ -46,6 +46,7 @@ export class TowerDefenseService {
     this.initPlayground(scene, this.size);
     const path = this.pathFinding();
     this.highlightPath(path);
+    console.log(path);
   }
 
   private initScene(canvas: ElementRef<HTMLCanvasElement>, size: { width: number, height: number }): Scene {
@@ -131,7 +132,16 @@ export class TowerDefenseService {
 
   private updateEnemies(path: number[][]): void {
     for (const enemy of this.enemies) {
-      const [y, x] = path[path.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y) + 1] !;
+      let enemyPath = path;
+      let indexSource = enemyPath.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y);
+      if (indexSource === -1) {
+        enemyPath = this.pathFinding({ x: enemy.source.y, y: enemy.source.x });
+        indexSource = enemyPath.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y);
+      }
+      if (indexSource === enemyPath.length - 1) {
+        continue;
+      }
+      const [y, x] = enemyPath[indexSource + 1] !;
       enemy.target = { x, y };
       const target = this.fields[enemy.target.x][enemy.target.y];
       let deltaTargetSource = target.mesh.position.subtract(enemy.mesh.position);
@@ -143,6 +153,8 @@ export class TowerDefenseService {
       if (enemyDelta.equalsWithEpsilon(Vector3.Zero())) {
         enemy.source = enemy.target;
         enemy.target = undefined;
+        enemy.mesh.position.x += Math.random() * 0.1;
+        enemy.mesh.position.z += Math.random() * 0.1;
       }
     }
   }
@@ -151,7 +163,7 @@ export class TowerDefenseService {
     const path = this.pathFinding();
     this.highlightPath(path);
 
-    if (this.enemies.length < 200) {
+    if (this.enemies.length < 20 && Math.random() * 10 > 9.9) {
       const mesh = Mesh.CreateSphere(`enemy-${createUuid()}`, 32, 0.125, this.engine.scene);
       mesh.material = this.enemyMaterial;
       mesh.position.x = -this.size.width / 2 + 0.5;
