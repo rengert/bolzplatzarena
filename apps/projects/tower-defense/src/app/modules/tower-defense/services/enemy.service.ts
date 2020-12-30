@@ -69,15 +69,15 @@ export class EnemyService {
       const targetCoordinates = { x, y };
       const target = this.fields[targetCoordinates.x][targetCoordinates.y];
       let deltaTargetSource = target.mesh.position.subtract(enemy.mesh.position);
-      enemy.mesh.position.x += deltaTargetSource.x * 0.05;
-      enemy.mesh.position.z += deltaTargetSource.z * 0.05;
+      enemy.mesh.position.x += Math.min(deltaTargetSource.x, 0.0125);
+      enemy.mesh.position.z += Math.min(deltaTargetSource.z, 0.0125);
 
       const enemyDelta = target.mesh.position.subtract(enemy.mesh.position);
       enemyDelta.y = 0;
       if (enemyDelta.equalsWithEpsilon(Vector3.Zero())) {
         enemy.source = targetCoordinates;
-        enemy.mesh.position.x += Math.random() * 0.1;
-        enemy.mesh.position.z += Math.random() * 0.1;
+        enemy.mesh.position.x += Math.random() * 0.0125;
+        enemy.mesh.position.z += Math.random() * 0.0125;
       }
     }
   }

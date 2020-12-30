@@ -128,7 +128,7 @@ export class TowerDefenseService {
     this.highlightPath(path);
 
     if ((this.enemy.items.length < VALUES.config.enemies.count)
-      && (Math.random() * 10 > VALUES.config.enemies.probability)) {
+      && (Math.random() > VALUES.config.enemies.probability)) {
       this.enemy.appear(this.start, this.end);
     }
 

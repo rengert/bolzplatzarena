@@ -19,14 +19,14 @@ export const VALUES = {
     enemies: {
       // todo: move later to a better level system
       count: 40,
-      probability: 0.9,
+      probability: 0.99,
       energy: 1,
       size: 0.125,
     },
     tower: {
       size: 0.125,
       power: 0.125,
-      range: 1.125,
+      range: 1.25,
     },
   },
 };
