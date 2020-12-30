@@ -65,7 +65,7 @@ export class EnemyService {
       if (indexSource === enemyPath.length - 1) {
         continue;
       }
-      const [y, x] = enemyPath[indexSource + 1] !;
+      const [y, x] = enemyPath[indexSource + 1];
       const targetCoordinates = { x, y };
       const target = this.fields[targetCoordinates.x][targetCoordinates.y];
       let deltaTargetSource = target.mesh.position.subtract(enemy.mesh.position);
