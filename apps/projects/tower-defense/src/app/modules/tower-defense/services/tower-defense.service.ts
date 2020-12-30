@@ -1,12 +1,14 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { EngineService } from './engine.service';
-import { ActionManager, Color3, ExecuteCodeAction, MeshBuilder, Scene, StandardMaterial } from '@babylonjs/core';
+import { ActionManager, ExecuteCodeAction, MeshBuilder, Scene, StandardMaterial } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 import { Field } from '../models/field.model';
 import { Coordinate } from '../models/coordinate.model';
 import { EnemyService } from './enemy.service';
 import { PathService } from './path.service';
 import { TowerService } from './tower.service';
+import { colorFrom } from '../utils/common.utils';
+import { VALUES } from '../constants';
 
 @Injectable({ providedIn: 'root' })
 export class TowerDefenseService {
@@ -50,15 +52,15 @@ export class TowerDefenseService {
 
     this.material = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.material.alpha = 1;
-    this.material.diffuseColor = new Color3(0.123, 0.456, 0.789);
+    this.material.diffuseColor = colorFrom(VALUES.colors.fields.standard);
 
     this.hoverMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.hoverMaterial.alpha = 1;
-    this.hoverMaterial.diffuseColor = new Color3(0.123, 1, 0.789);
+    this.hoverMaterial.diffuseColor = colorFrom(VALUES.colors.fields.hover);
 
     this.blockedMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.blockedMaterial.alpha = 1;
-    this.blockedMaterial.diffuseColor = new Color3(0.823, 0.1, 0.789);
+    this.blockedMaterial.diffuseColor = colorFrom(VALUES.colors.fields.blocked);
 
     scene.registerBeforeRender(() => {
       this.beforeRender();
@@ -79,8 +81,8 @@ export class TowerDefenseService {
       for (let j = 0; j < size.height; j++) {
         const mesh = MeshBuilder.CreateBox(`field-${createUuid()}`, { size: 1 }, this.engine.scene);
         mesh.material = this.material;
-        mesh.position.x = i - size.width / 2 + 0.5;
-        mesh.position.z = j - size.height / 2 + 0.5;
+        mesh.position.x = i - size.width / 2 + VALUES.config.fields.size / 2;
+        mesh.position.z = j - size.height / 2 + VALUES.config.fields.size / 2;
         const field = { free: true, mesh };
         this.defineAction(field, scene);
         this.fields[i][j] = field;
@@ -122,7 +124,8 @@ export class TowerDefenseService {
     const path = this.path.find(this.start, this.end);
     this.highlightPath(path);
 
-    if (this.enemy.items.length < 20 && Math.random() * 10 > 9.9) {
+    if ((this.enemy.items.length < VALUES.config.enemies.count)
+      && (Math.random() * 10 > VALUES.config.enemies.probability)) {
       this.enemy.appear(this.start, this.end);
     }
 

@@ -41,15 +41,22 @@ export class EngineService {
     this.scene.clearColor = new Color4(0.5, 0.8, 0.5, 1);
     this.scene.ambientColor = new Color3(0.3, 0.3, 0.3);
 
+    this.initLight();
+    this.initGround(size);
+    this.initSky();
+    this.initCamera();
+
+    this.scene.actionManager = new ActionManager(this.scene);
+
+    return this.scene;
+  }
+
+  private initCamera(): void {
     const camera = new ArcRotateCamera('camera1', 0, 0, 20, new Vector3(0, 0, 0), this.scene);
     camera.setTarget(Vector3.Zero());
-    //camera.heightOffset = 12;
+  }
 
-    const light = new DirectionalLight('hemi', new Vector3(-1, -3, 1), this.scene);
-    light.position = new Vector3(3, 9, 3);
-    light.diffuse = new Color3(1, 1, 1);
-    light.specular = new Color3(1, 1, 1);
-
+  private initGround({ width, height }: { width: number; height: number; }): void {
     const materialGround = new BackgroundMaterial('StandardMaterial', this.scene);
     // todo: find textture
     const texture = new Texture('assets/textures/grass.jpg', this.scene);
@@ -59,14 +66,23 @@ export class EngineService {
     materialGround.diffuseTexture = texture;
     materialGround.shadowLevel = 0.125;
 
-    const ground = Mesh.CreateGround('ground1', size.width, size.height, 2, this.scene);
+    const ground = Mesh.CreateGround('ground1', width, height, 2, this.scene);
     ground.material = materialGround;
     ground.receiveShadows = true;
     ground.position.y - 2.05;
+  }
+
+  private initLight(): void {
+    const light = new DirectionalLight('hemi', new Vector3(-1, -3, 1), this.scene);
+    light.position = new Vector3(3, 9, 3);
+    light.diffuse = new Color3(1, 1, 1);
+    light.specular = new Color3(1, 1, 1);
 
     this.shadowGenerator = new ShadowGenerator(1024, light);
     this.shadowGenerator.useExponentialShadowMap = true;
+  }
 
+  private initSky(): void {
     // Sky material
     const skyboxMaterial = new SkyMaterial('skyMaterial', this.scene);
     skyboxMaterial.backFaceCulling = false;
@@ -78,13 +94,9 @@ export class EngineService {
     // Sky mesh (box)
     var skybox = Mesh.CreateBox('skyBox', 50.0, this.scene);
     skybox.material = skyboxMaterial;
-
-    this.scene.actionManager = new ActionManager(this.scene);
-
-    return this.scene;
   }
 
-  clean(): void {
+  private clean(): void {
     this.scene?.dispose();
     this.engine?.dispose();
     // this.camera?.dispose();

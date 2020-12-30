@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Field } from '../models/field.model';
-import { Color3, Mesh, StandardMaterial } from '@babylonjs/core';
+import { Mesh, StandardMaterial } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 import { EngineService } from './engine.service';
 import { Tower } from '../models/tower.model';
 import { EnemyService } from './enemy.service';
 import { first, orderBy } from 'lodash';
-import { distanceTo } from '../utils/common.utils';
+import { colorFrom, distanceTo } from '../utils/common.utils';
+import { VALUES } from '../constants';
+
+const SEGMENTS = 32;
 
 @Injectable({ providedIn: 'root' })
 export class TowerService {
@@ -22,18 +25,18 @@ export class TowerService {
   init(): void {
     this.material = new StandardMaterial('Tower', this.engine.scene);
     this.material.alpha = 1;
-    this.material.diffuseColor = new Color3(0, 0.99, 0);
+    this.material.diffuseColor = colorFrom(VALUES.colors.towers.standard);
 
     this.towers = [];
   }
 
   build(field: Field): Tower {
-    const mesh = Mesh.CreateSphere(`tower-${createUuid()}`, 32, 0.125, this.engine.scene);
+    const mesh = Mesh.CreateSphere(`tower-${createUuid()}`, SEGMENTS, VALUES.config.tower.size, this.engine.scene);
     mesh.material = this.material;
     mesh.position.x = field.mesh.position.x;
     mesh.position.z = field.mesh.position.z;
     mesh.position.y = 1;
-    const tower = { power: 1, mesh };
+    const tower = { power: VALUES.config.tower.power, mesh };
     this.towers.push(tower);
 
     return tower;

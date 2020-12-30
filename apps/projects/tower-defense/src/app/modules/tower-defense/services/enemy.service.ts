@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Enemy } from '../models/enemy.model';
-import { Color3, Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
+import { Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 import { EngineService } from './engine.service';
 import { Field } from '../models/field.model';
 import { Coordinate } from '../models/coordinate.model';
 import { PathService } from './path.service';
+import { VALUES } from '../constants';
+import { colorFrom } from '../utils/common.utils';
+
+const SEGMENTS = 32;
 
 @Injectable({ providedIn: 'root' })
 export class EnemyService {
@@ -27,7 +31,7 @@ export class EnemyService {
   init(fields: Field[][]): void {
     this.material = new StandardMaterial('Enemy', this.engine.scene);
     this.material.alpha = 1;
-    this.material.diffuseColor = new Color3(0.99, 0, 0);
+    this.material.diffuseColor = colorFrom(VALUES.colors.enemies.standard);
 
     this.fields = fields;
 
@@ -35,7 +39,7 @@ export class EnemyService {
   }
 
   appear(source: Coordinate, target: Coordinate): void {
-    const mesh = Mesh.CreateSphere(`enemy-${createUuid()}`, 32, 0.125, this.engine.scene);
+    const mesh = Mesh.CreateSphere(`enemy-${createUuid()}`, SEGMENTS, VALUES.config.enemies.size, this.engine.scene);
     mesh.material = this.material;
     mesh.position.x = this.fields[source.x][source.y].mesh.position.x;
     mesh.position.z = this.fields[source.x][source.y].mesh.position.z;
