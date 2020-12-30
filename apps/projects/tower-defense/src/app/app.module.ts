@@ -1,18 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TowerDefenseModule } from './modules/tower-defense/tower-defense.module';
+import { RouterModule, Routes } from '@angular/router';
+import { TowerDefenseComponent } from './modules/tower-defense/components/tower-defense/tower-defense.component';
+import { PrivacyNoticeComponent } from './components/privacy-notice/privacy-notice.component';
+import { WindowService } from '@bpa/core';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: TowerDefenseComponent,
+  },
+  {
+    path: 'privacy',
+    component: PrivacyNoticeComponent,
+  },
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PrivacyNoticeComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    RouterModule.forRoot(routes),
+    TowerDefenseModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    WindowService,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

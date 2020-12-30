@@ -830,7 +830,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush"
         }
       },
       "root": "projects/ascii-racer",
@@ -934,7 +935,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush"
         }
       },
       "root": "projects/tower-defense",
@@ -1024,28 +1026,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/tower-defense/tsconfig.app.json",
-              "projects/tower-defense/tsconfig.spec.json",
-              "projects/tower-defense/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/tower-defense/**/*.ts",
+              "projects/tower-defense/**/*.html"
             ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/tower-defense/e2e/protractor.conf.js",
-            "devServerTarget": "tower-defense:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "tower-defense:serve:production"
-            }
           }
         }
       }
