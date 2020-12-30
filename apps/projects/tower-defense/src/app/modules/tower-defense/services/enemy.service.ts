@@ -40,7 +40,14 @@ export class EnemyService {
     mesh.position.x = this.fields[source.x][source.y].mesh.position.x;
     mesh.position.z = this.fields[source.x][source.y].mesh.position.z;
     mesh.position.y = 1;
-    this.items.push({ mesh, energy: 1, source, target });
+    this.items.push({ mesh, energy: 1, source, target, dying: false });
+  }
+
+  kill(enemy: Enemy): void {
+    enemy.dying = true;
+    this.#items = this.#items.filter(item => item !== enemy);
+
+    enemy.mesh.dispose();
   }
 
   update(path: number[][]): void {

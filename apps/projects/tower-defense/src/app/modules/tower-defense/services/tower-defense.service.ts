@@ -6,6 +6,7 @@ import { Field } from '../models/field.model';
 import { Coordinate } from '../models/coordinate.model';
 import { EnemyService } from './enemy.service';
 import { PathService } from './path.service';
+import { TowerService } from './tower.service';
 
 @Injectable({ providedIn: 'root' })
 export class TowerDefenseService {
@@ -23,6 +24,7 @@ export class TowerDefenseService {
     private readonly engine: EngineService,
     private readonly enemy: EnemyService,
     private readonly path: PathService,
+    private readonly tower: TowerService,
   ) {
   }
 
@@ -38,8 +40,9 @@ export class TowerDefenseService {
     const path = this.path.find(this.start, this.end);
     this.highlightPath(path);
 
-    // enemies
+    // others
     this.enemy.init(this.fields);
+    this.tower.init();
   }
 
   private initScene(canvas: ElementRef<HTMLCanvasElement>, size: { width: number, height: number }): Scene {
@@ -90,7 +93,11 @@ export class TowerDefenseService {
     field.mesh.actionManager.registerAction(new ExecuteCodeAction(
       ActionManager.OnPickTrigger,
       () => {
+        if (!field.free) {
+          return;
+        }
         field.free = !field.free;
+        field.tower = this.tower.build(field);
       },
     ));
   }
@@ -120,6 +127,7 @@ export class TowerDefenseService {
     }
 
     this.enemy.update(path);
+    this.tower.update();
   }
 
   private afterRender(): void {

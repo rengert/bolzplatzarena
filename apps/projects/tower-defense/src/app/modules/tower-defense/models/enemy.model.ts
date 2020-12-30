@@ -6,4 +6,5 @@ export interface Enemy {
   mesh: Mesh;
   target: Coordinate;
   source: Coordinate;
+  dying: boolean;
 }
