@@ -1,6 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { EngineService } from './engine.service';
-import { ActionManager, ExecuteCodeAction, MeshBuilder, Scene, StandardMaterial } from '@babylonjs/core';
+import { ActionManager, ExecuteCodeAction, MeshBuilder, Scene, StandardMaterial, Texture } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 import { Field } from '../models/field.model';
 import { Coordinate } from '../models/coordinate.model';
@@ -52,14 +52,17 @@ export class TowerDefenseService {
 
     this.material = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.material.alpha = 1;
+    this.material.ambientTexture = new Texture('assets/textures/grass.dds.jpg', scene);
     this.material.diffuseColor = colorFrom(VALUES.colors.fields.standard);
 
     this.hoverMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.hoverMaterial.alpha = 1;
+    this.hoverMaterial.ambientTexture = new Texture('assets/textures/grass.dds.jpg', scene);
     this.hoverMaterial.diffuseColor = colorFrom(VALUES.colors.fields.hover);
 
     this.blockedMaterial = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.blockedMaterial.alpha = 1;
+    this.blockedMaterial.ambientTexture = new Texture('assets/textures/floor.png', scene);
     this.blockedMaterial.diffuseColor = colorFrom(VALUES.colors.fields.blocked);
 
     scene.registerBeforeRender(() => {
