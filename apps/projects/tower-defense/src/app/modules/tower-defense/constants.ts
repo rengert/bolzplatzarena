@@ -2,7 +2,7 @@ export const VALUES = {
   colors: {
     fields: {
       standard: { red: 0.123, green: 0.856, blue: 0.789 },
-      hover: { red: 0.123, green: 1, blue: 0.789 },
+      hover: { red: 0.423, green: 1, blue: 0.789 },
       blocked: { red: 0.888, green: 0.888, blue: 0.888 },
     },
     towers: {

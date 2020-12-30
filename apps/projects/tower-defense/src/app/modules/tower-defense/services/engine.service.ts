@@ -50,9 +50,13 @@ export class EngineService {
   }
 
   private initLight(): void {
-    const light = new DirectionalLight('hemi', new Vector3(-2, -3, -2), this.scene);
+    const light = new DirectionalLight('direct', new Vector3(-2, -3, -2), this.scene);
     light.diffuse = new Color3(1, 1, 1);
     light.specular = new Color3(1, 1, 1);
+
+    const lightLeft = new DirectionalLight('directLeft', new Vector3(12, -14, 14), this.scene);
+    lightLeft.diffuse = new Color3(1, 1, 1);
+    lightLeft.specular = new Color3(1, 1, 1);
 
     this.shadowGenerator = new ShadowGenerator(1024, light);
     this.shadowGenerator.useExponentialShadowMap = true;
