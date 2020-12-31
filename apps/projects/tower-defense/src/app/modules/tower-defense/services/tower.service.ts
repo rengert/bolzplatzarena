@@ -42,6 +42,12 @@ export class TowerService {
     return tower;
   }
 
+  destroy(field: Field): void {
+    this.towers = this.towers.filter(item => item !== field.tower);
+    field.tower?.mesh.dispose();
+    field.tower = undefined;
+  }
+
   update(): void {
     if (!this.enemy.items.length) {
       return;
