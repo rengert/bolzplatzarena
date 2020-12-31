@@ -22,6 +22,8 @@ export class TowerDefenseService {
   private readonly end: Coordinate = { x: 19, y: 9 };
   private readonly size = { width: 10, height: 20 };
 
+  private bestPath: number[][] = [];
+
   constructor(
     private readonly engine: EngineService,
     private readonly enemy: EnemyService,
@@ -39,8 +41,8 @@ export class TowerDefenseService {
 
     // path finding
     this.path.init(this.fields);
-    const path = this.path.find(this.start, this.end);
-    this.highlightPath(path);
+    this.bestPath = this.path.find(this.start, this.end);
+    this.highlightPath(this.bestPath);
 
     // others
     this.enemy.init(this.fields);
@@ -101,8 +103,20 @@ export class TowerDefenseService {
         if (!field.free) {
           return;
         }
-        field.free = !field.free;
         field.tower = this.tower.build(field);
+        field.free = !field.tower;
+        if (field.free) {
+          return;
+        }
+        const path = this.path.find(this.start, this.end);
+        if (path.length) {
+          this.bestPath = path;
+          this.highlightPath(this.bestPath);
+          return;
+        }
+
+        field.free = true;
+        this.tower.destroy(field);
       },
     ));
   }
@@ -124,15 +138,12 @@ export class TowerDefenseService {
   /** rendering stuff **/
 
   private beforeRender(): void {
-    const path = this.path.find(this.start, this.end);
-    this.highlightPath(path);
-
     if ((this.enemy.items.length < VALUES.config.enemies.count)
       && (Math.random() > VALUES.config.enemies.probability)) {
       this.enemy.appear(this.start, this.end);
     }
 
-    this.enemy.update(path);
+    this.enemy.update(this.bestPath);
     this.tower.update();
   }
 

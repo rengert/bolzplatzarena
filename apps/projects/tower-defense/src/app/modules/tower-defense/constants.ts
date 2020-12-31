@@ -27,6 +27,8 @@ export const VALUES = {
       size: 0.125,
       power: 0.125,
       range: 1.25,
+      shotsPerSecond: 1,
+      price: 150,
     },
   },
 };
