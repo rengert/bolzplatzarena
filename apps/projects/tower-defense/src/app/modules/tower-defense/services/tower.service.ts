@@ -36,7 +36,7 @@ export class TowerService {
     mesh.position.x = field.mesh.position.x;
     mesh.position.z = field.mesh.position.z;
     mesh.position.y = 1;
-    const tower = { power: VALUES.config.tower.power, mesh };
+    const tower = { power: VALUES.config.tower.power, mesh, range: VALUES.config.tower.range };
     this.towers.push(tower);
 
     return tower;
@@ -55,7 +55,7 @@ export class TowerService {
 
     for (const tower of this.towers) {
       if (tower.enemy) {
-        if (distanceTo(tower, tower.enemy) > 1) {
+        if (distanceTo(tower, tower.enemy) > tower.range) {
           tower.enemy = undefined;
         }
       }
@@ -66,7 +66,7 @@ export class TowerService {
           item => item.distance,
           ['asc'],
         ));
-        if (candidate && Math.abs(candidate.distance) < 1) {
+        if (candidate && Math.abs(candidate.distance) <= tower.range) {
           tower.enemy = candidate.enemy;
         }
       }
@@ -74,8 +74,8 @@ export class TowerService {
       // shooting
       if (tower.enemy) {
         tower.enemy.energy -= tower.power;
-
-        if (tower.enemy.energy < 0) {
+        console.log(tower.enemy.mesh.name, tower.enemy.energy);
+        if (tower.enemy.energy <= 0) {
           this.enemy.kill(tower.enemy);
           tower.enemy = undefined;
         }
