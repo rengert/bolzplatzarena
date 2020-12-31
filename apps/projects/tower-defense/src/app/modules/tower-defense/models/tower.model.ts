@@ -6,4 +6,6 @@ export interface Tower {
   enemy?: Enemy;
   mesh: Mesh;
   range: number;
+  shotsPerSecond: number;
+  lastShot?: Date;
 }

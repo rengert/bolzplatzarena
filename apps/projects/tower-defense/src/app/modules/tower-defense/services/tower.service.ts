@@ -36,7 +36,12 @@ export class TowerService {
     mesh.position.x = field.mesh.position.x;
     mesh.position.z = field.mesh.position.z;
     mesh.position.y = 1;
-    const tower = { power: VALUES.config.tower.power, mesh, range: VALUES.config.tower.range };
+    const tower = {
+      power: VALUES.config.tower.power,
+      mesh,
+      range: VALUES.config.tower.range,
+      shotsPerSecond: VALUES.config.tower.shotsPerSecond,
+    };
     this.towers.push(tower);
 
     return tower;
@@ -53,7 +58,13 @@ export class TowerService {
       return;
     }
 
-    for (const tower of this.towers) {
+    const date = new Date();
+    const value = date.valueOf();
+    const towers = this.towers.filter(({ shotsPerSecond, lastShot }) => {
+      return !lastShot || (value - lastShot.valueOf()) > (1000 / shotsPerSecond);
+    });
+    for (const tower of towers) {
+      tower.lastShot = date;
       if (tower.enemy) {
         if (distanceTo(tower, tower.enemy) > tower.range) {
           tower.enemy = undefined;
