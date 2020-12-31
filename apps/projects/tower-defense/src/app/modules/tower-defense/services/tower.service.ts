@@ -72,11 +72,14 @@ export class TowerService {
     });
     for (const tower of towers) {
       tower.lastShot = date;
+      // is the enemy still there?
       if (tower.enemy) {
-        if (distanceTo(tower, tower.enemy) > tower.range) {
+        // todo: check if it could be harder, if tower shots nevertheless, but get no money for the kill
+        if (tower.enemy.dying || distanceTo(tower, tower.enemy) > tower.range) {
           tower.enemy = undefined;
         }
       }
+      // find the enemy
       if (!tower.enemy) {
         // find in range
         const candidate = first(orderBy(
@@ -88,11 +91,9 @@ export class TowerService {
           tower.enemy = candidate.enemy;
         }
       }
-
       // shooting
       if (tower.enemy) {
         tower.enemy.energy -= tower.power;
-        console.log(tower.enemy.mesh.name, tower.enemy.energy);
         if (tower.enemy.energy <= 0) {
           this.enemy.kill(tower.enemy);
           tower.enemy = undefined;
