@@ -7,4 +7,5 @@ export interface Enemy {
   target: Coordinate;
   source: Coordinate;
   dying: boolean;
+  value: number;
 }
