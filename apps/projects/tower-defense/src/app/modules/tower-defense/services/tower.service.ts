@@ -8,6 +8,7 @@ import { EnemyService } from './enemy.service';
 import { first, orderBy } from 'lodash';
 import { colorFrom, distanceTo } from '../utils/common.utils';
 import { VALUES } from '../constants';
+import { AccountService } from './account.service';
 
 const SEGMENTS = 32;
 
@@ -17,6 +18,7 @@ export class TowerService {
   private towers: Tower[] = [];
 
   constructor(
+    private readonly account: AccountService,
     private readonly engine: EngineService,
     private readonly enemy: EnemyService,
   ) {
@@ -30,7 +32,11 @@ export class TowerService {
     this.towers = [];
   }
 
-  build(field: Field): Tower {
+  build(field: Field): Tower | undefined {
+    if (!this.account.pay(VALUES.config.tower.price)) {
+      return undefined;
+    }
+
     const mesh = Mesh.CreateSphere(`tower-${createUuid()}`, SEGMENTS, VALUES.config.tower.size, this.engine.scene);
     mesh.material = this.material;
     mesh.position.x = field.mesh.position.x;
@@ -41,6 +47,7 @@ export class TowerService {
       mesh,
       range: VALUES.config.tower.range,
       shotsPerSecond: VALUES.config.tower.shotsPerSecond,
+      price: VALUES.config.tower.price,
     };
     this.towers.push(tower);
 

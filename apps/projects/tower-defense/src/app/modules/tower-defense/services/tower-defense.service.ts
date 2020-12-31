@@ -103,9 +103,11 @@ export class TowerDefenseService {
         if (!field.free) {
           return;
         }
-        field.free = !field.free;
         field.tower = this.tower.build(field);
-
+        field.free = !field.tower;
+        if (field.free) {
+          return;
+        }
         const path = this.path.find(this.start, this.end);
         if (path.length) {
           this.bestPath = path;

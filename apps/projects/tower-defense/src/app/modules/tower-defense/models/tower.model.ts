@@ -8,4 +8,5 @@ export interface Tower {
   range: number;
   shotsPerSecond: number;
   lastShot?: Date;
+  price: number;
 }

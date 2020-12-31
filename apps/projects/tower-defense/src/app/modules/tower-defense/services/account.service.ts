@@ -21,4 +21,14 @@ export class AccountService {
       this.cash.next(this.cash.value + enemy.value);
     });
   }
+
+  pay(amount: number): boolean {
+    if (this.cash.value > amount) {
+      this.ngZone.run(() => {
+        this.cash.next(this.cash.value - amount);
+      });
+      return true;
+    }
+    return false;
+  }
 }
