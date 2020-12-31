@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Enemy } from '../models/enemy.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -10,13 +10,15 @@ export class AccountService {
   readonly kills$: Observable<number>;
   readonly cash$: Observable<number>;
 
-  constructor() {
+  constructor(private readonly ngZone: NgZone) {
     this.kills$ = this.kills;
     this.cash$ = this.cash;
   }
 
   addKill(enemy: Enemy): void {
-    this.kills.next(this.kills.value + 1);
-    this.cash.next(this.cash.value + enemy.value);
+    this.ngZone.run(() => {
+      this.kills.next(this.kills.value + 1);
+      this.cash.next(this.cash.value + enemy.value);
+    });
   }
 }
