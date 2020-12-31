@@ -8,6 +8,7 @@ import { Coordinate } from '../models/coordinate.model';
 import { PathService } from './path.service';
 import { VALUES } from '../constants';
 import { colorFrom } from '../utils/common.utils';
+import { AccountService } from './account.service';
 
 const SEGMENTS = 32;
 
@@ -23,6 +24,7 @@ export class EnemyService {
   }
 
   constructor(
+    private readonly account: AccountService,
     private readonly engine: EngineService,
     private readonly path: PathService,
   ) {
@@ -44,12 +46,13 @@ export class EnemyService {
     mesh.position.x = this.fields[source.x][source.y].mesh.position.x;
     mesh.position.z = this.fields[source.x][source.y].mesh.position.z;
     mesh.position.y = 1;
-    this.items.push({ mesh, energy: 1, source, target, dying: false });
+    this.items.push({ mesh, energy: 1, source, target, dying: false, value: 100 });
   }
 
   kill(enemy: Enemy): void {
     enemy.dying = true;
     this.#items = this.#items.filter(item => item !== enemy);
+    this.account.addKill(enemy);
 
     enemy.mesh.dispose();
   }
