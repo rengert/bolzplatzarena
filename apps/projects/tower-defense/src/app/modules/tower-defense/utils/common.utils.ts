@@ -1,6 +1,6 @@
-import { Color3, Mesh, Vector3 } from '@babylonjs/core';
+import { AbstractMesh, Color3, Vector3 } from '@babylonjs/core';
 
-export function distanceTo(first: { mesh: Mesh }, second: { mesh: Mesh }) {
+export function distanceTo(first: { mesh: AbstractMesh }, second: { mesh: AbstractMesh }) {
   return Vector3.Distance(first.mesh.position, second.mesh.position);
 }
 

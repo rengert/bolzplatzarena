@@ -1,9 +1,9 @@
-import { Mesh } from '@babylonjs/core';
+import { AbstractMesh } from '@babylonjs/core';
 import { Coordinate } from './coordinate.model';
 
 export interface Enemy {
   energy: number;
-  mesh: Mesh;
+  mesh: AbstractMesh;
   target: Coordinate;
   source: Coordinate;
   dying: boolean;

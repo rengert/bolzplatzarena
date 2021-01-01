@@ -29,7 +29,7 @@ export class EngineService {
   ) {
   }
 
-  createScene(canvas: HTMLCanvasElement, size: { width: number; height: number; }): Scene {
+  createScene(canvas: HTMLCanvasElement): Scene {
     this.canvas = canvas;
 
     this.engine = new Engine(this.canvas, true);
@@ -45,7 +45,7 @@ export class EngineService {
   }
 
   private initCamera(): void {
-    const camera = new ArcRotateCamera('camera1', 0, 0, 13, new Vector3(0, 0, 0), this.scene);
+    const camera = new ArcRotateCamera('camera1', 0, .44, 15, new Vector3(0, 0, 0), this.scene);
     camera.setTarget(Vector3.Zero());
   }
 
@@ -74,13 +74,6 @@ export class EngineService {
     // Sky mesh (box)
     var skybox = Mesh.CreateBox('skyBox', 50.0, this.scene);
     skybox.material = skyboxMaterial;
-  }
-
-  private clean(): void {
-    this.scene?.dispose();
-    this.engine?.dispose();
-    this.spotLight?.dispose();
-    this.shadowGenerator?.dispose();
   }
 
   animate(): void {
