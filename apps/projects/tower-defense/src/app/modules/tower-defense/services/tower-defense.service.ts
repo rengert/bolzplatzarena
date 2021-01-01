@@ -34,7 +34,7 @@ export class TowerDefenseService {
 
   init(canvas: ElementRef<HTMLCanvasElement>): void {
     // scene
-    const scene = this.initScene(canvas, this.size);
+    const scene = this.initScene(canvas);
 
     // playground
     this.initPlayground(scene, this.size);
@@ -49,8 +49,8 @@ export class TowerDefenseService {
     this.tower.init();
   }
 
-  private initScene(canvas: ElementRef<HTMLCanvasElement>, size: { width: number, height: number }): Scene {
-    const scene = this.engine.createScene(canvas.nativeElement, size);
+  private initScene(canvas: ElementRef<HTMLCanvasElement>): Scene {
+    const scene = this.engine.createScene(canvas.nativeElement);
 
     this.material = new StandardMaterial('StandardMaterial', this.engine.scene);
     this.material.alpha = 1;

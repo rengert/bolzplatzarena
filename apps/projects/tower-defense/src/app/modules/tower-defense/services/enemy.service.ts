@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Enemy } from '../models/enemy.model';
-import { Mesh, StandardMaterial, Vector3 } from '@babylonjs/core';
-import { createUuid } from '@bpa/core';
+import { SceneLoader, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { EngineService } from './engine.service';
 import { Field } from '../models/field.model';
 import { Coordinate } from '../models/coordinate.model';
@@ -9,8 +8,6 @@ import { PathService } from './path.service';
 import { VALUES } from '../constants';
 import { colorFrom } from '../utils/common.utils';
 import { AccountService } from './account.service';
-
-const SEGMENTS = 32;
 
 @Injectable({ providedIn: 'root' })
 export class EnemyService {
@@ -41,12 +38,15 @@ export class EnemyService {
   }
 
   appear(source: Coordinate, target: Coordinate): void {
-    const mesh = Mesh.CreateSphere(`enemy-${createUuid()}`, SEGMENTS, VALUES.config.enemies.size, this.engine.scene);
-    mesh.material = this.material;
-    mesh.position.x = this.fields[source.x][source.y].mesh.position.x;
-    mesh.position.z = this.fields[source.x][source.y].mesh.position.z;
-    mesh.position.y = 1;
-    this.items.push({ mesh, energy: 1, source, target, dying: false, value: 100 });
+    SceneLoader.ImportMesh('', 'https://models.babylonjs.com/', 'ufo.glb', this.engine.scene, (meshes) => {
+        const mesh = meshes[0];
+        mesh.material = this.material;
+        mesh.position.x = this.fields[source.x][source.y].mesh.position.x;
+        mesh.position.z = this.fields[source.x][source.y].mesh.position.z;
+        mesh.position.y = 1;
+        this.items.push({ mesh, energy: 1, source, target, dying: false, value: 100 });
+      },
+    );
   }
 
   kill(enemy: Enemy): void {
