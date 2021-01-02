@@ -39,14 +39,14 @@ export class TowerDefenseService {
     // playground
     this.initPlayground(scene, this.size);
 
+    // others
+    await this.enemy.init(this.fields);
+    await this.tower.init();
+
     // path finding
     this.path.init(this.fields);
     this.bestPath = this.path.find(this.start, this.end);
     this.highlightPath(this.bestPath);
-
-    // others
-    this.enemy.init(this.fields);
-    await this.tower.init();
   }
 
   private initScene(canvas: ElementRef<HTMLCanvasElement>): Scene {

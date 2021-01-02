@@ -30,8 +30,9 @@ export class TowerService {
     this.material.diffuseColor = colorFrom(VALUES.colors.towers.standard);
 
     this.towers = [];
-
-    this.smallGunMeshTemplate = Mesh.MergeMeshes((await SceneLoader.ImportMeshAsync('', './assets/models/', 'gun1.obj', this.engine.scene)).meshes.map(mesh => mesh as Mesh)) as Mesh;
+    const rootUrl = './assets/models/';
+    const loadResult = await SceneLoader.ImportMeshAsync('', rootUrl, 'gun1.obj', this.engine.scene);
+    this.smallGunMeshTemplate = Mesh.MergeMeshes(loadResult.meshes.map(mesh => mesh as Mesh)) as Mesh;
     this.smallGunMeshTemplate.scaling = new Vector3(0.25, 0.25, 0.25);
     this.smallGunMeshTemplate.setEnabled(false);
   }

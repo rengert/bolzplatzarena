@@ -45,7 +45,7 @@ export class EngineService {
   }
 
   private initCamera(): void {
-    const camera = new ArcRotateCamera('camera1', 0, 0.75, 15, new Vector3(0, 0, 0), this.scene);
+    const camera = new ArcRotateCamera('camera1', 0, 0.975, 15, new Vector3(0, 0, 0), this.scene);
     camera.setTarget(Vector3.Zero());
   }
 

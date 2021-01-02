@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Enemy } from '../models/enemy.model';
-import { SceneLoader, StandardMaterial, Vector3 } from '@babylonjs/core';
+import { Mesh, SceneLoader, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { EngineService } from './engine.service';
 import { Field } from '../models/field.model';
 import { Coordinate } from '../models/coordinate.model';
@@ -16,6 +16,8 @@ export class EnemyService {
   private material: StandardMaterial;
   private fields: Field[][];
 
+  private enemyMeshTemplate: Mesh;
+
   get items(): Enemy[] {
     return this.#items;
   }
@@ -27,26 +29,31 @@ export class EnemyService {
   ) {
   }
 
-  init(fields: Field[][]): void {
+  async init(fields: Field[][]): Promise<void> {
     this.material = new StandardMaterial('Enemy', this.engine.scene);
     this.material.alpha = 1;
     this.material.diffuseColor = colorFrom(VALUES.colors.enemies.standard);
 
     this.fields = fields;
 
+    const rootUrl = 'https://playground.babylonjs.com/scenes/Buggy/glTF-Draco/';
+    this.enemyMeshTemplate = (await SceneLoader.ImportMeshAsync('', rootUrl, 'Buggy.gltf', this.engine.scene)).meshes[0] as Mesh;
+    this.enemyMeshTemplate.scaling = new Vector3(0.005, 0.005, 0.005);
+    this.enemyMeshTemplate.setEnabled(false);
+
     this.path.init(fields);
   }
 
   appear(source: Coordinate, target: Coordinate): void {
-    SceneLoader.ImportMesh('', 'https://models.babylonjs.com/', 'ufo.glb', this.engine.scene, (meshes) => {
-        const mesh = meshes[0];
-        mesh.material = this.material;
-        mesh.position.x = this.fields[source.x][source.y].mesh.position.x;
-        mesh.position.z = this.fields[source.x][source.y].mesh.position.z;
-        mesh.position.y = 1;
-        this.items.push({ mesh, energy: 1, source, target, dying: false, value: 100 });
-      },
-    );
+    if (!this.enemyMeshTemplate) {
+      return;
+    }
+    const mesh = this.enemyMeshTemplate.instantiateHierarchy() as Mesh;
+    mesh.setEnabled(true);
+    mesh.position.x = this.fields[source.x][source.y].mesh.position.x;
+    mesh.position.z = this.fields[source.x][source.y].mesh.position.z;
+    mesh.position.y = .55;
+    this.items.push({ mesh, energy: 1, source, target, dying: false, value: 100 });
   }
 
   kill(enemy: Enemy): void {
