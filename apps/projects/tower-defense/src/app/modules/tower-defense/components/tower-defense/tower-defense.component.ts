@@ -13,7 +13,7 @@ export class TowerDefenseComponent implements AfterViewInit {
   constructor(private readonly towerDefense: TowerDefenseService) {
   }
 
-  ngAfterViewInit(): void {
-    this.towerDefense.init(this.canvasElement);
+  async ngAfterViewInit(): Promise<void> {
+    await this.towerDefense.init(this.canvasElement);
   }
 }
