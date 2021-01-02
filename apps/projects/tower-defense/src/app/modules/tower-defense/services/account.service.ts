@@ -23,7 +23,7 @@ export class AccountService {
   }
 
   pay(amount: number): boolean {
-    if (this.cash.value > amount) {
+    if (this.cash.value >= amount) {
       this.ngZone.run(() => {
         this.cash.next(this.cash.value - amount);
       });
