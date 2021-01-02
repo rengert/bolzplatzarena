@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Field } from '../models/field.model';
-import { Mesh, StandardMaterial } from '@babylonjs/core';
+import { Mesh, SceneLoader, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 import { EngineService } from './engine.service';
 import { Tower } from '../models/tower.model';
@@ -10,12 +10,12 @@ import { colorFrom, distanceTo } from '../utils/common.utils';
 import { VALUES } from '../constants';
 import { AccountService } from './account.service';
 
-const SEGMENTS = 32;
-
 @Injectable({ providedIn: 'root' })
 export class TowerService {
   private material: StandardMaterial;
   private towers: Tower[] = [];
+
+  private smallGunMeshTemplate: Mesh;
 
   constructor(
     private readonly account: AccountService,
@@ -24,12 +24,16 @@ export class TowerService {
   ) {
   }
 
-  init(): void {
+  async init(): Promise<void> {
     this.material = new StandardMaterial('Tower', this.engine.scene);
     this.material.alpha = 1;
     this.material.diffuseColor = colorFrom(VALUES.colors.towers.standard);
 
     this.towers = [];
+
+    this.smallGunMeshTemplate = Mesh.MergeMeshes((await SceneLoader.ImportMeshAsync('', './assets/models/', 'gun1.obj', this.engine.scene)).meshes.map(mesh => mesh as Mesh)) as Mesh;
+    this.smallGunMeshTemplate.scaling = new Vector3(0.25, 0.25, 0.25);
+    this.smallGunMeshTemplate.setEnabled(false);
   }
 
   build(field: Field): Tower | undefined {
@@ -37,11 +41,14 @@ export class TowerService {
       return undefined;
     }
 
-    const mesh = Mesh.CreateSphere(`tower-${createUuid()}`, SEGMENTS, VALUES.config.tower.size, this.engine.scene);
-    mesh.material = this.material;
+    const mesh = this.smallGunMeshTemplate.createInstance(`tower-${createUuid()}`);
+    if (!mesh) {
+      return undefined;
+    }
+    mesh;
     mesh.position.x = field.mesh.position.x;
     mesh.position.z = field.mesh.position.z;
-    mesh.position.y = 1;
+    mesh.position.y = 0.5;
     const tower = {
       power: VALUES.config.tower.power,
       mesh,
@@ -50,7 +57,6 @@ export class TowerService {
       price: VALUES.config.tower.price,
     };
     this.towers.push(tower);
-
     return tower;
   }
 

@@ -1,0 +1,35 @@
+# Blender MTL File: 'Gunturret_One_blend.blend'
+# Material Count: 3
+
+newmtl Material_#6
+Ns 18.000005
+Ka 1.000000 1.000000 1.000000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd Gun_Turret_1_Gun_Turret_1_Platform_BaseColor.png
+
+newmtl Material_#7
+Ns 18.000005
+Ka 1.000000 1.000000 1.000000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd Gun_Turret_1_Gun_Turret_1_BaseColor.png
+
+newmtl Material_#8
+Ns 18.000005
+Ka 1.000000 1.000000 1.000000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd Gun_Turret_1_Gun_Turret_1_BaseColor.png

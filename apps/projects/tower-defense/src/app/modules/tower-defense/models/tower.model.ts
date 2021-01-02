@@ -1,10 +1,10 @@
-import { Mesh } from '@babylonjs/core';
 import { Enemy } from './enemy.model';
+import { AbstractMesh } from '@babylonjs/core';
 
 export interface Tower {
   power: number;
   enemy?: Enemy;
-  mesh: Mesh;
+  mesh: AbstractMesh;
   range: number;
   shotsPerSecond: number;
   lastShot?: Date;

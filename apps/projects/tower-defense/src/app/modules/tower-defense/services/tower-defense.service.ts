@@ -32,7 +32,7 @@ export class TowerDefenseService {
   ) {
   }
 
-  init(canvas: ElementRef<HTMLCanvasElement>): void {
+  async init(canvas: ElementRef<HTMLCanvasElement>): Promise<void> {
     // scene
     const scene = this.initScene(canvas);
 
@@ -46,7 +46,7 @@ export class TowerDefenseService {
 
     // others
     this.enemy.init(this.fields);
-    this.tower.init();
+    await this.tower.init();
   }
 
   private initScene(canvas: ElementRef<HTMLCanvasElement>): Scene {
