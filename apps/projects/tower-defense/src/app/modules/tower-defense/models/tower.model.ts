@@ -9,4 +9,5 @@ export interface Tower {
   shotsPerSecond: number;
   lastShot?: Date;
   price: number;
+  level: 1 | 2 | 3;
 }

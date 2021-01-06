@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Field } from '../models/field.model';
-import { Mesh, SceneLoader, StandardMaterial, Vector3 } from '@babylonjs/core';
+import { ActionManager, ExecuteCodeAction, Mesh, SceneLoader, StandardMaterial, Vector3 } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
 import { EngineService } from './engine.service';
 import { Tower } from '../models/tower.model';
@@ -23,7 +23,7 @@ export class TowerService {
     private readonly account: AccountService,
     private readonly engine: EngineService,
     private readonly enemy: EnemyService,
-    private readonly dialogService: MatDialog,
+    private readonly dialog: MatDialog,
   ) {
   }
 
@@ -53,13 +53,22 @@ export class TowerService {
     mesh.position.x = field.mesh.position.x;
     mesh.position.z = field.mesh.position.z;
     mesh.position.y = 0.5;
-    const tower = {
+    const tower: Tower = {
       power: VALUES.config.tower.power,
       mesh,
       range: VALUES.config.tower.range,
       shotsPerSecond: VALUES.config.tower.shotsPerSecond,
       price: VALUES.config.tower.price,
+      level: 1,
     };
+
+    mesh.actionManager = new ActionManager(this.engine.scene);
+    mesh.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger,
+      () => {
+        this.openDialog(tower);
+      },
+    ));
+
     this.towers.push(tower);
     return tower;
   }
@@ -68,14 +77,6 @@ export class TowerService {
     this.towers = this.towers.filter(item => item !== field.tower);
     field.tower?.mesh.dispose();
     field.tower = undefined;
-  }
-
-  dialog(tower: Tower): void {
-    const dialogRef = this.dialogService.open(TowerUpdateComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   update(): void {
@@ -111,12 +112,18 @@ export class TowerService {
       }
       // shooting
       if (tower.enemy) {
-        tower.enemy.energy -= tower.power;
+        tower.enemy.energy -= (tower.power * tower.level);
         if (tower.enemy.energy <= 0) {
           this.enemy.kill(tower.enemy);
           tower.enemy = undefined;
         }
       }
     }
+  }
+
+  private openDialog(tower: Tower): void {
+    this.dialog.open(TowerUpdateComponent, {
+      data: tower,
+    });
   }
 }
