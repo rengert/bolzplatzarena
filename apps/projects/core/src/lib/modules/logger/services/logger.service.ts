@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Logger, Message, Verbosity } from '../models/interfaces';
 
 export const LOGGER = new InjectionToken<Logger>('Logger');
@@ -15,7 +15,7 @@ function createMessage<T>(message: string, component = 'unknown', verbosity = Ve
 export class LoggerService<T> {
   name: string;
 
-  constructor(@Inject(LOGGER) private readonly logger: Logger[] = []) {
+  constructor(@Optional() @Inject(LOGGER) private readonly logger: Logger[] = []) {
   }
 
   debug(message: string): void {
