@@ -101,6 +101,7 @@ export class TowerDefenseService {
       ActionManager.OnPickTrigger,
       () => {
         if (!field.free) {
+          this.tower.dialog(field.tower !);
           return;
         }
         field.tower = this.tower.build(field);

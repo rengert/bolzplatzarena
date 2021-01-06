@@ -9,6 +9,8 @@ import { first, orderBy } from 'lodash';
 import { colorFrom, distanceTo } from '../utils/common.utils';
 import { VALUES } from '../constants';
 import { AccountService } from './account.service';
+import { TowerUpdateComponent } from '../components/tower-defense/dialogs/tower-update/tower-update.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({ providedIn: 'root' })
 export class TowerService {
@@ -21,6 +23,7 @@ export class TowerService {
     private readonly account: AccountService,
     private readonly engine: EngineService,
     private readonly enemy: EnemyService,
+    private readonly dialogService: MatDialog,
   ) {
   }
 
@@ -65,6 +68,14 @@ export class TowerService {
     this.towers = this.towers.filter(item => item !== field.tower);
     field.tower?.mesh.dispose();
     field.tower = undefined;
+  }
+
+  dialog(tower: Tower): void {
+    const dialogRef = this.dialogService.open(TowerUpdateComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   update(): void {

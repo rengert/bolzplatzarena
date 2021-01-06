@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { TowerDefenseComponent } from './components/tower-defense/tower-defense.component';
 import { AccountComponent } from './components/account/account.component';
 import { CoreModule } from '@bpa/core';
+import { TowerUpdateComponent } from './components/tower-defense/dialogs/tower-update/tower-update.component';
 
 @NgModule({
-  declarations: [TowerDefenseComponent, AccountComponent],
+  declarations: [TowerDefenseComponent, AccountComponent, TowerUpdateComponent],
   imports: [
     CommonModule,
     CoreModule,
