@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Enemy } from '../models/enemy.model';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -10,7 +11,9 @@ export class AccountService {
   readonly kills$: Observable<number>;
   readonly cash$: Observable<number>;
 
-  constructor(private readonly ngZone: NgZone) {
+  constructor(
+    private snackBar: MatSnackBar,
+    private readonly ngZone: NgZone) {
     this.kills$ = this.kills;
     this.cash$ = this.cash;
   }
@@ -29,6 +32,9 @@ export class AccountService {
       });
       return true;
     }
+
+    this.snackBar.open('Leider nicht genügend Kohle, General!!', undefined, { duration: 1500 });
+
     return false;
   }
 }
