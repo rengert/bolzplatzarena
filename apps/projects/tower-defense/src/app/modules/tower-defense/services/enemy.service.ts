@@ -9,6 +9,14 @@ import { VALUES } from '../constants';
 import { colorFrom } from '../utils/common.utils';
 import { AccountService } from './account.service';
 
+const SPEED = 0.0125;
+
+function getMove(move: number): number {
+  return move >= 0
+    ? Math.min(move, SPEED)
+    : Math.max(move, -SPEED);
+}
+
 @Injectable({ providedIn: 'root' })
 export class EnemyService {
   #items: Enemy[] = [];
@@ -52,7 +60,7 @@ export class EnemyService {
     mesh.setEnabled(true);
     mesh.position.x = this.fields[source.x][source.y].mesh.position.x;
     mesh.position.z = this.fields[source.x][source.y].mesh.position.z;
-    mesh.position.y = .55;
+    mesh.position.y = 0.55;
     this.items.push({ mesh, energy: 1, source, target, dying: false, value: 100 });
   }
 
@@ -79,15 +87,15 @@ export class EnemyService {
       const targetCoordinates = { x, y };
       const target = this.fields[targetCoordinates.x][targetCoordinates.y];
       let deltaTargetSource = target.mesh.position.subtract(enemy.mesh.position);
-      enemy.mesh.position.x += Math.min(deltaTargetSource.x, 0.0125);
-      enemy.mesh.position.z += Math.min(deltaTargetSource.z, 0.0125);
+      enemy.mesh.position.x += getMove(deltaTargetSource.x);
+      enemy.mesh.position.z += getMove(deltaTargetSource.z);
 
       const enemyDelta = target.mesh.position.subtract(enemy.mesh.position);
       enemyDelta.y = 0;
       if (enemyDelta.equalsWithEpsilon(Vector3.Zero())) {
         enemy.source = targetCoordinates;
-        enemy.mesh.position.x += Math.random() * 0.0125;
-        enemy.mesh.position.z += Math.random() * 0.0125;
+        enemy.mesh.position.x += Math.random() * SPEED;
+        enemy.mesh.position.z += Math.random() * SPEED;
       }
     }
   }
