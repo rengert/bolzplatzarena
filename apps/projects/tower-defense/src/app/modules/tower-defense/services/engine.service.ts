@@ -23,10 +23,22 @@ export class EngineService {
   private canvas: HTMLCanvasElement;
   private engine: Engine;
 
+  private camera: ArcRotateCamera;
+
+  #mesh: Mesh;
+
   constructor(
     private readonly ngZone: NgZone,
     private readonly windowRef: WindowService,
   ) {
+  }
+
+  set mesh(mesh: Mesh) {
+    this.#mesh = mesh;
+  }
+
+  get mesh(): Mesh {
+    return this.#mesh;
   }
 
   createScene(canvas: HTMLCanvasElement): Scene {
@@ -45,8 +57,7 @@ export class EngineService {
   }
 
   private initCamera(): void {
-    const camera = new ArcRotateCamera('camera1', 0, 0.975, 15, new Vector3(0, 0, 0), this.scene);
-    camera.setTarget(Vector3.Zero());
+    this.camera = new ArcRotateCamera('camera1', 0, 0.25, 100, Vector3.Zero(), this.scene);
   }
 
   private initLight(): void {
@@ -76,6 +87,22 @@ export class EngineService {
     skybox.material = skyboxMaterial;
   }
 
+  fitToView(): void {
+    console.log('ss');
+    if (!this.mesh || !this.camera) {
+      return;
+    }
+    this.mesh.computeWorldMatrix(true);
+    const radius = this.mesh.getBoundingInfo().boundingSphere.radiusWorld;
+    const aspectRatio = this.engine.getAspectRatio(this.camera);
+    let halfMinFov = this.camera.fov / 1.1;
+    if (aspectRatio < 1) {
+      halfMinFov = Math.atan(aspectRatio * Math.tan(this.camera.fov / 1.1));
+    }
+
+    this.camera.radius = Math.abs(radius / Math.sin(halfMinFov));
+  }
+
   animate(): void {
     // We have to run this outside angular zones,
     // because it could trigger heavy changeDetection cycles.
@@ -94,6 +121,7 @@ export class EngineService {
 
       this.windowRef.window.addEventListener('resize', () => {
         this.engine.resize();
+        this.fitToView();
       });
     });
   }

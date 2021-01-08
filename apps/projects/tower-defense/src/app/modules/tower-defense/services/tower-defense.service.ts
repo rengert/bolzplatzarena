@@ -20,7 +20,7 @@ export class TowerDefenseService {
 
   private readonly start: Coordinate = { x: 0, y: 0 };
   private readonly end: Coordinate = { x: 19, y: 9 };
-  private readonly size = { width: 10, height: 20 };
+  private readonly size = { width: 10, depth: 20 };
 
   private bestPath: number[][] = [];
 
@@ -47,6 +47,8 @@ export class TowerDefenseService {
     this.path.init(this.fields);
     this.bestPath = this.path.find(this.start, this.end);
     this.highlightPath(this.bestPath);
+
+    this.engine.fitToView();
   }
 
   private initScene(canvas: ElementRef<HTMLCanvasElement>): Scene {
@@ -79,20 +81,28 @@ export class TowerDefenseService {
     return scene;
   }
 
-  private initPlayground(scene: Scene, size: { width: number, height: number }): void {
+  private initPlayground(scene: Scene, size: { width: number, depth: number }): void {
     this.fields = [];
     for (let i = 0; i < size.width; i++) {
       this.fields[i] = [];
-      for (let j = 0; j < size.height; j++) {
+      for (let j = 0; j < size.depth; j++) {
         const mesh = MeshBuilder.CreateBox(`field-${createUuid()}`, { size: 1 }, this.engine.scene);
         mesh.material = this.material;
         mesh.position.x = i - size.width / 2 + VALUES.config.fields.size / 2;
-        mesh.position.z = j - size.height / 2 + VALUES.config.fields.size / 2;
+        mesh.position.z = j - size.depth / 2 + VALUES.config.fields.size / 2;
         const field = { free: true, mesh };
         this.defineAction(field, scene);
         this.fields[i][j] = field;
       }
     }
+    const mesh = MeshBuilder.CreateBox(`field-${createUuid()}`, { height: 1, width: size.width, depth: size.depth }, this.engine.scene);
+    mesh.material = this.material;
+    mesh.position.x = 0;
+    mesh.position.z = 0;
+    mesh.visibility = 0.35;
+    mesh.position.y = -1;
+    this.engine.mesh = mesh;
+    this.engine.fitToView();
   }
 
   private defineAction(field: Field, scene: Scene): void {
