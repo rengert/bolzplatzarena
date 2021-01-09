@@ -88,16 +88,15 @@ export class EngineService {
   }
 
   fitToView(): void {
-    console.log('ss');
     if (!this.mesh || !this.camera) {
       return;
     }
     this.mesh.computeWorldMatrix(true);
     const radius = this.mesh.getBoundingInfo().boundingSphere.radiusWorld;
     const aspectRatio = this.engine.getAspectRatio(this.camera);
-    let halfMinFov = this.camera.fov / 1.1;
+    let halfMinFov = this.camera.fov / 1.35;
     if (aspectRatio < 1) {
-      halfMinFov = Math.atan(aspectRatio * Math.tan(this.camera.fov / 1.1));
+      halfMinFov = Math.atan(aspectRatio * Math.tan(this.camera.fov / 1.35));
     }
 
     this.camera.radius = Math.abs(radius / Math.sin(halfMinFov));
