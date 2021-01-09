@@ -1,2 +1,12 @@
 <canvas #canvasElement id="canvasElement"></canvas>
 <app-account></app-account>
+
+<section *ngIf="!started">
+  <ng-container *ngIf="loading$ | async as loading">
+    <mat-progress-bar color="primary"
+                      mode="buffer"
+                      [value]="(loading.finished / loading.steps) * 100"
+                      [bufferValue]="(loading.started / loading.steps) * 100">
+    </mat-progress-bar>
+  </ng-container>
+</section>

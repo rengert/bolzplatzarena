@@ -9,9 +9,18 @@ import { PathService } from './path.service';
 import { TowerService } from './tower.service';
 import { colorFrom } from '../utils/common.utils';
 import { VALUES } from '../constants';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+export interface Loading {
+  steps: number,
+  started: number,
+  finished: number,
+}
 
 @Injectable({ providedIn: 'root' })
 export class TowerDefenseService {
+  readonly loading$: Observable<Loading>;
+
   private fields: Field[][];
 
   private material: StandardMaterial;
@@ -24,31 +33,47 @@ export class TowerDefenseService {
 
   private bestPath: number[][] = [];
 
+  private readonly loading = new BehaviorSubject<Loading>({ steps: 0, started: 0, finished: 0 });
+
   constructor(
     private readonly engine: EngineService,
     private readonly enemy: EnemyService,
     private readonly path: PathService,
     private readonly tower: TowerService,
   ) {
+    this.loading$ = this.loading;
   }
 
   async init(canvas: ElementRef<HTMLCanvasElement>): Promise<void> {
+    const steps = 8;
+    let started = 0;
+    let finished = 0;
+
     // scene
+    this.loading.next({ steps, started: started++, finished: ++finished });
     const scene = this.initScene(canvas);
 
     // playground
+    this.loading.next({ steps, started: started++, finished: ++finished });
     this.initPlayground(scene, this.size);
 
     // others
+    this.loading.next({ steps, started: started++, finished: ++finished });
     await this.enemy.init(this.fields);
+    this.loading.next({ steps, started: started++, finished: ++finished });
     await this.tower.init();
 
     // path finding
+    this.loading.next({ steps, started: started++, finished: ++finished });
     this.path.init(this.fields);
+    this.loading.next({ steps, started: started++, finished: ++finished });
     this.bestPath = this.path.find(this.start, this.end);
+    this.loading.next({ steps, started: started++, finished: ++finished });
     this.highlightPath(this.bestPath);
 
+    this.loading.next({ steps, started: started++, finished: ++finished });
     this.engine.fitToView();
+    this.loading.next({ steps, started: steps, finished: steps });
   }
 
   private initScene(canvas: ElementRef<HTMLCanvasElement>): Scene {

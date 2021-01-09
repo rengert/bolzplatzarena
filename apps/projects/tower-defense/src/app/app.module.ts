@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TowerDefenseComponent } from './modules/tower-defense/components/tower-defense/tower-defense.component';
 import { PrivacyNoticeComponent } from './components/privacy-notice/privacy-notice.component';
 import { WindowService } from '@bpa/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    MatProgressBarModule,
     RouterModule.forRoot(routes),
     TowerDefenseModule,
   ],
