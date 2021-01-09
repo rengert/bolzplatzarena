@@ -3,9 +3,26 @@
   flex: 1;
 
   canvas {
+    display: none;
     height: 100vh;
     width: 100vw;
     flex: 1;
     background-color: grey;
+  }
+
+  section {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    z-index: 10;
+    background-color: #FFFFFF;
+    justify-content: center;
+
+    mat-progress-bar {
+      width: 80%;
+    }
   }
 }
