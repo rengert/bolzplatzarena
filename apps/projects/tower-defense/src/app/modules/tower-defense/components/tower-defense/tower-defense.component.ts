@@ -18,7 +18,8 @@ export class TowerDefenseComponent implements AfterViewInit {
 
   constructor(private readonly towerDefense: TowerDefenseService) {
     this.loading$ = this.towerDefense.loading$.pipe(
-      delayWhen(loading => loading.steps === loading.finished ? timer(2000) : timer(1)),
+      tap(data => console.log(data)),
+      delayWhen(loading => loading.steps === loading.finished ? timer(3000) : timer(1)),
       tap(loading => this.started = loading.steps === loading.finished),
     );
   }
