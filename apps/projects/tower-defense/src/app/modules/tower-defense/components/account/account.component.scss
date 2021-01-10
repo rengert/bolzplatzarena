@@ -2,4 +2,11 @@
   position: fixed;
   top: 0;
   right: 0;
+  font-size: 1.5rem;
+  border-bottom: 2px solid darkblue;
+
+  span {
+    display: inline-block;
+    min-width: 100px;
+  }
 }
