@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '~@angular/material/theming';
 @import "~material-design-icons/iconfont/material-icons.css";
 @import "values";
 
@@ -15,6 +16,12 @@
   url('./assets/fonts/annie-use-your-telescope-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
   url('./assets/fonts/annie-use-your-telescope-v10-latin-regular.svg#AnnieUseYourTelescope') format('svg'); /* Legacy iOS */
 }
+
+$config: mat-typography-config(
+  $font-family: 'Annie Use Your Telescope, Verdana, sans-serif'
+);
+
+@include mat-core($config);
 
 html {
   margin: 0;
@@ -55,10 +62,6 @@ html {
       a:link,
       a:visited {
         color: $brandColor;
-      }
-
-      * {
-        font-family: 'Annie Use Your Telescope', Verdana, sans-serif;
       }
     }
   }
