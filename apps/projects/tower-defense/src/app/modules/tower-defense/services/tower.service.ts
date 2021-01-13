@@ -49,7 +49,6 @@ export class TowerService {
     if (!mesh) {
       return undefined;
     }
-    mesh;
     mesh.position.x = field.mesh.position.x;
     mesh.position.z = field.mesh.position.z;
     mesh.position.y = 0.5;
@@ -68,6 +67,7 @@ export class TowerService {
         this.openDialog(tower);
       },
     ));
+    this.engine.shadowGenerator.addShadowCaster(mesh);
 
     this.towers.push(tower);
     return tower;
