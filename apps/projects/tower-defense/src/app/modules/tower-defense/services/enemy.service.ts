@@ -8,6 +8,7 @@ import { PathService } from './path.service';
 import { VALUES } from '../constants';
 import { colorFrom } from '../utils/common.utils';
 import { AccountService } from './account.service';
+import { ExplosionService } from './explosion.service';
 
 const SPEED = 0.0125;
 
@@ -33,6 +34,7 @@ export class EnemyService {
   constructor(
     private readonly account: AccountService,
     private readonly engine: EngineService,
+    private readonly explosion: ExplosionService,
     private readonly path: PathService,
   ) {
   }
@@ -68,6 +70,8 @@ export class EnemyService {
     enemy.dying = true;
     this.#items = this.#items.filter(item => item !== enemy);
     this.account.addKill(enemy);
+
+    this.explosion.do(enemy.mesh.position);
 
     enemy.mesh.dispose();
   }
