@@ -9,7 +9,6 @@ import {
   Mesh,
   Scene,
   ShadowGenerator,
-  SpotLight,
   Texture,
   Vector3,
   VirtualJoystick,
@@ -22,7 +21,6 @@ export class EngineService {
   scene: Scene;
   camera: FollowCamera;
   shadowGenerator: ShadowGenerator;
-  spotLight: SpotLight;
 
   private canvas: HTMLCanvasElement;
   private engine: Engine;
@@ -95,7 +93,6 @@ export class EngineService {
     this.scene?.dispose();
     this.engine?.dispose();
     this.camera?.dispose();
-    this.spotLight?.dispose();
     this.shadowGenerator?.dispose();
     this.virtualJoystick.releaseCanvas();
   }
