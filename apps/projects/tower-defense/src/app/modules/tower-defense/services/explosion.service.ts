@@ -6,32 +6,32 @@ import { EngineService } from './engine.service';
   providedIn: 'root',
 })
 export class ExplosionService {
+  private texture: Texture;
+
   constructor(
     private readonly engine: EngineService,
   ) {
   }
 
-  do(position: Vector3): void {
-    // Create default particle systems
-    var fireBlast = ParticleHelper.CreateDefault(position, 100);
+  init(): void {
+    this.texture = new Texture('assets/textures/explosion.png', this.engine.scene);
+  }
 
-    // Emitter
-    var fireBlastHemisphere = fireBlast.createHemisphericEmitter(.1, 0);
+  do(position: Vector3, large = false): void {
+    const fireBlast = ParticleHelper.CreateDefault(position, 100);
+    const fireBlastHemisphere = fireBlast.createHemisphericEmitter(.1, 0);
 
     // Set emission rate
     fireBlast.emitRate = 500;
-
     // Start size
-    fireBlast.minSize = 0.1;
-    fireBlast.maxSize = 1;
-
+    fireBlast.minSize = large ? 0.1 : 0.05;
+    fireBlast.maxSize = large ? 1 : 0.25;
     // Lifetime
     fireBlast.minLifeTime = 0.1;
-    fireBlast.maxLifeTime = 2;
-
+    fireBlast.maxLifeTime = large ? 2 : 1;
     // Emission power
-    fireBlast.minEmitPower = 1;
-    fireBlast.maxEmitPower = 2;
+    fireBlast.minEmitPower = large ? 1 : 0.125;
+    fireBlast.maxEmitPower = large ? 2 : 0.25;
 
     // Limit velocity over time
     fireBlast.addLimitVelocityGradient(0, 40);
@@ -48,7 +48,7 @@ export class ExplosionService {
     fireBlast.maxInitialRotation = Math.PI / 2;
 
     // Texture
-    fireBlast.particleTexture = new Texture('assets/textures/explosion.png', this.engine.scene);
+    fireBlast.particleTexture = this.texture.clone();
     fireBlast.blendMode = ParticleSystem.BLENDMODE_MULTIPLYADD;
 
     // Color over life

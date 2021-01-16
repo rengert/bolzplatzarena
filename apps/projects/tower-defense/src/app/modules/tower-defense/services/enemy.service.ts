@@ -52,6 +52,7 @@ export class EnemyService {
     this.enemyMeshTemplate.setEnabled(false);
 
     this.path.init(fields);
+    this.explosion.init();
   }
 
   appear(source: Coordinate, target: Coordinate): void {
@@ -66,12 +67,20 @@ export class EnemyService {
     this.items.push({ mesh, energy: 1, source, target, dying: false, value: 100 });
   }
 
+  hit(enemy: Enemy, power: number): void {
+    enemy.energy -= power;
+    this.explosion.do(enemy.mesh.position);
+    if (enemy.energy <= 0) {
+      this.kill(enemy);
+    }
+  }
+
   kill(enemy: Enemy): void {
     enemy.dying = true;
     this.#items = this.#items.filter(item => item !== enemy);
     this.account.addKill(enemy);
 
-    this.explosion.do(enemy.mesh.position);
+    this.explosion.do(enemy.mesh.position, true);
 
     enemy.mesh.dispose();
   }

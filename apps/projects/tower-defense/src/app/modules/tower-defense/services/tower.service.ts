@@ -110,14 +110,18 @@ export class TowerService {
           tower.enemy = candidate.enemy;
         }
       }
-      // shooting
-      if (tower.enemy) {
-        tower.enemy.energy -= (tower.power * tower.level);
-        if (tower.enemy.energy <= 0) {
-          this.enemy.kill(tower.enemy);
-          tower.enemy = undefined;
-        }
-      }
+      this.shoot(tower);
+    }
+  }
+
+  private shoot(tower: Tower): void {
+    const { enemy } = tower;
+    if (!enemy) {
+      return;
+    }
+    this.enemy.hit(enemy, (tower.power * tower.level));
+    if (enemy.dying) {
+      tower.enemy = undefined;
     }
   }
 
