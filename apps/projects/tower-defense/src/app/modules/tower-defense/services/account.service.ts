@@ -5,9 +5,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
+  private readonly energy = new BehaviorSubject(1);
   private readonly kills = new BehaviorSubject(0);
   private readonly cash = new BehaviorSubject(1000);
 
+  readonly energy$: Observable<number>;
   readonly kills$: Observable<number>;
   readonly cash$: Observable<number>;
 
@@ -16,6 +18,7 @@ export class AccountService {
     private readonly ngZone: NgZone) {
     this.kills$ = this.kills;
     this.cash$ = this.cash;
+    this.energy$ = this.energy;
   }
 
   addKill(enemy: Enemy): void {
@@ -36,5 +39,13 @@ export class AccountService {
     this.snackBar.open('Leider nicht genügend Kohle, General!!', undefined, { duration: 1500 });
 
     return false;
+  }
+
+  hit(): void {
+    if (this.energy.value > 0) {
+      this.ngZone.run(() => {
+        this.energy.next(this.energy.value - 0.1);
+      });
+    }
   }
 }
