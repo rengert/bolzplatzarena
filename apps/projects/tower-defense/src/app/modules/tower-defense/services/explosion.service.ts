@@ -19,14 +19,14 @@ export class ExplosionService {
     var fireBlastHemisphere = fireBlast.createHemisphericEmitter(.1, 0);
 
     // Set emission rate
-    fireBlast.emitRate = 5000;
+    fireBlast.emitRate = 500;
 
     // Start size
     fireBlast.minSize = 0.1;
-    fireBlast.maxSize = 2;
+    fireBlast.maxSize = 1;
 
     // Lifetime
-    fireBlast.minLifeTime = 1;
+    fireBlast.minLifeTime = 0.1;
     fireBlast.maxLifeTime = 2;
 
     // Emission power
