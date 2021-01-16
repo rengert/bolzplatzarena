@@ -16,7 +16,8 @@ export class AccountService {
 
   constructor(
     private snackBar: MatSnackBar,
-    private readonly ngZone: NgZone) {
+    private readonly ngZone: NgZone,
+  ) {
     this.kills$ = this.kills;
     this.cash$ = this.cash;
     this.energy$ = this.energy;
@@ -47,7 +48,6 @@ export class AccountService {
   }
 
   hit(): void {
-    console.log(this.energy.value);
     if (!this.defeated) {
       this.ngZone.run(() => {
         this.energy.next(this.energy.value - 0.1);

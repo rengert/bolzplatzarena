@@ -5,9 +5,10 @@ import { AccountComponent } from './components/account/account.component';
 import { CoreModule } from '@bpa/core';
 import { TowerUpdateComponent } from './components/tower-defense/dialogs/tower-update/tower-update.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ResultComponent } from './components/tower-defense/dialogs/result/result.component';
 
 @NgModule({
-  declarations: [TowerDefenseComponent, AccountComponent, TowerUpdateComponent],
+  declarations: [TowerDefenseComponent, AccountComponent, TowerUpdateComponent, ResultComponent],
   imports: [
     CommonModule,
     CoreModule,
