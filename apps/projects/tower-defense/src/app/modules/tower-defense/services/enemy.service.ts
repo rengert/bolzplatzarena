@@ -64,6 +64,7 @@ export class EnemyService {
     mesh.position.x = this.fields[source.x][source.y].mesh.position.x;
     mesh.position.z = this.fields[source.x][source.y].mesh.position.z;
     mesh.position.y = 0.55;
+    mesh.rotation = Vector3.Zero();
     this.items.push({ mesh, energy: 1, source, target, dying: false, value: 100 });
   }
 
@@ -114,11 +115,25 @@ export class EnemyService {
     }
   }
 
+  private rotate(enemy: Enemy, targetCoordinates: { x: number, y: number }): boolean {
+    const target = this.fields[targetCoordinates.x][targetCoordinates.y];
+    const enemyDelta = target.mesh.position.subtract(enemy.mesh.position);
+    const targetAngel = (enemyDelta.z > 0) ? 0 : Math.PI / 2;
+    if (Math.abs(targetAngel - (enemy.mesh.rotation.y % Math.PI)) > 0.1) {
+      enemy.mesh.rotation = new Vector3(0, (enemy.mesh.rotation.y + Math.PI / 32) % (Math.PI * 2), 0);
+      return true;
+    }
+
+    return false;
+  }
+
   update(path: number[][]): void {
     for (const enemy of this.items) {
       const target = this.findTarget(enemy, path);
       if (target) {
-        this.move(enemy, target);
+        if (!this.rotate(enemy, target)) {
+          this.move(enemy, target);
+        }
       }
     }
   }
