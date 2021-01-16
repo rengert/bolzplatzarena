@@ -85,30 +85,40 @@ export class EnemyService {
     enemy.mesh.dispose();
   }
 
+  private findTarget(enemy: Enemy, bestPath: number[][]): { x: number, y: number } | undefined {
+    let enemyPath = bestPath;
+    let indexSource = enemyPath.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y);
+    if (indexSource === -1) {
+      enemyPath = this.path.find({ x: enemy.source.y, y: enemy.source.x }, enemy.target);
+      indexSource = enemyPath.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y);
+    }
+    if (indexSource === enemyPath.length - 1) {
+      return;
+    }
+    const [y, x] = enemyPath[indexSource + 1];
+    return { x, y };
+  }
+
+  private move(enemy: Enemy, targetCoordinates: { x: number, y: number }) {
+    const target = this.fields[targetCoordinates.x][targetCoordinates.y];
+    let deltaTargetSource = target.mesh.position.subtract(enemy.mesh.position);
+    enemy.mesh.position.x += getMove(deltaTargetSource.x);
+    enemy.mesh.position.z += getMove(deltaTargetSource.z);
+
+    const enemyDelta = target.mesh.position.subtract(enemy.mesh.position);
+    enemyDelta.y = 0;
+    if (enemyDelta.equalsWithEpsilon(Vector3.Zero())) {
+      enemy.source = targetCoordinates;
+      enemy.mesh.position.x += Math.random() * SPEED;
+      enemy.mesh.position.z += Math.random() * SPEED;
+    }
+  }
+
   update(path: number[][]): void {
     for (const enemy of this.items) {
-      let enemyPath = path;
-      let indexSource = enemyPath.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y);
-      if (indexSource === -1) {
-        enemyPath = this.path.find({ x: enemy.source.y, y: enemy.source.x }, enemy.target);
-        indexSource = enemyPath.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y);
-      }
-      if (indexSource === enemyPath.length - 1) {
-        continue;
-      }
-      const [y, x] = enemyPath[indexSource + 1];
-      const targetCoordinates = { x, y };
-      const target = this.fields[targetCoordinates.x][targetCoordinates.y];
-      let deltaTargetSource = target.mesh.position.subtract(enemy.mesh.position);
-      enemy.mesh.position.x += getMove(deltaTargetSource.x);
-      enemy.mesh.position.z += getMove(deltaTargetSource.z);
-
-      const enemyDelta = target.mesh.position.subtract(enemy.mesh.position);
-      enemyDelta.y = 0;
-      if (enemyDelta.equalsWithEpsilon(Vector3.Zero())) {
-        enemy.source = targetCoordinates;
-        enemy.mesh.position.x += Math.random() * SPEED;
-        enemy.mesh.position.z += Math.random() * SPEED;
+      const target = this.findTarget(enemy, path);
+      if (target) {
+        this.move(enemy, target);
       }
     }
   }
