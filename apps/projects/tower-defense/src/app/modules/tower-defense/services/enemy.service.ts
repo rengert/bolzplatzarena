@@ -86,6 +86,16 @@ export class EnemyService {
     enemy.mesh.dispose();
   }
 
+  explode(enemy: Enemy): void {
+    enemy.dying = true;
+    this.#items = this.#items.filter(item => item !== enemy);
+    this.account.hit();
+
+    this.explosion.do(enemy.mesh.position, true);
+
+    enemy.mesh.dispose();
+  }
+
   private findTarget(enemy: Enemy, bestPath: number[][]): { x: number, y: number } | undefined {
     let enemyPath = bestPath;
     let indexSource = enemyPath.findIndex(([y, x]: number[]) => x === enemy.source.x && y === enemy.source.y);
@@ -134,7 +144,10 @@ export class EnemyService {
         if (!this.rotate(enemy, target)) {
           this.move(enemy, target);
         }
+        continue;
       }
+
+      this.explode(enemy);
     }
   }
 }
