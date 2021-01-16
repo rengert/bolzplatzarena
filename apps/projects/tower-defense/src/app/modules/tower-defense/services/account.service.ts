@@ -2,6 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { Enemy } from '../models/enemy.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { isZero } from '@bpa/core';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -19,6 +20,10 @@ export class AccountService {
     this.kills$ = this.kills;
     this.cash$ = this.cash;
     this.energy$ = this.energy;
+  }
+
+  get defeated(): boolean {
+    return isZero(this.energy.value);
   }
 
   addKill(enemy: Enemy): void {
@@ -42,7 +47,8 @@ export class AccountService {
   }
 
   hit(): void {
-    if (this.energy.value > 0) {
+    console.log(this.energy.value);
+    if (!this.defeated) {
       this.ngZone.run(() => {
         this.energy.next(this.energy.value - 0.1);
       });

@@ -3,6 +3,8 @@ import { OperatorFunction } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
+const EPSYLON = 0.00001;
+
 export function createUuid(): string {
   return uuid();
 }
@@ -91,4 +93,8 @@ export function pop<T>(items: T[]): T {
     throw Error('do not pop empty array');
   }
   return pop;
+}
+
+export function isZero(value: number): boolean {
+  return Math.abs(value) < EPSYLON;
 }

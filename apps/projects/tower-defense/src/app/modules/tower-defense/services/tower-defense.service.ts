@@ -10,6 +10,7 @@ import { TowerService } from './tower.service';
 import { colorFrom } from '../utils/common.utils';
 import { VALUES } from '../constants';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AccountService } from './account.service';
 
 export interface Loading {
   steps: number,
@@ -35,7 +36,11 @@ export class TowerDefenseService {
 
   private readonly loading = new BehaviorSubject<Loading>({ steps: 0, started: 0, finished: 0 });
 
+  private started = false;
+  private defeated = false;
+
   constructor(
+    private readonly account: AccountService,
     private readonly engine: EngineService,
     private readonly enemy: EnemyService,
     private readonly path: PathService,
@@ -74,6 +79,9 @@ export class TowerDefenseService {
     this.loading.next({ steps, started: started++, finished: ++finished });
     this.engine.fitToView();
     this.loading.next({ steps, started: steps, finished: steps });
+
+    // todo: move to an dialog
+    this.started = true;
   }
 
   private initScene(canvas: ElementRef<HTMLCanvasElement>): Scene {
@@ -173,12 +181,21 @@ export class TowerDefenseService {
   /** rendering stuff **/
 
   private beforeRender(): void {
+    if (!this.started || this.defeated) {
+      return;
+    }
+
     if ((this.enemy.items.length < VALUES.config.enemies.count)
       && (Math.random() > VALUES.config.enemies.probability)) {
       this.enemy.appear(this.start, this.end);
     }
 
     this.enemy.update(this.bestPath);
+
+    if (this.account.defeated) {
+      this.defeated = true;
+      return;
+    }
     this.tower.update();
   }
 
