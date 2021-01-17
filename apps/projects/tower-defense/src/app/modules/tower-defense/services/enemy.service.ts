@@ -10,7 +10,7 @@ import { colorFrom } from '../utils/common.utils';
 import { AccountService } from './account.service';
 import { ExplosionService } from './explosion.service';
 
-const SPEED = 0.125;
+const SPEED = 0.0125;
 
 function getMove(move: number): number {
   return move >= 0
