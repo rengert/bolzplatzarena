@@ -33,8 +33,8 @@ export class TowerDefenseService {
   private blockedMaterial: StandardMaterial;
   private hoverMaterial: StandardMaterial;
 
-  private readonly start: Coordinate = { x: 0, y: 0 };
-  private readonly end: Coordinate = { x: 19, y: 9 };
+  private readonly startCoordinate: Coordinate = { x: 0, y: 0 };
+  private readonly endCoordinate: Coordinate = { x: 19, y: 9 };
   private readonly size = { width: 10, depth: 20 };
 
   private bestPath: number[][] = [];
@@ -80,15 +80,17 @@ export class TowerDefenseService {
     this.loading.next({ steps, started: started++, finished: ++finished });
     this.path.init(this.fields);
     this.loading.next({ steps, started: started++, finished: ++finished });
-    this.bestPath = this.path.find(this.start, this.end);
+    this.bestPath = this.path.find(this.startCoordinate, this.endCoordinate);
     this.loading.next({ steps, started: started++, finished: ++finished });
     this.highlightPath(this.bestPath);
 
     this.loading.next({ steps, started: started++, finished: ++finished });
     this.engine.fitToView();
     this.loading.next({ steps, started: steps, finished: steps });
+  }
 
-    // todo: move to an dialog
+  start(): void {
+    this.defeated = false;
     this.started = true;
   }
 
@@ -151,7 +153,7 @@ export class TowerDefenseService {
     field.mesh.actionManager.registerAction(new ExecuteCodeAction(
       ActionManager.OnPickTrigger,
       () => {
-        if (!field.free) {
+        if (!this.started || !field.free) {
           return;
         }
         field.tower = this.tower.build(field);
@@ -159,7 +161,7 @@ export class TowerDefenseService {
         if (field.free) {
           return;
         }
-        const path = this.path.find(this.start, this.end);
+        const path = this.path.find(this.startCoordinate, this.endCoordinate);
         if (path.length) {
           this.bestPath = path;
           this.highlightPath(this.bestPath);
@@ -195,7 +197,7 @@ export class TowerDefenseService {
 
     if ((this.enemy.items.length < VALUES.config.enemies.count)
       && (Math.random() > VALUES.config.enemies.probability)) {
-      this.enemy.appear(this.start, this.end);
+      this.enemy.appear(this.startCoordinate, this.endCoordinate);
     }
 
     this.enemy.update(this.bestPath);
