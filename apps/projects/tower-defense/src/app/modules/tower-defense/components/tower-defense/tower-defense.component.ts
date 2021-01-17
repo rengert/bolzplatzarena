@@ -28,6 +28,12 @@ export class TowerDefenseComponent implements AfterViewInit {
     this.loading$ = this.towerDefense.loading$.pipe(
       delayWhen(loading => loading.steps === loading.finished ? timer(3000) : timer(1)),
       tap(loading => this.started = loading.steps === loading.finished),
+      tap(() => {
+          if (this.started) {
+            this.readyPlayerOne();
+          }
+        },
+      ),
     );
 
     this.subscription = this.towerDefense.result$.subscribe(result => this.openResult(result));
@@ -35,7 +41,6 @@ export class TowerDefenseComponent implements AfterViewInit {
 
   async ngAfterViewInit(): Promise<void> {
     await this.towerDefense.init(this.canvasElement);
-    this.readyPlayerOne();
   }
 
   private readyPlayerOne(): void {
