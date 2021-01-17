@@ -1,4 +1,4 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { ElementRef, Injectable, NgZone } from '@angular/core';
 import { EngineService } from './engine.service';
 import { ActionManager, ExecuteCodeAction, MeshBuilder, Scene, StandardMaterial, Texture } from '@babylonjs/core';
 import { createUuid } from '@bpa/core';
@@ -9,7 +9,8 @@ import { PathService } from './path.service';
 import { TowerService } from './tower.service';
 import { colorFrom } from '../utils/common.utils';
 import { VALUES } from '../constants';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { AccountService } from './account.service';
 
 export interface Loading {
   steps: number,
@@ -17,9 +18,14 @@ export interface Loading {
   finished: number,
 }
 
+export interface Result {
+  defeated: boolean;
+}
+
 @Injectable({ providedIn: 'root' })
 export class TowerDefenseService {
   readonly loading$: Observable<Loading>;
+  readonly result$: Observable<Result>;
 
   private fields: Field[][];
 
@@ -34,14 +40,21 @@ export class TowerDefenseService {
   private bestPath: number[][] = [];
 
   private readonly loading = new BehaviorSubject<Loading>({ steps: 0, started: 0, finished: 0 });
+  private readonly result = new Subject<Result>();
+
+  private started = false;
+  private defeated = false;
 
   constructor(
+    private readonly account: AccountService,
     private readonly engine: EngineService,
     private readonly enemy: EnemyService,
     private readonly path: PathService,
     private readonly tower: TowerService,
+    private readonly ngZone: NgZone,
   ) {
     this.loading$ = this.loading;
+    this.result$ = this.result;
   }
 
   async init(canvas: ElementRef<HTMLCanvasElement>): Promise<void> {
@@ -74,6 +87,9 @@ export class TowerDefenseService {
     this.loading.next({ steps, started: started++, finished: ++finished });
     this.engine.fitToView();
     this.loading.next({ steps, started: steps, finished: steps });
+
+    // todo: move to an dialog
+    this.started = true;
   }
 
   private initScene(canvas: ElementRef<HTMLCanvasElement>): Scene {
@@ -173,12 +189,25 @@ export class TowerDefenseService {
   /** rendering stuff **/
 
   private beforeRender(): void {
+    if (!this.started || this.defeated) {
+      return;
+    }
+
     if ((this.enemy.items.length < VALUES.config.enemies.count)
       && (Math.random() > VALUES.config.enemies.probability)) {
       this.enemy.appear(this.start, this.end);
     }
 
     this.enemy.update(this.bestPath);
+
+    if (this.account.defeated) {
+      this.defeated = true;
+      this.ngZone.run(() => {
+        this.result.next({ defeated: true });
+      });
+
+      return;
+    }
     this.tower.update();
   }
 
