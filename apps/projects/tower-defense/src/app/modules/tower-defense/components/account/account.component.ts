@@ -18,5 +18,6 @@ export class AccountComponent {
     this.energy$ = account.energy$;
     this.kills$ = account.kills$;
     this.cash$ = account.cash$;
+    this.wave$ = account.wave$;
   }
 }
