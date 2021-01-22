@@ -6,6 +6,7 @@ import { isZero } from '@bpa/core';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
+  private readonly wave = new BehaviorSubject(1);
   private readonly energy = new BehaviorSubject(1);
   private readonly kills = new BehaviorSubject(0);
   private readonly cash = new BehaviorSubject(1000);
@@ -13,6 +14,7 @@ export class AccountService {
   readonly energy$: Observable<number>;
   readonly kills$: Observable<number>;
   readonly cash$: Observable<number>;
+  readonly wave$: Observable<number>;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -21,6 +23,7 @@ export class AccountService {
     this.kills$ = this.kills;
     this.cash$ = this.cash;
     this.energy$ = this.energy;
+    this.wave$ = this.wave;
   }
 
   get defeated(): boolean {
@@ -53,5 +56,10 @@ export class AccountService {
         this.energy.next(this.energy.value - 0.1);
       });
     }
+  }
+
+  nextWave(wave: number): void {
+    this.wave.next(wave);
+    this.snackBar.open(`Welle ${wave}`, undefined, { duration: 1500 });
   }
 }

@@ -12,6 +12,7 @@ export class AccountComponent {
   readonly energy$: Observable<number>;
   readonly kills$: Observable<number>;
   readonly cash$: Observable<number>;
+  readonly wave$: Observable<number>;
 
   constructor(account: AccountService) {
     this.energy$ = account.energy$;

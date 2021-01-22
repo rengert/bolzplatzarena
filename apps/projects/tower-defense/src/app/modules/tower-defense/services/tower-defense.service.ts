@@ -45,6 +45,9 @@ export class TowerDefenseService {
   private started = false;
   private defeated = false;
 
+  private wave = 1;
+  private appearedEnemies = 0;
+
   constructor(
     private readonly account: AccountService,
     private readonly engine: EngineService,
@@ -197,7 +200,12 @@ export class TowerDefenseService {
 
     if ((this.enemy.items.length < VALUES.config.enemies.count)
       && (Math.random() > VALUES.config.enemies.probability)) {
-      this.enemy.appear(this.startCoordinate, this.endCoordinate);
+      if (this.appearedEnemies >= this.wave * 10) {
+        this.wave++;
+        this.account.nextWave(this.wave);
+      }
+      this.enemy.appear(this.startCoordinate, this.endCoordinate, this.wave);
+      this.appearedEnemies++;
     }
 
     this.enemy.update(this.bestPath);
