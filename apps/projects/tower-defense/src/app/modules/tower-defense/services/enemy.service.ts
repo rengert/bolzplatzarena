@@ -55,7 +55,7 @@ export class EnemyService {
     this.explosion.init();
   }
 
-  appear(source: Coordinate, target: Coordinate): void {
+  appear(source: Coordinate, target: Coordinate, level: number): void {
     if (!this.enemyMeshTemplate) {
       return;
     }
@@ -65,7 +65,7 @@ export class EnemyService {
     mesh.position.z = this.fields[source.x][source.y].mesh.position.z;
     mesh.position.y = 0.55;
     mesh.rotation = Vector3.Zero();
-    this.items.push({ mesh, energy: 1, source, target, dying: false, value: 100 });
+    this.items.push({ mesh, energy: level, source, target, dying: false, value: 100 + (level - 1) * 50 });
   }
 
   hit(enemy: Enemy, power: number): void {

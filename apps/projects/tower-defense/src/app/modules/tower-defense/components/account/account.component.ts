@@ -12,10 +12,12 @@ export class AccountComponent {
   readonly energy$: Observable<number>;
   readonly kills$: Observable<number>;
   readonly cash$: Observable<number>;
+  readonly wave$: Observable<number>;
 
   constructor(account: AccountService) {
     this.energy$ = account.energy$;
     this.kills$ = account.kills$;
     this.cash$ = account.cash$;
+    this.wave$ = account.wave$;
   }
 }
