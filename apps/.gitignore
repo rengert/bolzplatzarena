@@ -45,7 +45,6 @@ testem.log
 .DS_Store
 Thumbs.db
 /projects/snake/apps/node_modules/.cache/
-/projects/neinometer/apps/.gradle/
 /projects/nonogramm/apps/.gradle/
 /.firebase/
 /projects/snake/apps/.gradle/
