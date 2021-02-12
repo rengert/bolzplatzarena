@@ -57,10 +57,11 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(LoseScreenComponent);
     dialogRef.afterClosed()
       .subscribe(async result => {
-        if (result === true) {
+        const current = this.gameData$.value;
+        if (result === true && current) {
           this.gameData$.next({
-            ...this.gameData$.value !,
-            current: [...this.gameData$.value !.data].map(
+            ...current,
+            current: [...current.data].map(
               row => ({
                 ...row,
                 data: row.data.map(block => ({ ...block })),
