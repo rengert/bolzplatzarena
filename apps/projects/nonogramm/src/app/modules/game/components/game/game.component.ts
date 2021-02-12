@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { Config } from '../../../../models/config';
 import { GameData } from '../../../../models/game-data';
 import { StorageService } from '../../../../services/storage.service';
@@ -15,14 +16,13 @@ import { WinScreenComponent } from '../win-screen/win-screen.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameComponent implements OnInit {
-  gameData: GameData;
+  readonly gameData$ = new BehaviorSubject<GameData | undefined>(undefined);
 
   constructor(
     private readonly game: GameService,
     private readonly storage: StorageService,
     private readonly dialog: MatDialog,
     private readonly router: Router,
-    private readonly change: ChangeDetectorRef,
   ) {
   }
 
@@ -41,7 +41,7 @@ export class GameComponent implements OnInit {
   }
 
   private setupGame(config: Config): void {
-    this.gameData = this.storage.loadGame() ?? this.game.createGameData(config);
+    this.gameData$.next(this.storage.loadGame() ?? this.game.createGameData(config));
   }
 
   private win(): void {
@@ -55,19 +55,19 @@ export class GameComponent implements OnInit {
 
   private lose(): void {
     const dialogRef = this.dialog.open(LoseScreenComponent);
-    dialogRef
-      .afterClosed()
+    dialogRef.afterClosed()
       .subscribe(async result => {
         if (result === true) {
-          this.gameData.current = [...this.gameData.data].map(
-            row => ({
-              ...row,
-              data: row.data.map(block => ({ ...block })),
-            }),
-          );
-          this.gameData = { ...this.gameData };
-          this.change.detectChanges();
-
+          this.gameData$.next({
+            ...this.gameData$.value !,
+            current: [...this.gameData$.value !.data].map(
+              row => ({
+                ...row,
+                data: row.data.map(block => ({ ...block })),
+              }),
+            ),
+            failed: 0,
+          });
           return;
         }
         this.storage.cleanGame();

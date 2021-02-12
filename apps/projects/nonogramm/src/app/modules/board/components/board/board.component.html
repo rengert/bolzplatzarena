@@ -13,8 +13,8 @@
                [config]="boardData.config"></app-caption>
 </div>
 <div class="inner">
-  <div *ngFor="let row of boardData.current; trackBy: ('row' | trackByProperty)" class="row">
-    <app-block *ngFor="let block of row.data; trackBy: ({ prop1: 'row', prop2: 'column'} | trackByCoord)"
+  <div *ngFor="let row of boardData.current" class="row">
+    <app-block *ngFor="let block of row.data"
                [block]="block"
                [config]="boardData.config"
                (action)="onAction($event)"
