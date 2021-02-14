@@ -1,3 +1,6 @@
-<app-performance-test *ngFor="let test of tests; trackBy: trackByFn"
-                      [test]="test"
-                      [loop]="100000"></app-performance-test>
+<button (click)="captureScreen()">Drucken</button>
+<div class="captureScreen" *ngFor="let test of tests; trackBy: trackByFn">
+  <app-performance-test
+    [test]="test"
+    [loop]="100000"></app-performance-test>
+</div>

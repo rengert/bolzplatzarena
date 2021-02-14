@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import moment from 'moment';
-import { addDays } from '../../../../../core/src/lib/utils/date.util';
+import { addDays } from 'projects/core/src/projects';
 
 @Component({
   selector: 'app-moment-playground',
@@ -99,4 +99,5 @@ export class MomentPlaygroundComponent {
     }
     this.timeCreateMomentWithDate = new Date().getTime() - startBoth;
   }
+
 }
