@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import jsPDF from 'jspdf';
 import moment from 'moment';
 import { addDays } from 'projects/core/src/projects';
 
@@ -101,17 +100,4 @@ export class MomentPlaygroundComponent {
     this.timeCreateMomentWithDate = new Date().getTime() - startBoth;
   }
 
-  async print(): Promise<void> {
-    const doc = new jsPDF('p', 'pt', 'a4');
-
-    const div = window.document.createElement('div');
-    const style = window.document.getElementsByTagName('style');
-    for (let x = 0; x < style.length; x++) {
-      div.appendChild(style[x]);
-    }
-    div.appendChild(await window.document.getElementsByTagName('main')[0]);
-    await doc.html(div);
-    doc.save('test.pdf');
-    doc.output('dataurlnewwindow');
-  }
 }
