@@ -39,6 +39,3 @@ jobs:
       - run: cd apps && npm run deploy:snake3d
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - run: cd apps && npm run deploy:tower-defense
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}          
