@@ -17,6 +17,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { PerformanceCheckComponent } from './components/performance-check/performance-check.component';
 import { PerformanceTestComponent } from './components/performance-check/performance-test/performance-test.component';
 import { SelectionDemoComponent } from './components/selection-demo/selection-demo.component';
+import { OnlineOfflineComponent } from './components/online-offline/online-offline.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SelectionDemoComponent } from './components/selection-demo/selection-de
     PerformanceCheckComponent,
     PerformanceTestComponent,
     GridComponent,
+    OnlineOfflineComponent,
   ],
   imports: [
     CommonModule,
