@@ -69,7 +69,7 @@ registerLocaleData(localeDe);
     NavigationModule,
 
     WorkerModule.forWorkers([
-      { worker: PropertyWorker, initFn: () => new Worker('./workers/property.worker.ts', { type: 'module' }) },
+      { worker: PropertyWorker, initFn: () => new Worker(new URL('./workers/property.worker.ts', import.meta.url), { type: 'module' }) },
     ]),
   ],
   providers: [

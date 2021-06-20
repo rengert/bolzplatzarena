@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LoggerService, NotificationService, TitleBarService } from '@bpa/core';
 import { TranslateService } from '@ngx-translate/core';
 import { instance, mock } from 'ts-mockito';
-import 'zone.js/dist/zone-testing';
+import 'zone.js/testing';
 import { DialogService } from '../../../core/src/lib/modules/dialog/services/dialog.service';
 import { AppComponent } from './app.component';
 

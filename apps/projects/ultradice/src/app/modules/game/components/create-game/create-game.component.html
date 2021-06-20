@@ -9,21 +9,21 @@
   <mat-form-field class="full-width">
     <input matInput type="text"
            [(ngModel)]="player2.name"
-           [disabled]="player1.name == ''"
+           [disabled]="player1.name === ''"
            placeholder="Name Spieler 2"
            class="input">
   </mat-form-field>
   <mat-form-field class="full-width">
     <input matInput type="text"
            [(ngModel)]="player3.name"
-           [disabled]="player2.name == ''"
+           [disabled]="player2.name === ''"
            placeholder="Name Spieler 3"
            class="input">
   </mat-form-field>
   <mat-form-field class="full-width">
     <input matInput type="text"
            [(ngModel)]="player4.name"
-           [disabled]="player3.name == ''"
+           [disabled]="player3.name === ''"
            placeholder="Name Spieler 4"
            class="input">
   </mat-form-field>

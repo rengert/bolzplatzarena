@@ -40,8 +40,8 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.simulation.registerWorker(new Worker('./workers/project.worker', { type: 'module' }));
-    this.simulation.registerWorker(new Worker('./app.worker', { type: 'module' }));
+    this.simulation.registerWorker(new Worker(new URL('./workers/project.worker', import.meta.url), { type: 'module' }));
+    this.simulation.registerWorker(new Worker(new URL('./app.worker', import.meta.url), { type: 'module' }));
 
     this.client = this.workerManager.createClient(PropertyWorker);
     await this.client.connect();

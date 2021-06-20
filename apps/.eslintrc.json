@@ -22,8 +22,7 @@
         "eslint-plugin-no-null",
         "eslint-plugin-unicorn"
       ],
-      "rules": {
-      }
+      "rules": {}
     },
     {
       "files": [
@@ -32,8 +31,7 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {
-      }
+      "rules": {}
     }
   ]
 }
