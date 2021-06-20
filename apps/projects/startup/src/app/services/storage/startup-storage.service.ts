@@ -12,19 +12,19 @@ export class StartupStorageService {
   }
 
   launched$(): Observable<boolean> {
-    return this.storage.watch<Startup>('startup').pipe(
+    return this.storage.watch('startup').pipe(
       map(startup => !!startup),
     );
   }
 
   watch$(): Observable<Startup> {
-    return this.storage.watch<Startup>('startup').pipe(
+    return this.storage.watch('startup').pipe(
       map(data => data as Startup),
     );
   }
 
   async get(): Promise<Startup> {
-    return this.storage.get<Startup>('startup').pipe(
+    return this.storage.get('startup').pipe(
       first(),
       map(data => data as Startup),
     ).toPromise();
@@ -39,7 +39,7 @@ export class StartupStorageService {
   }
 
   async getMoment(key: string): Promise<Moment | undefined> {
-    const data = await this.storage.get<string>(key).toPromise() as string;
+    const data = await this.storage.get(key).toPromise() as string;
     if (!!data) {
       return createMoment(data);
     }
