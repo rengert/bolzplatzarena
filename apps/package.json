@@ -54,7 +54,7 @@
     "astar-typescript": "^1.2.5",
     "babylonjs": "^4.2.0",
     "babylonjs-loaders": "^4.2.0",
-    "dexie": "^3.0.3",
+    "dexie": "^3.2.2",
     "firebase": "^8.2.4",
     "jspdf": "^2.3.0",
     "lodash": "^4.17.21",
