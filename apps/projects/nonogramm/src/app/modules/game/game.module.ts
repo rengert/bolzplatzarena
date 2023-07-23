@@ -10,26 +10,22 @@ import { LoseScreenComponent } from './components/lose-screen/lose-screen.compon
 import { WinScreenComponent } from './components/win-screen/win-screen.component';
 
 @NgModule({
-  declarations: [
-    GameComponent,
-    LoseScreenComponent,
-    WinScreenComponent,
-  ],
-  imports: [
-    BoardModule,
-    CommonModule,
-    MatButtonModule,
-    MatDialogModule,
-    RouterModule,
-    TranslateModule,
-  ],
-  exports: [
-    GameComponent,
-  ],
-  entryComponents: [
-    LoseScreenComponent,
-    WinScreenComponent,
-  ],
+    declarations: [
+        GameComponent,
+        LoseScreenComponent,
+        WinScreenComponent,
+    ],
+    imports: [
+        BoardModule,
+        CommonModule,
+        MatButtonModule,
+        MatDialogModule,
+        RouterModule,
+        TranslateModule,
+    ],
+    exports: [
+        GameComponent,
+    ]
 })
 export class GameModule {
 }

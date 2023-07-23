@@ -18,31 +18,27 @@ import { StatisticsModule } from './modules/statistics/statistics.module';
 import { ROUTES } from './routes';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, relativeLinkResolution: 'legacy' }),
-    SharedModule,
-    GameModule,
-    InfoModule,
-    StatisticsModule,
-    TranslateModule.forRoot(),
-    MatIconModule,
-    MatDialogModule,
-    MaterialModule,
-    DialogModule,
-  ],
-  providers: [
-    GameIsRunningGuard,
-  ],
-  entryComponents: [
-    ResultComponent,
-    EndResultComponent,
-  ],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule.forRoot(ROUTES, { useHash: true, relativeLinkResolution: 'legacy' }),
+        SharedModule,
+        GameModule,
+        InfoModule,
+        StatisticsModule,
+        TranslateModule.forRoot(),
+        MatIconModule,
+        MatDialogModule,
+        MaterialModule,
+        DialogModule,
+    ],
+    providers: [
+        GameIsRunningGuard,
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
