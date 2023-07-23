@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SpeedDialService } from '@bpa/core';
 import { Observable } from 'rxjs';
@@ -19,7 +19,7 @@ import { OfficeService } from '../../services/office.service';
 export class OpenOfficeComponent extends BaseComponent {
   readonly cities$: Observable<City[]>;
 
-  readonly form: FormGroup;
+  readonly form: UntypedFormGroup;
 
   constructor(
     speedDial: SpeedDialService,
@@ -34,13 +34,13 @@ export class OpenOfficeComponent extends BaseComponent {
 
     this.cities$ = this.staticData.getCities$();
 
-    this.form = new FormGroup({
+    this.form = new UntypedFormGroup({
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      city: new FormControl('', Validators.required),
+      city: new UntypedFormControl('', Validators.required),
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      name: new FormControl('', Validators.required),
+      name: new UntypedFormControl('', Validators.required),
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      address: new FormControl('', Validators.required),
+      address: new UntypedFormControl('', Validators.required),
     });
   }
 
