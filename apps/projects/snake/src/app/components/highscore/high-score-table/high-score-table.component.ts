@@ -13,7 +13,6 @@ import { HighscoreService } from '../../../services/highscore.service';
 })
 export class HighScoreTableComponent implements OnChanges {
   @Input() gameMode: GameMode;
-  @Input() remote: boolean;
 
   readonly data$: Observable<Highscore[]>;
 
@@ -21,9 +20,7 @@ export class HighScoreTableComponent implements OnChanges {
 
   constructor(highscore: HighscoreService) {
     this.data$ = this.mode.pipe(
-      switchMap(mode => this.remote
-        ? highscore.getRemote$(mode)
-        : highscore.getByMode$(mode)),
+      switchMap(mode => highscore.getByMode$(mode)),
     );
   }
 

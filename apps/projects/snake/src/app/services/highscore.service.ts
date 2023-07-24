@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { GameMode } from '../app.constants';
 import { Highscore } from '../models/highscore.model';
@@ -7,19 +6,14 @@ import { HighscoreStorageService } from './storage/highscore-storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class HighscoreService {
-  constructor(
-    private readonly highscoreStorage: HighscoreStorageService,
-    private readonly firestore: AngularFirestore,
-  ) {
+  constructor(private readonly highscoreStorage: HighscoreStorageService) {
   }
 
-  async add(highscore: Highscore): Promise<void> {
+  add(highscore: Highscore): Promise<unknown> {
     if (!highscore.name) {
-      return;
+      return Promise.resolve()
     }
-    await this.highscoreStorage.highscore.put(highscore);
-    await this.firestore.collection('SnakeHighscore')
-      .add(highscore);
+    return this.highscoreStorage.highscore.put(highscore);
   }
 
   get$(): Observable<Highscore[]> {
@@ -41,16 +35,5 @@ export class HighscoreService {
         .limit(10)
         .toArray(),
     );
-  }
-
-  getRemote$(gameMode: GameMode): Observable<Highscore[]> {
-    return this.firestore.collection<Highscore>(
-      'SnakeHighscore',
-      ref => ref
-        .where('gameMode', '==', gameMode)
-        .orderBy('score', 'desc')
-        .limit(10),
-    )
-      .valueChanges();
   }
 }

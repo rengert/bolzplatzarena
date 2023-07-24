@@ -6,9 +6,7 @@
     </mat-button-toggle>
   </mat-button-toggle-group>
   <h2>Highscore</h2>
-  <app-high-score-table [gameMode]="gameMode" [remote]="false"></app-high-score-table>
-  <h2>Highscore / Remote</h2>
-  <app-high-score-table [gameMode]="gameMode" [remote]="true"></app-high-score-table>
+  <app-high-score-table [gameMode]="gameMode"></app-high-score-table>
   <button mat-flat-button color="primary" [routerLink]="['/']">
     {{ 'COMPONENTS.HIGHSCORE.HOME_LINK' | translate }}
   </button>

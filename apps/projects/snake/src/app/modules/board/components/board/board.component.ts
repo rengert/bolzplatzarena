@@ -1,7 +1,5 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
-import { SimpleSnackBar } from '@angular/material/snack-bar/simple-snack-bar';
-import { MatSnackBarRef } from '@angular/material/snack-bar/snack-bar-ref';
+import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { createUuid, LoggerService, pop } from '@bpa/core';
 import moment from 'moment';
 import { Direction, GameMode, Points } from '../../../../app.constants';
@@ -39,7 +37,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   constructor(
     private readonly boardService: BoardService,
     private readonly highscore: HighscoreService,
-    private readonly logger: LoggerService<BoardComponent>,
     private readonly snackBar: MatSnackBar,
   ) {
   }
