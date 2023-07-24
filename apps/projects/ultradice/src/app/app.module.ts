@@ -24,7 +24,7 @@ import { ROUTES } from './routes';
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(ROUTES, { useHash: true, relativeLinkResolution: 'legacy' }),
+        RouterModule.forRoot(ROUTES, { useHash: true }),
         SharedModule,
         GameModule,
         InfoModule,
