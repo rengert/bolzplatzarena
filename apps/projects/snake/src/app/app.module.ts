@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { CoreModule, MaterialModule } from '@bpa/core';
@@ -27,6 +28,7 @@ import { BoardModule } from './modules/board/board.module';
     MaterialModule,
     TranslateModule.forRoot(),
     FormsModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

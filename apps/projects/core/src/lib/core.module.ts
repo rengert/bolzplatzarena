@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { IconCardComponent } from './components/icon-card/icon-card.component';
@@ -20,6 +21,7 @@ import { TrackByPropertyPipe } from './pipes/track-by-property.pipe';
     MaterialModule,
     PrivacyModule,
     RouterModule,
+    MatCardModule,
   ],
   exports: [
     AgePipe,
