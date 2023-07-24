@@ -45,7 +45,7 @@
     "@capacitor/core": "3.0.1",
     "@capacitor/ios": "3.0.1",
     "@ngx-pwa/local-storage": "16.3.0",
-    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/core": "^15.0.0",
     "@swimlane/ngx-charts": "^20.4.1",
     "ag-grid-angular": "^25.0.1",
     "ag-grid-community": "^25.0.1",
