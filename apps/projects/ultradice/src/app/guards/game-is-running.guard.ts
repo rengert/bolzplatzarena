@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { GameService } from '../services/game.service';
 
 @Injectable({ providedIn: 'root' })
-export class GameIsRunningGuard implements CanActivate {
+export class GameIsRunningGuard  {
   constructor(private readonly game: GameService, private readonly router: Router) {
   }
 
