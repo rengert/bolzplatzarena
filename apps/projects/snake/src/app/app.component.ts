@@ -23,6 +23,6 @@ export class AppComponent implements OnInit {
     const data = require(`../i18n/${lang}.json`);
     this.translate.setTranslation(lang, data, true);
 
-    await SplashScreen.hide();
+    await SplashScreen?.hide();
   }
 }
