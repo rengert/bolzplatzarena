@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Plugins } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const { SplashScreen } = Plugins;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  title = 'snake';
-
   constructor(private readonly translate: TranslateService) {
   }
 
@@ -22,6 +19,6 @@ export class AppComponent implements OnInit {
     const data = require(`../i18n/${lang}.json`);
     this.translate.setTranslation(lang, data, true);
 
-    await SplashScreen?.hide();
+    return SplashScreen?.hide();
   }
 }

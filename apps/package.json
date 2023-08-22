@@ -44,6 +44,7 @@
     "@capacitor/android": "3.0.1",
     "@capacitor/core": "3.0.1",
     "@capacitor/ios": "3.0.1",
+    "@capacitor/splash-screen": "^0.3.0",
     "@ngx-pwa/local-storage": "16.3.0",
     "@ngx-translate/core": "^15.0.0",
     "@swimlane/ngx-charts": "^20.4.1",
