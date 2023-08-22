@@ -1,7 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { createUuid, LoggerService, pop } from '@bpa/core';
-import moment from 'moment';
 import { Direction, GameMode, Points } from '../../../../app.constants';
 import { Settings } from '../../../../components/settings/settings.component';
 import { BoardSettings } from '../../../../models/board-settings.model';
@@ -158,8 +157,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       apples: this.scoreBoard.apples,
       level: this.settings.level,
       gameMode: this.settings.gameMode,
-      date: moment()
-        .format(),
+      date: new Date().toISOString(),
     });
     this.gameOver = true;
   }
