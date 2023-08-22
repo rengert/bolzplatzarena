@@ -15,12 +15,12 @@ export interface Settings {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent {
-  user = '';
+  user: string = '';
   selectedLevel: Level;
   gameMode: GameMode;
 
   readonly level = Level;
-  readonly levels =[
+  readonly levels = [
     { key: 'EASY', value: Level.easy },
     { key: 'NORMAL', value: Level.normal },
     { key: 'HARD', value: Level.hard },
@@ -33,6 +33,18 @@ export class SettingsComponent {
   ];
 
   constructor(private readonly router: Router) {
+    const data = localStorage.getItem('settings');
+    const defaultValue = {
+      level: Level.normal,
+      gameMode: GameMode.normal,
+      user: '',
+    };
+    const { level, gameMode, user } = data
+      ? { ...defaultValue, ...(JSON.parse(data) as Settings) }
+      : defaultValue;
+    this.user = user;
+    this.selectedLevel = level;
+    this.gameMode = gameMode;
   }
 
   save(): Promise<boolean> {
