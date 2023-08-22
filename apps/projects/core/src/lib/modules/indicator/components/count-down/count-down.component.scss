@@ -9,7 +9,7 @@
 $bgColor: #123456;
 
 $numOfColBlocks: 5; // must be higher than 2
-$deg: 360deg / $numOfColBlocks;
+$deg: calc(360deg / $numOfColBlocks);
 
 $red: #FD3359;
 $yellow: #F4D302;
@@ -48,7 +48,7 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
   top: 50%;
   width: $sizeBig;
   height: $size;
-  margin-top: $size / -2;
+  margin-top: calc($size / -2);
   padding: $pad;
   border-radius: 20px;
   transform: translateX(-50%);
@@ -60,7 +60,7 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
     top: 0;
     width: $sizeBig;
     height: 100%;
-    margin-left: $sizeBig/-2;
+    margin-left: calc($sizeBig / -2);
     padding: $pad;
     border-radius: $contBr;
     perspective: 500px;
@@ -111,8 +111,8 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
     top: 50%;
     width: $numSize;
     height: $numSize;
-    margin-left: $numSize/-2;
-    margin-top: $numSize/-2;
+    margin-left: calc($numSize / -2);
+    margin-top: calc($numSize / -2);
 
     .path {
       fill: none;
@@ -148,13 +148,13 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
 @keyframes contAnim {
   15%,
   100% {
-    margin-left: $sizeBig/-2;
+    margin-left: calc($sizeBig / -2);
     width: $sizeBig;
   }
 
   25%,
   90% {
-    margin-left: $size/-2;
+    margin-left: calc($size / -2);
     width: $size;
   }
 }
@@ -176,18 +176,18 @@ $totalLen: $num1Len + $num2Len + $num3Len + $numJoin1-2 + $numJoin2-3 + $numJoin
   53%,
   66% {
     stroke-dasharray: $num2Len, $totalLen;
-    stroke-dashoffset: -$num3Len - $numJoin2-3 -$numJoin3-0;
+    stroke-dashoffset: -$num3Len - $numJoin2-3 - $numJoin3-0;
   }
 
   76% {
-    stroke-dasharray: $num1Len + $numJoin1-2/2, $totalLen;
-    stroke-dashoffset: -$num3Len - $numJoin2-3 - $num2Len - $numJoin1-2 -$numJoin3-0;
+    stroke-dasharray: $num1Len + calc($numJoin1-2 / 2), $totalLen;
+    stroke-dashoffset: -$num3Len - $numJoin2-3 - $num2Len - $numJoin1-2 - $numJoin3-0;
   }
 
   88%,
   100% {
     stroke-dasharray: $num1Len, $totalLen;
-    stroke-dashoffset: -$num3Len - $numJoin2-3 - $num2Len - $numJoin1-2 -$numJoin3-0;
+    stroke-dashoffset: -$num3Len - $numJoin2-3 - $num2Len - $numJoin1-2 - $numJoin3-0;
   }
 
   92% {
