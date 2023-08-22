@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@capacitor/splash-screen';
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
+import * as de from '../i18n/de.json';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +12,8 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    const lang = 'de';
-    this.translate.use(lang);
-    // eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires
-    const data = require(`../i18n/${lang}.json`);
-    this.translate.setTranslation(lang, data, true);
+    this.translate.use('de');
+    this.translate.setTranslation('de', de, true);
 
     return SplashScreen?.hide();
   }
