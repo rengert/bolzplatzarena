@@ -55,7 +55,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setup();
 
-    this.nextFrame();
+    this.nextFrame(true);
   }
 
   ngOnDestroy(): void {
@@ -230,9 +230,9 @@ export class BoardComponent implements OnInit, OnDestroy {
       || (coord.y < 0);
   }
 
-  private nextFrame(): void {
+  private nextFrame(first = false): void {
     setTimeout(async () => {
       await this.updatePositions();
-    }, this.boardSettings.interval);
+    }, first ? this.boardSettings.startDelay : this.boardSettings.interval);
   }
 }
