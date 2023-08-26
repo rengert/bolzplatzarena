@@ -1,7 +1,6 @@
 {
   "appId": "com.bolzplatzarena.snake",
   "appName": "Snake",
-  "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "../../../dist/snake/public",
   "cordova": {}
