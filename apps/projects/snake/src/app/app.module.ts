@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { CoreModule, MaterialModule } from '@bpa/core';
-import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HighScoreTableComponent } from './components/highscore/high-score-table/high-score-table.component';
@@ -29,7 +28,7 @@ import { BoardModule } from './modules/board/board.module';
     MaterialModule,
     TranslateModule.forRoot(),
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

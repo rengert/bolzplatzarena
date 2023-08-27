@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LaunchStartup, StartupService } from '../../services/startup.service';
 
@@ -10,21 +10,21 @@ import { LaunchStartup, StartupService } from '../../services/startup.service';
 })
 export class LaunchStartupComponent {
   challengeAccepted = false;
-  readonly form = new FormGroup({
+  readonly form = new UntypedFormGroup({
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    sex: new FormControl('', Validators.required),
+    sex: new UntypedFormControl('', Validators.required),
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    firstName: new FormControl('', Validators.required),
+    firstName: new UntypedFormControl('', Validators.required),
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    lastName: new FormControl('', Validators.required),
+    lastName: new UntypedFormControl('', Validators.required),
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    startup: new FormControl('', Validators.required),
+    startup: new UntypedFormControl('', Validators.required),
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    companyType: new FormControl('', Validators.required),
+    companyType: new UntypedFormControl('', Validators.required),
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    companyTopic: new FormControl('', Validators.required),
+    companyTopic: new UntypedFormControl('', Validators.required),
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    companyDescription: new FormControl('', Validators.required),
+    companyDescription: new UntypedFormControl('', Validators.required),
   });
 
   constructor(

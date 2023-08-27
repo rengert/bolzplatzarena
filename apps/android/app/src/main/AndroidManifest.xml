@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.bolzplatzarena.nonogram">
+    >
 
     <application
         android:allowBackup="true"
@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity
+            android:exported="true"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:name="net.bolzplatzarena.nonogram.MainActivity"
             android:label="@string/title_activity_main"

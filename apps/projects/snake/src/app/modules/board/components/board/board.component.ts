@@ -1,9 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SimpleSnackBar } from '@angular/material/snack-bar/simple-snack-bar';
-import { MatSnackBarRef } from '@angular/material/snack-bar/snack-bar-ref';
+import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { createUuid, LoggerService, pop } from '@bpa/core';
-import moment from 'moment';
 import { Direction, GameMode, Points } from '../../../../app.constants';
 import { Settings } from '../../../../components/settings/settings.component';
 import { BoardSettings } from '../../../../models/board-settings.model';
@@ -39,7 +36,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   constructor(
     private readonly boardService: BoardService,
     private readonly highscore: HighscoreService,
-    private readonly logger: LoggerService<BoardComponent>,
     private readonly snackBar: MatSnackBar,
   ) {
   }
@@ -59,7 +55,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setup();
 
-    this.nextFrame();
+    this.nextFrame(true);
   }
 
   ngOnDestroy(): void {
@@ -161,8 +157,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       apples: this.scoreBoard.apples,
       level: this.settings.level,
       gameMode: this.settings.gameMode,
-      date: moment()
-        .format(),
+      date: new Date().toISOString(),
     });
     this.gameOver = true;
   }
@@ -235,9 +230,9 @@ export class BoardComponent implements OnInit, OnDestroy {
       || (coord.y < 0);
   }
 
-  private nextFrame(): void {
+  private nextFrame(first = false): void {
     setTimeout(async () => {
       await this.updatePositions();
-    }, this.boardSettings.interval);
+    }, first ? this.boardSettings.startDelay : this.boardSettings.interval);
   }
 }

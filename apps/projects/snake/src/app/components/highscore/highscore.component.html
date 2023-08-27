@@ -1,15 +1,16 @@
 <mat-card>
   <mat-button-toggle-group [(ngModel)]="gameMode">
-    <mat-button-toggle *ngFor="let item of modes; trackBy: ('key' | trackByProperty)"
-                       [value]="item.value">
+    <mat-button-toggle *ngFor="let item of modes; trackBy: ('key' | trackByProperty)" [value]="item.value">
       {{ 'GLOBAL.ENUM.GAME_MODE.' + item.key | uppercase | translate }}
     </mat-button-toggle>
   </mat-button-toggle-group>
-  <h2>Highscore</h2>
-  <app-high-score-table [gameMode]="gameMode" [remote]="false"></app-high-score-table>
-  <h2>Highscore / Remote</h2>
-  <app-high-score-table [gameMode]="gameMode" [remote]="true"></app-high-score-table>
-  <button mat-flat-button color="primary" [routerLink]="['/']">
-    {{ 'COMPONENTS.HIGHSCORE.HOME_LINK' | translate }}
-  </button>
+  <mat-card-content>
+    <h2>Highscore</h2>
+    <app-high-score-table [gameMode]="gameMode"></app-high-score-table>
+  </mat-card-content>
+  <mat-card-actions>
+    <button [routerLink]="['/']" color="primary" mat-flat-button>
+      {{ 'COMPONENTS.HIGHSCORE.HOME_LINK' | translate }}
+    </button>
+  </mat-card-actions>
 </mat-card>

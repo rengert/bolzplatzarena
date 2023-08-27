@@ -4,8 +4,7 @@ import { Settings } from '../../../components/settings/settings.component';
 import { BoardSettings } from '../../../models/board-settings.model';
 import { Cell } from '../../../models/cell.model';
 
-// eslint-disable-next-line no-null/no-null
-@Injectable({ providedIn: null })
+@Injectable()
 export class BoardService {
   private readonly settings: Settings;
 
@@ -16,7 +15,9 @@ export class BoardService {
       gameMode: GameMode.normal,
       user: 'Anonym',
     };
-    this.settings = data ? { ...defaultValue, ...(JSON.parse(data) as Settings) } : defaultValue;
+    this.settings = data
+      ? { ...defaultValue, ...(JSON.parse(data) as Settings) }
+      : defaultValue;
   }
 
   createNewLine(line: number, settings: BoardSettings): Cell[] {

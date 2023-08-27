@@ -31,7 +31,6 @@ export function distance(start: { latitude: number; longitude: number; }, end: {
     return 0;
   }
   // Calculating Distance between Points
-  let result = 0;
   const pi = 3.14159265;
   const halfCircle = 180;
   const radians: number = halfCircle / pi;
@@ -44,12 +43,12 @@ export function distance(start: { latitude: number; longitude: number; }, end: {
   const lg2 = end.longitude / radians;
 
   // radius of earth in miles (3,958.8) * metres in a mile * position on surface of sphere...
-  result = radiusOfEarth * Math.acos(Math.sin(lt1) * Math.sin(lt2) + Math.cos(lt1) * Math.cos(lt2) * Math.cos(lg2 - lg1));
+  const result = radiusOfEarth * Math.acos(Math.sin(lt1) * Math.sin(lt2) + Math.cos(lt1) * Math.cos(lt2) * Math.cos(lg2 - lg1));
 
   return result / 1000;
 }
 
-export function randomEnum<T>(anEnum: T): T[keyof T] {
+export function randomEnum<T extends {}>(anEnum: T): T[keyof T] {
   const enumValues = Object.keys(anEnum)
     .map(n => Number.parseInt(n, 10))
     .filter(n => !Number.isNaN(n)) as unknown as T[keyof T][];

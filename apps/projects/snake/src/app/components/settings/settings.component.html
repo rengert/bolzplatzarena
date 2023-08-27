@@ -1,14 +1,14 @@
 <mat-card>
-  <mat-card-title translate>COMPONENTS.SETTINGS.HEADLINE</mat-card-title>
-  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.USER</mat-card-subtitle>
+  <mat-card-title translate>
+    COMPONENTS.SETTINGS.HEADLINE
+  </mat-card-title>
   <mat-card-content>
+    <p translate>COMPONENTS.SETTINGS.LABELS.USER</p>
     <mat-form-field>
       <mat-label translate>COMPONENTS.SETTINGS.LABELS.NAME</mat-label>
       <input matInput placeholder="Corban Dallas" [(ngModel)]="user">
     </mat-form-field>
-  </mat-card-content>
-  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.LEVEL</mat-card-subtitle>
-  <mat-card-content>
+    <p translate>COMPONENTS.SETTINGS.LABELS.LEVEL</p>
     <mat-radio-group
       aria-labelledby="level-label"
       [(ngModel)]="selectedLevel">
@@ -17,9 +17,7 @@
         {{ 'GLOBAL.ENUM.LEVEL.' + item.key | uppercase | translate }}
       </mat-radio-button>
     </mat-radio-group>
-  </mat-card-content>
-  <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.GAME_MODE</mat-card-subtitle>
-  <mat-card-content>
+    <p translate>COMPONENTS.SETTINGS.LABELS.GAME_MODE</p>
     <mat-radio-group
       aria-labelledby="level-label"
       [(ngModel)]="gameMode">
@@ -30,14 +28,16 @@
     </mat-radio-group>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button color="primary" (click)="save()">
-      {{ 'COMPONENTS.SETTINGS.SAVE' | translate }}
-    </button>
-    <button mat-flat-button color="primary" [routerLink]="['highscore']">
-      {{ 'COMPONENTS.SETTINGS.HIGHSCORE' | translate }}
-    </button>
-    <button mat-flat-button color="primary" [routerLink]="['privacy']">
-      {{ 'GLOBAL.LINKS.PRIVACY' | translate }}
-    </button>
+    <div>
+      <button mat-flat-button color="primary" (click)="save()">
+        {{ 'COMPONENTS.SETTINGS.SAVE' | translate }}
+      </button>
+      <button mat-flat-button color="primary" [routerLink]="['highscore']">
+        {{ 'COMPONENTS.SETTINGS.HIGHSCORE' | translate }}
+      </button>
+      <button mat-flat-button color="primary" [routerLink]="['privacy']">
+        {{ 'GLOBAL.LINKS.PRIVACY' | translate }}
+      </button>
+    </div>
   </mat-card-actions>
 </mat-card>

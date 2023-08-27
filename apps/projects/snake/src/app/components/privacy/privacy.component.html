@@ -1,9 +1,9 @@
 <mat-card>
-  <mat-card-title translate>COMPONENTS.PRIVACY.HEADLINE</mat-card-title>
-  <mat-card-subtitle translate>COMPONENTS.PRIVACY.SUBHEADLINE</mat-card-subtitle>
-  <mat-card-content [innerHTML]="'COMPONENTS.PRIVACY.PRIVACY_NOTE' | translate">
-  </mat-card-content>
-  <mat-card-subtitle translate>COMPONENTS.PRIVACY.SUBHEADLINE2</mat-card-subtitle>
+  <mat-card-header>
+    <mat-card-title translate>COMPONENTS.PRIVACY.HEADLINE</mat-card-title>
+    <mat-card-subtitle translate>COMPONENTS.PRIVACY.SUBHEADLINE</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content [innerHTML]="'COMPONENTS.PRIVACY.PRIVACY_NOTE' | translate"></mat-card-content>
   <mat-card-content>
     <h2>Datenschutzerklärung</h2>
     <p>Personenbezogene Daten (nachfolgend zumeist nur „Daten“ genannt) werden von uns nur im Rahmen der
@@ -80,17 +80,21 @@
       <a target="_blank" href="https://www.ratgeberrecht.eu/leistungen/muster-datenschutzerklaerung.html">Muster-Datenschutzerklärung</a>
       der <a target="_blank" href="https://www.ratgeberrecht.eu/datenschutz/datenschutzerklaerung-generator-dsgvo.html">Anwaltskanzlei
       Weiß &amp; Partner</a></p>
+    <h2 translate>COMPONENTS.PRIVACY.VERSION</h2>
+    <h2 translate>{{ version.value }} {{ version.name }}</h2>
   </mat-card-content>
-  <mat-card-subtitle translate>COMPONENTS.PRIVACY.VERSION</mat-card-subtitle>
-  <mat-card-subtitle translate>{{ version.value }} {{ version.name }}</mat-card-subtitle>
   <mat-card-content [innerHTML]="version.description"></mat-card-content>
-  <small>Dieser Text basiert auf folgendem Artikel aus der freien Enzyklopädie Wikipedia: <a
-    [href]="'https://de.wikipedia.org/wiki/' + version.slug" target="_blank">{{ version.name }}</a>
-    (<a
-      href="https://creativecommons.org/licenses/by-sa/3.0/de/legalcode" target="_blank">Lizenz</a>, <a
-      [href]="'https://de.wikipedia.org/w/index.php?action=history&title=' + version.slug " target="_blank">Liste der
-      Autoren</a>).</small>
-  <button mat-flat-button color="primary" [routerLink]="['/']">
-    {{ 'GLOBAL.LINKS.HOME' | translate }}
-  </button>
+  <mat-card-content>
+    <small>Dieser Text basiert auf folgendem Artikel aus der freien Enzyklopädie Wikipedia: <a
+      [href]="'https://de.wikipedia.org/wiki/' + version.slug" target="_blank">{{ version.name }}</a>
+      (<a
+        href="https://creativecommons.org/licenses/by-sa/3.0/de/legalcode" target="_blank">Lizenz</a>, <a
+        [href]="'https://de.wikipedia.org/w/index.php?action=history&title=' + version.slug " target="_blank">Liste der
+        Autoren</a>).</small>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button color="primary" [routerLink]="['/']">
+      {{ 'GLOBAL.LINKS.HOME' | translate }}
+    </button>
+  </mat-card-actions>
 </mat-card>

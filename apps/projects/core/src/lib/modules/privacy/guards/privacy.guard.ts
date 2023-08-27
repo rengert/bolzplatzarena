@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { PrivacyService } from '../services/privacy.service';
 
 @Injectable({ providedIn: 'root' })
-export class PrivacyGuard implements CanActivate {
+export class PrivacyGuard  {
   constructor(
     private readonly privacy: PrivacyService,
     private readonly router: Router,

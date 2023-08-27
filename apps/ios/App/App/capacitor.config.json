@@ -1,6 +1,6 @@
 {
-  "appId": "net.bolzplatzarena.nonogram",
-  "appName": "Nonogramm",
-  "webDir": "dist/nonogramm/public",
-  "npmClient": "npm"
+	"appId": "net.bolzplatzarena.nonogram",
+	"appName": "Nonogramm",
+	"webDir": "dist/nonogramm/public",
+	"npmClient": "npm"
 }

@@ -9,8 +9,9 @@
     "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "importHelpers": true,
-    "target": "es2016",
+    "target": "ES2022",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -29,7 +30,8 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "noImplicitReturns": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
