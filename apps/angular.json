@@ -73,18 +73,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ultradice:build"
+            "buildTarget": "ultradice:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ultradice:build:production"
+              "buildTarget": "ultradice:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ultradice:build"
+            "buildTarget": "ultradice:build"
           }
         },
         "test": {
@@ -200,18 +200,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "nonogramm:build"
+            "buildTarget": "nonogramm:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "nonogramm:build:production"
+              "buildTarget": "nonogramm:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "nonogramm:build"
+            "buildTarget": "nonogramm:build"
           }
         },
         "test": {
@@ -332,18 +332,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "startup:build"
+            "buildTarget": "startup:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "startup:build:production"
+              "buildTarget": "startup:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "startup:build"
+            "buildTarget": "startup:build"
           }
         },
         "test": {
@@ -489,19 +489,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "snake:build",
-            "port": 4201
+            "port": 4201,
+            "buildTarget": "snake:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "snake:build:production"
+              "buildTarget": "snake:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "snake:build"
+            "buildTarget": "snake:build"
           }
         },
         "test": {
@@ -604,19 +604,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "core-example:build",
-            "port": 4202
+            "port": 4202,
+            "buildTarget": "core-example:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "core-example:build:production"
+              "buildTarget": "core-example:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "core-example:build"
+            "buildTarget": "core-example:build"
           }
         },
         "test": {
@@ -716,18 +716,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "snake3d:build"
+            "buildTarget": "snake3d:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "snake3d:build:production"
+              "buildTarget": "snake3d:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "snake3d:build"
+            "buildTarget": "snake3d:build"
           }
         },
         "test": {
@@ -827,18 +827,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ascii-racer:build"
+            "buildTarget": "ascii-racer:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ascii-racer:build:production"
+              "buildTarget": "ascii-racer:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ascii-racer:build"
+            "buildTarget": "ascii-racer:build"
           }
         },
         "test": {
