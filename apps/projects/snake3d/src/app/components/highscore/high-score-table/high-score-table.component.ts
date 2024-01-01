@@ -28,9 +28,7 @@ export class HighScoreTableComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
     this.data$ = this.mode.pipe(
-      switchMap(mode => this.remote
-        ? this.highscore.getRemote$(mode)
-        : this.highscore.getByMode$(mode)),
+      switchMap(mode => this.highscore.getByMode$(mode)),
     );
   }
 }

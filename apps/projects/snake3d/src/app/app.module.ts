@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateModule } from '@ngx-translate/core';
 import { CoreModule, MaterialModule, WindowService } from '@bpa/core';
-import { environment } from '../environments/environment';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GameComponent } from './components/game/game.component';
@@ -36,7 +34,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     FormsModule,
     MaterialModule,
     TranslateModule.forRoot(),
-    AngularFireModule.initializeApp(environment.firebase),
+    MatCardModule,
   ],
   providers: [
     WindowService,
