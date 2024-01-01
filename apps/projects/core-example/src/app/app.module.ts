@@ -39,7 +39,7 @@ import { OnlineOfflineComponent } from './components/online-offline/online-offli
     AppRoutingModule,
     MaterialModule,
     MatBadgeModule,
-    AgGridModule.withComponents([]),
+    AgGridModule,
     FormsModule,
     ScrollingModule,
   ],

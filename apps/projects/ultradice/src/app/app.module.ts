@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,8 +8,6 @@ import { DialogModule, MaterialModule } from '@bpa/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppComponent } from './app.component';
 import { GameIsRunningGuard } from './guards/game-is-running.guard';
-import { EndResultComponent } from './modules/game/components/end-result/end-result.component';
-import { ResultComponent } from './modules/game/components/result/result.component';
 import { GameModule } from './modules/game/game.module';
 import { InfoModule } from './modules/info/info.module';
 import { SharedModule } from './modules/shared/shared.module';

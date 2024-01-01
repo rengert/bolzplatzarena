@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Config } from '../../../../models/config';
@@ -56,7 +55,7 @@ export class GameComponent implements OnInit {
   private lose(): void {
     const dialogRef = this.dialog.open(LoseScreenComponent);
     dialogRef.afterClosed()
-      .subscribe(async result => {
+      .subscribe(async (result: true | undefined) => {
         const current = this.gameData$.value;
         if (result === true && current) {
           this.gameData$.next({
