@@ -23,7 +23,7 @@ jobs:
         key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-modules-
-    - run: cd apps && npm install
+    - run: cd apps && npm install --legacy-peer-deps
     - run: cd apps && npm run lint:all
     - run: cd apps && npm run test:all
       env:
