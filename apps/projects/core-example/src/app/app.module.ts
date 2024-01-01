@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatLineModule } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule, MaterialModule } from '@bpa/core';
 import { AgGridModule } from 'ag-grid-angular';
@@ -14,10 +17,10 @@ import { CellComponent } from './components/broadcast-demo/cell/cell.component';
 import { GridComponent } from './components/grid/grid.component';
 import { MomentPlaygroundComponent } from './components/moment-playground/moment-playground.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { OnlineOfflineComponent } from './components/online-offline/online-offline.component';
 import { PerformanceCheckComponent } from './components/performance-check/performance-check.component';
 import { PerformanceTestComponent } from './components/performance-check/performance-test/performance-test.component';
 import { SelectionDemoComponent } from './components/selection-demo/selection-demo.component';
-import { OnlineOfflineComponent } from './components/online-offline/online-offline.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { OnlineOfflineComponent } from './components/online-offline/online-offli
     AgGridModule,
     FormsModule,
     ScrollingModule,
+    MatListModule,
+    MatLineModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
