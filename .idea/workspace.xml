@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="lint: ultradice">
-      <change afterPath="$PROJECT_DIR$/apps/projects/ascii-racer/tsconfig.editor.json" afterDir="false" />
+    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="lint: ascii-racer">
+      <change afterPath="$PROJECT_DIR$/apps/projects/core-example/tsconfig.editor.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ascii-racer/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ascii-racer/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ascii-racer/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ascii-racer/tsconfig.app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/core-example/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/core-example/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/core-example/src/app/components/performance-check/performance-tests/for.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/core-example/src/app/components/performance-check/performance-tests/for.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/core-example/src/app/components/performance-check/performance-tests/spread.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/core-example/src/app/components/performance-check/performance-tests/spread.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +52,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "github-actions",
-    "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/projects/ascii-racer",
+    "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/projects/core-example",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,6 +65,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps/projects/core-example" />
       <recent name="$PROJECT_DIR$/apps/projects/ascii-racer" />
     </key>
   </component>
@@ -106,7 +108,7 @@
       <workItem from="1697740830742" duration="85000" />
       <workItem from="1704138511403" duration="7865000" />
       <workItem from="1704146420797" duration="3259000" />
-      <workItem from="1704183523372" duration="2581000" />
+      <workItem from="1704183523372" duration="2672000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update the node server for builds">
       <option name="closed" value="true" />
@@ -300,7 +302,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704185924524</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="lint: ascii-racer">
+      <option name="closed" value="true" />
+      <created>1704186129112</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1704186129112</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,6 +340,7 @@
     <MESSAGE value="chore: data issue in template" />
     <MESSAGE value="chore: github actions should use node 20" />
     <MESSAGE value="lint: ultradice" />
-    <option name="LAST_COMMIT_MESSAGE" value="lint: ultradice" />
+    <MESSAGE value="lint: ascii-racer" />
+    <option name="LAST_COMMIT_MESSAGE" value="lint: ascii-racer" />
   </component>
 </project>
