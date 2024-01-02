@@ -1,19 +1,19 @@
 <app-settings-view [config]="boardData.config"></app-settings-view>
 <app-hearts [hearts]="hearts"></app-hearts>
 <div class="columns">
-  @for (column of columnHints; track ('valueOf' | trackByProperty)($index, column)) {
+  @for (column of columnHints; track column) {
     <app-caption
-      [numbers]="column"
-      [vertical]="true"
-    [config]="boardData.config"></app-caption>
+        [numbers]="column"
+        [vertical]="true"
+        [config]="boardData.config"></app-caption>
   }
 </div>
 <div class="rows">
-  @for (row of rowHints; track ('valueOf' | trackByProperty)($index, row)) {
+  @for (row of rowHints; track row) {
     <app-caption
-      [numbers]="row"
-      [vertical]="false"
-    [config]="boardData.config"></app-caption>
+        [numbers]="row"
+        [vertical]="false"
+        [config]="boardData.config"></app-caption>
   }
 </div>
 <div class="inner">
@@ -21,10 +21,10 @@
     <div class="row">
       @for (block of row.data; track block) {
         <app-block
-          [block]="block"
-          [config]="boardData.config"
-          (action)="onAction($event)"
-          [selectExpected]="selectType">
+            [block]="block"
+            [config]="boardData.config"
+            (action)="onAction($event)"
+            [selectExpected]="selectType">
         </app-block>
       }
     </div>
