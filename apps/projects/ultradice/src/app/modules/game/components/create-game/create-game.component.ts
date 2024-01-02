@@ -26,10 +26,10 @@ import { LinkButtonComponent } from '../../../shared/components/link-button/link
   ],
 })
 export class CreateGameComponent {
-  readonly player1 = new Player();
-  readonly player2 = new Player();
-  readonly player3 = new Player();
-  readonly player4 = new Player();
+  protected readonly player1 = new Player();
+  protected readonly player2 = new Player();
+  protected readonly player3 = new Player();
+  protected readonly player4 = new Player();
 
   constructor(
     private readonly game: GameService,
@@ -37,7 +37,7 @@ export class CreateGameComponent {
   ) {
   }
 
-  async startGame(): Promise<void> {
+  protected async startGame(): Promise<void> {
     const playersList = new Array<Player>();
     if (this.player1.name !== '') {
       playersList.push(this.player1);
@@ -60,10 +60,8 @@ export class CreateGameComponent {
         players: playersList,
         shuffleMaxCount: 3,
       };
-      await this.game.createGame(game)
-        .then(() => {
-          void this.router.navigate(['game']);
-        });
+      await this.game.createGame(game);
+      await this.router.navigate(['game']);
     }
   }
 }
