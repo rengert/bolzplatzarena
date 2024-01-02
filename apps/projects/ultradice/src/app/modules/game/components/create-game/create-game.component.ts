@@ -3,12 +3,27 @@ import { Router } from '@angular/router';
 import { Game } from '../../../../models/game.model';
 import { Player } from '../../../../models/player.model';
 import { GameService } from '../../../../services/game.service';
+import { LinkButtonComponent } from '../../../shared/components/link-button/link-button.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-create-game',
-  templateUrl: './create-game.component.html',
-  styleUrls: ['./create-game.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-create-game',
+    templateUrl: './create-game.component.html',
+    styleUrls: ['./create-game.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        TranslateModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        ButtonComponent,
+        LinkButtonComponent,
+    ],
 })
 export class CreateGameComponent {
   readonly player1 = new Player();

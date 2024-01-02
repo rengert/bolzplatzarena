@@ -4,12 +4,23 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Statistic } from '../../../../models/statistic.model';
 import { DataService } from '../../../../services/data.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { LinkButtonComponent } from '../../../shared/components/link-button/link-button.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
-  selector: 'app-statistics',
-  templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-statistics',
+    templateUrl: './statistics.component.html',
+    styleUrls: ['./statistics.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        MatTableModule,
+        ButtonComponent,
+        LinkButtonComponent,
+        TranslateModule,
+    ],
 })
 export class StatisticsComponent implements OnInit {
   statistics$: Observable<Statistic[]>;

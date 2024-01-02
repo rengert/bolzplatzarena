@@ -17,21 +17,19 @@ describe('AppComponent', () => {
     const translateService = mock(TranslateService);
 
     await TestBed.configureTestingModule({
-      imports: [
+    imports: [
         RouterTestingModule,
-      ],
-      declarations: [
         AppComponent,
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+    providers: [
         { provide: LoggerService, useFactory: () => instance(loggerServiceMock) },
         { provide: NotificationService, useFactory: () => instance(notificationServiceMock) },
         { provide: TitleBarService, useFactory: () => instance(titleBarMock) },
         { provide: DialogService, useFactory: () => instance(dialogServiceMock) },
         { provide: TranslateService, useFactory: () => instance(translateService) },
-      ],
-    })
+    ],
+})
       .compileComponents();
   }));
 

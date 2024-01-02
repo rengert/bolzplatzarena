@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-rule',
-  templateUrl: './rule.component.html',
-  styleUrls: ['./rule.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-rule',
+    templateUrl: './rule.component.html',
+    styleUrls: ['./rule.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class RuleComponent {
   @Input() text: string;
