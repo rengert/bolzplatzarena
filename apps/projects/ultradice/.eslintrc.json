@@ -9,11 +9,7 @@
         "*.ts"
       ],
       "parserOptions": {
-        "project": [
-          "./projects/ultradice/tsconfig.app.json",
-          "./projects/ultradice/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+        "project": ["./projects/ultradice/tsconfig.*?.json"]
       },
       "plugins": [
         "eslint-plugin-no-null",
