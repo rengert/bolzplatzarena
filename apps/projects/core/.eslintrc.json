@@ -10,10 +10,8 @@
       ],
       "parserOptions": {
         "project": [
-          "./projects/core/tsconfig.lib.json",
-          "./projects/core/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+          "./projects/core/tsconfig.*?.json"
+        ]
       },
       "plugins": [
         "eslint-plugin-no-null",
