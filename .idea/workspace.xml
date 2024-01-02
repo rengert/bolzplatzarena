@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="chore: beautify code after migration">
-      <change beforePath="$PROJECT_DIR$/apps/projects/ascii-racer/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ascii-racer/src/app/app.component.html" afterDir="false" />
+    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="lint: snake3d">
+      <change afterPath="$PROJECT_DIR$/apps/projects/startup/tsconfig.editor.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/startup/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/startup/src/app/components/launch-startup/launch-startup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/src/app/components/launch-startup/launch-startup.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/startup/src/app/modules/offices/components/open-office/open-office.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/src/app/modules/offices/components/open-office/open-office.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/startup/src/app/services/simulators/property-simulator.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/src/app/services/simulators/property-simulator.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,17 +52,44 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "ascii-racer",
-    "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena",
+    "git-widget-placeholder": "github-actions",
+    "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/projects/startup",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "npm.lint:all.executor": "Run",
     "settings.editor.selected.configurable": "actions.on.save",
     "ts.external.directory.path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/node_modules/typescript/lib"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps/projects/startup" />
+      <recent name="$PROJECT_DIR$/apps/projects/snake3d" />
+      <recent name="$PROJECT_DIR$/apps/projects/snake" />
+      <recent name="$PROJECT_DIR$/apps/projects/nonogramm" />
+      <recent name="$PROJECT_DIR$/apps/projects/core-example" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="lint:all" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/apps/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint:all" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.lint:all" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -80,7 +112,7 @@
       <workItem from="1697740830742" duration="85000" />
       <workItem from="1704138511403" duration="7865000" />
       <workItem from="1704146420797" duration="3259000" />
-      <workItem from="1704183523372" duration="834000" />
+      <workItem from="1704183523372" duration="3119000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update the node server for builds">
       <option name="closed" value="true" />
@@ -242,16 +274,85 @@
       <option name="project" value="LOCAL" />
       <updated>1704184290081</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="chore: data issue in template">
+      <option name="closed" value="true" />
+      <created>1704184371049</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1704184371049</updated>
+    </task>
+    <task id="LOCAL-00022" summary="chore: data issue in template">
+      <option name="closed" value="true" />
+      <created>1704184551157</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1704184551157</updated>
+    </task>
+    <task id="LOCAL-00023" summary="chore: github actions should use node 20">
+      <option name="closed" value="true" />
+      <created>1704184659990</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1704184659990</updated>
+    </task>
+    <task id="LOCAL-00024" summary="lint: ultradice">
+      <option name="closed" value="true" />
+      <created>1704185924524</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1704185924524</updated>
+    </task>
+    <task id="LOCAL-00025" summary="lint: ascii-racer">
+      <option name="closed" value="true" />
+      <created>1704186129112</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1704186129112</updated>
+    </task>
+    <task id="LOCAL-00026" summary="lint: core-example">
+      <option name="closed" value="true" />
+      <created>1704186212194</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1704186212194</updated>
+    </task>
+    <task id="LOCAL-00027" summary="lint: linting nonogramm">
+      <option name="closed" value="true" />
+      <created>1704186324754</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1704186324754</updated>
+    </task>
+    <task id="LOCAL-00028" summary="lint: snake">
+      <option name="closed" value="true" />
+      <created>1704186379370</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1704186379370</updated>
+    </task>
+    <task id="LOCAL-00029" summary="lint: snake3d">
+      <option name="closed" value="true" />
+      <created>1704186425573</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1704186425574</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: update the node server for builds" />
-    <MESSAGE value="chore: package lock" />
-    <MESSAGE value="chore: some files" />
     <MESSAGE value="feat: update angular" />
     <MESSAGE value="feat: update material" />
     <MESSAGE value="feat: several packages" />
@@ -269,6 +370,14 @@
     <MESSAGE value="chore: beautify code" />
     <MESSAGE value="chore: new control flow" />
     <MESSAGE value="chore: beautify code after migration" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: beautify code after migration" />
+    <MESSAGE value="chore: data issue in template" />
+    <MESSAGE value="chore: github actions should use node 20" />
+    <MESSAGE value="lint: ultradice" />
+    <MESSAGE value="lint: ascii-racer" />
+    <MESSAGE value="lint: core-example" />
+    <MESSAGE value="lint: linting nonogramm" />
+    <MESSAGE value="lint: snake" />
+    <MESSAGE value="lint: snake3d" />
+    <option name="LAST_COMMIT_MESSAGE" value="lint: snake3d" />
   </component>
 </project>

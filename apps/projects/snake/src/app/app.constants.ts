@@ -28,7 +28,6 @@ export enum Speed {
   fast = 100,
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export const Points = {
   perMove: 1,
   perApple: 50,

@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Plugins } from '@capacitor/core';
+import { SplashScreen } from '@capacitor/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { DialogService } from '../../../core/src/lib/modules/dialog/services/dialog.service';
 import { ResultComponent } from './modules/game/components/result/result.component';
 import { GameService } from './services/game.service';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const { SplashScreen } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -33,7 +31,6 @@ export class AppComponent implements OnInit, OnDestroy {
   async ngOnInit(): Promise<void> {
     const lang = 'de';
     this.translate.use(lang);
-    // eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires
     const data = require(`../i18n/${lang}.json`);
     this.translate.setTranslation(lang, data, true);
 

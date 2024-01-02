@@ -9,11 +9,7 @@
         "*.ts"
       ],
       "parserOptions": {
-        "project": [
-          "./projects/core-example/tsconfig.app.json",
-          "./projects/core-example/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+        "project": ["./projects/core-example/tsconfig.*?.json"]
       },
       "plugins": [
         "eslint-plugin-no-null",

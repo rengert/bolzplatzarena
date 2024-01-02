@@ -51,7 +51,6 @@ export class GameComponent implements OnDestroy {
   async shuffle(): Promise<void> {
     if (this.game.shuffleMaxCount > 0) {
       const dices = this.dices.toArray();
-      // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let x = 0; x < dices.length; x++) {
         await this.shuffelDice(dices[x]);
       }

@@ -24,11 +24,9 @@ export class PropertySimulatorService implements Simulator {
     }
     this.logger.debug('handle the properties');
 
-    await this.offices.get().then(
-      // eslint-disable-next-line @typescript-eslint/require-await
-      async offices => offices.forEach(
-        async office => this.credit.substract(office.monthlyCost, `Monatliche Miete ${office.name}`, date),
-      ),
-    );
+    const offices = await this.offices.get();
+    for(const office of offices) {
+      await this.credit.substract(office.monthlyCost, `Monatliche Miete ${office.name}`, date)
+    }
   }
 }

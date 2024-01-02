@@ -35,11 +35,8 @@ export class OpenOfficeComponent extends BaseComponent {
     this.cities$ = this.staticData.getCities$();
 
     this.form = new UntypedFormGroup({
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       city: new UntypedFormControl('', Validators.required),
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       name: new UntypedFormControl('', Validators.required),
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       address: new UntypedFormControl('', Validators.required),
     });
   }
