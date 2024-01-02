@@ -1,8 +1,8 @@
+import { AsyncPipe, NgFor } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { last, round } from 'lodash';
 import { Observable, timer } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { NgFor, AsyncPipe } from '@angular/common';
 
 // eslint-disable-next-line no-shadow
 enum Direction {
@@ -13,11 +13,11 @@ enum Direction {
 }
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    standalone: true,
-    imports: [NgFor, AsyncPipe],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [NgFor, AsyncPipe],
 })
 export class AppComponent {
   readonly data$: Observable<string[][]>;
