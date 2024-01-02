@@ -9,11 +9,7 @@
       }
     </ol>
     @for (player of items; track player.id; let odd = $odd; let even = $even) {
-      <div
-          [ngClass]="{
-            'odd-active': odd,
-            'even-active': even
-            }">
+      <div [ngClass]="{ 'odd-active': odd, 'even-active': even }">
         <h3>{{ player.name }}</h3>
         <div>Einser: <span>{{ player.gameCard.ones }}</span></div>
         <div>Zweier: <span>{{ player.gameCard.twos }}</span></div>
