@@ -4,18 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="lint: snake3d">
-      <change afterPath="$PROJECT_DIR$/apps/projects/startup/tsconfig.editor.json" afterDir="false" />
+    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="chore: code style create game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/startup/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/startup/src/app/components/launch-startup/launch-startup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/src/app/components/launch-startup/launch-startup.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/startup/src/app/modules/offices/components/open-office/open-office.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/src/app/modules/offices/components/open-office/open-office.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/startup/src/app/services/simulators/property-simulator.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/src/app/services/simulators/property-simulator.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/guards/game-is-running.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/guards/game-is-running.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/services/game.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/services/game.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -46,13 +52,14 @@
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "github-actions",
+    "git-widget-placeholder": "ultradice",
     "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/projects/startup",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -86,6 +93,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.lint:all" />
         <item itemvalue="npm.lint:all" />
       </list>
     </recent_temporary>
@@ -346,29 +354,141 @@
       <option name="project" value="LOCAL" />
       <updated>1704186425574</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="refactor: beautify code">
+      <option name="closed" value="true" />
+      <created>1704206408323</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1704206408323</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fix: make it working">
+      <option name="closed" value="true" />
+      <created>1704207139741</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1704207139741</updated>
+    </task>
+    <task id="LOCAL-00032" summary="fix: es lint setup">
+      <option name="closed" value="true" />
+      <created>1704207258112</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1704207258112</updated>
+    </task>
+    <task id="LOCAL-00033" summary="fix: remove matomo">
+      <option name="closed" value="true" />
+      <created>1704207436208</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1704207436208</updated>
+    </task>
+    <task id="LOCAL-00034" summary="refactor: migration control flow">
+      <option name="closed" value="true" />
+      <created>1704207528027</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1704207528027</updated>
+    </task>
+    <task id="LOCAL-00035" summary="refactor: fix after the control flow setup">
+      <option name="closed" value="true" />
+      <created>1704208272621</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1704208272621</updated>
+    </task>
+    <task id="LOCAL-00036" summary="fix: import path">
+      <option name="closed" value="true" />
+      <created>1704208325249</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1704208325249</updated>
+    </task>
+    <task id="LOCAL-00037" summary="chore: remove unused file">
+      <option name="closed" value="true" />
+      <created>1704211137321</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1704211137321</updated>
+    </task>
+    <task id="LOCAL-00038" summary="chore: application building">
+      <option name="closed" value="true" />
+      <created>1704211424310</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1704211424310</updated>
+    </task>
+    <task id="LOCAL-00039" summary="refactor: standalone migration">
+      <option name="closed" value="true" />
+      <created>1704211696372</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1704211696372</updated>
+    </task>
+    <task id="LOCAL-00040" summary="chore: reformat the files">
+      <option name="closed" value="true" />
+      <created>1704212131118</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1704212131118</updated>
+    </task>
+    <task id="LOCAL-00041" summary="refactor: control flow">
+      <option name="closed" value="true" />
+      <created>1704212187154</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1704212187155</updated>
+    </task>
+    <task id="LOCAL-00042" summary="fix: after refactor control flow">
+      <option name="closed" value="true" />
+      <created>1704212365587</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1704212365587</updated>
+    </task>
+    <task id="LOCAL-00043" summary="chore: code style">
+      <option name="closed" value="true" />
+      <created>1704212538552</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1704212538552</updated>
+    </task>
+    <task id="LOCAL-00044" summary="fix: button style">
+      <option name="closed" value="true" />
+      <created>1704212656401</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1704212656401</updated>
+    </task>
+    <task id="LOCAL-00045" summary="chore: code style create game">
+      <option name="closed" value="true" />
+      <created>1704212789079</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1704212789079</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: update angular" />
-    <MESSAGE value="feat: update material" />
-    <MESSAGE value="feat: several packages" />
-    <MESSAGE value="chore: several packages" />
-    <MESSAGE value="chore: remove the legacy" />
-    <MESSAGE value="fix: core-example" />
-    <MESSAGE value="fix: nonogramm" />
-    <MESSAGE value="fix: snake3d" />
-    <MESSAGE value="fix: startup tried my best" />
-    <MESSAGE value="fix: ultradice" />
-    <MESSAGE value="fix: some more fixes for startup" />
-    <MESSAGE value="chore: stand alone step one ascii racer" />
-    <MESSAGE value="chore: stand alone step three (no two) ascii racer" />
-    <MESSAGE value="chore: formattings / unused stuff" />
-    <MESSAGE value="chore: beautify code" />
-    <MESSAGE value="chore: new control flow" />
     <MESSAGE value="chore: beautify code after migration" />
     <MESSAGE value="chore: data issue in template" />
     <MESSAGE value="chore: github actions should use node 20" />
@@ -378,6 +498,22 @@
     <MESSAGE value="lint: linting nonogramm" />
     <MESSAGE value="lint: snake" />
     <MESSAGE value="lint: snake3d" />
-    <option name="LAST_COMMIT_MESSAGE" value="lint: snake3d" />
+    <MESSAGE value="refactor: beautify code" />
+    <MESSAGE value="fix: make it working" />
+    <MESSAGE value="fix: es lint setup" />
+    <MESSAGE value="fix: remove matomo" />
+    <MESSAGE value="refactor: migration control flow" />
+    <MESSAGE value="refactor: fix after the control flow setup" />
+    <MESSAGE value="fix: import path" />
+    <MESSAGE value="chore: remove unused file" />
+    <MESSAGE value="chore: application building" />
+    <MESSAGE value="refactor: standalone migration" />
+    <MESSAGE value="chore: reformat the files" />
+    <MESSAGE value="refactor: control flow" />
+    <MESSAGE value="fix: after refactor control flow" />
+    <MESSAGE value="chore: code style" />
+    <MESSAGE value="fix: button style" />
+    <MESSAGE value="chore: code style create game" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: code style create game" />
   </component>
 </project>
