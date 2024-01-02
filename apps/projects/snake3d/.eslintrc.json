@@ -9,11 +9,7 @@
         "*.ts"
       ],
       "parserOptions": {
-        "project": [
-          "./projects/snake3d/tsconfig.app.json",
-          "./projects/snake3d/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+        "project": ["./projects/snake3d/tsconfig.*?.json"]
       },
       "plugins": [
         "eslint-plugin-no-null",
