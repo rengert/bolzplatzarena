@@ -1,10 +1,8 @@
 import { AsyncPipe, NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TrackByPropertyPipe } from '@bpa/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Player } from '../../../../models/player.model';
 import { GameService } from '../../../../services/game.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
@@ -20,22 +18,18 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
     NgClass,
     ButtonComponent,
     AsyncPipe,
-    TrackByPropertyPipe
-],
+    TrackByPropertyPipe,
+  ],
 })
-export class ResultComponent implements OnInit {
-  players$: Observable<Player[]>;
+export class ResultComponent {
+  protected readonly players: Player[];
 
   constructor(
-    private readonly game: GameService,
     readonly dialogRef: MatDialogRef<ResultComponent>,
+    gameService: GameService,
   ) {
-  }
-
-  ngOnInit(): void {
-    this.players$ = this.game.getGame()
-      .pipe(
-        map(game => game.players.sort((a, b) => (a.gameCard.sum < b.gameCard.sum ? 1 : -1))),
-      );
+    const game = gameService.getGame();
+    this.players =
+      game.players.sort((a, b) => (a.gameCard.sum < b.gameCard.sum ? 1 : -1));
   }
 }

@@ -1,5 +1,4 @@
 import { Injectable, signal } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { Game } from '../models/game.model';
 
 @Injectable({ providedIn: 'root' })
@@ -16,14 +15,14 @@ export class GameService {
     return localStorage.getItem('game') !== null;
   }
 
-  getGame(): Observable<Game> {
+  getGame(): Game {
     const data = localStorage.getItem('game');
 
     if (!data) {
       throw new Error('Game not loaded');
     }
 
-    return of(JSON.parse(data) as Game);
+    return JSON.parse(data) as Game;
   }
 
   async updateGame(game: Game): Promise<Game> {

@@ -8,6 +8,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   standalone: true,
 })
 export class RuleComponent {
-  @Input() text: string;
+  @Input({ required: true }) text: string;
   @Input() value?: number;
 }

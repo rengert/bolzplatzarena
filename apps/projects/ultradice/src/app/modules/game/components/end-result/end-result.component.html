@@ -1,42 +1,40 @@
-@if (players$ | async; as items) {
-  <div class="holder">
-    <h4 translate>COMPONENTS.GAME.END_RESULT.HEADLINE</h4>
-    <ol>
-      @for (player of items; track player.id; let odd = $odd; let even = $even) {
-        <li
-            [ngClass]="{ 'odd-active': odd, 'even-active': even }">{{ player.name }}: {{ player.gameCard.sum }}
-        </li>
-      }
-    </ol>
-    @for (player of items; track player.id; let odd = $odd; let even = $even) {
-      <div [ngClass]="{ 'odd-active': odd, 'even-active': even }">
-        <h3>{{ player.name }}</h3>
-        <div>Einser: <span>{{ player.gameCard.ones }}</span></div>
-        <div>Zweier: <span>{{ player.gameCard.twos }}</span></div>
-        <div>Dreier: <span>{{ player.gameCard.threes }}</span></div>
-        <div>Vierer: <span>{{ player.gameCard.fours }}</span></div>
-        <div>Fünfer: <span>{{ player.gameCard.fives }}</span></div>
-        <div>Sechser: <span>{{ player.gameCard.six }}</span></div>
-        <hr>
-        <div>Oben: <span>{{ player.gameCard.sumUpper }}</span></div>
-        <div>Bonus: <span>{{ player.gameCard.bonus }}</span></div>
-        <hr>
-        <div>Ein Paar: <span>{{ player.gameCard.onePair }}</span></div>
-        <div>Zwei Paare: <span>{{ player.gameCard.twoPair }}</span></div>
-        <div>Drei Gleiche: <span>{{ player.gameCard.threeOfAKind }}</span></div>
-        <div>Vier Gleiche: <span>{{ player.gameCard.fourOfAKind }}</span></div>
-        <div>Kuchen / Full House: <span>{{ player.gameCard.fullHouse }}</span></div>
-        <div>Kleine Straße: <span>{{ player.gameCard.shortStreet }}</span></div>
-        <div>Große Straße: <span>{{ player.gameCard.largeStreet }}</span></div>
-        <div>Pasch: <span>{{ player.gameCard.fiveOfAKind }}</span></div>
-        <div>Chance: <span>{{ player.gameCard.chance }}</span></div>
-        <hr>
-        <hr>
-        <div>Oben: <span>{{ player.gameCard.sumUpper }}</span></div>
-        <div>Unten: <span>{{ player.gameCard.sumLower }}</span></div>
-        <div>Gesamt:<span>{{ player.gameCard.sum }}</span></div>
-      </div>
+<div class="holder">
+  <h4 translate>COMPONENTS.GAME.END_RESULT.HEADLINE</h4>
+  <ol>
+    @for (player of players; track player.id; let odd = $odd; let even = $even) {
+      <li
+          [ngClass]="{ 'odd-active': odd, 'even-active': even }">{{ player.name }}: {{ player.gameCard.sum }}
+      </li>
     }
-  </div>
-  <app-button (click)="close()">Schließen</app-button>
-}
+  </ol>
+  @for (player of players; track player.id; let odd = $odd; let even = $even) {
+    <div [ngClass]="{ 'odd-active': odd, 'even-active': even }">
+      <h3>{{ player.name }}</h3>
+      <div>Einser: <span>{{ player.gameCard.ones }}</span></div>
+      <div>Zweier: <span>{{ player.gameCard.twos }}</span></div>
+      <div>Dreier: <span>{{ player.gameCard.threes }}</span></div>
+      <div>Vierer: <span>{{ player.gameCard.fours }}</span></div>
+      <div>Fünfer: <span>{{ player.gameCard.fives }}</span></div>
+      <div>Sechser: <span>{{ player.gameCard.six }}</span></div>
+      <hr>
+      <div>Oben: <span>{{ player.gameCard.sumUpper }}</span></div>
+      <div>Bonus: <span>{{ player.gameCard.bonus }}</span></div>
+      <hr>
+      <div>Ein Paar: <span>{{ player.gameCard.onePair }}</span></div>
+      <div>Zwei Paare: <span>{{ player.gameCard.twoPair }}</span></div>
+      <div>Drei Gleiche: <span>{{ player.gameCard.threeOfAKind }}</span></div>
+      <div>Vier Gleiche: <span>{{ player.gameCard.fourOfAKind }}</span></div>
+      <div>Kuchen / Full House: <span>{{ player.gameCard.fullHouse }}</span></div>
+      <div>Kleine Straße: <span>{{ player.gameCard.shortStreet }}</span></div>
+      <div>Große Straße: <span>{{ player.gameCard.largeStreet }}</span></div>
+      <div>Pasch: <span>{{ player.gameCard.fiveOfAKind }}</span></div>
+      <div>Chance: <span>{{ player.gameCard.chance }}</span></div>
+      <hr>
+      <hr>
+      <div>Oben: <span>{{ player.gameCard.sumUpper }}</span></div>
+      <div>Unten: <span>{{ player.gameCard.sumLower }}</span></div>
+      <div>Gesamt:<span>{{ player.gameCard.sum }}</span></div>
+    </div>
+  }
+</div>
+<app-button (click)="close()">Schließen</app-button>

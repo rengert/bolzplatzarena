@@ -11,5 +11,4 @@ import { LinkButtonComponent } from '../../../shared/components/link-button/link
   imports: [MatCardModule, LinkButtonComponent],
 })
 export class PrivacyComponent {
-
 }

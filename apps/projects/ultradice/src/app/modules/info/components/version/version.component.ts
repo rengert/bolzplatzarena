@@ -17,5 +17,5 @@ import { LinkButtonComponent } from '../../../shared/components/link-button/link
   ],
 })
 export class VersionComponent {
-  readonly version = version;
+  protected readonly version = version;
 }

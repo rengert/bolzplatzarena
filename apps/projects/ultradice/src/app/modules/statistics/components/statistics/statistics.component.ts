@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -22,21 +22,21 @@ import { LinkButtonComponent } from '../../../shared/components/link-button/link
     TranslateModule,
   ],
 })
-export class StatisticsComponent implements OnInit {
-  statistics$: Observable<Statistic[]>;
-  displayedColumns: string[] = ['name', 'value'];
+export class StatisticsComponent {
+  protected readonly statistics$: Observable<Statistic[]>;
+  protected readonly displayedColumns: string[] = ['name', 'value'];
 
-  constructor(private readonly dataService: DataService, private readonly router: Router) {
-  }
-
-  ngOnInit(): void {
+  constructor(
+    private readonly dataService: DataService,
+    private readonly router: Router,
+  ) {
     this.statistics$ = this.dataService.getStatistics$()
       .pipe(
         map(statistics => statistics.map(item => ({ ...item, name: item.name.toUpperCase() }))),
       );
   }
 
-  async reset(): Promise<void> {
+  protected async reset(): Promise<void> {
     await this.dataService.cleanUp();
     await this.router.navigate(['/home']);
   }

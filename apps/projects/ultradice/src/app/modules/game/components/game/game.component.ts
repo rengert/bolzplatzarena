@@ -8,8 +8,6 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { GameCard, recalculate } from '../../../../models/game-card.model';
 import { Game } from '../../../../models/game.model';
 import { DataService } from '../../../../services/data.service';
@@ -38,8 +36,7 @@ import { RuleComponent } from '../rule/rule.component';
 export class GameComponent implements OnDestroy {
   @ViewChildren(DiceComponent) dices: QueryList<DiceComponent>;
 
-  init$: Observable<any>;
-  game: Game;
+  readonly game: Game;
 
   get gameCard(): GameCard {
     return this.game.currentPlayer.gameCard;
@@ -52,7 +49,7 @@ export class GameComponent implements OnDestroy {
     private readonly dialog: MatDialog,
     private readonly changeDetectionRef: ChangeDetectorRef,
   ) {
-    this.init$ = this.initGame$();
+    this.game = this.gameService.getGame();
     this.gameService.state$.set(true);
   }
 
@@ -130,12 +127,5 @@ export class GameComponent implements OnDestroy {
       this.game.nextPlayer = false;
       await this.gameService.updateGame(this.game);
     }
-  }
-
-  private initGame$(): Observable<Game> {
-    return this.gameService.getGame()
-      .pipe(
-        tap(game => this.game = game),
-      );
   }
 }
