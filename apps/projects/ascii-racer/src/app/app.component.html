@@ -1,8 +1,16 @@
 Gefahrene Kilometer: {{ way }}
 Unfälle: {{ crashs }}
-<div *ngFor="let row of data$ | async; trackBy: trackByFn; let line = index;">
-  <span *ngFor="let cell of row; trackBy: trackByFn; let column = index"
-        [class.green]="cell === '1'"
-        [class.middle]="cell === '|'"
-        [class.racer]="column === racerPosition && line === racerPositionY">{{ column === racerPosition && line === racerPositionY ? 'H' : cell }}</span>
-</div>
+@if(data$ | async; as data) {
+  @for (row of data; track trackByFn(line, row); let line = $index) {
+    <div>
+      @for (cell of row; track trackByFn(column, cell); let column = $index) {
+        <span
+          [class.green]="cell === '1'"
+          [class.middle]="cell === '|'"
+          [class.racer]="column === racerPosition && line === racerPositionY">
+          {{ column === racerPosition && line === racerPositionY ? 'H' : cell }}
+        </span>
+      }
+    </div>
+  }
+}

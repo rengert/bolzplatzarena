@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { last, round } from 'lodash';
 import { Observable, timer } from 'rxjs';
@@ -15,19 +16,21 @@ enum Direction {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [AsyncPipe],
 })
 export class AppComponent {
-  readonly data$: Observable<string[][]>;
-  readonly speed = 50;
-  readonly trackWitdth = 100;
-  readonly trackLength = 50;
+  protected readonly data$: Observable<string[][]>;
+  protected readonly speed = 50;
+  protected readonly trackWidth = 100;
+  protected readonly trackLength = 50;
 
-  title = 'ascii-racer';
-  racerPosition = 20;
-  racerPositionY = 49;
+  protected title = 'ascii-racer';
+  protected racerPosition = 20;
+  protected racerPositionY = 49;
 
-  crashs = 0;
-  way = 0;
+  protected crashs = 0;
+  protected way = 0;
 
   private last: string[][];
   private readonly track = [15, 35];
@@ -40,7 +43,8 @@ export class AppComponent {
     );
   }
 
-  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
+  @HostListener('window:keydown', ['$event'])
+  protected handleKeyboardEvents(e: KeyboardEvent): void {
     const direction = e.key as Direction;
     if (direction === Direction.left) {
       this.racerPosition -= 1;
@@ -50,7 +54,7 @@ export class AppComponent {
     }
   }
 
-  trackByFn(_: number, item: any): any {
+  protected trackByFn(_: number, item: unknown): unknown {
     return item;
   }
 
@@ -76,7 +80,7 @@ export class AppComponent {
       default:
         break;
     }
-    for (let j = 0; j < this.trackWitdth; j++) {
+    for (let j = 0; j < this.trackWidth; j++) {
       this.last[this.trackLength - 1][j] = j < this.track[0] || j > this.track[1] ? '1' : '8';
       if (j === this.track[0] + 10) {
         this.last[this.trackLength - 1][j] = '|';
@@ -90,7 +94,7 @@ export class AppComponent {
     this.last = [];
     for (let i = 0; i < this.trackLength; i++) {
       this.last[i] = [];
-      for (let j = 0; j < this.trackWitdth; j++) {
+      for (let j = 0; j < this.trackWidth; j++) {
         this.last[i][j] = j < this.track[0] || j > this.track[1] ? '1' : '8';
         if (j === this.track[0] + 10) {
           this.last[i][j] = '|';
@@ -99,7 +103,7 @@ export class AppComponent {
     }
   }
 
-  private check(data: string[][]) {
+  private check(data: string[][]): void {
     const lastLine = last(data);
     if (lastLine && lastLine[this.racerPosition] === '1') {
       this.crashs++;
