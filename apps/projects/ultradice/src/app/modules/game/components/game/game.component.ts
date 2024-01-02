@@ -36,9 +36,9 @@ import { RuleComponent } from '../rule/rule.component';
 export class GameComponent implements OnDestroy {
   @ViewChildren(DiceComponent) dices: QueryList<DiceComponent>;
 
-  readonly game: Game;
+  protected readonly game: Game;
 
-  get gameCard(): GameCard {
+  protected get gameCard(): GameCard {
     return this.game.currentPlayer.gameCard;
   }
 
@@ -57,23 +57,18 @@ export class GameComponent implements OnDestroy {
     this.gameService.state$.set(false);
   }
 
-  async shuffle(): Promise<void> {
+  protected async shuffle(): Promise<void> {
     if (this.game.shuffleMaxCount > 0) {
       const dices = this.dices.toArray();
       for (let x = 0; x < dices.length; x++) {
-        await this.shuffelDice(dices[x]);
+        await this.shuffleDice(dices[x]);
       }
-      // this.gameCard.sum++;
       this.game.shuffleMaxCount -= 1;
     }
     this.changeDetectionRef.markForCheck();
   }
 
-  async shuffelDice(dice: DiceComponent): Promise<void> {
-    if (dice.id === '0') {
-      // error case
-      return;
-    }
+  private async shuffleDice(dice: DiceComponent): Promise<void> {
     if (!dice.fixed) {
       dice.value = Math.ceil((Math.random() * 6));
       await this.dataService.updateShuffleStatistic('dice.all');
@@ -82,7 +77,7 @@ export class GameComponent implements OnDestroy {
     }
   }
 
-  async handleRule(rule: number): Promise<void> {
+  protected async handleRule(rule: number): Promise<void> {
     if (this.game.shuffleMaxCount === 3 || this.game.nextPlayer) {
       // kleiner betrüger :P
       return;
@@ -104,7 +99,7 @@ export class GameComponent implements OnDestroy {
     await this.gameService.updateGame(this.game);
   }
 
-  async next(): Promise<void> {
+  protected async next(): Promise<void> {
     this.game.currentPlayerIndex++;
     if (this.game.currentPlayerIndex === this.game.players.length) {
       this.game.currentPlayerIndex = 0;

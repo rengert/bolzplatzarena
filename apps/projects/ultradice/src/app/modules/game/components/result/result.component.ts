@@ -1,6 +1,7 @@
 import { AsyncPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { TrackByPropertyPipe } from '@bpa/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Player } from '../../../../models/player.model';
@@ -19,6 +20,10 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
     ButtonComponent,
     AsyncPipe,
     TrackByPropertyPipe,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDividerModule,
   ],
 })
 export class ResultComponent {

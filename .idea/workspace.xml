@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="refactor: rework app component">
+    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="refactor: game state service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/end-result/end-result.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/end-result/end-result.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/end-result/end-result.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/end-result/end-result.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/game/game.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/game/game.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/dice/dice.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/dice/dice.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/game/game.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/game/game.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/result/result.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/result/result.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/result/result.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/result/result.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/result/result.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/result/result.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/rule/rule.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/rule/rule.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/info/components/privacy/privacy.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/info/components/privacy/privacy.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/info/components/version/version.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/info/components/version/version.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/statistics/components/statistics/statistics.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/statistics/components/statistics/statistics.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/services/game.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/services/game.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,14 +123,6 @@
       <workItem from="1704138511403" duration="7865000" />
       <workItem from="1704146420797" duration="3259000" />
       <workItem from="1704183523372" duration="3119000" />
-    </task>
-    <task id="LOCAL-00001" summary="chore: update the node server for builds">
-      <option name="closed" value="true" />
-      <created>1693151819591</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1693151819591</updated>
     </task>
     <task id="LOCAL-00002" summary="chore: package lock">
       <option name="closed" value="true" />
@@ -522,14 +508,21 @@
       <option name="project" value="LOCAL" />
       <updated>1704229541043</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="refactor: game state service">
+      <option name="closed" value="true" />
+      <created>1704230704604</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1704230704604</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="lint: ascii-racer" />
     <MESSAGE value="lint: core-example" />
     <MESSAGE value="lint: linting nonogramm" />
     <MESSAGE value="lint: snake" />
@@ -554,6 +547,7 @@
     <MESSAGE value="fix: button for menu" />
     <MESSAGE value="refactor: button should use signal" />
     <MESSAGE value="refactor: rework app component" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: rework app component" />
+    <MESSAGE value="refactor: game state service" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: game state service" />
   </component>
 </project>
