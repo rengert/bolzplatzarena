@@ -1,12 +1,14 @@
 Gefahrene Kilometer: {{ way }}
 Unfälle: {{ crashs }}
-@for (row of data$ | async; track trackByFn(line, row); let line = $index) {
+@for (row of (data$ | async); track trackByFn(line, row); let line = $index) {
   <div>
     @for (cell of row; track trackByFn(column, cell); let column = $index) {
       <span
         [class.green]="cell === '1'"
         [class.middle]="cell === '|'"
-      [class.racer]="column === racerPosition && line === racerPositionY">{{ column === racerPosition && line === racerPositionY ? 'H' : cell }}</span>
+        [class.racer]="column === racerPosition && line === racerPositionY">
+        {{ column === racerPosition && line === racerPositionY ? 'H' : cell }}
+      </span>
     }
   </div>
 }
