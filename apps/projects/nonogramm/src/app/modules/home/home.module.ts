@@ -12,22 +12,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    VersionComponent,
-    NavigationComponent,
-    ImprintComponent,
-    PrivacyComponent,
-  ],
-  imports: [
-    CoreModule,
-    CommonModule,
-    MatButtonModule,
-    RouterModule,
-    TranslateModule,
-    MatCardModule,
-  ],
-  exports: [HomeComponent],
+    imports: [
+        CoreModule,
+        CommonModule,
+        MatButtonModule,
+        RouterModule,
+        TranslateModule,
+        MatCardModule,
+        HomeComponent,
+        VersionComponent,
+        NavigationComponent,
+        ImprintComponent,
+        PrivacyComponent,
+    ],
+    exports: [HomeComponent],
 })
 export class HomeModule {
 }

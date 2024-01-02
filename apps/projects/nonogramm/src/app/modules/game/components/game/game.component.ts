@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Config } from '../../../../models/config';
 import { GameData } from '../../../../models/game-data';
@@ -8,12 +8,25 @@ import { StorageService } from '../../../../services/storage.service';
 import { GameService } from '../../services/game.service';
 import { LoseScreenComponent } from '../lose-screen/lose-screen.component';
 import { WinScreenComponent } from '../win-screen/win-screen.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
+import { BoardComponent } from '../../../board/components/board/board.component';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-game',
+    templateUrl: './game.component.html',
+    styleUrls: ['./game.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        BoardComponent,
+        MatButtonModule,
+        RouterLink,
+        AsyncPipe,
+        TranslateModule,
+    ],
 })
 export class GameComponent implements OnInit {
   readonly gameData$ = new BehaviorSubject<GameData | undefined>(undefined);

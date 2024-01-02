@@ -10,16 +10,13 @@ describe('AppComponent', () => {
     const translateMock = mock(TranslateService);
     const analyticsMock = mock(Angulartics2Piwik);
     void TestBed.configureTestingModule({
-      imports: [],
-      declarations: [
-        AppComponent,
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
+    imports: [AppComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    providers: [
         { provide: Angulartics2Piwik, useFactory: () => instance(analyticsMock) },
         { provide: TranslateService, useFactory: () => instance(translateMock) },
-      ],
-    })
+    ],
+})
       .compileComponents();
   }));
 

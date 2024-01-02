@@ -1,10 +1,19 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { CoreModule } from '../../../../../../../../core/src/lib/core.module';
+import { MatIconModule } from '@angular/material/icon';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-hearts',
-  templateUrl: './hearts.component.html',
-  styleUrls: ['./hearts.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-hearts',
+    templateUrl: './hearts.component.html',
+    styleUrls: ['./hearts.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgFor,
+        MatIconModule,
+        CoreModule,
+    ],
 })
 export class HeartsComponent implements OnChanges {
   @Input() hearts: number;

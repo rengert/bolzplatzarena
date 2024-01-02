@@ -15,26 +15,24 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
-  declarations: [
-    BoardComponent,
-    BlockComponent,
-    CaptionComponent,
-    HeartsComponent,
-    SettingsViewComponent,
-  ],
-  exports: [
-    BoardComponent,
-  ],
-  imports: [
-    CommonModule,
-    CoreModule,
-    FormsModule,
-    TranslateModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatFormFieldModule,
-  ],
+    exports: [
+        BoardComponent,
+    ],
+    imports: [
+        CommonModule,
+        CoreModule,
+        FormsModule,
+        TranslateModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatFormFieldModule,
+        BoardComponent,
+        BlockComponent,
+        CaptionComponent,
+        HeartsComponent,
+        SettingsViewComponent,
+    ],
 })
 export class BoardModule {
 }

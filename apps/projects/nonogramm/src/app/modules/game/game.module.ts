@@ -10,11 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-    declarations: [
-        GameComponent,
-        LoseScreenComponent,
-        WinScreenComponent,
-    ],
     imports: [
         BoardModule,
         CommonModule,
@@ -22,6 +17,9 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatDialogModule,
         RouterModule,
         TranslateModule,
+        GameComponent,
+        LoseScreenComponent,
+        WinScreenComponent,
     ],
     exports: [
         GameComponent,

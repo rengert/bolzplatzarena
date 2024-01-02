@@ -9,16 +9,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
-  declarations: [SettingsComponent],
-  imports: [
-    CommonModule,
-    CoreModule,
-    FormsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatRadioModule,
-    TranslateModule,
-  ],
+    imports: [
+        CommonModule,
+        CoreModule,
+        FormsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatRadioModule,
+        TranslateModule,
+        SettingsComponent,
+    ],
 })
 export class SettingsModule {
 }
