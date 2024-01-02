@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -17,14 +17,12 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    NgIf,
     TranslateModule,
-    NgFor,
     NgClass,
     ButtonComponent,
     AsyncPipe,
-    TrackByPropertyPipe,
-  ],
+    TrackByPropertyPipe
+],
 })
 export class EndResultComponent implements OnInit {
   players$: Observable<Player[]>;

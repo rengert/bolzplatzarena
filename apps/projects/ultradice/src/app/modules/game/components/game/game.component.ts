@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -28,13 +28,12 @@ import { RuleComponent } from '../rule/rule.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    NgIf,
     DiceComponent,
     ButtonComponent,
     RuleComponent,
     LinkButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GameComponent implements OnDestroy {
   @ViewChildren(DiceComponent) dices: QueryList<DiceComponent>;
