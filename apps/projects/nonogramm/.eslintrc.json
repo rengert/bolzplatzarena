@@ -9,11 +9,7 @@
         "*.ts"
       ],
       "parserOptions": {
-        "project": [
-          "./projects/nonogramm/tsconfig.app.json",
-          "./projects/nonogramm/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+        "project": ["./projects/nonogramm/tsconfig.*?.json"]
       },
       "plugins": [
         "eslint-plugin-no-null",

@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     const lang = 'de';
     this.translate.use(lang);
-    // eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires
     const data = require(`../i18n/${lang}.json`);
     this.translate.setTranslation(lang, data, true);
   }
