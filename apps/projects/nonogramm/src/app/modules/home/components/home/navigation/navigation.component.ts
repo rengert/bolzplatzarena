@@ -1,24 +1,24 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { StorageService } from '../../../../../services/storage.service';
-import { TranslateModule } from '@ngx-translate/core';
 import { NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { CoreModule } from '../../../../../../../../core/src/lib/core.module';
+import { Router, RouterLink } from '@angular/router';
+import { CoreModule } from '@bpa/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { StorageService } from '../../../../../services/storage.service';
 
 @Component({
-    selector: 'app-navigation',
-    templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        CoreModule,
-        MatButtonModule,
-        NgIf,
-        RouterLink,
-        TranslateModule,
-    ],
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    NgIf,
+    RouterLink,
+    TranslateModule,
+    CoreModule,
+  ],
 })
 export class NavigationComponent implements OnInit {
   gameStarted: boolean;

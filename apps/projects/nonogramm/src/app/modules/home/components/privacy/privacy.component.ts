@@ -1,21 +1,21 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { CoreModule } from '../../../../../../../core/src/lib/core.module';
+import { RouterLink } from '@angular/router';
+import { CoreModule } from '@bpa/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-privacy',
-    templateUrl: './privacy.component.html',
-    styleUrls: ['./privacy.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        CoreModule,
-        MatButtonModule,
-        RouterLink,
-        TranslateModule,
-    ],
+  selector: 'app-privacy',
+  templateUrl: './privacy.component.html',
+  styleUrls: ['./privacy.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CoreModule,
+    MatButtonModule,
+    RouterLink,
+    TranslateModule,
+  ],
 })
 export class PrivacyComponent {
 }

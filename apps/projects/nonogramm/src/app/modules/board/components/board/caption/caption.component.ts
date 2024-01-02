@@ -1,16 +1,16 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { TrackByPropertyPipe } from '@bpa/core';
 import { Caption } from '../../../../../models/caption';
 import { Config } from '../../../../../models/config';
-import { CoreModule } from '../../../../../../../../core/src/lib/core.module';
-import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-caption',
-    templateUrl: './caption.component.html',
-    styleUrls: ['./caption.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NgFor, CoreModule],
+  selector: 'app-caption',
+  templateUrl: './caption.component.html',
+  styleUrls: ['./caption.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgFor, TrackByPropertyPipe],
 })
 export class CaptionComponent implements OnChanges {
   @Input() config: Config;

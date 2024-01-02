@@ -1,32 +1,32 @@
+import { NgFor, UpperCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
 import { Router } from '@angular/router';
+import { CoreModule } from '@bpa/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { Level } from '../../../../models/level';
 import { Size } from '../../../../models/size';
 import { StorageService } from '../../../../services/storage.service';
-import { MatButtonModule } from '@angular/material/button';
-import { NgFor, UpperCasePipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatRadioModule } from '@angular/material/radio';
-import { TranslateModule } from '@ngx-translate/core';
-import { MatCardModule } from '@angular/material/card';
-import { CoreModule } from '../../../../../../../core/src/lib/core.module';
 
 @Component({
-    selector: 'app-settings',
-    templateUrl: './settings.component.html',
-    styleUrls: ['./settings.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        CoreModule,
-        MatCardModule,
-        TranslateModule,
-        MatRadioModule,
-        FormsModule,
-        NgFor,
-        MatButtonModule,
-        UpperCasePipe,
-    ],
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CoreModule,
+    MatCardModule,
+    TranslateModule,
+    MatRadioModule,
+    FormsModule,
+    NgFor,
+    MatButtonModule,
+    UpperCasePipe,
+  ],
 })
 export class SettingsComponent implements OnInit {
   level: Level;

@@ -13,7 +13,7 @@ import { TrackByCoordPipe } from './pipes/track-by-coord.pipe';
 import { TrackByPropertyPipe } from './pipes/track-by-property.pipe';
 
 @NgModule({
-  declarations: [TrackByPropertyPipe, TrackByCoordPipe, DistancePipe, AgePipe, IconCardComponent],
+  declarations: [TrackByCoordPipe, DistancePipe, AgePipe, IconCardComponent],
   imports: [
     BrowserAnimationsModule,
     CommonModule,
@@ -22,6 +22,7 @@ import { TrackByPropertyPipe } from './pipes/track-by-property.pipe';
     RouterModule,
     MatCardModule,
     MatIconModule,
+    TrackByPropertyPipe,
   ],
   exports: [
     AgePipe,

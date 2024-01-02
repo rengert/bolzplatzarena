@@ -1,36 +1,47 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { NgFor } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { TrackByPropertyPipe } from '@bpa/core';
 import { Caption } from '../../../../models/caption';
 import { GameBlock } from '../../../../models/game-block';
 import { GameData } from '../../../../models/game-data';
 import { StorageService } from '../../../../services/storage.service';
 import { generateColumnHints, generateRowHints } from '../../services/board.util';
-import { CoreModule } from '../../../../../../../core/src/lib/core.module';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { BlockComponent } from './block/block.component';
 import { CaptionComponent } from './caption/caption.component';
-import { NgFor } from '@angular/common';
 import { HeartsComponent } from './hearts/hearts.component';
 import { SettingsViewComponent } from './settings-view/settings-view.component';
 
 const HEART_LIMIT = 3;
 
 @Component({
-    selector: 'app-board',
-    templateUrl: './board.component.html',
-    styleUrls: ['./board.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        SettingsViewComponent,
-        HeartsComponent,
-        NgFor,
-        CaptionComponent,
-        BlockComponent,
-        MatFormFieldModule,
-        FormsModule,
-        CoreModule,
-    ],
+  selector: 'app-board',
+  templateUrl: './board.component.html',
+  styleUrls: ['./board.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    SettingsViewComponent,
+    HeartsComponent,
+    NgFor,
+    CaptionComponent,
+    BlockComponent,
+    MatFormFieldModule,
+    FormsModule,
+    TrackByPropertyPipe,
+    MatSlideToggleModule,
+  ],
 })
 export class BoardComponent implements OnChanges {
   @Input() boardData: GameData;
