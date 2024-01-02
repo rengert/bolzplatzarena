@@ -1,4 +1,4 @@
-import { NgFor, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,10 +23,9 @@ import { StorageService } from '../../../../services/storage.service';
     TranslateModule,
     MatRadioModule,
     FormsModule,
-    NgFor,
     MatButtonModule,
-    UpperCasePipe,
-  ],
+    UpperCasePipe
+],
 })
 export class SettingsComponent implements OnInit {
   level: Level;

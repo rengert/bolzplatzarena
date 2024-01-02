@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,7 +19,7 @@ import { GameBlock } from '../../../../../models/game-block';
   styleUrls: ['./block.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf],
+  imports: [],
 })
 export class BlockComponent implements OnChanges {
   @Input() config: Config;

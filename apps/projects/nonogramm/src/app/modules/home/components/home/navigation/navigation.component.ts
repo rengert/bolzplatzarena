@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
@@ -14,11 +14,10 @@ import { StorageService } from '../../../../../services/storage.service';
   standalone: true,
   imports: [
     MatButtonModule,
-    NgIf,
     RouterLink,
     TranslateModule,
-    CoreModule,
-  ],
+    CoreModule
+],
 })
 export class NavigationComponent implements OnInit {
   gameStarted: boolean;

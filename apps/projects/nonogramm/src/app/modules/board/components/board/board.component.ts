@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -34,14 +34,13 @@ const HEART_LIMIT = 3;
   imports: [
     SettingsViewComponent,
     HeartsComponent,
-    NgFor,
     CaptionComponent,
     BlockComponent,
     MatFormFieldModule,
     FormsModule,
     TrackByPropertyPipe,
-    MatSlideToggleModule,
-  ],
+    MatSlideToggleModule
+],
 })
 export class BoardComponent implements OnChanges {
   @Input() boardData: GameData;

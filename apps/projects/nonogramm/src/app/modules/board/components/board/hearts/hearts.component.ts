@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { TrackByPropertyPipe } from '@bpa/core';
@@ -10,10 +10,9 @@ import { TrackByPropertyPipe } from '@bpa/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    NgFor,
     MatIconModule,
-    TrackByPropertyPipe,
-  ],
+    TrackByPropertyPipe
+],
 })
 export class HeartsComponent implements OnChanges {
   @Input() hearts: number;

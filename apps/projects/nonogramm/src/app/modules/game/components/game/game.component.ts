@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,13 +20,12 @@ import { WinScreenComponent } from '../win-screen/win-screen.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    NgIf,
     BoardComponent,
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    TranslateModule,
-  ],
+    TranslateModule
+],
 })
 export class GameComponent implements OnInit {
   readonly gameData$ = new BehaviorSubject<GameData | undefined>(undefined);

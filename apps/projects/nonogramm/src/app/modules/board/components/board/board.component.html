@@ -1,26 +1,34 @@
 <app-settings-view [config]="boardData.config"></app-settings-view>
 <app-hearts [hearts]="hearts"></app-hearts>
 <div class="columns">
-  <app-caption *ngFor="let column of columnHints; trackBy: ('valueOf' | trackByProperty)"
-               [numbers]="column"
-               [vertical]="true"
-               [config]="boardData.config"></app-caption>
+  @for (column of columnHints; track ('valueOf' | trackByProperty)($index, column)) {
+    <app-caption
+      [numbers]="column"
+      [vertical]="true"
+    [config]="boardData.config"></app-caption>
+  }
 </div>
 <div class="rows">
-  <app-caption *ngFor="let row of rowHints; trackBy: ('valueOf' | trackByProperty)"
-               [numbers]="row"
-               [vertical]="false"
-               [config]="boardData.config"></app-caption>
+  @for (row of rowHints; track ('valueOf' | trackByProperty)($index, row)) {
+    <app-caption
+      [numbers]="row"
+      [vertical]="false"
+    [config]="boardData.config"></app-caption>
+  }
 </div>
 <div class="inner">
-  <div *ngFor="let row of boardData.current" class="row">
-    <app-block *ngFor="let block of row.data"
-               [block]="block"
-               [config]="boardData.config"
-               (action)="onAction($event)"
-               [selectExpected]="selectType">
-    </app-block>
-  </div>
+  @for (row of boardData.current; track row) {
+    <div class="row">
+      @for (block of row.data; track block) {
+        <app-block
+          [block]="block"
+          [config]="boardData.config"
+          (action)="onAction($event)"
+          [selectExpected]="selectType">
+        </app-block>
+      }
+    </div>
+  }
 </div>
 <div class="controls">
   <mat-label>&#10005;&nbsp;&nbsp;&nbsp;</mat-label>
