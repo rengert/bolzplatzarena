@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="chore: code style create game">
+    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="chore: migrate guard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/guards/game-is-running.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/guards/game-is-running.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/services/game.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/services/game.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -482,14 +482,21 @@
       <option name="project" value="LOCAL" />
       <updated>1704212789079</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="chore: migrate guard">
+      <option name="closed" value="true" />
+      <created>1704213547982</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1704213547982</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: beautify code after migration" />
     <MESSAGE value="chore: data issue in template" />
     <MESSAGE value="chore: github actions should use node 20" />
     <MESSAGE value="lint: ultradice" />
@@ -514,6 +521,7 @@
     <MESSAGE value="chore: code style" />
     <MESSAGE value="fix: button style" />
     <MESSAGE value="chore: code style create game" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: code style create game" />
+    <MESSAGE value="chore: migrate guard" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: migrate guard" />
   </component>
 </project>
