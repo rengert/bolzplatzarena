@@ -29,12 +29,11 @@ import { GameService } from './services/game.service';
 export class AppComponent implements OnInit, OnDestroy {
   @Input() @HostBinding('class.visible') isVisible: boolean;
 
-  private subscription = Subscription.EMPTY;
   private endSubscription = Subscription.EMPTY;
 
   constructor(
+    readonly game: GameService,
     private readonly dialog: DialogService,
-    private readonly game: GameService,
     private readonly translate: TranslateService,
     private readonly router: Router,
   ) {
@@ -47,15 +46,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translate.setTranslation(lang, data, true);
 
     await SplashScreen.hide();
-    this.subscription = this.game.state$.subscribe(
-      value => {
-        this.isVisible = value;
-      },
-    );
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
     this.endSubscription.unsubscribe();
   }
 

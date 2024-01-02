@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Game } from '../models/game.model';
 
 @Injectable({ providedIn: 'root' })
 export class GameService {
-  readonly state$ = new BehaviorSubject(false);
+  readonly state$ = signal(false);
 
   async createGame(game: Game): Promise<Game> {
     await this.cleanUpGame();

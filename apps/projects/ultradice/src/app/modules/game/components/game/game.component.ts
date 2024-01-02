@@ -32,8 +32,8 @@ import { RuleComponent } from '../rule/rule.component';
     ButtonComponent,
     RuleComponent,
     LinkButtonComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class GameComponent implements OnDestroy {
   @ViewChildren(DiceComponent) dices: QueryList<DiceComponent>;
@@ -53,11 +53,11 @@ export class GameComponent implements OnDestroy {
     private readonly changeDetectionRef: ChangeDetectorRef,
   ) {
     this.init$ = this.initGame$();
-    this.gameService.state$.next(true);
+    this.gameService.state$.set(true);
   }
 
   ngOnDestroy(): void {
-    this.gameService.state$.next(false);
+    this.gameService.state$.set(false);
   }
 
   async shuffle(): Promise<void> {

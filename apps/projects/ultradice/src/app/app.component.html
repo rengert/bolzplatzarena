@@ -1,6 +1,8 @@
-<button mat-mini-fab color="basic" [matMenuTriggerFor]="menu" class="trigger">
-  <mat-icon>menu</mat-icon>
-</button>
+@if (game.state$()) {
+  <button mat-mini-fab color="basic" [matMenuTriggerFor]="menu" class="trigger">
+    <mat-icon>menu</mat-icon>
+  </button>
+}
 
 <mat-menu #menu>
   <button mat-menu-item (click)="displayRanking()">

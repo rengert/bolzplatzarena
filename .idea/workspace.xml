@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="chore: migrate guard">
+    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="fix: button for menu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/game/game.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/game/game.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/services/game.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/services/game.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -490,14 +492,21 @@
       <option name="project" value="LOCAL" />
       <updated>1704213547982</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="fix: button for menu">
+      <option name="closed" value="true" />
+      <created>1704221280304</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1704221280304</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: data issue in template" />
     <MESSAGE value="chore: github actions should use node 20" />
     <MESSAGE value="lint: ultradice" />
     <MESSAGE value="lint: ascii-racer" />
@@ -522,6 +531,7 @@
     <MESSAGE value="fix: button style" />
     <MESSAGE value="chore: code style create game" />
     <MESSAGE value="chore: migrate guard" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: migrate guard" />
+    <MESSAGE value="fix: button for menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: button for menu" />
   </component>
 </project>

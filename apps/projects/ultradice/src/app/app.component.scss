@@ -13,11 +13,5 @@
     position: absolute;
     right: 5px;
     top: 5px;
-    display: none;
   }
 }
-
-:host.visible button.trigger {
-  display: inline-block;
-}
-
