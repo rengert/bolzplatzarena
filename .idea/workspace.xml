@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="lint: snake">
-      <change afterPath="$PROJECT_DIR$/apps/projects/snake3d/tsconfig.editor.json" afterDir="false" />
+    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="lint: snake3d">
+      <change afterPath="$PROJECT_DIR$/apps/projects/startup/tsconfig.editor.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/snake3d/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/snake3d/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/snake3d/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/snake3d/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/startup/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/startup/src/app/components/launch-startup/launch-startup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/src/app/components/launch-startup/launch-startup.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/startup/src/app/modules/offices/components/open-office/open-office.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/src/app/modules/offices/components/open-office/open-office.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/startup/src/app/services/simulators/property-simulator.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/startup/src/app/services/simulators/property-simulator.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +53,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "github-actions",
-    "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/projects/snake3d",
+    "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/projects/startup",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,11 +66,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps/projects/startup" />
       <recent name="$PROJECT_DIR$/apps/projects/snake3d" />
       <recent name="$PROJECT_DIR$/apps/projects/snake" />
       <recent name="$PROJECT_DIR$/apps/projects/nonogramm" />
       <recent name="$PROJECT_DIR$/apps/projects/core-example" />
-      <recent name="$PROJECT_DIR$/apps/projects/ascii-racer" />
     </key>
   </component>
   <component name="RunManager">
@@ -110,7 +112,7 @@
       <workItem from="1697740830742" duration="85000" />
       <workItem from="1704138511403" duration="7865000" />
       <workItem from="1704146420797" duration="3259000" />
-      <workItem from="1704183523372" duration="2891000" />
+      <workItem from="1704183523372" duration="3119000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update the node server for builds">
       <option name="closed" value="true" />
@@ -336,14 +338,21 @@
       <option name="project" value="LOCAL" />
       <updated>1704186379370</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="lint: snake3d">
+      <option name="closed" value="true" />
+      <created>1704186425573</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1704186425574</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: some files" />
     <MESSAGE value="feat: update angular" />
     <MESSAGE value="feat: update material" />
     <MESSAGE value="feat: several packages" />
@@ -368,6 +377,7 @@
     <MESSAGE value="lint: core-example" />
     <MESSAGE value="lint: linting nonogramm" />
     <MESSAGE value="lint: snake" />
-    <option name="LAST_COMMIT_MESSAGE" value="lint: snake" />
+    <MESSAGE value="lint: snake3d" />
+    <option name="LAST_COMMIT_MESSAGE" value="lint: snake3d" />
   </component>
 </project>

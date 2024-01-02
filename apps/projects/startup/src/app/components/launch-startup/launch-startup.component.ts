@@ -11,19 +11,12 @@ import { LaunchStartup, StartupService } from '../../services/startup.service';
 export class LaunchStartupComponent {
   challengeAccepted = false;
   readonly form = new UntypedFormGroup({
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     sex: new UntypedFormControl('', Validators.required),
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     firstName: new UntypedFormControl('', Validators.required),
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     lastName: new UntypedFormControl('', Validators.required),
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     startup: new UntypedFormControl('', Validators.required),
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     companyType: new UntypedFormControl('', Validators.required),
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     companyTopic: new UntypedFormControl('', Validators.required),
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     companyDescription: new UntypedFormControl('', Validators.required),
   });
 
