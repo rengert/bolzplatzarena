@@ -1,5 +1,5 @@
-<div class="holder">
-  <h4 translate>COMPONENTS.GAME.END_RESULT.HEADLINE</h4>
+<h4 mat-dialog-title translate>COMPONENTS.GAME.END_RESULT.HEADLINE</h4>
+<mat-dialog-content>
   <ol>
     @for (player of players; track player.id; let odd = $odd; let even = $even) {
       <li
@@ -16,10 +16,10 @@
       <div>Vierer: <span>{{ player.gameCard.fours }}</span></div>
       <div>Fünfer: <span>{{ player.gameCard.fives }}</span></div>
       <div>Sechser: <span>{{ player.gameCard.six }}</span></div>
-      <hr>
+      <mat-divider></mat-divider>
       <div>Oben: <span>{{ player.gameCard.sumUpper }}</span></div>
       <div>Bonus: <span>{{ player.gameCard.bonus }}</span></div>
-      <hr>
+      <mat-divider></mat-divider>
       <div>Ein Paar: <span>{{ player.gameCard.onePair }}</span></div>
       <div>Zwei Paare: <span>{{ player.gameCard.twoPair }}</span></div>
       <div>Drei Gleiche: <span>{{ player.gameCard.threeOfAKind }}</span></div>
@@ -29,12 +29,13 @@
       <div>Große Straße: <span>{{ player.gameCard.largeStreet }}</span></div>
       <div>Pasch: <span>{{ player.gameCard.fiveOfAKind }}</span></div>
       <div>Chance: <span>{{ player.gameCard.chance }}</span></div>
-      <hr>
-      <hr>
+      <mat-divider></mat-divider>
       <div>Oben: <span>{{ player.gameCard.sumUpper }}</span></div>
       <div>Unten: <span>{{ player.gameCard.sumLower }}</span></div>
       <div>Gesamt:<span>{{ player.gameCard.sum }}</span></div>
     </div>
   }
-</div>
-<app-button (click)="close()">Schließen</app-button>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <app-button (click)="close()">Schließen</app-button>
+</mat-dialog-actions>
