@@ -240,18 +240,6 @@
               "projects/nonogramm/**/*.html"
             ]
           }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/nonogramm/e2e/protractor.conf.js",
-            "devServerTarget": "nonogramm:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "nonogramm:serve:production"
-            }
-          }
         }
       }
     },
