@@ -9,11 +9,7 @@
         "*.ts"
       ],
       "parserOptions": {
-        "project": [
-          "./projects/ascii-racer/tsconfig.app.json",
-          "./projects/ascii-racer/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+        "project": ["./projects/ascii-racer/tsconfig.*?.json"]
       },
       "plugins": [
         "eslint-plugin-no-null",

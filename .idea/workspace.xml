@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="chore: github actions should use node 20">
+    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="lint: ultradice">
+      <change afterPath="$PROJECT_DIR$/apps/projects/ascii-racer/tsconfig.editor.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/e2e/protractor.conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/e2e/src/app.e2e-spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/e2e/src/app.po.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/e2e/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/game/game.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/src/app/modules/game/components/game/game.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/ultradice/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ultradice/tsconfig.app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ascii-racer/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ascii-racer/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/ascii-racer/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/ascii-racer/tsconfig.app.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +51,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "github-actions",
-    "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena",
+    "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/projects/ascii-racer",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -67,6 +62,11 @@
     "ts.external.directory.path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/node_modules/typescript/lib"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps/projects/ascii-racer" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="lint:all" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/apps/package.json" />
@@ -106,7 +106,7 @@
       <workItem from="1697740830742" duration="85000" />
       <workItem from="1704138511403" duration="7865000" />
       <workItem from="1704146420797" duration="3259000" />
-      <workItem from="1704183523372" duration="2300000" />
+      <workItem from="1704183523372" duration="2581000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update the node server for builds">
       <option name="closed" value="true" />
@@ -292,7 +292,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704184659990</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="lint: ultradice">
+      <option name="closed" value="true" />
+      <created>1704185924524</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1704185924524</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,6 +329,7 @@
     <MESSAGE value="chore: beautify code after migration" />
     <MESSAGE value="chore: data issue in template" />
     <MESSAGE value="chore: github actions should use node 20" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: github actions should use node 20" />
+    <MESSAGE value="lint: ultradice" />
+    <option name="LAST_COMMIT_MESSAGE" value="lint: ultradice" />
   </component>
 </project>
