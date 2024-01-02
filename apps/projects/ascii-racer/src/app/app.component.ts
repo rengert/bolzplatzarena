@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { last, round } from 'lodash';
 import { Observable, timer } from 'rxjs';
@@ -17,7 +17,7 @@ enum Direction {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [NgFor, AsyncPipe],
+  imports: [AsyncPipe],
 })
 export class AppComponent {
   protected readonly data$: Observable<string[][]>;
