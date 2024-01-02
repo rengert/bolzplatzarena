@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="lint: core-example">
-      <change afterPath="$PROJECT_DIR$/apps/projects/nonogramm/tsconfig.editor.json" afterDir="false" />
+    <list default="true" id="166e8f86-c01a-4b6d-8813-6ad9e55e7610" name="Changes" comment="lint: linting nonogramm">
+      <change afterPath="$PROJECT_DIR$/apps/projects/snake/tsconfig.editor.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/nonogramm/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/nonogramm/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/projects/nonogramm/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/nonogramm/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/snake/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/snake/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/projects/snake/src/app/app.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/projects/snake/src/app/app.constants.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +51,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "github-actions",
-    "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/projects/nonogramm",
+    "last_opened_file_path": "/Users/tomfila/Documents/Development/git/bolzplatzarena/apps/projects/snake",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,6 +64,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps/projects/snake" />
       <recent name="$PROJECT_DIR$/apps/projects/nonogramm" />
       <recent name="$PROJECT_DIR$/apps/projects/core-example" />
       <recent name="$PROJECT_DIR$/apps/projects/ascii-racer" />
@@ -108,7 +109,7 @@
       <workItem from="1697740830742" duration="85000" />
       <workItem from="1704138511403" duration="7865000" />
       <workItem from="1704146420797" duration="3259000" />
-      <workItem from="1704183523372" duration="2751000" />
+      <workItem from="1704183523372" duration="2842000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update the node server for builds">
       <option name="closed" value="true" />
@@ -318,14 +319,21 @@
       <option name="project" value="LOCAL" />
       <updated>1704186212194</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="lint: linting nonogramm">
+      <option name="closed" value="true" />
+      <created>1704186324754</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1704186324754</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: update the node server for builds" />
     <MESSAGE value="chore: package lock" />
     <MESSAGE value="chore: some files" />
     <MESSAGE value="feat: update angular" />
@@ -350,6 +358,7 @@
     <MESSAGE value="lint: ultradice" />
     <MESSAGE value="lint: ascii-racer" />
     <MESSAGE value="lint: core-example" />
-    <option name="LAST_COMMIT_MESSAGE" value="lint: core-example" />
+    <MESSAGE value="lint: linting nonogramm" />
+    <option name="LAST_COMMIT_MESSAGE" value="lint: linting nonogramm" />
   </component>
 </project>
