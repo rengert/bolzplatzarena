@@ -15,3 +15,6 @@ export * from './lib/utils/moment.util';
 // services
 
 export * from './lib/services/window.service';
+
+// pipes
+export { TrackByPropertyPipe } from './lib/pipes/track-by-property.pipe';

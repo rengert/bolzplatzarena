@@ -1,5 +1,9 @@
+
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { Router, RouterLink } from '@angular/router';
+import { CoreModule } from '@bpa/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { StorageService } from '../../../../../services/storage.service';
 
 @Component({
@@ -7,6 +11,13 @@ import { StorageService } from '../../../../../services/storage.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    RouterLink,
+    TranslateModule,
+    CoreModule
+],
 })
 export class NavigationComponent implements OnInit {
   gameStarted: boolean;

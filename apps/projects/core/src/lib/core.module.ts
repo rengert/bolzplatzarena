@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { IconCardComponent } from './components/icon-card/icon-card.component';
 import { IndicatorModule } from './modules/indicator/indicator.module';
@@ -13,15 +12,15 @@ import { TrackByCoordPipe } from './pipes/track-by-coord.pipe';
 import { TrackByPropertyPipe } from './pipes/track-by-property.pipe';
 
 @NgModule({
-  declarations: [TrackByPropertyPipe, TrackByCoordPipe, DistancePipe, AgePipe, IconCardComponent],
+  declarations: [TrackByCoordPipe, DistancePipe, AgePipe, IconCardComponent],
   imports: [
-    BrowserAnimationsModule,
     CommonModule,
     IndicatorModule,
     PrivacyModule,
     RouterModule,
     MatCardModule,
     MatIconModule,
+    TrackByPropertyPipe,
   ],
   exports: [
     AgePipe,

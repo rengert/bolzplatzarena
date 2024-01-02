@@ -1,10 +1,14 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
 import { Config } from '../../../../models/config';
 import { GameData } from '../../../../models/game-data';
 import { StorageService } from '../../../../services/storage.service';
+import { BoardComponent } from '../../../board/components/board/board.component';
 import { GameService } from '../../services/game.service';
 import { LoseScreenComponent } from '../lose-screen/lose-screen.component';
 import { WinScreenComponent } from '../win-screen/win-screen.component';
@@ -14,6 +18,14 @@ import { WinScreenComponent } from '../win-screen/win-screen.component';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    BoardComponent,
+    MatButtonModule,
+    RouterLink,
+    AsyncPipe,
+    TranslateModule
+],
 })
 export class GameComponent implements OnInit {
   readonly gameData$ = new BehaviorSubject<GameData | undefined>(undefined);
@@ -47,7 +59,7 @@ export class GameComponent implements OnInit {
   private win(): void {
     const dialogRef = this.dialog.open(WinScreenComponent);
     dialogRef.afterClosed()
-      .subscribe(async () => {
+      .subscribe(async() => {
         this.storage.cleanGame();
         await this.router.navigate(['']);
       });
@@ -56,7 +68,7 @@ export class GameComponent implements OnInit {
   private lose(): void {
     const dialogRef = this.dialog.open(LoseScreenComponent);
     dialogRef.afterClosed()
-      .subscribe(async (result: true | undefined) => {
+      .subscribe(async(result: true | undefined) => {
         const current = this.gameData$.value;
         if (result === true && current) {
           this.gameData$.next({

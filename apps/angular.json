@@ -141,12 +141,14 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/nonogramm/public",
             "index": "projects/nonogramm/src/index.html",
-            "main": "projects/nonogramm/src/main.ts",
-            "polyfills": "projects/nonogramm/src/polyfills.ts",
+            "browser": "projects/nonogramm/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/nonogramm/tsconfig.app.json",
             "assets": [
               "projects/nonogramm/src/favicon.ico",
@@ -157,9 +159,7 @@
               "projects/nonogramm/src/styles.scss"
             ],
             "scripts": [],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true
@@ -239,18 +239,6 @@
               "projects/nonogramm/**/*.ts",
               "projects/nonogramm/**/*.html"
             ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/nonogramm/e2e/protractor.conf.js",
-            "devServerTarget": "nonogramm:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "nonogramm:serve:production"
-            }
           }
         }
       }

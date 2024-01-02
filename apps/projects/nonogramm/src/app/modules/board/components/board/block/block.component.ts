@@ -1,3 +1,4 @@
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,6 +18,8 @@ import { GameBlock } from '../../../../../models/game-block';
   templateUrl: './block.component.html',
   styleUrls: ['./block.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [],
 })
 export class BlockComponent implements OnChanges {
   @Input() config: Config;

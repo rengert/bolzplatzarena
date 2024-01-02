@@ -3,20 +3,24 @@
     <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.LEVEL</mat-card-subtitle>
     <mat-radio-group aria-labelledby="level-label"
                      [(ngModel)]="level">
-      <mat-radio-button *ngFor="let item of levels; trackBy: ('value' | trackByProperty)"
-                        [value]="item">
-        {{ 'GLOBAL.ENUM.LEVEL.' + item | uppercase | translate }}
-      </mat-radio-button>
+      @for (item of levels; track item) {
+        <mat-radio-button
+            [value]="item">
+          {{ 'GLOBAL.ENUM.LEVEL.' + item | uppercase | translate }}
+        </mat-radio-button>
+      }
     </mat-radio-group>
   </section>
   <section class="setting">
     <mat-card-subtitle translate>COMPONENTS.SETTINGS.LABELS.SIZE</mat-card-subtitle>
     <mat-radio-group aria-labelledby="size-label"
                      [(ngModel)]="size">
-      <mat-radio-button *ngFor="let item of sizes; trackBy: ('value' | trackByProperty)"
-                        [value]="item">
-        {{ 'GLOBAL.ENUM.SIZE.' + item | translate }}
-      </mat-radio-button>
+      @for (item of sizes; track item) {
+        <mat-radio-button
+            [value]="item">
+          {{ 'GLOBAL.ENUM.SIZE.' + item | translate }}
+        </mat-radio-button>
+      }
     </mat-radio-group>
   </section>
   <section class="actions">

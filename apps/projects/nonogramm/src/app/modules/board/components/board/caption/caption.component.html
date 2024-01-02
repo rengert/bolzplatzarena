@@ -1,3 +1,5 @@
-<span *ngFor="let item of numbers; trackBy: ('valueOf' | trackByProperty)"
-      [class]="numbersClass"
-      [class.done]="item.done">{{ item.items }}</span>
+@for (item of numbers; track item.valueOf()) {
+  <span [class]="numbersClass" [class.done]="item.done">
+    {{ item.items }}
+  </span>
+}

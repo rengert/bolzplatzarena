@@ -1,10 +1,18 @@
+
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { TrackByPropertyPipe } from '@bpa/core';
 
 @Component({
   selector: 'app-hearts',
   templateUrl: './hearts.component.html',
   styleUrls: ['./hearts.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatIconModule,
+    TrackByPropertyPipe
+],
 })
 export class HeartsComponent implements OnChanges {
   @Input() hearts: number;

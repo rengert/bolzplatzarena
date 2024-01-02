@@ -1,4 +1,6 @@
+
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { TrackByPropertyPipe } from '@bpa/core';
 import { Caption } from '../../../../../models/caption';
 import { Config } from '../../../../../models/config';
 
@@ -7,6 +9,8 @@ import { Config } from '../../../../../models/config';
   templateUrl: './caption.component.html',
   styleUrls: ['./caption.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [TrackByPropertyPipe],
 })
 export class CaptionComponent implements OnChanges {
   @Input() config: Config;
