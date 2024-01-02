@@ -22,7 +22,8 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
       AppRoutingModule,
       BoardModule,
-      GameModule, HomeModule,
+      GameModule,
+      HomeModule,
       MatToolbarModule,
       MatIconModule,
       SettingsModule,
