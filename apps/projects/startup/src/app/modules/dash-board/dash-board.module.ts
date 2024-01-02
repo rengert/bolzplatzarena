@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 import { CoreModule, MaterialModule } from '@bpa/core';
 import { BarChartModule } from '@swimlane/ngx-charts';
@@ -18,6 +19,7 @@ import { StatisticsComponent } from './components/dash-board/statistics/statisti
     RouterModule,
     BarChartModule,
     EmployeeModule,
+    MatCardModule,
   ],
   declarations: [CreditAuditComponent, DashBoardComponent, OfficesComponent, StatisticsComponent, EmployeeComponent],
 })

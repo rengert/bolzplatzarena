@@ -2,6 +2,13 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatLineModule } from '@angular/material/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -31,7 +38,6 @@ import { PropertySimulatorService } from './services/simulators/property-simulat
 import { SalarySimulatorService } from './services/simulators/salary-simulator.service';
 import { SIMULATOR } from './services/simulators/simulator';
 import { PropertyWorker } from './workers/property.worker';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 registerLocaleData(localeDe);
 
@@ -69,8 +75,17 @@ registerLocaleData(localeDe);
     NavigationModule,
 
     WorkerModule.forWorkers([
-      { worker: PropertyWorker, initFn: () => new Worker(new URL('./workers/property.worker.ts', import.meta.url), { type: 'module' }) },
+      {
+        worker: PropertyWorker,
+        initFn: () => new Worker(new URL('./workers/property.worker.ts', import.meta.url), { type: 'module' }),
+      },
     ]),
+    MatListModule,
+    MatLineModule,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatSidenavModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' },

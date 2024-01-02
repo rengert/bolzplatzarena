@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 import { CoreModule, MaterialModule } from '@bpa/core';
 import { EmployeeTableComponent } from './components/employee-table/employee-table.component';
@@ -14,6 +15,7 @@ import { WorkerComponent } from './components/worker/worker.component';
     MaterialModule,
     CoreModule,
     RouterModule,
+    MatCardModule,
   ],
   exports: [
     EmployeeTableComponent,

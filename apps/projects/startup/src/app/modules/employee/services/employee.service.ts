@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createUuid, randomMoment } from '@bpa/core';
 import moment, { Moment } from 'moment';
+import { firstValueFrom } from 'rxjs';
 import { Level } from '../../../models/level.model';
 import { Profession } from '../../../models/profession.model';
 import { Worker } from '../../../models/worker.model';
@@ -53,10 +54,8 @@ export class EmployeeService {
   }
 
   async seed(count = 20): Promise<void> {
-    const professions = await this.profession.get$()
-      .toPromise();
-    const levels = await this.profession.getLevels$()
-      .toPromise();
+    const professions = await firstValueFrom(this.profession.get$());
+    const levels = await firstValueFrom(this.profession.getLevels$());
 
     const data: Worker[] = [];
     for (let i = 0; i < count; i++) {
