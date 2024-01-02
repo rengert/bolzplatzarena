@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { List, orderBy } from 'lodash';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { filter, first, map } from 'rxjs/operators';
 
 type ListIterator<T, TResult> = (value: T, index: number, collection: List<T>) => TResult;
@@ -23,7 +23,7 @@ export class StorageService extends StorageMap {
   }
 
   getEntity<T>(key: string): Promise<T> {
-    return this.get(key).pipe(first(), map(data => data as T)).toPromise();
+    return firstValueFrom(this.get(key).pipe( map(data => data as T)));
   }
 
   setEntity<T>(key: string, data: T): Promise<void> {

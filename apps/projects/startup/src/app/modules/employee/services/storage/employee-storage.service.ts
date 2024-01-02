@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractStorageService } from '@bpa/core';
-import { Observable } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { firstValueFrom, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Worker } from '../../../../models/worker.model';
 import { AppStorageService } from '../../../../services/storage/app-storage.service';
 
@@ -18,9 +18,7 @@ export class EmployeeStorageService extends AbstractStorageService<Worker> {
   }
 
   async getEmployed(): Promise<Worker[]> {
-    return this.getEmployed$().pipe(
-      first(),
-    ).toPromise();
+    return firstValueFrom(this.getEmployed$());
   }
 
   protected loadNavigationProperties(item: Worker): void {

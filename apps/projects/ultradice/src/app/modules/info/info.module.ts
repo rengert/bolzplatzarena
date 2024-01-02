@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { MaterialModule } from '../../../../../core/src/lib/modules/material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
 import { ImprintComponent } from './components/imprint/imprint.component';
@@ -14,8 +14,8 @@ import { VersionComponent } from './components/version/version.component';
     CommonModule,
     SharedModule,
     RouterModule,
-    MaterialModule,
     TranslateModule,
+    MatCardModule,
   ],
   declarations: [HomeComponent, ImprintComponent, PrivacyComponent, VersionComponent],
 })

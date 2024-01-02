@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { SpeedDialService } from '@bpa/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { BaseComponent } from '../../../../components/base/base.component';
 import { Office } from '../../../../models/office.model';
 import { OfficeService } from '../../services/office.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-office-list',

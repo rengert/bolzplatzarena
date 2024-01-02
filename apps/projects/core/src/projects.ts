@@ -4,8 +4,6 @@
 
 export * from './lib/modules/dialog/dialog.module';
 
-export * from './lib/modules/material/material.module';
-
 export * from './lib/core.module';
 
 export * from './lib/modules/public-api';

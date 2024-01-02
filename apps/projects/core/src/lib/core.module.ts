@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { IconCardComponent } from './components/icon-card/icon-card.component';
 import { IndicatorModule } from './modules/indicator/indicator.module';
-import { MaterialModule } from './modules/material/material.module';
 import { PrivacyModule } from './modules/privacy/privacy.module';
 import { AgePipe } from './pipes/age.pipe';
 import { DistancePipe } from './pipes/distance.pipe';
@@ -18,10 +18,10 @@ import { TrackByPropertyPipe } from './pipes/track-by-property.pipe';
     BrowserAnimationsModule,
     CommonModule,
     IndicatorModule,
-    MaterialModule,
     PrivacyModule,
     RouterModule,
     MatCardModule,
+    MatIconModule,
   ],
   exports: [
     AgePipe,
@@ -31,7 +31,6 @@ import { TrackByPropertyPipe } from './pipes/track-by-property.pipe';
     PrivacyModule,
     TrackByPropertyPipe,
     TrackByCoordPipe,
-    MaterialModule,
   ],
 })
 export class CoreModule {

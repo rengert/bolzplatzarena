@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { createMoment } from '@bpa/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Moment } from 'moment';
-import { Observable } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { firstValueFrom, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Startup } from '../../models/startup.model';
 
 @Injectable({ providedIn: 'root' })
@@ -24,14 +24,13 @@ export class StartupStorageService {
   }
 
   async get(): Promise<Startup> {
-    return this.storage.get('startup').pipe(
-      first(),
+    return firstValueFrom(this.storage.get('startup').pipe(
       map(data => data as Startup),
-    ).toPromise();
+    ));
   }
 
   async save(startup: Startup): Promise<void> {
-    return this.storage.set('startup', startup).toPromise();
+    return firstValueFrom(this.storage.set('startup', startup));
   }
 
   async setMoment(key: string, value: Moment): Promise<void> {

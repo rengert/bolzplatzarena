@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Angulartics2Piwik } from 'angulartics2/piwik';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +9,7 @@ import { Angulartics2Piwik } from 'angulartics2/piwik';
 export class AppComponent implements OnInit {
   title = 'nonogramm';
 
-  constructor(
-    private readonly tracking: Angulartics2Piwik,
-    private readonly translate: TranslateService,
-  ) {
-    this.tracking.startTracking();
+  constructor(private readonly translate: TranslateService,) {
   }
 
   ngOnInit(): void {

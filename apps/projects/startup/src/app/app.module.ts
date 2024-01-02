@@ -2,11 +2,21 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MAT_LEGACY_FORM_FIELD_DEFAULT_OPTIONS as MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/legacy-form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatLineModule } from '@angular/material/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { ButtonModule, ConsoleLoggerService, CoreModule, LOGGER, MaterialModule, NavigationModule } from '@bpa/core';
+import { ButtonModule, ConsoleLoggerService, CoreModule, LOGGER, NavigationModule } from '@bpa/core';
 import { WorkerModule } from 'angular-web-worker/angular';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -62,15 +72,27 @@ registerLocaleData(localeDe);
     CreditModule,
     DashBoardModule,
     EmployeeModule,
-    MaterialModule,
     OfficesModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NavigationModule,
 
     WorkerModule.forWorkers([
-      { worker: PropertyWorker, initFn: () => new Worker(new URL('./workers/property.worker.ts', import.meta.url), { type: 'module' }) },
+      {
+        worker: PropertyWorker,
+        initFn: () => new Worker(new URL('./workers/property.worker.ts', import.meta.url), { type: 'module' }),
+      },
     ]),
+    MatListModule,
+    MatLineModule,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatTableModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' },
