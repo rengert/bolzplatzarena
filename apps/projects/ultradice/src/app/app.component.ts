@@ -1,30 +1,30 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { SplashScreen } from '@capacitor/splash-screen';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { DialogService } from '../../../core/src/lib/modules/dialog/services/dialog.service';
 import { ResultComponent } from './modules/game/components/result/result.component';
 import { GameService } from './services/game.service';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        MatButtonModule,
-        MatMenuModule,
-        MatIconModule,
-        TranslateModule,
-        RouterLink,
-        RouterOutlet,
-    ],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    TranslateModule,
+    RouterLink,
+    RouterOutlet,
+  ],
 })
 export class AppComponent implements OnInit, OnDestroy {
   @Input() @HostBinding('class.visible') isVisible: boolean;

@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -14,27 +15,26 @@ import { Game } from '../../../../models/game.model';
 import { DataService } from '../../../../services/data.service';
 import { GameService } from '../../../../services/game.service';
 import { RuleService } from '../../../../services/rule.service';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { LinkButtonComponent } from '../../../shared/components/link-button/link-button.component';
 import { DiceComponent } from '../dice/dice.component';
 import { EndResultComponent } from '../end-result/end-result.component';
-import { LinkButtonComponent } from '../../../shared/components/link-button/link-button.component';
 import { RuleComponent } from '../rule/rule.component';
-import { ButtonComponent } from '../../../shared/components/button/button.component';
-import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-game',
-    templateUrl: './game.component.html',
-    styleUrls: ['./game.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        NgIf,
-        DiceComponent,
-        ButtonComponent,
-        RuleComponent,
-        LinkButtonComponent,
-        AsyncPipe,
-    ],
+  selector: 'app-game',
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgIf,
+    DiceComponent,
+    ButtonComponent,
+    RuleComponent,
+    LinkButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class GameComponent implements OnDestroy {
   @ViewChildren(DiceComponent) dices: QueryList<DiceComponent>;

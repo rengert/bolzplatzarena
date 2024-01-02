@@ -1,29 +1,29 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Game } from '../../../../models/game.model';
 import { Player } from '../../../../models/player.model';
 import { GameService } from '../../../../services/game.service';
-import { LinkButtonComponent } from '../../../shared/components/link-button/link-button.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { TranslateModule } from '@ngx-translate/core';
+import { LinkButtonComponent } from '../../../shared/components/link-button/link-button.component';
 
 @Component({
-    selector: 'app-create-game',
-    templateUrl: './create-game.component.html',
-    styleUrls: ['./create-game.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        TranslateModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        ButtonComponent,
-        LinkButtonComponent,
-    ],
+  selector: 'app-create-game',
+  templateUrl: './create-game.component.html',
+  styleUrls: ['./create-game.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ButtonComponent,
+    LinkButtonComponent,
+  ],
 })
 export class CreateGameComponent {
   readonly player1 = new Player();
