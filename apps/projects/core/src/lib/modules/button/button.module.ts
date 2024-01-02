@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from '../../core.module';
-import { MaterialModule } from '../material/material.module';
 import { SpeedDialComponent } from './components/speed-dial/speed-dial.component';
 
 @NgModule({
@@ -10,8 +10,8 @@ import { SpeedDialComponent } from './components/speed-dial/speed-dial.component
   imports: [
     CommonModule,
     CoreModule,
-    MaterialModule,
     RouterModule,
+    MatButtonModule,
   ],
   exports: [
     SpeedDialComponent,

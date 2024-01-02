@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
-import { CoreModule, MaterialModule } from '@bpa/core';
+import { CoreModule } from '@bpa/core';
 import { CreditAuditComponent } from './components/credit-audit/credit-audit.component';
 import { CreditComponent } from './components/credit/credit.component';
 
@@ -9,9 +11,10 @@ import { CreditComponent } from './components/credit/credit.component';
   declarations: [CreditAuditComponent, CreditComponent],
   imports: [
     CommonModule,
-    MaterialModule,
     CoreModule,
     RouterModule,
+    MatButtonModule,
+    MatTableModule,
   ],
   exports: [
     CreditAuditComponent,
