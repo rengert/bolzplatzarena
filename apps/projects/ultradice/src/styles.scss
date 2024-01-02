@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~material-design-icons/iconfont/material-icons.css";
+@import "material-design-icons/iconfont/material-icons.css";
 /* You can add global styles to this file, and also import other style files */
 
 html {
@@ -11,9 +11,7 @@ html {
   user-select: none;
 
   body {
-    padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
     padding-top: env(safe-area-inset-top); /* iOS 11.2 */
-    padding-bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
     padding-bottom: env(safe-area-inset-bottom); /* iOS 11.2 */
 
     margin: 0;
@@ -76,7 +74,7 @@ html {
     }
 
     .material-icons {
-      font-family: 'Material Icons';
+      font-family: 'Material Icons', serif;
       font-weight: normal;
       font-style: normal;
       font-size: 24px; /* Preferred icon size */
