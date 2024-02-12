@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { CoreModule } from '../../../../../core/src/lib/core.module';
+import { CoreModule } from 'projects/core/src/lib/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { CreateGameComponent } from './components/create-game/create-game.component';
 import { DiceComponent } from './components/dice/dice.component';
