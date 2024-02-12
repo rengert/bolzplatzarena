@@ -1,6 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
-import { createUuid, LoggerService, pop } from '@bpa/core';
+import { createUuid, pop } from '@bpa/core';
 import { Direction, GameMode, Points } from '../../../../app.constants';
 import { Settings } from '../../../../components/settings/settings.component';
 import { BoardSettings } from '../../../../models/board-settings.model';
@@ -40,16 +40,16 @@ export class BoardComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
-    this.handleDirection(e.key as Direction);
-  }
-
   get boardSettings(): BoardSettings {
     return this.boardService.getSettings();
   }
 
   get settings(): Settings {
     return this.boardSettings.settings;
+  }
+
+  @HostListener('window:keydown', ['$event']) handleKeyboardEvents(e: KeyboardEvent): void {
+    this.handleDirection(e.key as Direction);
   }
 
   ngOnInit(): void {

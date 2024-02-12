@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, QueryList, ViewChildren } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { GameCard, recalculate } from '../../../../models/game-card.model';
@@ -22,10 +22,6 @@ export class GameComponent implements OnDestroy {
   init$: Observable<any>;
   game: Game;
 
-  get gameCard(): GameCard {
-    return this.game.currentPlayer.gameCard;
-  }
-
   constructor(
     private readonly ruleService: RuleService,
     private readonly dataService: DataService,
@@ -35,6 +31,10 @@ export class GameComponent implements OnDestroy {
   ) {
     this.init$ = this.initGame$();
     this.gameService.state$.next(true);
+  }
+
+  get gameCard(): GameCard {
+    return this.game.currentPlayer.gameCard;
   }
 
   ngOnDestroy(): void {
